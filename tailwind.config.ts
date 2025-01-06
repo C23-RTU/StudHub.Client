@@ -1,6 +1,7 @@
-import { COLORS } from './src/lib/constants/color.constant';
 import type { Config } from 'tailwindcss';
 import { fontFamily } from 'tailwindcss/defaultTheme';
+
+import { COLORS } from './src/lib/constants/color.constant';
 
 export default {
     darkMode: ['class'],
@@ -28,7 +29,7 @@ export default {
                     foreground: COLORS.white,
                 },
                 secondary: {
-                    DEFAULT: 'hsl(var(--secondary))',
+                    DEFAULT: COLORS.secondary,
                     foreground: 'hsl(var(--secondary-foreground))',
                 },
                 muted: {
