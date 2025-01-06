@@ -1,3 +1,3 @@
 export interface IAppStore {
-  test: string
+    test: string;
 }

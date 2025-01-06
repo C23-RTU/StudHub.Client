@@ -1,8 +1,10 @@
 import type { Metadata } from 'next';
-import './globals.css';
-import ProviderLayout from '@/components/Provider/Provider';
 import { Geologica } from 'next/font/google';
 import { Inter } from 'next/font/google';
+
+import ProviderLayout from '@/components/Provider/Provider';
+
+import '@/scss/globals.scss';
 
 const geologica = Geologica({
     subsets: ['latin'],
