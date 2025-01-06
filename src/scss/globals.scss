@@ -70,4 +70,8 @@ body {
     body {
         @apply bg-background text-foreground text-white;
     }
+
+    .page {
+        @apply h-full w-full px-pageX pt-pageY;
+    }
 }
