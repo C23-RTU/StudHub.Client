@@ -1,6 +1,6 @@
-import { create } from "zustand";
-import { IAppStore } from "./types/appStore.type";
+import { create } from 'zustand';
+import type { IAppStore } from './types/appStore.type';
 
 export const useAppStore = create<IAppStore>(() => ({
-  test: ""
-}))
+    test: '',
+}));
