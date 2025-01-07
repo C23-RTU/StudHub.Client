@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-    font-family: Arial, Helvetica, sans-serif;
-}
-
 @layer base {
     :root {
         --background: 0 0% 100%;
@@ -67,11 +63,25 @@ body {
     * {
         @apply border-border;
     }
+
     body {
         @apply bg-background text-foreground text-white;
     }
 
     .page {
-        @apply h-full w-full px-pageX pt-pageY;
+        @apply h-max w-full px-pageX py-pageY;
+    }
+
+    .hidden-scroll {
+        -ms-overflow-style: none; /* IE 10+ */
+        overscroll-behavior: none;
+
+        &::-webkit-scrollbar {
+            background: transparent;
+            display: none; // Safari and Chrome
+            -webkit-appearance: none;
+            width: 0;
+            height: 0;
+        }
     }
 }
