@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Ваш профиль',
+    title: 'Профиль',
     description: '',
 };
 
