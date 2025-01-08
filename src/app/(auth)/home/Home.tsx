@@ -1,7 +1,9 @@
+'use client';
+
 import { EventCard } from '@/components/EventCard/EventCard';
 import { NotificationBadge } from '@/components/NotificationBadge/NotificationBadge';
 import { PostCard } from '@/components/PostCard/PostCard';
-import { Input } from '@/components/ui/input';
+import { SearchInput } from '@/components/ui/SearchInput/SearchInput';
 
 const Home = () => {
     return (
@@ -17,7 +19,7 @@ const Home = () => {
                 </div>
                 <p className="text-xl font-semibold">Лента</p>
                 <div>
-                    <Input placeholder="Поиск по ленте..." />
+                    <SearchInput placeholder="Поиск по ленте..." />
                 </div>
                 <div className="flex flex-col gap-10">
                     <PostCard />
