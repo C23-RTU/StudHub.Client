@@ -1,17 +1,13 @@
 import Image from 'next/image';
 
 import { PostActionButton } from './PostActionButton';
+import { PostHeader } from './PostHeader/PostHeader';
 
 export function PostCard() {
     return (
         <div className="flex flex-col gap-3">
-            <div className="flex items-center">
-                <Image src={'/img/avatar.png'} width={40} height={40} alt="avatar" />
-                <div className="flex flex-col ml-3">
-                    <p className="text-sm font-semibold">Станислав Алексеевич Кудж</p>
-                    <small className="text-[10px] font-normal">Ректор РТУ МИРЭА</small>
-                </div>
-            </div>
+            <PostHeader />
+
             <div>
                 <p className="text-sm text-gray-300">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vehicula eu nibh at suscipit.
@@ -19,6 +15,11 @@ export function PostCard() {
                     velit, imperdiet et efficitur non, gravida ac mi. Pellentesque vitae posuere ante. Etiam eu aliquet
                     purus. Nulla eget volutpat lorem. In hac habitasse platea dictumst.
                 </p>
+            </div>
+            <div className="flex gap-2">
+                <p className="px-4 py-1.5 bg-secondary rounded-[100px] text-xss w-fit">#РТУ</p>
+                <p className="px-4 py-1.5 bg-secondary rounded-[100px] text-xss w-fit">#2025</p>
+                <p className="px-4 py-1.5 bg-secondary rounded-[100px] text-xss w-fit">#NewYear</p>
             </div>
             <div className="w-full h-full flex items-center justify-center ">
                 <Image src={'/img/banner.png'} height={200} width={600} alt={'banner'} className="rounded-md" />
