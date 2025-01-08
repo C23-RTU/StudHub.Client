@@ -67,6 +67,9 @@ export default {
                 pageX: '18px',
                 pageY: '20px',
             },
+            fontSize: {
+                xss: '10px',
+            },
         },
     },
     plugins: [require('tailwindcss-animate')],

@@ -20,8 +20,8 @@ export function PostCard() {
                     purus. Nulla eget volutpat lorem. In hac habitasse platea dictumst.
                 </p>
             </div>
-            <div className="w-full h-full flex items-center justify-center">
-                <Image src={'/img/banner.png'} height={200} width={600} alt={'banner'} />
+            <div className="w-full h-full flex items-center justify-center ">
+                <Image src={'/img/banner.png'} height={200} width={600} alt={'banner'} className="rounded-md" />
             </div>
             <div className="flex items-center justify-between">
                 <div className="flex gap-4">
