@@ -1,0 +1,27 @@
+# Потом можем вынести конфигурационные файлы в отдельный репозиторий
+networks:
+    setkaNetwork:
+
+services:
+    nginx:
+        image: nginx:alpine
+        ports:
+            - 80:80
+        restart: always
+        networks:
+            - setkaNetwork
+        depends_on:
+            - frontend
+
+    certbot:
+        image: certbot/certbot:latest
+        volumes:
+            - './certbot/www/:/var/www/certbot/:rw'
+            - './certbot/conf/:/etc/letsencrypt/:rw'
+
+    frontend:
+        build: .
+        ports:
+            - 3000:3000
+        networks:
+            - setkaNetwork

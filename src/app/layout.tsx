@@ -21,7 +21,11 @@ export const metadata: Metadata = {
     description: 'Сетка РТУ МИРЭА',
 };
 
-export default function RootLayout({ children }: Readonly) {
+export default function RootLayout({
+    children,
+}: Readonly<{
+    children: React.ReactNode;
+}>) {
     return (
         <html lang="en">
             <body className={`${inter.variable} ${geologica.variable} antialiased dark font-geologica`}>
