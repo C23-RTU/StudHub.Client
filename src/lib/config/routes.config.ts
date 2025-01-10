@@ -3,7 +3,7 @@ class AuthPage {
     EVENTS = '/events';
     PROFILE = '/profile';
     CLUBS = '/clubs';
-    CALENDAR = '/calendar';
+    FINDER = '/finder';
 }
 
 class PublicPage {

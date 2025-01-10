@@ -1,4 +1,4 @@
-import { CalendarClockIcon, CircleUserIcon, CompassIcon, HouseIcon, UsersIcon } from 'lucide-react';
+import { CircleUserIcon, CompassIcon, FingerprintIcon, GlobeIcon, HouseIcon } from 'lucide-react';
 
 import { AUTH_PAGE } from '@/lib/config/routes.config';
 
@@ -12,11 +12,11 @@ export const MENU_LINKS = [
         link: AUTH_PAGE.EVENTS,
     },
     {
-        Icon: CalendarClockIcon,
-        link: AUTH_PAGE.CALENDAR,
+        Icon: FingerprintIcon,
+        link: AUTH_PAGE.FINDER,
     },
     {
-        Icon: UsersIcon,
+        Icon: GlobeIcon,
         link: AUTH_PAGE.CLUBS,
     },
     {
