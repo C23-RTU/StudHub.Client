@@ -1,6 +1,13 @@
-import Image from 'next/image';
+'use client';
 
-import { PostActionButton } from './PostActionButton';
+import Image from 'next/image';
+import { usePathname, useRouter } from 'next/navigation';
+import { match } from 'path-to-regexp';
+
+import { AUTH_PAGE } from '@/lib/config/routes.config';
+
+import { ActionButton } from '../ui/ActionButton/ActionButton';
+
 import { PostHeader } from './PostHeader/PostHeader';
 import type { Post } from '@/lib/types/post';
 import { cn } from '@/lib/utils';
@@ -11,6 +18,9 @@ type PostCardProps = {
 };
 
 export function PostCard({ className, post }: PostCardProps) {
+    const router = useRouter();
+    const pathname = usePathname();
+
     return (
         <article className={cn('flex flex-col gap-3', className)}>
             <PostHeader post={post} />
@@ -33,8 +43,13 @@ export function PostCard({ className, post }: PostCardProps) {
             </div>
             <div className="flex items-center justify-between font-inter">
                 <div className="flex gap-4">
-                    <PostActionButton type={'like'} initialValue={post.likesCount} />
-                    <PostActionButton type={'comment'} initialValue={post.commentsCount} />
+                    <ActionButton type={'like'} initialValue={post.likesCount} />
+                    <ActionButton
+                        type={'comment'}
+                        initialValue={post.commentsCount}
+                        onClick={() => router.push(AUTH_PAGE.COMMENTS(1))}
+                        setHover={!!match(AUTH_PAGE.COMMENTS(post.id))(pathname)}
+                    />
                 </div>
 
                 <p className="text-xs opacity-50 font-inter">
