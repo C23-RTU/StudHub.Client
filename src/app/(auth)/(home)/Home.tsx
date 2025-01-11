@@ -6,35 +6,15 @@ import { SearchInput } from '@/components/ui/SearchInput/SearchInput';
 
 import type { Post } from '@/lib/types/post';
 
-export default async function Home() {
-    const posts: Array<Post> = [
-        {
-            id: 1,
-            content: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vehicula eu nibh at suscipit.
-                    Maecenas consectetur vestibulum felis ut pharetra. Donec finibus vestibulum rhoncus. Nullam leo
-                    velit, imperdiet et efficitur non, gravida ac mi. Pellentesque vitae posuere ante. Etiam eu aliquet
-                    purus. Nulla eget volutpat lorem. In hac habitasse platea dictumst.`,
-            createdAt: new Date(),
-            user: {
-                id: 1,
-                name: 'Станислав Алексеевич Кудж',
-                major: 'Ректор РТУ МИРЭА',
-                avatarUrl: '/img/avatar.png',
-                status: 'online',
-            },
-            likesCount: 10,
-            commentsCount: 5,
-            tags: ['РТУ', 'Сетка'],
-        },
-    ];
+export default async function Home({ posts }: { posts: Post[] }) {
     return (
         <div className="page">
-            <div className="flex flex-col gap-4">
-                <Header>
-                    <HeaderTitle>Доброе утро, Костя 👋</HeaderTitle>
-                    <NotificationBadge />
-                </Header>
+            <Header>
+                <HeaderTitle>Доброе утро, Костя 👋</HeaderTitle>
+                <NotificationBadge />
+            </Header>
 
+            <main className="flex flex-col gap-4">
                 <div className="flex justify-center">
                     <EventCard />
                 </div>
@@ -47,7 +27,7 @@ export default async function Home() {
                         <PostCard key={post.id} post={post} />
                     ))}
                 </div>
-            </div>
+            </main>
         </div>
     );
 }
