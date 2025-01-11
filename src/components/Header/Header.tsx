@@ -13,5 +13,5 @@ export function Header({ children, className, ...props }: Props) {
 }
 
 export function HeaderTitle({ children }: PropsWithChildren) {
-    return <h1 className="text-xl font-semibold">{children}</h1>;
+    return <h1 className="text-xl font-semibold font-geologica">{children}</h1>;
 }
