@@ -6,9 +6,9 @@ interface Props extends PropsWithChildren, HTMLAttributes<HTMLDivElement> {}
 
 export function Header({ children, className, ...props }: Props) {
     return (
-        <div className={cn('flex items-center justify-between mb-4 min-h-[45px]', className)} {...props}>
+        <header className={cn('flex items-center justify-between mb-4 min-h-[45px]', className)} {...props}>
             {children}
-        </div>
+        </header>
     );
 }
 
