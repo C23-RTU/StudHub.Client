@@ -1,12 +1,12 @@
 import type { Metadata } from 'next';
 
-import { Profile } from './Profile';
+import Profile from './Profile';
 
 export const metadata: Metadata = {
     title: 'Профиль',
     description: '',
 };
 
-export default function Page() {
+export default async function Page() {
     return <Profile />;
 }
