@@ -12,7 +12,7 @@ export function CommentItem() {
             </div>
             <div className="flex flex-col gap-2 w-full">
                 <div className="flex justify-between items-center">
-                    <p className="font-geologica font-medium text-xs">Николай Гусев</p>
+                    <p className="font-geologica font-medium text-sm">Николай Гусев</p>
                     <small className="text-xss opacity-50 font-inter font-normal">12 минут назад</small>
                 </div>
                 <p className="text-xs font-inter font-normal text-[#B8B8B8] leading-snug">

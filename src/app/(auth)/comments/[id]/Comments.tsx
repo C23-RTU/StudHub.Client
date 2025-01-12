@@ -1,8 +1,10 @@
 import { Fragment } from 'react';
 
 import { CommentItem } from '@/components/CommentItem/CommentItem';
-import { Header, HeaderTitle } from '@/components/Header/Header';
 import { PostCard } from '@/components/PostCard/PostCard';
+
+import { Header, HeaderTitle } from '@/hoc/Header/Header';
+import { MainContent } from '@/hoc/MainContent/MainContent';
 
 export function Comments() {
     return (
@@ -11,7 +13,7 @@ export function Comments() {
                 <HeaderTitle>Комментарии</HeaderTitle>
             </Header>
 
-            <main className="flex flex-col gap-4">
+            <MainContent>
                 <PostCard
                     post={{
                         id: 1,
@@ -42,7 +44,7 @@ export function Comments() {
                             </Fragment>
                         ))}
                 </div>
-            </main>
+            </MainContent>
         </div>
     );
 }

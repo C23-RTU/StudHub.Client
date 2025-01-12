@@ -1,9 +1,10 @@
+import { NotificationBadge } from '@/components/Badge/NotificationBadge/NotificationBadge';
 import { EventCard } from '@/components/EventCard/EventCard';
-import { Header, HeaderTitle } from '@/components/Header/Header';
-import { NotificationBadge } from '@/components/NotificationBadge/NotificationBadge';
 import { PostCard } from '@/components/PostCard/PostCard';
 import { SearchInput } from '@/components/ui/SearchInput/SearchInput';
 
+import { Header, HeaderTitle } from '@/hoc/Header/Header';
+import { MainContent } from '@/hoc/MainContent/MainContent';
 import type { Post } from '@/lib/types/post';
 
 export default async function Home({ posts }: { posts: Post[] }) {
@@ -14,7 +15,7 @@ export default async function Home({ posts }: { posts: Post[] }) {
                 <NotificationBadge />
             </Header>
 
-            <main className="flex flex-col gap-4">
+            <MainContent>
                 <div className="flex justify-center">
                     <EventCard />
                 </div>
@@ -27,7 +28,7 @@ export default async function Home({ posts }: { posts: Post[] }) {
                         <PostCard key={post.id} post={post} />
                     ))}
                 </div>
-            </main>
+            </MainContent>
         </div>
     );
 }

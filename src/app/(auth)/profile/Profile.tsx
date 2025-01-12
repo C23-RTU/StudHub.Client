@@ -3,17 +3,20 @@ import { HiIdentification } from 'react-icons/hi2';
 import { IoMdMail } from 'react-icons/io';
 import { MdModeComment } from 'react-icons/md';
 
-import { Header, HeaderTitle } from '@/components/Header/Header';
-import { NotificationBadge } from '@/components/NotificationBadge/NotificationBadge';
+import { SettingBadge } from '@/components/Badge/SettingBadge/SettingBadge';
+
+import { Header, HeaderTitle } from '@/hoc/Header/Header';
+import { MainContent } from '@/hoc/MainContent/MainContent';
 
 export default async function Profile() {
     return (
         <div className="page">
             <Header>
                 <HeaderTitle>Профиль</HeaderTitle>
-                <NotificationBadge />
+                <SettingBadge />
             </Header>
-            <main className="flex flex-col gap-4">
+
+            <MainContent>
                 <div className="flex flex-row gap-4">
                     <Image
                         src={
@@ -64,7 +67,7 @@ export default async function Profile() {
                         <AchievementCard />
                     </div>
                 </div>
-            </main>
+            </MainContent>
         </div>
     );
 }

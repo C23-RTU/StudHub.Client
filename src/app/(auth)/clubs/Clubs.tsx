@@ -1,4 +1,4 @@
-import { Header, HeaderTitle } from '@/components/Header/Header';
+import { Header, HeaderTitle } from '@/hoc/Header/Header';
 
 export function Clubs() {
     return (
