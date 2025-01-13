@@ -15,6 +15,7 @@ services:
             - setkaNetwork
         depends_on:
             - frontend
+            - backend_api
 
     certbot:
         image: certbot/certbot:latest
@@ -26,5 +27,12 @@ services:
         build: .
         ports:
             - 3000:3000
+        networks:
+            - setkaNetwork
+
+    backend_api:
+        build: /opt/setka/Setka.Server
+        ports:
+            - 5293:8080
         networks:
             - setkaNetwork
