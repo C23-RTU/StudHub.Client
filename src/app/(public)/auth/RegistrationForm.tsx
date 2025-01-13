@@ -13,12 +13,15 @@ export default function RegistrationForm() {
         event.preventDefault();
 
         const data = {
-            name: (event.currentTarget.elements.namedItem('name') as HTMLFormElement).value,
-            surname: (event.currentTarget.elements.namedItem('surname') as HTMLFormElement).value,
-            email: (event.currentTarget.elements.namedItem('email') as HTMLFormElement).value,
-            password: (event.currentTarget.elements.namedItem('password') as HTMLFormElement).value,
-            confirmPassword: (event.currentTarget.elements.namedItem('confirmPassword') as HTMLFormElement).value,
-        };
+            name: (event.currentTarget.elements.namedItem('name') as HTMLInputElement).value,
+            surname: (event.currentTarget.elements.namedItem('lastname') as HTMLInputElement).value,
+            middlename: (event.currentTarget.elements.namedItem('middlename') as HTMLInputElement)?.value || '',
+            age: parseInt((event.currentTarget.elements.namedItem('age') as HTMLInputElement).value) || null,
+            about: (event.currentTarget.elements.namedItem('about') as HTMLInputElement)?.value || '',
+            email: (event.currentTarget.elements.namedItem('email') as HTMLInputElement).value,
+            password: (event.currentTarget.elements.namedItem('password') as HTMLInputElement).value,
+            confirmPassword: (event.currentTarget.elements.namedItem('confirmPassword') as HTMLInputElement).value,
+        };        
 
         if (data.password !== data.confirmPassword) {
             alert('Пароли не совпадают!');
@@ -28,9 +31,12 @@ export default function RegistrationForm() {
     }
 
     return (
-        <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+        <form className="flex flex-col gap-4 grid-cols-2" onSubmit={handleSubmit}>
             <Input name="name" placeholder="Имя" type="text" required />
-            <Input name="surname" placeholder="Фамилия" type="text" required />
+            <Input name="lastname" placeholder="Фамилия" type="text" required />
+            <Input name="middlename" placeholder="Отчество" type="text" />
+            <Input name="age" placeholder="Возраст" type="integer" required />
+            <Input name="about" placeholder="Номер института" type="integer" />
             <Input name="email" placeholder="Почта" type="email" required />
             <div className="relative">
                 <Input name="password" placeholder="Пароль" type={showPassword ? 'text' : 'password'} required />
