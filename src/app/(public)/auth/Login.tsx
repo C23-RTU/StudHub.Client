@@ -1,12 +1,16 @@
 'use client';
 
 import { Eye, EyeClosed } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
+import { AUTH_PAGE } from '@/lib/config/routes.config';
+
 export default function Login() {
+    const router = useRouter();
     const [showPassword, setShowPassword] = useState(false);
 
     async function handleSubmit(event: React.FormEvent) {
@@ -14,6 +18,7 @@ export default function Login() {
 
         // Тут уже работаем с апишкой
     }
+
     return (
         <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
             <Input placeholder="Почта" type="email" />
@@ -33,7 +38,9 @@ export default function Login() {
                     />
                 )}
             </div>
-            <Button type="submit">Войти</Button>
+            <Button type="submit" onClick={() => router.push(AUTH_PAGE.HOME)}>
+                Войти
+            </Button>
         </form>
     );
 }

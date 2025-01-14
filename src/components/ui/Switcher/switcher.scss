@@ -1,0 +1,35 @@
+input[id='radio-0'] {
+    &:checked {
+        & ~ .glider {
+            transform: translateX(0%);
+        }
+
+        & ~ label[for='radio-0'] {
+            color: var(--black_color);
+        }
+    }
+}
+
+input[id='radio-1'] {
+    &:checked {
+        & ~ .glider {
+            transform: translateX(100%);
+        }
+
+        & ~ label[for='radio-1'] {
+            color: var(--black_color);
+        }
+    }
+}
+
+input[id='radio-2'] {
+    &:checked {
+        & ~ .glider {
+            transform: translateX(200%);
+        }
+
+        & ~ label[for='radio-2'] {
+            color: var(--black_color);
+        }
+    }
+}
