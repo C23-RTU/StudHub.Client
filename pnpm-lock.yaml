@@ -44,9 +44,6 @@ importers:
       react-icons:
         specifier: ^5.4.0
         version: 5.4.0(react@19.0.0)
-      react-tabs:
-        specifier: ^6.1.0
-        version: 6.1.0(react@19.0.0)
       tailwind-merge:
         specifier: ^2.6.0
         version: 2.6.0
@@ -1965,11 +1962,6 @@ packages:
     peerDependenciesMeta:
       '@types/react':
         optional: true
-
-  react-tabs@6.1.0:
-    resolution: {integrity: sha512-6QtbTRDKM+jA/MZTTefvigNxo0zz+gnBTVFw2CFVvq+f2BuH0nF0vDLNClL045nuTAdOoK/IL1vTP0ZLX0DAyQ==}
-    peerDependencies:
-      react: ^18.0.0 || ^19.0.0
 
   react@19.0.0:
     resolution: {integrity: sha512-V8AVnmPIICiWpGfm6GLzCR/W5FXLchHop40W4nXBmdlEceh16rCN8O8LNWm5bh5XUX91fh7KpA+W0TgMKmgTpQ==}
@@ -4289,12 +4281,6 @@ snapshots:
       tslib: 2.8.1
     optionalDependencies:
       '@types/react': 19.0.3
-
-  react-tabs@6.1.0(react@19.0.0):
-    dependencies:
-      clsx: 2.1.1
-      prop-types: 15.8.1
-      react: 19.0.0
 
   react@19.0.0: {}
 
