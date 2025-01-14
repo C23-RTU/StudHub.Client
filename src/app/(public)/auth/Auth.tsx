@@ -2,8 +2,8 @@
 
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 
-import LoginForm from './LoginForm';
-import RegistrationForm from './RegistrationForm';
+import LoginForm from './Login';
+import RegistrationForm from './Register';
 
 export default function Auth() {
     return (
