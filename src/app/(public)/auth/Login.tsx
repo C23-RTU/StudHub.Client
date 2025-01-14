@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
-export default function LoginForm() {
+export default function Login() {
     const [showPassword, setShowPassword] = useState(false);
 
     async function handleSubmit(event: React.FormEvent) {

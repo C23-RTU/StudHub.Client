@@ -2,6 +2,7 @@
 
 import { Eye, EyeClosed } from 'lucide-react';
 import { useState } from 'react';
+import { z } from 'zod';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -13,13 +14,50 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Input } from '@/components/ui/input';
 
-export default function RegistrationForm() {
+const registrationSchema = z
+    .object({
+        firstName: z
+            .string()
+            .min(1, 'Имя обязательно')
+            .max(20, 'Имя не более 20 символов')
+            .regex(/^[A-Za-zА-Яа-яёЁ\s]+$/, 'Некорректное имя'),
+        lastName: z
+            .string()
+            .min(1, 'Фамилия обязательна')
+            .max(40, 'Фамилия не более 40 символов')
+            .regex(/^[A-Za-zА-Яа-яёЁ\s]+$/, 'Некорректная фамилия'),
+        middleName: z
+            .string()
+            .max(25, 'Отчество не более 25 символов')
+            .regex(/^[A-Za-zА-Яа-яёЁ\s]+$/, 'Недопустимые символы')
+            .optional(),
+        age: z
+            .number({ invalid_type_error: 'Возраст должен быть числом' })
+            .min(1, 'Некорректный возраст')
+            .max(100, 'Некорректный возраст'),
+        email: z.string().email('Некорректный email'),
+        password: z
+            .string()
+            .min(12, 'Не менее 12 символов')
+            .regex(/[a-z]/, 'Пароль должен содержать строчную букву')
+            .regex(/[A-Z]/, 'Пароль должен содержать заглавную букву')
+            .regex(/\d/, 'Пароль должен содержать цифру')
+            .regex(/[^A-Za-z0-9]/, 'Пароль должен содержать спец. символ'),
+        confirmPassword: z.string(),
+    })
+    .refine((data) => data.password === data.confirmPassword, {
+        message: 'Пароли не совпадают',
+        path: ['confirmPassword'],
+    });
+
+export default function Register() {
     const [showPassword, setShowPassword] = useState(false);
     const [selectedInstitute, setSelectedInstitute] = useState<string | null>(null);
     const [aboutText, setAboutText] = useState('');
+    const [errors, setErrors] = useState<Record<string, string>>({});
 
     const handleTextChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-        if (event.target.value.length <= 400) {
+        if (event.target.value.length <= 200) {
             setAboutText(event.target.value);
         }
     };
@@ -27,35 +65,67 @@ export default function RegistrationForm() {
     async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
 
+        const formData = new FormData(event.currentTarget);
+
         const data = {
-            name: (event.currentTarget.elements.namedItem('name') as HTMLInputElement).value,
-            surname: (event.currentTarget.elements.namedItem('lastname') as HTMLInputElement).value,
-            middlename: (event.currentTarget.elements.namedItem('middlename') as HTMLInputElement)?.value || '',
-            age: parseInt((event.currentTarget.elements.namedItem('age') as HTMLInputElement).value) || null,
-            institute: (event.currentTarget.elements.namedItem('institute') as HTMLInputElement)?.value || '',
-            email: (event.currentTarget.elements.namedItem('email') as HTMLInputElement).value,
-            password: (event.currentTarget.elements.namedItem('password') as HTMLInputElement).value,
-            confirmPassword: (event.currentTarget.elements.namedItem('confirmPassword') as HTMLInputElement).value,
+            firstName: formData.get('name') as string,
+            lastName: formData.get('lastname') as string,
+            middleName: (formData.get('middlename') as string) || undefined,
+            age: parseInt(formData.get('age') as string, 10),
+            institute: selectedInstitute,
+            email: formData.get('email') as string,
+            about: aboutText || undefined,
+            password: formData.get('password') as string,
+            confirmPassword: formData.get('confirmPassword') as string,
         };
 
-        if (data.password !== data.confirmPassword) {
-            alert('Пароли не совпадают!');
-        }
+        try {
+            registrationSchema.parse(data);
+            setErrors({});
 
-        // api
+            // api
+
+            console.log(data);
+        } catch (error) {
+            if (error instanceof z.ZodError) {
+                const fieldErrors: Record<string, string> = {};
+                error.errors.forEach((err) => {
+                    if (err.path[0]) {
+                        fieldErrors[err.path[0].toString()] = err.message;
+                    }
+                });
+                setErrors(fieldErrors);
+            }
+        }
     }
 
     return (
-        <form className="grid gap-4 grid-cols-3" onSubmit={handleSubmit}>
-            <Input name="name" placeholder="Имя" type="text" required />
-            <Input name="lastname" placeholder="Фамилия" type="text" required />
-            <Input name="middlename" placeholder="Отчество" type="text" />
-            <div className="col-span-3">
-                <Input name="email" placeholder="Почта" type="email" required />
+        <form className="grid gap-5 grid-cols-3" onSubmit={handleSubmit}>
+            <div className="relative">
+                <Input name="name" placeholder="Имя" type="text" />
+                {errors.firstName && (
+                    <p className="text-red-500 text-xs absolute left-0 bottom-full">{errors.firstName}</p>
+                )}
+            </div>
+            <div className="relative">
+                <Input name="lastname" placeholder="Фамилия" type="text" />
+                {errors.lastName && (
+                    <p className="text-red-500 text-xs absolute left-0 bottom-full">{errors.lastName}</p>
+                )}
+            </div>
+            <div className="relative">
+                <Input name="middlename" placeholder="Отчество" type="text" />
+                {errors.middleName && (
+                    <p className="text-red-500 text-xs absolute left-0 bottom-full">{errors.middleName}</p>
+                )}
+            </div>
+            <div className="col-span-3 relative">
+                <Input name="email" placeholder="Почта" type="email" />
+                {errors.email && <p className="text-red-500 text-xs absolute left-0 bottom-full">{errors.email}</p>}
             </div>
             <div className="grid gap-4 grid-cols-2 col-span-3">
                 <div className="relative">
-                    <Input name="password" placeholder="Пароль" type={showPassword ? 'text' : 'password'} required />
+                    <Input name="password" placeholder="Пароль" type={showPassword ? 'text' : 'password'} />
                     {showPassword ? (
                         <Eye
                             className="absolute top-1/2 right-2 -translate-y-1/2 cursor-pointer"
@@ -69,13 +139,20 @@ export default function RegistrationForm() {
                             onClick={() => setShowPassword(!showPassword)}
                         />
                     )}
+                    {errors.password && (
+                        <p className="text-red-500 text-xs absolute left-0 bottom-full">{errors.password}</p>
+                    )}
                 </div>
-                <Input
-                    className="col-span-1"
-                    name="confirmPassword"
-                    placeholder="Повторите пароль"
-                    type={showPassword ? 'text' : 'password'}
-                />
+                <div className="relative">
+                    <Input
+                        name="confirmPassword"
+                        placeholder="Повторите пароль"
+                        type={showPassword ? 'text' : 'password'}
+                    />
+                    {errors.confirmPassword && (
+                        <p className="text-red-500 text-xs absolute left-0 bottom-full">{errors.confirmPassword}</p>
+                    )}
+                </div>
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                         <Button className="w-full bg-secondary hover:bg-secondary/80 rounded-b-none border-b focus:border-b-2 focus:border-b-neutral-200 border-neutral-600">
@@ -91,21 +168,23 @@ export default function RegistrationForm() {
                         ))}
                     </DropdownMenuContent>
                 </DropdownMenu>
-                <Input name="age" placeholder="Возраст" type="integer" />
-                <div className="col-span-full">
-                    <div className="relative w-full">
-                        <textarea
-                            name="about"
-                            placeholder="О себе"
-                            value={aboutText}
-                            onChange={handleTextChange}
-                            rows={6}
-                            className="w-full rounded-lg bg-secondary border px-4 py-2 text-sm focus:outline-none border focus:border-neutral-200 border-neutral-600"
-                        />
-                        <span className="absolute bottom-2 right-4 text-xs text-[#fff] select-none">
-                            {aboutText.length}/{400}
-                        </span>
-                    </div>
+                <div className="relative">
+                    <Input name="age" placeholder="Возраст" type="number" />
+                    {errors.age && <p className="text-red-500 text-xs absolute left-0 bottom-full">{errors.age}</p>}
+                </div>
+            </div>
+
+            <div className="col-span-3">
+                <div className="relative w-full">
+                    <textarea
+                        name="about"
+                        placeholder="Расскажите о себе"
+                        value={aboutText}
+                        onChange={handleTextChange}
+                        rows={6}
+                        className="w-full placeholder:text-neutral-600 rounded-lg bg-secondary border px-4 py-2 text-sm focus:outline-none focus:border-b-2 focus:border-neutral-200 border-neutral-600"
+                    />
+                    <span className="absolute bottom-2 right-4 text-xs text-neutral-600">{aboutText.length}/200</span>
                 </div>
             </div>
 

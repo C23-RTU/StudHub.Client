@@ -2,8 +2,8 @@
 
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 
-import LoginForm from './Login';
-import RegistrationForm from './Register';
+import Login from './Login';
+import Register from './Register';
 
 export default function Auth() {
     return (
@@ -24,10 +24,10 @@ export default function Auth() {
             </TabList>
 
             <TabPanel>
-                <LoginForm />
+                <Login />
             </TabPanel>
             <TabPanel>
-                <RegistrationForm />
+                <Register />
             </TabPanel>
         </Tabs>
     );
