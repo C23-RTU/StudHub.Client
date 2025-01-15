@@ -1,6 +1,5 @@
 'use client';
 
-import { Eye, EyeClosed } from 'lucide-react';
 import { useState } from 'react';
 import { z } from 'zod';
 
@@ -51,7 +50,6 @@ const registrationSchema = z
     });
 
 export default function Register() {
-    const [showPassword, setShowPassword] = useState(false);
     const [selectedInstitute, setSelectedInstitute] = useState<string | null>(null);
     const [aboutText, setAboutText] = useState('');
     const [errors, setErrors] = useState<Record<string, string>>({});
@@ -125,30 +123,13 @@ export default function Register() {
             </div>
             <div className="grid gap-4 grid-cols-2 col-span-3">
                 <div className="relative">
-                    <Input name="password" placeholder="Пароль" type={showPassword ? 'text' : 'password'} />
-                    {showPassword ? (
-                        <Eye
-                            className="absolute top-1/2 right-2 -translate-y-1/2 cursor-pointer"
-                            size={20}
-                            onClick={() => setShowPassword(!showPassword)}
-                        />
-                    ) : (
-                        <EyeClosed
-                            className="absolute top-1/2 right-2 -translate-y-1/2 cursor-pointer"
-                            size={20}
-                            onClick={() => setShowPassword(!showPassword)}
-                        />
-                    )}
+                    <Input placeholder="Пароль" type="password" />
                     {errors.password && (
                         <p className="text-red-500 text-xs absolute left-0 bottom-full">{errors.password}</p>
                     )}
                 </div>
                 <div className="relative">
-                    <Input
-                        name="confirmPassword"
-                        placeholder="Повторите пароль"
-                        type={showPassword ? 'text' : 'password'}
-                    />
+                    <Input placeholder="Повторите пароль" type="password" />
                     {errors.confirmPassword && (
                         <p className="text-red-500 text-xs absolute left-0 bottom-full">{errors.confirmPassword}</p>
                     )}
