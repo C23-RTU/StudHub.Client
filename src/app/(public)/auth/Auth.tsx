@@ -5,8 +5,8 @@ import { useState } from 'react';
 
 import { Switcher } from '@/components/ui/Switcher/Switcher';
 
-import Login from './Login';
-import Register from './Register';
+import Login from './Forms/Login';
+import Register from './Forms/Register';
 
 enum Tabs {
     LOGIN = 0,
@@ -14,7 +14,7 @@ enum Tabs {
 }
 
 export default function Auth() {
-    const [formType, setFormType] = useState<Tabs>(Tabs.REGISTRATION);
+    const [formType, setFormType] = useState<Tabs>(Tabs.LOGIN);
 
     return (
         <div className="flex flex-col items-center gap-3">
