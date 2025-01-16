@@ -7,13 +7,18 @@ import { Switcher } from '@/components/ui/Switcher/Switcher';
 
 import Login from './Login';
 import Register from './Register';
+import type { registerData } from '@/schemas/registerSchema';
 
 enum Tabs {
     LOGIN = 0,
     REGISTRATION = 1,
 }
 
-export default function Auth() {
+interface RegisterProps {
+    handleRegister: (data: registerData) => void;
+}
+
+export default function Auth({ handleRegister }: RegisterProps) {
     const [formType, setFormType] = useState<Tabs>(Tabs.REGISTRATION);
 
     return (
@@ -23,7 +28,7 @@ export default function Auth() {
 
             <div className="w-full">
                 {formType === Tabs.LOGIN && <Login />}
-                {formType === Tabs.REGISTRATION && <Register />}
+                {formType === Tabs.REGISTRATION && <Register onRegister={handleRegister} />}
             </div>
         </div>
     );

@@ -14,43 +14,14 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Input } from '@/components/ui/input';
 
-const registrationSchema = z
-    .object({
-        firstName: z
-            .string()
-            .min(1, 'Имя обязательно')
-            .max(20, 'Имя не более 20 символов')
-            .regex(/^[A-Za-zА-Яа-яёЁ\s]+$/, 'Некорректное имя'),
-        lastName: z
-            .string()
-            .min(1, 'Фамилия обязательна')
-            .max(40, 'Фамилия не более 40 символов')
-            .regex(/^[A-Za-zА-Яа-яёЁ\s]+$/, 'Некорректная фамилия'),
-        middleName: z
-            .string()
-            .max(25, 'Отчество не более 25 символов')
-            .regex(/^[A-Za-zА-Яа-яёЁ\s]+$/, 'Недопустимые символы')
-            .optional(),
-        age: z
-            .number({ invalid_type_error: 'Возраст должен быть числом' })
-            .min(1, 'Некорректный возраст')
-            .max(100, 'Некорректный возраст'),
-        email: z.string().email('Некорректный email'),
-        password: z
-            .string()
-            .min(12, 'Не менее 12 символов')
-            .regex(/[a-z]/, 'Пароль должен содержать строчную букву')
-            .regex(/[A-Z]/, 'Пароль должен содержать заглавную букву')
-            .regex(/\d/, 'Пароль должен содержать цифру')
-            .regex(/[^A-Za-z0-9]/, 'Пароль должен содержать спец. символ'),
-        confirmPassword: z.string(),
-    })
-    .refine((data) => data.password === data.confirmPassword, {
-        message: 'Пароли не совпадают',
-        path: ['confirmPassword'],
-    });
+import { registerSchema } from '@/schemas/registerSchema';
+import type { registerData } from '@/schemas/registerSchema';
 
-export default function Register() {
+interface RegisterProps {
+    onRegister: (data: registerData) => void;
+}
+
+export default function Register({ onRegister }: RegisterProps) {
     const [showPassword, setShowPassword] = useState(false);
     const [selectedInstitute, setSelectedInstitute] = useState<string | null>(null);
     const [aboutText, setAboutText] = useState('');
@@ -70,22 +41,20 @@ export default function Register() {
         const data = {
             firstName: formData.get('name') as string,
             lastName: formData.get('lastname') as string,
-            middleName: (formData.get('middlename') as string) || undefined,
+            middleName: (formData.get('middlename') as string) || '',
             age: parseInt(formData.get('age') as string, 10),
-            institute: selectedInstitute,
+            institute: selectedInstitute || null,
             email: formData.get('email') as string,
-            about: aboutText || undefined,
+            about: aboutText || '',
             password: formData.get('password') as string,
             confirmPassword: formData.get('confirmPassword') as string,
         };
 
         try {
-            registrationSchema.parse(data);
+            registerSchema.parse(data);
             setErrors({});
 
-            // api
-
-            console.log(data);
+            onRegister(data);
         } catch (error) {
             if (error instanceof z.ZodError) {
                 const fieldErrors: Record<string, string> = {};
