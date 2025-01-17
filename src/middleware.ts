@@ -3,8 +3,7 @@ import type { NextRequest } from 'next/server';
 
 import { PUBLIC_PAGE } from './lib/config/routes.config';
 import { authorizationProtect } from './middleware/authorization-protect.middleware';
-
-// import { loginProtect } from './middleware/login-protect.middleware';
+import { loginProtect } from './middleware/login-protect.middleware';
 
 export async function middleware(request: NextRequest) {
     const url = new URL(request.url);
@@ -14,9 +13,9 @@ export async function middleware(request: NextRequest) {
         return authorizationProtect(request);
     }
 
-    // if (pathname.includes(PUBLIC_PAGE.AUTH)) {
-    //     return loginProtect(request);
-    // }
+    if (pathname.includes(PUBLIC_PAGE.AUTH)) {
+        return loginProtect(request);
+    }
 
     return NextResponse.next();
 }
