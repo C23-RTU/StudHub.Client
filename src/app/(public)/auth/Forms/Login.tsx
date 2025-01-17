@@ -42,8 +42,6 @@ export default function Login() {
         mutate(data);
     };
 
-    console.log(isValid);
-
     return (
         <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmitHandler)}>
             <FormField

@@ -6,3 +6,8 @@ export const AuthDataSchema = z.object({
 });
 
 export type TAuthDataSchema = z.infer<typeof AuthDataSchema>;
+
+export enum EnumTokens {
+    ACCESS_TOKEN = 'AccessToken',
+    REFRESH_TOKEN = 'RefreshToken',
+}

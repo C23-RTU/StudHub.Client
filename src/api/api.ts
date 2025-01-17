@@ -5,7 +5,11 @@ export const BASE_API_URL = 'http://45.12.73.206/api';
 
 export const api = axios.create({
     baseURL: BASE_API_URL,
+    headers: {
+        'Content-Type': 'application/json',
+    },
     httpAgent: new https.Agent({
         keepAlive: true,
     }),
+    withCredentials: true,
 });

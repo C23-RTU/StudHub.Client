@@ -9,8 +9,7 @@ class AuthPage {
 }
 
 class PublicPage {
-    LOGIN = '/login';
-    REGISTRATION = '/registration';
+    AUTH = '/auth';
 }
 
 export const AUTH_PAGE = new AuthPage();
