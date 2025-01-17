@@ -9,7 +9,7 @@ import { authorizationProtect } from './middleware/authorization-protect.middlew
 export async function middleware(request: NextRequest) {
     const url = new URL(request.url);
     const pathname = url.pathname;
-
+    console.log(request.cookies);
     if (!pathname.includes(PUBLIC_PAGE.AUTH)) {
         return authorizationProtect(request);
     }

@@ -9,9 +9,6 @@ export async function getTokensFromRequest(request: NextRequest) {
     if (!refreshToken) {
         request.cookies.delete(EnumTokens.ACCESS_TOKEN);
         return null;
-    } else if (!accessToken) {
-        request.cookies.delete(EnumTokens.REFRESH_TOKEN);
-        return null;
     }
 
     return { accessToken, refreshToken };
