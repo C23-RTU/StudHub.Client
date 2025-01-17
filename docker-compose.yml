@@ -7,6 +7,7 @@ services:
         image: nginx:alpine
         ports:
             - 80:80
+            - 443:443
         restart: always
         volumes:
             - './.next/:/usr/share/nginx/html/'
