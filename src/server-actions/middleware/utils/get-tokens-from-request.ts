@@ -2,11 +2,13 @@ import { AxiosError } from 'axios';
 import type { NextRequest } from 'next/server';
 
 import { EnumTokens } from '@/lib/types/auth.type';
-import { AuthService } from '@/services/auth.service';
+import { getNewTokens } from '@/server-actions/actions/getRefreshTokens.action';
 
 export async function getTokensFromRequest(request: NextRequest) {
     const refreshToken = request.cookies.get(EnumTokens.REFRESH_TOKEN)?.value;
     let accessToken = request.cookies.get(EnumTokens.ACCESS_TOKEN)?.value;
+
+    console.log(accessToken, refreshToken);
 
     if (!refreshToken) {
         request.cookies.delete(EnumTokens.ACCESS_TOKEN);
@@ -15,9 +17,10 @@ export async function getTokensFromRequest(request: NextRequest) {
 
     if (!accessToken) {
         try {
-            const data = await AuthService.getNewTokens(refreshToken);
+            const data = await getNewTokens(refreshToken);
             accessToken = data.accessToken;
         } catch (error) {
+            console.log(error);
             if (error instanceof AxiosError) {
                 if (error.status === 401) {
                     console.log('Не валидный токен');

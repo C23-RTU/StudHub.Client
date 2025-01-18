@@ -2,8 +2,8 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 import { PUBLIC_PAGE } from './lib/config/routes.config';
-import { authorizationProtect } from './middleware/authorization-protect.middleware';
-import { loginProtect } from './middleware/login-protect.middleware';
+import { authorizationProtect } from './server-actions/middleware/authorization-protect.middleware';
+import { loginProtect } from './server-actions/middleware/login-protect.middleware';
 
 export async function middleware(request: NextRequest) {
     const url = new URL(request.url);
