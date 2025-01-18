@@ -1,18 +1,19 @@
 import type { Metadata } from 'next';
 
-// import { api } from '@/api/api';
-
 import Home from './Home';
 
-// import type { Post } from '@/lib/types/post';
+// import { PostService } from '@/services/post.service';
 
 export const metadata: Metadata = {
     title: 'Главная',
     description: 'Главная страница',
 };
 
-// const posts: Array<Post> = await api.get('/posts').then((res) => res.data);
+export const dynamic = 'force-static';
+export const revalidate = 100;
 
 export default async function HomePage() {
+    // const posts = await PostService.getAll();
+
     return <Home />;
 }

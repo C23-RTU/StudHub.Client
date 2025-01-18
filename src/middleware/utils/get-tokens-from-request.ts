@@ -24,6 +24,7 @@ export async function getTokensFromRequest(request: NextRequest) {
                     request.cookies.delete(EnumTokens.ACCESS_TOKEN);
                 }
             }
+
             request.cookies.delete(EnumTokens.REFRESH_TOKEN);
             return null;
         }
