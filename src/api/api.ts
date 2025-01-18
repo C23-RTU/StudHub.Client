@@ -7,5 +7,6 @@ export const api = axios.create({
     baseURL: BASE_API_URL,
     httpAgent: new https.Agent({
         keepAlive: true,
+        rejectUnauthorized: false,
     }),
 });
