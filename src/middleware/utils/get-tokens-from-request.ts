@@ -1,6 +1,6 @@
 import type { NextRequest } from 'next/server';
 
-import { EnumTokens } from '@/lib/types/auth.type';
+import { EnumTokens } from '@/lib/types/login.type';
 
 export async function getTokensFromRequest(request: NextRequest) {
     const refreshToken = request.cookies.get(EnumTokens.REFRESH_TOKEN)?.value;

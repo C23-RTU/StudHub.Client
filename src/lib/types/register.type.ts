@@ -1,8 +1,8 @@
 import { z } from 'zod';
 
-export type registerData = z.infer<typeof registerSchema>
+export type TRegisterDataSchema = z.infer<typeof RegisterDataSchema>
 
-export const registerSchema = z
+export const RegisterDataSchema = z
     .object({
         firstName: z
             .string()
@@ -20,9 +20,13 @@ export const registerSchema = z
             // .regex(/^[A-Za-zА-Яа-яёЁ\s]+$/, 'Недопустимые символы')
             .optional(),
         age: z
+            .preprocess(
+                (value) => (typeof value === 'string' ? parseInt(value, 10) : value),
+            z
             .number({ invalid_type_error: 'Возраст должен быть числом' })
             .min(1, 'Некорректный возраст')
             .max(100, 'Некорректный возраст'),
+            ),
         email: z.string().email('Некорректный email'),
         password: z
             .string()
@@ -31,7 +35,15 @@ export const registerSchema = z
             .regex(/[A-Z]/, 'Пароль должен содержать заглавную букву')
             .regex(/\d/, 'Пароль должен содержать цифру')
             .regex(/[^A-Za-z0-9]/, 'Пароль должен содержать спец. символ'),
-        confirmPassword: z.string(),
+        confirmPassword: z
+            .string(),
+        about: z
+            .string()
+            .max(200, 'Описание не может превышать 200 символов')
+            .optional(),
+        instituteId: z
+            .number()
+            .int('Некорректный идентификатор института'),
     })
     .refine((data) => data.password === data.confirmPassword, {
         message: 'Пароли не совпадают',

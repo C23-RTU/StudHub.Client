@@ -10,7 +10,7 @@ import { Button } from '@/components/ui/button';
 
 import { AUTH_PAGE } from '@/lib/config/routes.config';
 
-import { AuthDataSchema, type TAuthDataSchema } from '@/lib/types/auth.type';
+import { LoginDataSchema, type TLoginDataSchema } from '@/lib/types/login.type';
 import { AuthService } from '@/services/auth.service';
 
 export default function Login() {
@@ -21,14 +21,14 @@ export default function Login() {
         reset,
         register,
         formState: { errors, isValid },
-    } = useForm<TAuthDataSchema>({
+    } = useForm<TLoginDataSchema>({
         mode: 'onChange',
-        resolver: zodResolver(AuthDataSchema),
+        resolver: zodResolver(LoginDataSchema),
     });
 
     const { mutate, isPending } = useMutation({
         mutationKey: ['login'],
-        mutationFn: async (data: TAuthDataSchema) => await AuthService.login(data),
+        mutationFn: async (data: TLoginDataSchema) => await AuthService.login(data),
         onSuccess: () => {
             router.push(AUTH_PAGE.HOME);
             reset();
@@ -38,7 +38,7 @@ export default function Login() {
         },
     });
 
-    const onSubmitHandler: SubmitHandler<TAuthDataSchema> = (data) => {
+    const onSubmitHandler: SubmitHandler<TLoginDataSchema> = (data) => {
         mutate(data);
     };
 
