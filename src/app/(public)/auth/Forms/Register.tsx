@@ -1,6 +1,5 @@
 'use client';
 
-import { Eye, EyeClosed } from 'lucide-react';
 import { useState } from 'react';
 import { z } from 'zod';
 
@@ -14,15 +13,43 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Input } from '@/components/ui/input';
 
-import { registerSchema } from '@/schemas/registerSchema';
-import type { registerData } from '@/schemas/registerSchema';
+const registrationSchema = z
+    .object({
+        firstName: z
+            .string()
+            .min(1, 'Имя обязательно')
+            .max(20, 'Имя не более 20 символов')
+            .regex(/^[A-Za-zА-Яа-яёЁ\s]+$/, 'Некорректное имя'),
+        lastName: z
+            .string()
+            .min(1, 'Фамилия обязательна')
+            .max(40, 'Фамилия не более 40 символов')
+            .regex(/^[A-Za-zА-Яа-яёЁ\s]+$/, 'Некорректная фамилия'),
+        middleName: z
+            .string()
+            .max(25, 'Отчество не более 25 символов')
+            .regex(/^[A-Za-zА-Яа-яёЁ\s]+$/, 'Недопустимые символы')
+            .optional(),
+        age: z
+            .number({ invalid_type_error: 'Возраст должен быть числом' })
+            .min(1, 'Некорректный возраст')
+            .max(100, 'Некорректный возраст'),
+        email: z.string().email('Некорректный email'),
+        password: z
+            .string()
+            .min(12, 'Не менее 12 символов')
+            .regex(/[a-z]/, 'Пароль должен содержать строчную букву')
+            .regex(/[A-Z]/, 'Пароль должен содержать заглавную букву')
+            .regex(/\d/, 'Пароль должен содержать цифру')
+            .regex(/[^A-Za-z0-9]/, 'Пароль должен содержать спец. символ'),
+        confirmPassword: z.string(),
+    })
+    .refine((data) => data.password === data.confirmPassword, {
+        message: 'Пароли не совпадают',
+        path: ['confirmPassword'],
+    });
 
-interface RegisterProps {
-    onRegister: (data: registerData) => void;
-}
-
-export default function Register({ onRegister }: RegisterProps) {
-    const [showPassword, setShowPassword] = useState(false);
+export default function Register() {
     const [selectedInstitute, setSelectedInstitute] = useState<string | null>(null);
     const [aboutText, setAboutText] = useState('');
     const [errors, setErrors] = useState<Record<string, string>>({});
@@ -41,20 +68,22 @@ export default function Register({ onRegister }: RegisterProps) {
         const data = {
             firstName: formData.get('name') as string,
             lastName: formData.get('lastname') as string,
-            middleName: (formData.get('middlename') as string) || '',
+            middleName: (formData.get('middlename') as string) || undefined,
             age: parseInt(formData.get('age') as string, 10),
-            institute: selectedInstitute || null,
+            institute: selectedInstitute,
             email: formData.get('email') as string,
-            about: aboutText || '',
+            about: aboutText || undefined,
             password: formData.get('password') as string,
             confirmPassword: formData.get('confirmPassword') as string,
         };
 
         try {
-            registerSchema.parse(data);
+            registrationSchema.parse(data);
             setErrors({});
 
-            onRegister(data);
+            // api
+
+            console.log(data);
         } catch (error) {
             if (error instanceof z.ZodError) {
                 const fieldErrors: Record<string, string> = {};
@@ -94,30 +123,13 @@ export default function Register({ onRegister }: RegisterProps) {
             </div>
             <div className="grid gap-4 grid-cols-2 col-span-3">
                 <div className="relative">
-                    <Input name="password" placeholder="Пароль" type={showPassword ? 'text' : 'password'} />
-                    {showPassword ? (
-                        <Eye
-                            className="absolute top-1/2 right-2 -translate-y-1/2 cursor-pointer"
-                            size={20}
-                            onClick={() => setShowPassword(!showPassword)}
-                        />
-                    ) : (
-                        <EyeClosed
-                            className="absolute top-1/2 right-2 -translate-y-1/2 cursor-pointer"
-                            size={20}
-                            onClick={() => setShowPassword(!showPassword)}
-                        />
-                    )}
+                    <Input placeholder="Пароль" type="password" />
                     {errors.password && (
                         <p className="text-red-500 text-xs absolute left-0 bottom-full">{errors.password}</p>
                     )}
                 </div>
                 <div className="relative">
-                    <Input
-                        name="confirmPassword"
-                        placeholder="Повторите пароль"
-                        type={showPassword ? 'text' : 'password'}
-                    />
+                    <Input placeholder="Повторите пароль" type="password" />
                     {errors.confirmPassword && (
                         <p className="text-red-500 text-xs absolute left-0 bottom-full">{errors.confirmPassword}</p>
                     )}

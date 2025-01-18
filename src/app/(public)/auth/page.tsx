@@ -28,7 +28,7 @@ export default async function RegistrationPage() {
     }
 
     return (
-        <main className="w-full h-[100svh] flex justify-center items-center px-pageX max-w-[1024px] m-auto">
+        <main className="w-full h-[100svh] flex justify-center px-pageX max-w-[1024px] m-auto">
             <div className="flex flex-col gap-4 w-full">
                 <Auth handleRegister={handleRegister} />
             </div>

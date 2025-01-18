@@ -5,8 +5,8 @@ import { useState } from 'react';
 
 import { Switcher } from '@/components/ui/Switcher/Switcher';
 
-import Login from './Login';
-import Register from './Register';
+import Login from './Forms/Login';
+import Register from './Forms/Register';
 import type { registerData } from '@/schemas/registerSchema';
 
 enum Tabs {
