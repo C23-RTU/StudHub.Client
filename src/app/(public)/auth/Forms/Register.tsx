@@ -45,7 +45,7 @@ export default function Register() {
 
     const { mutate, isPending } = useMutation({
         mutationKey: ['register'],
-        mutationFn: async (data: TRegisterDataSchema) => await AuthService.login(data),
+        mutationFn: async (data: TRegisterDataSchema) => await AuthService.register(data),
         onSuccess: () => {
             router.push(AUTH_PAGE.HOME);
             reset();
