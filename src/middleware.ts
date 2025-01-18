@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 import { PUBLIC_PAGE } from './lib/config/routes.config';
-import { isProduction } from './lib/isProdation.env';
+import { isProduction } from './lib/isProduction.env';
 import { authorizationProtect } from './middleware/authorization-protect.middleware';
 import { loginProtect } from './middleware/login-protect.middleware';
 
