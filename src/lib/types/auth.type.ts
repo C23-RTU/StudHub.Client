@@ -6,3 +6,13 @@ export const AuthDataSchema = z.object({
 });
 
 export type TAuthDataSchema = z.infer<typeof AuthDataSchema>;
+
+export interface ILoginResponse {
+    accessToken: string;
+    refreshToken: string;
+}
+
+export enum EnumTokens {
+    ACCESS_TOKEN = 'accessToken',
+    REFRESH_TOKEN = 'refreshToken',
+}

@@ -2,19 +2,24 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
+import axios from 'axios';
+import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
+import { useTransition } from 'react';
 import { type SubmitHandler, useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 
 import { FormField } from '@/components/ui/FormField/FormField';
 import { Button } from '@/components/ui/button';
 
 import { AUTH_PAGE } from '@/lib/config/routes.config';
 
-import { AuthDataSchema, type TAuthDataSchema } from '@/lib/types/auth.type';
+import { AuthDataSchema, EnumTokens, type TAuthDataSchema } from '@/lib/types/auth.type';
 import { AuthService } from '@/services/auth.service';
 
 export default function Login() {
     const router = useRouter();
+    const [isPending, startTransition] = useTransition();
 
     const {
         handleSubmit,
@@ -26,23 +31,41 @@ export default function Login() {
         resolver: zodResolver(AuthDataSchema),
     });
 
-    const { mutate, isPending } = useMutation({
+    //TODO: вынести в отдельный хук useLogin.tsx
+    const { mutateAsync, isPending: isLoginPending } = useMutation({
         mutationKey: ['login'],
         mutationFn: async (data: TAuthDataSchema) => await AuthService.login(data),
-        onSuccess: () => {
-            router.push(AUTH_PAGE.HOME);
-            reset();
-        },
-        onError: (error) => {
-            console.log(error.message);
+        onSuccess: ({ accessToken, refreshToken }) => {
+            Cookies.set(EnumTokens.ACCESS_TOKEN, accessToken, { expires: 1 / 24 / 6 }); // 10 минут
+            Cookies.set(EnumTokens.REFRESH_TOKEN, refreshToken, { expires: 30 }); // 30 дней
         },
     });
 
     const onSubmitHandler: SubmitHandler<TAuthDataSchema> = (data) => {
-        mutate(data);
-    };
+        toast.promise(
+            mutateAsync(data),
+            {
+                loading: 'Попытка входа...',
+                success: () => {
+                    startTransition(() => {
+                        reset();
+                        router.push(AUTH_PAGE.HOME);
+                    });
 
-    console.log(isValid);
+                    return 'Успешный вход!';
+                },
+                error: (error: unknown) => {
+                    console.log(error);
+                    if (axios.isAxiosError(error)) {
+                        return error.response?.data.detail;
+                    }
+                },
+            },
+            {
+                id: 'error',
+            },
+        );
+    };
 
     return (
         <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmitHandler)}>
@@ -60,7 +83,7 @@ export default function Login() {
                 error={errors.password?.message}
             />
 
-            <Button type="submit" isLoading={isPending} disabled={!isValid}>
+            <Button type="submit" isLoading={isPending || isLoginPending} disabled={!isValid}>
                 Войти
             </Button>
         </form>
