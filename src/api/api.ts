@@ -10,6 +10,7 @@ export const api = axios.create({
     },
     httpAgent: new https.Agent({
         keepAlive: true,
+        rejectUnauthorized: false,
     }),
     withCredentials: true,
 });
