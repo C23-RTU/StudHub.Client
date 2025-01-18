@@ -60,30 +60,29 @@ export default function Register() {
     };
 
     return (
-        <form className="grid gap-5 grid-cols-3 mb-5" onSubmit={handleSubmit(onSubmitHandler)}>
-            <FormField
-                placeholder="Имя"
-                type="text"
-                autoComplete="off"
-                registration={register('firstName')}
-                error={errors.firstName?.message}
-            />
-            <FormField
-                placeholder="Фамилия"
-                type="text"
-                autoComplete="off"
-                registration={register('lastName')}
-                error={errors.lastName?.message}
-            />
-            <FormField
-                placeholder="Отчество"
-                type="text"
-                autoComplete="off"
-                registration={register('middleName')}
-                error={errors.middleName?.message}
-            />
-
-            <div className="col-span-3 relative">
+        <form className="flex flex-col gap-4 mb-5" onSubmit={handleSubmit(onSubmitHandler)}>
+            <div className="grid col-span-2 gap-4">
+                <FormField
+                    placeholder="Имя"
+                    type="text"
+                    autoComplete="off"
+                    registration={register('firstName')}
+                    error={errors.firstName?.message}
+                />
+                <FormField
+                    placeholder="Фамилия"
+                    type="text"
+                    autoComplete="off"
+                    registration={register('lastName')}
+                    error={errors.lastName?.message}
+                />
+                <FormField
+                    placeholder="Отчество"
+                    type="text"
+                    autoComplete="off"
+                    registration={register('middleName')}
+                    error={errors.middleName?.message}
+                />
                 <FormField
                     placeholder="Почта"
                     type="email"
@@ -92,7 +91,7 @@ export default function Register() {
                     error={errors.email?.message}
                 />
             </div>
-            <div className="grid gap-4 grid-cols-2 col-span-3">
+            <div className="grid gap-4 grid-cols-2 col-span-2">
                 <FormField
                     placeholder="Пароль"
                     type="password"
@@ -124,10 +123,10 @@ export default function Register() {
                 </DropdownMenu>
                 <FormField
                     placeholder="Возраст"
-                    type="number"
+                    type="date"
                     autoComplete="off"
-                    registration={register('age')}
-                    error={errors.age?.message}
+                    registration={register('birthDate', { valueAsDate: true })}
+                    error={errors.birthDate?.message}
                 />
             </div>
 

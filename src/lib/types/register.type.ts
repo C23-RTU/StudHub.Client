@@ -19,14 +19,12 @@ export const RegisterDataSchema = z
             .max(25, 'Отчество не более 25 символов')
             // .regex(/^[A-Za-zА-Яа-яёЁ\s]+$/, 'Недопустимые символы')
             .optional(),
-        age: z
-            .preprocess(
-                (value) => (typeof value === 'string' ? parseInt(value, 10) : value),
-            z
-            .number({ invalid_type_error: 'Возраст должен быть числом' })
-            .min(1, 'Некорректный возраст')
-            .max(100, 'Некорректный возраст'),
-            ),
+        birthDate: z
+            .date({
+                required_error: 'Дата рождения обязательна',
+                invalid_type_error: 'Введите корректную дату 2',
+            })
+            .refine((date) => date <= new Date(), 'Введите корректную дату'),
         email: z.string().email('Некорректный email'),
         password: z
             .string()
