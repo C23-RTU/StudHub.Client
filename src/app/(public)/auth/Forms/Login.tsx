@@ -36,7 +36,7 @@ export default function Login() {
         mutationKey: ['login'],
         mutationFn: async (data: TAuthDataSchema) => await AuthService.login(data),
         onSuccess: ({ accessToken, refreshToken }) => {
-            Cookies.set(EnumTokens.ACCESS_TOKEN, accessToken, { expires: 1 / 24 / 6 }); // 10 минут
+            Cookies.set(EnumTokens.ACCESS_TOKEN, accessToken, { expires: 30 }); // 30 дней
             Cookies.set(EnumTokens.REFRESH_TOKEN, refreshToken, { expires: 30 }); // 30 дней
         },
     });
