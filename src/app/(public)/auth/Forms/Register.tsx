@@ -56,7 +56,15 @@ export default function Register() {
     });
 
     const onSubmitHandler: SubmitHandler<TRegisterDataSchema> = (data) => {
-        mutate(data);
+        const formattedData = {
+            ...data,
+            middleName: data.middleName?.trim() || undefined,
+            about: data.about?.trim() || undefined,
+            instituteId: selectedInstitute?.id || null,
+            age: 25,
+        };
+    
+        mutate(formattedData);
     };
 
     return (

@@ -42,7 +42,8 @@ export const RegisterDataSchema = z
         instituteId: z
             .number()
             .int('Некорректный идентификатор института')
-            .optional(),
+            .optional()
+            .nullable(),
     })
     .refine((data) => data.password === data.confirmPassword, {
         message: 'Пароли не совпадают',
