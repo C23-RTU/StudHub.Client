@@ -1,7 +1,7 @@
 'use client';
 
 import { AnimatePresence, motion as m } from 'framer-motion';
-import { CircleAlert, Copy, MapPin, OctagonAlert, SquareCheck, SquarePlus, UsersRound } from 'lucide-react';
+import { CircleAlert, Copy, MapPin, OctagonAlert, UsersRound } from 'lucide-react';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -11,7 +11,7 @@ import { PostCard } from '@/components/PostCard/PostCard';
 import { BackButton } from '@/components/ui/BackButton/BackButton';
 import { MoreButton } from '@/components/ui/MoreButton/MoreButton';
 import { SearchInput } from '@/components/ui/SearchInput/SearchInput';
-import { Button } from '@/components/ui/button';
+import { SubscribeButton } from '@/components/ui/SubscribeButton/SubscribeButton';
 
 import { MainContent } from '@/hoc/MainContent/MainContent';
 import type { Post } from '@/lib/types/post';
@@ -21,8 +21,6 @@ export function Club({ posts = [] }: { posts: Post[] }) {
 
     const pathname = usePathname();
 
-    const [subscribed, setSubscribed] = useState<boolean>(false);
-    const [unsubVisible, setUnsubVisible] = useState<boolean>(false);
     const [moreVisible, setMoreVisible] = useState<boolean>(false);
 
     return (
@@ -82,49 +80,7 @@ export function Club({ posts = [] }: { posts: Post[] }) {
                 </div>
             </div>
 
-            <div className="flex justify-center">
-                {subscribed ? (
-                    <Button
-                        onClick={() => {
-                            setUnsubVisible(true);
-                        }}
-                        className="mt-5 w-[60%] flex justify-center bg-secondary hover:bg-accent"
-                    >
-                        <span>Вы подписаны</span>
-                        <SquarePlus />
-                    </Button>
-                ) : (
-                    <Button onClick={() => setSubscribed(true)} className="mt-5 w-[60%] flex justify-center">
-                        <span>Вступить</span>
-                        <SquareCheck />
-                    </Button>
-                )}
-            </div>
-
-            <AnimatePresence>
-                {unsubVisible && (
-                    <ClickAwayListener onClickAway={() => setUnsubVisible(false)}>
-                        <m.div
-                            className="fixed rounded-lg left-40 right-40 bottom-20 flex flex-col p-5 bg-secondary shadow-md"
-                            initial={{ opacity: 0, scale: 0 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            exit={{ opacity: 0, scale: 0 }}
-                            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                        >
-                            <p className="text-center">Вы хотите отписаться от клуба?</p>
-                            <Button
-                                className="w-[60%] justify-center mx-auto mt-3"
-                                onClick={() => {
-                                    setSubscribed(false);
-                                    setUnsubVisible(false);
-                                }}
-                            >
-                                Отписаться
-                            </Button>
-                        </m.div>
-                    </ClickAwayListener>
-                )}
-            </AnimatePresence>
+            <SubscribeButton />
 
             <AnimatePresence>
                 {moreVisible && (
