@@ -3,18 +3,23 @@
 import { AnimatePresence, motion as m } from 'framer-motion';
 import { CircleAlert, Copy, MapPin, OctagonAlert, SquareCheck, SquarePlus, UsersRound } from 'lucide-react';
 import Image from 'next/image';
-import { useRouter, usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useState } from 'react';
 import ClickAwayListener from 'react-click-away-listener';
 
+import { PostCard } from '@/components/PostCard/PostCard';
 import { BackButton } from '@/components/ui/BackButton/BackButton';
 import { MoreButton } from '@/components/ui/MoreButton/MoreButton';
+import { SearchInput } from '@/components/ui/SearchInput/SearchInput';
 import { Button } from '@/components/ui/button';
 
-export function Club() {
+import { MainContent } from '@/hoc/MainContent/MainContent';
+import type { Post } from '@/lib/types/post';
+
+export function Club({ posts = [] }: { posts: Post[] }) {
     const router = useRouter();
 
-    const pathname = usePathname()
+    const pathname = usePathname();
 
     const [subscribed, setSubscribed] = useState<boolean>(false);
     const [unsubVisible, setUnsubVisible] = useState<boolean>(false);
@@ -142,6 +147,18 @@ export function Club() {
                     </ClickAwayListener>
                 )}
             </AnimatePresence>
+
+            <MainContent>
+                <p className="text-xl font-semibold">Посты</p>
+                <SearchInput placeholder="Поиск по постам..." />
+                <div className="flex flex-col gap-10">
+                    {posts && posts.length > 0 ? (
+                        posts.map((post) => <PostCard key={post.id} post={post} />)
+                    ) : (
+                        <p className="m-auto">Нет постов</p>
+                    )}
+                </div>
+            </MainContent>
         </div>
     );
 }
