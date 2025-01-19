@@ -3,6 +3,7 @@
 import { AnimatePresence, motion as m } from 'framer-motion';
 import { CircleAlert, Copy, MapPin, OctagonAlert, SquareCheck, SquarePlus, UsersRound } from 'lucide-react';
 import Image from 'next/image';
+import { useRouter, usePathname } from 'next/navigation';
 import { useState } from 'react';
 import ClickAwayListener from 'react-click-away-listener';
 
@@ -11,6 +12,10 @@ import { MoreButton } from '@/components/ui/MoreButton/MoreButton';
 import { Button } from '@/components/ui/button';
 
 export function Club() {
+    const router = useRouter();
+
+    const pathname = usePathname()
+
     const [subscribed, setSubscribed] = useState<boolean>(false);
     const [unsubVisible, setUnsubVisible] = useState<boolean>(false);
     const [moreVisible, setMoreVisible] = useState<boolean>(false);
@@ -53,7 +58,7 @@ export function Club() {
 
             <div className="flex flex-col gap-2 mt-5">
                 <div className="relative">
-                    <a href="#" className="ml-8">
+                    <a onClick={() => router.push(`${pathname}}/subscribers`)} className="ml-8 hover:cursor-pointer">
                         1.1М подписчиков
                     </a>
                     <UsersRound className="absolute left-0 top-0" />
