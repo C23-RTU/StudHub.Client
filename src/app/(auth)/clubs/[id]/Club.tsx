@@ -2,7 +2,7 @@
 
 import { CircleAlert, Copy, EllipsisVertical, MapPin, OctagonAlert, UsersRound } from 'lucide-react';
 import Image from 'next/image';
-import { usePathname, useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 import { PostCard } from '@/components/PostCard/PostCard';
 import { BackButton } from '@/components/ui/BackButton/BackButton';
@@ -19,15 +19,12 @@ import {
 import { MainContent } from '@/hoc/MainContent/MainContent';
 import type { Post } from '@/lib/types/post';
 
-export function Club({ posts = [] }: { posts: Post[] }) {
-    const router = useRouter();
-    const pathname = usePathname();
-
+export function Club({ posts = [], id = '1' }: { posts: Post[]; id: string }) {
     return (
         <div className="relative p-0">
             <div>
-                <div className="fixed flex flex-row justify-between items-center p-4 w-full">
-                    <div className="flex items-center">
+                <div className="fixed flex flex-row justify-between items-center p-4 w-full max-w-[1024px]">
+                    <div className="flex flex-row items-center">
                         <BackButton />
                         <p
                             className="text-lg ml-4 font-bold shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] bg-secondary font-geologica rounded-lg leading-8 h-10 py-1 px-3 hover:cursor-pointer"
@@ -42,7 +39,7 @@ export function Club({ posts = [] }: { posts: Post[] }) {
                             <Button
                                 variant={'outline'}
                                 size="icon"
-                                className="rounded-lg w-10 h-10 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] bg-secondary flex justify-center items-center hover:cursor-pointer"
+                                className="rounded-lg w-10 h-10 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] bg-secondary"
                             >
                                 <EllipsisVertical />
                             </Button>
@@ -89,27 +86,21 @@ export function Club({ posts = [] }: { posts: Post[] }) {
                 </div>
 
                 <div className="flex flex-col gap-2 mt-5">
-                    <div className="relative">
-                        <a
-                            onClick={() => router.push(`${pathname}}/subscribers`)}
-                            className="ml-8 hover:cursor-pointer"
-                        >
-                            1.1М подписчиков
-                        </a>
-                        <UsersRound className="absolute left-0 top-0" />
-                    </div>
-                    <div className="relative">
-                        <a href="#" className="ml-8">
-                            г. Москва, ул. Стромынка д.20
-                        </a>
-                        <MapPin className="absolute left-0 top-0" />
-                    </div>
-                    <div className="relative">
-                        <a href="#" className="ml-8 font-bold">
-                            Подробная информация
-                        </a>
-                        <CircleAlert className="absolute left-0 top-0" />
-                    </div>
+                    <Link
+                        href={`/clubs/${id}/subscribers`}
+                        className="flex gap-2 flex-row items-center cursor-pointer text-neutral-50"
+                    >
+                        <UsersRound />
+                        1.1М подписчиков
+                    </Link>
+                    <section className="flex gap-2 flex-row items-center cursor-pointer text-neutral-50">
+                        <MapPin />  
+                        г. Москва, ул. Стромынка д.2f
+                    </section>
+                    <section className="flex gap-2 flex-row items-center cursor-pointer text-neutral-50">
+                        <CircleAlert />
+                        Подробная информация
+                    </section>
                 </div>
 
                 <SubscribeButton />

@@ -1,7 +1,6 @@
 'use client';
 
 import { ArrowUpRight } from 'lucide-react';
-import Image from 'next/image';
 
 interface Props {
     status: 'online' | 'offline';
@@ -12,24 +11,32 @@ interface Props {
 
 export function SubscriberCard({ status = 'offline', name, avatar, role }: Props) {
     return (
-        <div className="flex w-full bg-secondary py-2 px-4 rounded-lg">
-            <div className="flex relative">
-                <Image src={avatar} width={40} height={40} alt="avatar" />
-                {status === 'online' ? (
-                    <div className="w-3 h-3 bg-emerald-400 rounded-full border border-bg absolute right-0 bottom-0"></div>
-                ) : (
-                    <div className="w-3 h-3 bg-red-500 rounded-full border border-bg absolute right-0 bottom-0"></div>
-                )}
+        <div className="flex w-full bg-secondary py-2 px-2 rounded-lg" role="listitem">
+            <div className="relative">
+                <img src={avatar} alt={`${name}'s avatar`} className="rounded-full w-10 h-10 min-w-[40px]" />
+                <div
+                    className={`w-3 h-3 rounded-full border border-bg absolute right-0 bottom-0 ${
+                        status === 'online' ? 'bg-emerald-400' : 'bg-red-500'
+                    }`}
+                    role="status"
+                    aria-label={`User is ${status}`}
+                />
             </div>
 
-            <div className="flex flex-col ml-3 justify-between">
-                <p className="text-m font-geologica font-semibold">{name}</p>
-                <p className="text-xs opacity-50 font-inter font-normal">{role}</p>
+            <div className="flex flex-col ml-3 justify-between overflow-hidden">
+                <p
+                    className="text-m font-geologica font-semibold text-ellipsis overflow-hidden whitespace-nowrap"
+                    title={name}
+                >
+                    {name}
+                </p>
+                <p
+                    className="text-xs opacity-50 font-inter font-normal text-ellipsis overflow-hidden whitespace-nowrap"
+                    title={role}
+                >
+                    {role}
+                </p>
             </div>
-
-            <a href="#" className="bg-primary rounded-lg flex justify-center items-center w-8 h-8 ml-auto hover:cursor-pointer hover:bg-primary/80 self-center">
-                <ArrowUpRight size={20} />
-            </a>
         </div>
     );
 }

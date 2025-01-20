@@ -7,8 +7,6 @@ export const metadata: Metadata = {
     description: 'Страница клуба',
 };
 
-const Page = () => {
-    return <Club />;
-};
-
-export default Page;
+export default async function Page({ params }: { params: { id: string } }) {
+    return <Club id={params.id} />;
+}

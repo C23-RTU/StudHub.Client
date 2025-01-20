@@ -2,8 +2,9 @@ import { SubscriberCard } from '@/components/SubscriberCard/SubscriberCard';
 import { BackButton } from '@/components/ui/BackButton/BackButton';
 
 import { HeaderTitle } from '@/hoc/Header/Header';
+import Link from 'next/link';
 
-export function Subscribers() {
+export function Subscribers({ id }: { id: string }) {
     const subscribers = [
         {
             status: 'online' as 'online',
@@ -22,7 +23,9 @@ export function Subscribers() {
     return (
         <div className="page">
             <div className="sticky top-1 left-0 flex items-center mb-4 gap-5">
-                <BackButton />
+                <Link href={`/clubs/${id}`}>
+                    <BackButton />
+                </Link>
                 <HeaderTitle>Подписчики</HeaderTitle>
             </div>
             <div className="space-y-4">

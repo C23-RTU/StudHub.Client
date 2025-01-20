@@ -9,6 +9,8 @@ export async function middleware(request: NextRequest) {
     const url = new URL(request.url);
     const pathname = url.pathname;
 
+    if (process.env.NODE_ENV === 'development') return NextResponse.next();
+
     if (!pathname.includes(PUBLIC_PAGE.AUTH)) {
         return authorizationProtect(request);
     }
