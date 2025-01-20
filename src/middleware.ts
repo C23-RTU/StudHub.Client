@@ -9,13 +9,13 @@ export async function middleware(request: NextRequest) {
     const url = new URL(request.url);
     const pathname = url.pathname;
 
-    if (!pathname.includes(PUBLIC_PAGE.AUTH)) {
-        return authorizationProtect(request);
-    }
+    // if (!pathname.includes(PUBLIC_PAGE.AUTH)) {
+    //     return authorizationProtect(request);
+    // }
 
-    if (pathname.includes(PUBLIC_PAGE.AUTH)) {
-        return loginProtect(request);
-    }
+    // if (pathname.includes(PUBLIC_PAGE.AUTH)) {
+    //     return loginProtect(request);
+    // }
 
     return NextResponse.next();
 }
