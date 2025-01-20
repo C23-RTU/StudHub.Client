@@ -7,14 +7,17 @@ services:
         image: nginx:alpine
         ports:
             - 80:80
+            - 443:443
         restart: always
         volumes:
             - './.next/:/usr/share/nginx/html/'
             - './nginx.conf:/etc/nginx/conf.d/default.conf'
+            - './ssl/:/etc/nginx/certs/'
         networks:
             - setkaNetwork
         depends_on:
             - frontend
+            - backend_api
 
     certbot:
         image: certbot/certbot:latest
@@ -26,5 +29,12 @@ services:
         build: .
         ports:
             - 3000:3000
+        networks:
+            - setkaNetwork
+
+    backend_api:
+        build: /opt/setka/Setka.Server
+        ports:
+            - 5293:8080
         networks:
             - setkaNetwork
