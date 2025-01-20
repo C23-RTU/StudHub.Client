@@ -1,19 +1,20 @@
+import Link from 'next/link';
+
 import { SubscriberCard } from '@/components/SubscriberCard/SubscriberCard';
 import { BackButton } from '@/components/ui/BackButton/BackButton';
 
 import { HeaderTitle } from '@/hoc/Header/Header';
-import Link from 'next/link';
 
 export function Subscribers({ id }: { id: string }) {
     const subscribers = [
         {
-            status: 'online' as 'online',
+            status: 'online',
             name: 'Станислав Алексеевич Кудж',
             avatar: '/img/avatar.png',
             role: 'Ректор РТУ МИРЭА',
         },
         {
-            status: 'offline' as 'offline',
+            status: 'offline',
             name: 'Иван Иванов',
             avatar: '/img/avatar.png',
             role: 'Студент',
@@ -32,7 +33,7 @@ export function Subscribers({ id }: { id: string }) {
                 {subscribers.map((subscriber, index) => (
                     <SubscriberCard
                         key={index}
-                        status={subscriber.status}
+                        status={subscriber.status as 'online' | 'offline'}
                         name={subscriber.name}
                         avatar={subscriber.avatar}
                         role={subscriber.role}

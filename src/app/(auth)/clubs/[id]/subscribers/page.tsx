@@ -7,6 +7,7 @@ export const metadata: Metadata = {
     description: 'Страница подписчиков клуба',
 };
 
-export default async function Page({ params }: { params: { id: string } }) {
-    return <Subscribers id={params.id} />;
+export default async function Page({ params }: { params: Promise<{ id: string }> }) {
+    const id = (await params).id;
+    return <Subscribers id={id} />;
 }
