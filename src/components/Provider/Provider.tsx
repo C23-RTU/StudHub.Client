@@ -1,6 +1,7 @@
 'use client';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { LazyMotion, domAnimation } from 'framer-motion';
 import type { PropsWithChildren } from 'react';
 import { Toaster } from 'react-hot-toast';
 
@@ -15,7 +16,9 @@ const queryClient = new QueryClient({
 export default function ProviderLayout({ children }: PropsWithChildren<unknown>) {
     return (
         <>
-            <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+            <QueryClientProvider client={queryClient}>
+                <LazyMotion features={domAnimation}>{children}</LazyMotion>
+            </QueryClientProvider>
             <Toaster position="top-center" />
         </>
     );
