@@ -2,7 +2,7 @@ import { AxiosError } from 'axios';
 import type { NextRequest } from 'next/server';
 
 import { jwtVerifyServer } from './jwt-verify';
-import { EnumTokens } from '@/lib/types/auth.type';
+import { EnumTokens } from '@/lib/types/login.type';
 import { getNewTokens } from '@/server-actions/actions/getRefreshTokens.action';
 
 export async function getTokensFromRequest(request: NextRequest) {
