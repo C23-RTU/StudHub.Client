@@ -14,7 +14,7 @@ interface IFormField extends Omit<Props, 'onCopy' | 'onChange' | 'onFocus' | 'on
     };
 }
 
-export function FormTextArea({ error, registration, placeholder, textAreaProps, ...props }: IFormField) {
+export function FormTextArea({ error, registration, placeholder, textAreaProps }: IFormField) {
     const [textAreaValue, setTextAreaValue] = React.useState('');
     const maxLength = textAreaProps?.maxLength || 200;
 
