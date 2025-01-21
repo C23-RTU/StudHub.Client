@@ -1,11 +1,11 @@
 import { z } from 'zod';
 
-export const AuthDataSchema = z.object({
+export const LoginDataSchema = z.object({
     email: z.string().email(''),
     password: z.string().nonempty(''),
 });
 
-export type TAuthDataSchema = z.infer<typeof AuthDataSchema>;
+export type TLoginDataSchema = z.infer<typeof LoginDataSchema>;
 
 export interface ILoginResponse {
     accessToken: string;

@@ -14,7 +14,7 @@ import { Button } from '@/components/ui/button';
 
 import { AUTH_PAGE } from '@/lib/config/routes.config';
 
-import { AuthDataSchema, EnumTokens, type TAuthDataSchema } from '@/lib/types/auth.type';
+import { EnumTokens, LoginDataSchema, type TLoginDataSchema } from '@/lib/types/login.type';
 import { AuthService } from '@/services/auth.service';
 
 export default function Login() {
@@ -26,22 +26,22 @@ export default function Login() {
         reset,
         register,
         formState: { errors, isValid },
-    } = useForm<TAuthDataSchema>({
+    } = useForm<TLoginDataSchema>({
         mode: 'onChange',
-        resolver: zodResolver(AuthDataSchema),
+        resolver: zodResolver(LoginDataSchema),
     });
 
     //TODO: вынести в отдельный хук useLogin.tsx
     const { mutateAsync, isPending: isLoginPending } = useMutation({
         mutationKey: ['login'],
-        mutationFn: async (data: TAuthDataSchema) => await AuthService.login(data),
+        mutationFn: async (data: TLoginDataSchema) => await AuthService.login(data),
         onSuccess: ({ accessToken, refreshToken }) => {
             Cookies.set(EnumTokens.ACCESS_TOKEN, accessToken, { expires: 30 }); // 30 дней
             Cookies.set(EnumTokens.REFRESH_TOKEN, refreshToken, { expires: 30 }); // 30 дней
         },
     });
 
-    const onSubmitHandler: SubmitHandler<TAuthDataSchema> = (data) => {
+    const onSubmitHandler: SubmitHandler<TLoginDataSchema> = (data) => {
         toast.promise(
             mutateAsync(data),
             {

@@ -14,7 +14,7 @@ enum Tabs {
 }
 
 export default function Auth() {
-    const [formType, setFormType] = useState<Tabs>(Tabs.LOGIN);
+    const [formType, setFormType] = useState<Tabs>(Tabs.REGISTRATION);
 
     return (
         <div className="flex flex-col items-center gap-3">

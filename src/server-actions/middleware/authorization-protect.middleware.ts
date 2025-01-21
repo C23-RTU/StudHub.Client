@@ -3,7 +3,7 @@ import { type NextRequest, NextResponse } from 'next/server';
 import { getTokensFromRequest } from './utils/get-tokens-from-request';
 import { jwtVerifyServer } from './utils/jwt-verify';
 import { redirectToAuth } from './utils/redirect-to-auth';
-import { EnumTokens } from '@/lib/types/auth.type';
+import { EnumTokens } from '@/lib/types/login.type';
 
 export async function authorizationProtect(request: NextRequest) {
     const response = NextResponse.next();
