@@ -22,7 +22,7 @@ export const RegisterDataSchema = z
         birthDate: z
             .date({
                 required_error: 'Дата рождения обязательна',
-                invalid_type_error: 'Введите корректную дату 2',
+                invalid_type_error: 'Введите корректную дату',
             })
             .refine((date) => date <= new Date(), 'Введите корректную дату'),
         email: z.string().email('Некорректный email'),

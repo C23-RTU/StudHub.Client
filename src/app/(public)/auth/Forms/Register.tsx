@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { type SubmitHandler, useForm } from 'react-hook-form';
 
+import { DatePicker } from '@/components/ui/DatePicker/DatePicker';
 import { FormField } from '@/components/ui/FormField/FormField';
 import { FormTextArea } from '@/components/ui/FormTextArea/FormTextArea';
 import { Button } from '@/components/ui/button';
@@ -37,6 +38,8 @@ export default function Register() {
         handleSubmit,
         reset,
         register,
+        watch,
+        setValue,
         formState: { errors, isValid },
     } = useForm<TRegisterDataSchema>({
         mode: 'onChange',
@@ -63,7 +66,7 @@ export default function Register() {
             instituteId: selectedInstitute?.id || null,
             age: 25,
         };
-    
+
         mutate(formattedData);
     };
 
@@ -129,11 +132,13 @@ export default function Register() {
                         ))}
                     </DropdownMenuContent>
                 </DropdownMenu>
-                <FormField
-                    placeholder="Возраст"
-                    type="date"
-                    autoComplete="off"
-                    registration={register('birthDate', { valueAsDate: true })}
+                <DatePicker
+                    value={watch('birthDate')}
+                    onChange={(date) => {
+                        if (date) {
+                            setValue('birthDate', date, { shouldValidate: true });
+                        }
+                    }}
                     error={errors.birthDate?.message}
                 />
             </div>
