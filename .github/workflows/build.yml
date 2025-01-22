@@ -1,9 +1,9 @@
 name: '[Setka.Client] Test build of the project'
 on:
     push:
-        branches: ['master']
+        branches: ['main']
     pull_request:
-        branches: ['master']
+        branches: ['main']
 jobs:
     build:
         name: Test build
