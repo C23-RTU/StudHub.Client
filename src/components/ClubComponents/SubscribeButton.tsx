@@ -3,8 +3,8 @@
 import { SquareCheck, SquarePlus } from 'lucide-react';
 import { useState } from 'react';
 
-import { Button } from '../button';
-import { Sheet, SheetContent, SheetHeader, SheetTitle } from '../sheet';
+import { Button } from '../ui/button';
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from '../ui/sheet';
 
 export function SubscribeButton() {
     const [subscribed, setSubscribed] = useState<boolean>(false);
