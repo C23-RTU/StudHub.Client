@@ -42,12 +42,12 @@ export function DatePicker({ value, onChange, error }: DatePickerProps) {
                         {value ? format(value, 'PPP', { locale: ru }) : <span>Дата рождения</span>}
                     </Button>
                 </PopoverTrigger>
-                <PopoverContent className="w-auto p-0 rounded-md">
+                <PopoverContent className="w-auto p-0 rounded-md border-secondary">
                     <div className="p-4">
                         <div className="flex justify-between">
                             <div className="relative">
                                 <select
-                                    className="appearance-none border pl-2 pr-4 rounded bg-secondary"
+                                    className="appearance-none border pl-2 pr-5 rounded bg-secondary"
                                     value={year}
                                     onChange={handleYearChange}
                                 >
@@ -65,7 +65,7 @@ export function DatePicker({ value, onChange, error }: DatePickerProps) {
                             </div>
                             <div className="relative">
                                 <select
-                                    className="appearance-none border pl-2 pr-4 rounded bg-secondary"
+                                    className="appearance-none border pl-2 rounded bg-secondary"
                                     value={month}
                                     onChange={handleMonthChange}
                                 >
@@ -83,6 +83,7 @@ export function DatePicker({ value, onChange, error }: DatePickerProps) {
                             selected={value}
                             onSelect={onChange}
                             month={currentMonth}
+                            showOutsideDays={false}
                             initialFocus
                             locale={ru}
                         />

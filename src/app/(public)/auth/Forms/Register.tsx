@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { type SubmitHandler, useForm } from 'react-hook-form';
 
-import { DatePicker } from '@/components/ui/DatePicker/DatePicker';
+import { DatePicker } from '@/components/ui/BirthDatePicker/BirthDatePicker';
 import { FormField } from '@/components/ui/FormField/FormField';
 import { FormTextArea } from '@/components/ui/FormTextArea/FormTextArea';
 import { Button } from '@/components/ui/button';
@@ -66,6 +66,8 @@ export default function Register() {
             instituteId: selectedInstitute?.id || null,
             age: 25,
         };
+
+        console.log(formattedData)
 
         mutate(formattedData);
     };
