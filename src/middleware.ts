@@ -12,7 +12,7 @@ export async function middleware(request: NextRequest) {
     // if (process.env.NODE_ENV === 'development') return NextResponse.next();
 
     if (!pathname.includes(PUBLIC_PAGE.AUTH)) {
-        return authorizationProtect(request);
+        // return authorizationProtect(request);
     }
 
     if (pathname.includes(PUBLIC_PAGE.AUTH)) {
