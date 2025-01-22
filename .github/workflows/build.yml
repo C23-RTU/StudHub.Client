@@ -1,17 +1,20 @@
-name: 'Setka.Client'
+name: '[Setka.Client] Test build of the project'
 on:
     push:
         branches: ['master']
     pull_request:
         branches: ['master']
 jobs:
-    test:
+    build:
         name: Test build
         runs-on: ubuntu-latest
 
         steps:
-            - name: Checkout repository
+            - name: git-checkout
               uses: actions/checkout@v4
+
+            - name: pnpm-setup
+              uses: pnpm/action-setup@v2
 
             - name: Setup Node.js
               uses: actions/setup-node@v4
