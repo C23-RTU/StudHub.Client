@@ -5,7 +5,8 @@ class AuthPage {
     CLUBS = '/clubs';
     FINDER = '/finder';
 
-    COMMENTS = (id: number) => `/comments/${id}`;
+    COMMENTS = (id: number | string) => `/comments/${id}`;
+    CLUB_SUBSCRIBERS = (clubId: number | string) => `${this.CLUBS}/${clubId}/subscribers`;
 }
 
 class PublicPage {
