@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { type SubmitHandler, useForm } from 'react-hook-form';
 
-import { DatePicker } from '@/components/ui/BirthDatePicker/BirthDatePicker';
+import { BirthDatePicker } from '@/components/ui/BirthDatePicker/BirthDatePicker';
 import { FormField } from '@/components/ui/FormField/FormField';
 import { FormTextArea } from '@/components/ui/FormTextArea/FormTextArea';
 import { Button } from '@/components/ui/button';
@@ -60,7 +60,6 @@ export default function Register() {
     });
 
     const onSubmitHandler: SubmitHandler<TRegisterDataSchema> = (data) => {
-        console.log(data);
         mutate(data);
     };
 
@@ -126,7 +125,7 @@ export default function Register() {
                         ))}
                     </DropdownMenuContent>
                 </DropdownMenu>
-                <DatePicker
+                <BirthDatePicker
                     value={watch('birthDate') ? format(new Date(watch('birthDate')), 'yyyy-MM-dd') : undefined}
                     onChange={(date) => {
                         if (date) {

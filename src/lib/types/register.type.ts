@@ -17,8 +17,10 @@ export const RegisterDataSchema = z
         middleName: z
             .string()
             .max(25, 'Отчество не более 25 символов')
-            // .regex(/^[A-Za-zА-Яа-яёЁ\s]+$/, 'Недопустимые символы')
-            .optional(),
+            .optional()
+            .refine((value) => value === undefined || value.trim() === '' || /^[A-Za-zА-Яа-яёЁ\s]+$/.test(value), {
+                message: 'Недопустимые символы',
+            }),
         birthDate: z
             .string({
                 required_error: 'Дата рождения обязательна',
@@ -47,7 +49,6 @@ export const RegisterDataSchema = z
             .optional(),
         instituteId: z
             .number()
-            .int('Некорректный идентификатор института')
             .optional()
             .nullable(),
     })
