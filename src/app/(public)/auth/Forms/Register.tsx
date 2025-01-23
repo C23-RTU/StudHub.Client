@@ -60,7 +60,12 @@ export default function Register() {
     });
 
     const onSubmitHandler: SubmitHandler<TRegisterDataSchema> = (data) => {
-        mutate(data);
+        const updatedData = {
+            ...data,
+            instituteId: selectedInstitute?.id || null,
+        };
+
+        mutate(updatedData);
     };
 
     return (
