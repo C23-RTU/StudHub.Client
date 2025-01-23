@@ -20,11 +20,17 @@ export const RegisterDataSchema = z
             // .regex(/^[A-Za-zА-Яа-яёЁ\s]+$/, 'Недопустимые символы')
             .optional(),
         birthDate: z
-            .date({
+            .string({
                 required_error: 'Дата рождения обязательна',
                 invalid_type_error: 'Введите корректную дату',
             })
-            .refine((date) => date <= new Date(), 'Введите корректную дату'),
+            .refine((value) => {
+                const isValidFormat = /^\d{4}-\d{2}-\d{2}$/.test(value);
+                if (!isValidFormat) return false;
+        
+                const date = new Date(value);
+                return !isNaN(date.getTime()) && date <= new Date();
+            }, 'Введите корректную дату'),
         email: z.string().email('Некорректный email'),
         password: z
             .string()

@@ -22,6 +22,7 @@ import { AUTH_PAGE } from '@/lib/config/routes.config';
 
 import { RegisterDataSchema, type TRegisterDataSchema } from '@/lib/types/register.type';
 import { AuthService } from '@/services/auth.service';
+import { format } from 'date-fns';
 
 export default function Register() {
     const [selectedInstitute, setSelectedInstitute] = useState<{ id: number; name: string } | null>(null);
@@ -59,17 +60,8 @@ export default function Register() {
     });
 
     const onSubmitHandler: SubmitHandler<TRegisterDataSchema> = (data) => {
-        const formattedData = {
-            ...data,
-            middleName: data.middleName?.trim() || undefined,
-            about: data.about?.trim() || undefined,
-            instituteId: selectedInstitute?.id || null,
-            age: 25,
-        };
-
-        console.log(formattedData)
-
-        mutate(formattedData);
+        console.log(data);
+        mutate(data);
     };
 
     return (
@@ -135,7 +127,7 @@ export default function Register() {
                     </DropdownMenuContent>
                 </DropdownMenu>
                 <DatePicker
-                    value={watch('birthDate')}
+                    value={watch('birthDate') ? format(new Date(watch('birthDate')), 'yyyy-MM-dd') : undefined}
                     onChange={(date) => {
                         if (date) {
                             setValue('birthDate', date, { shouldValidate: true });

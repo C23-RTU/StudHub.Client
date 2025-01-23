@@ -10,25 +10,35 @@ import { Calendar } from '@/components/ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 
 type DatePickerProps = {
-    value?: Date;
-    onChange: (date: Date | undefined) => void;
+    value?: string;
+    onChange: (date: string | undefined) => void;
     error?: string;
 };
 
 export function DatePicker({ value, onChange, error }: DatePickerProps) {
-    const [year, setYear] = React.useState<number>(value?.getFullYear() || new Date().getFullYear());
-    const [month, setMonth] = React.useState<number>(value?.getMonth() || new Date().getMonth());
+    const [year, setYear] = React.useState<number>(value ? new Date(value).getFullYear() : new Date().getFullYear());
+    const [month, setMonth] = React.useState<number>(value ? new Date(value).getMonth() : new Date().getMonth());
 
     const handleYearChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        setYear(Number(event.target.value));
-        const newDate = new Date(Number(event.target.value), month, value?.getDate() || 1);
-        onChange(newDate);
+        const newYear = Number(event.target.value);
+        setYear(newYear);
+        const newDate = new Date(newYear, month, 1);
+        onChange(format(newDate, "yyyy-MM-dd"));
     };
 
     const handleMonthChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        setMonth(Number(event.target.value));
-        const newDate = new Date(year, Number(event.target.value), value?.getDate() || 1);
-        onChange(newDate);
+        const newMonth = Number(event.target.value);
+        setMonth(newMonth);
+        const newDate = new Date(year, newMonth, 1);
+        onChange(format(newDate, "yyyy-MM-dd"));
+    };
+
+    const handleCalendarSelect = (date: Date | undefined) => {
+        if (date) {
+            onChange(format(date, "yyyy-MM-dd"));
+        } else {
+            onChange(undefined);
+        }
     };
 
     const currentMonth = new Date(year, month);
@@ -80,8 +90,8 @@ export function DatePicker({ value, onChange, error }: DatePickerProps) {
                         </div>
                         <Calendar
                             mode="single"
-                            selected={value}
-                            onSelect={onChange}
+                            selected={value ? new Date(value) : undefined}
+                            onSelect={handleCalendarSelect}
                             month={currentMonth}
                             showOutsideDays={false}
                             initialFocus
