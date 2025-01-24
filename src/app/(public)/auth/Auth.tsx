@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useState, useEffect } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 
 import { Switcher } from '@/components/ui/Switcher/Switcher';
 
@@ -31,14 +31,16 @@ export default function Auth() {
     };
 
     return (
-        <div className="flex flex-col items-center gap-3">
-            <Image src={'/img/logo.png'} width={255} height={255} quality={100} alt="logo" />
-            <Switcher tabs={['Вход', 'Регистация']} activeTabIndex={formType} onChange={handleChange} />
+        <Suspense>
+            <div className="flex flex-col items-center gap-3">
+                <Image src={'/img/logo.png'} width={255} height={255} quality={100} alt="logo" />
+                <Switcher tabs={['Вход', 'Регистация']} activeTabIndex={formType} onChange={handleChange} />
 
-            <div className="w-full">
-                {formType === Tabs.LOGIN && <Login />}
-                {formType === Tabs.REGISTRATION && <Register />}
+                <div className="w-full">
+                    {formType === Tabs.LOGIN && <Login />}
+                    {formType === Tabs.REGISTRATION && <Register />}
+                </div>
             </div>
-        </div>
+        </Suspense>
     );
 }
