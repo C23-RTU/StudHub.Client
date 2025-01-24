@@ -6,11 +6,12 @@ class AuthPage {
     FINDER = '/finder';
 
     COMMENTS = (id: number | string) => `/comments/${id}`;
+
     CLUB_SUBSCRIBERS = (clubId: number | string) => `${this.CLUBS}/${clubId}/subscribers`;
 }
 
 class PublicPage {
-    AUTH = '/auth';
+    AUTH = (type: 'login' | 'register' = 'login') => `/auth?type=${type}`;
 }
 
 export const AUTH_PAGE = new AuthPage();

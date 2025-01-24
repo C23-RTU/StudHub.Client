@@ -17,14 +17,22 @@ export const RegisterDataSchema = z
         middleName: z
             .string()
             .max(25, 'Отчество не более 25 символов')
-            // .regex(/^[A-Za-zА-Яа-яёЁ\s]+$/, 'Недопустимые символы')
-            .optional(),
+            .optional()
+            .refine((value) => value === undefined || value.trim() === '' || /^[A-Za-zА-Яа-яёЁ\s]+$/.test(value), {
+                message: 'Недопустимые символы',
+            }),
         birthDate: z
-            .date({
+            .string({
                 required_error: 'Дата рождения обязательна',
-                invalid_type_error: 'Введите корректную дату 2',
+                invalid_type_error: 'Введите корректную дату',
             })
-            .refine((date) => date <= new Date(), 'Введите корректную дату'),
+            .refine((value) => {
+                const isValidFormat = /^\d{4}-\d{2}-\d{2}$/.test(value);
+                if (!isValidFormat) return false;
+        
+                const date = new Date(value);
+                return !isNaN(date.getTime()) && date <= new Date();
+            }, 'Введите корректную дату'),
         email: z.string().email('Некорректный email'),
         password: z
             .string()
@@ -41,7 +49,6 @@ export const RegisterDataSchema = z
             .optional(),
         instituteId: z
             .number()
-            .int('Некорректный идентификатор института')
             .optional()
             .nullable(),
     })
