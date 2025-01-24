@@ -18,7 +18,7 @@ import {
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
-import { AUTH_PAGE } from '@/lib/config/routes.config';
+import { PUBLIC_PAGE } from '@/lib/config/routes.config';
 
 import { RegisterDataSchema, type TRegisterDataSchema } from '@/lib/types/register.type';
 import { AuthService } from '@/services/auth.service';
@@ -51,7 +51,7 @@ export default function Register() {
         mutationKey: ['register'],
         mutationFn: async (data: TRegisterDataSchema) => await AuthService.register(data),
         onSuccess: () => {
-            router.push(AUTH_PAGE.HOME);
+            router.push(`${PUBLIC_PAGE.AUTH}?type=login`);
             reset();
         },
         onError: (error) => {
@@ -65,6 +65,7 @@ export default function Register() {
             instituteId: selectedInstitute?.id || null,
         };
 
+        console.log(updatedData);
         mutate(updatedData);
     };
 
