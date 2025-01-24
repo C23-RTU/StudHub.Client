@@ -3,7 +3,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useTransition } from 'react';
 import { type SubmitHandler, useForm } from 'react-hook-form';
 
 import { BirthDatePicker } from '@/components/ui/BirthDatePicker/BirthDatePicker';
@@ -23,9 +23,12 @@ import { PUBLIC_PAGE } from '@/lib/config/routes.config';
 import { RegisterDataSchema, type TRegisterDataSchema } from '@/lib/types/register.type';
 import { AuthService } from '@/services/auth.service';
 import { format } from 'date-fns';
+import toast from 'react-hot-toast';
+import axios from 'axios';
 
 export default function Register() {
     const [selectedInstitute, setSelectedInstitute] = useState<{ id: number; name: string } | null>(null);
+    const [isPending, startTransition] = useTransition();
 
     const institutes = [
         { id: 1, name: 'ИКБ' },
@@ -47,7 +50,7 @@ export default function Register() {
         resolver: zodResolver(RegisterDataSchema),
     });
 
-    const { mutate, isPending } = useMutation({
+    const { mutateAsync, isPending: isRegistrationPending } = useMutation({
         mutationKey: ['register'],
         mutationFn: async (data: TRegisterDataSchema) => await AuthService.register(data),
         onSuccess: () => {
@@ -59,6 +62,8 @@ export default function Register() {
         },
     });
 
+    const isLoading = isPending || isRegistrationPending;
+
     const onSubmitHandler: SubmitHandler<TRegisterDataSchema> = (data) => {
         const updatedData = {
             ...data,
@@ -66,7 +71,29 @@ export default function Register() {
         };
 
         console.log(updatedData);
-        mutate(updatedData);
+
+        toast.promise(
+            mutateAsync(updatedData),
+            {
+                loading: 'Попытка регистрации...',
+                success: () => {
+                    startTransition(() => {
+                        reset();
+                        router.push(PUBLIC_PAGE.AUTH);
+                    });
+
+                    return 'Успешная регистрация!';
+                },
+                error: (error: unknown) => {
+                    if (axios.isAxiosError(error)) {
+                        return error.response?.data.detail;
+                    }
+                },
+            },
+            {
+                id: 'error',
+            },
+        );
     };
 
     return (
@@ -146,7 +173,7 @@ export default function Register() {
                 <FormTextArea placeholder="Расскажите о себе" registration={register('about')} />
             </div>
 
-            <Button className="col-span-3" type="submit" isLoading={isPending} disabled={!isValid}>
+            <Button className="col-span-3" type="submit" isLoading={isLoading} disabled={!isValid}>
                 Зарегистрироваться
             </Button>
         </form>
