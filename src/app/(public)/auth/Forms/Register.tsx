@@ -1,10 +1,9 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useMutation } from '@tanstack/react-query';
-import { useRouter } from 'next/navigation';
-import { useState, useTransition } from 'react';
-import { type SubmitHandler, useForm } from 'react-hook-form';
+import { format } from 'date-fns';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 import { BirthDatePicker } from '@/components/ui/BirthDatePicker/BirthDatePicker';
 import { FormField } from '@/components/ui/FormField/FormField';
@@ -18,25 +17,17 @@ import {
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
-import { PUBLIC_PAGE } from '@/lib/config/routes.config';
-
+import { useRegisterForm } from './useRegisterForm';
 import { RegisterDataSchema, type TRegisterDataSchema } from '@/lib/types/register.type';
-import { AuthService } from '@/services/auth.service';
-import { format } from 'date-fns';
-import toast from 'react-hot-toast';
-import axios from 'axios';
 
 export default function Register() {
     const [selectedInstitute, setSelectedInstitute] = useState<{ id: number; name: string } | null>(null);
-    const [isPending, startTransition] = useTransition();
 
     const institutes = [
         { id: 1, name: 'ИКБ' },
         { id: 2, name: 'ИИИ' },
         { id: 3, name: 'ИПТИП' },
     ];
-
-    const router = useRouter();
 
     const {
         handleSubmit,
@@ -50,54 +41,10 @@ export default function Register() {
         resolver: zodResolver(RegisterDataSchema),
     });
 
-    const { mutateAsync, isPending: isRegistrationPending } = useMutation({
-        mutationKey: ['register'],
-        mutationFn: async (data: TRegisterDataSchema) => await AuthService.register(data),
-        onSuccess: () => {
-            router.push(`${PUBLIC_PAGE.AUTH}?type=login`);
-            reset();
-        },
-        onError: (error) => {
-            console.log(error.message);
-        },
-    });
-
-    const isLoading = isPending || isRegistrationPending;
-
-    const onSubmitHandler: SubmitHandler<TRegisterDataSchema> = (data) => {
-        const updatedData = {
-            ...data,
-            instituteId: selectedInstitute?.id || null,
-        };
-
-        console.log(updatedData);
-
-        toast.promise(
-            mutateAsync(updatedData),
-            {
-                loading: 'Попытка регистрации...',
-                success: () => {
-                    startTransition(() => {
-                        reset();
-                        router.push(PUBLIC_PAGE.AUTH);
-                    });
-
-                    return 'Успешная регистрация!';
-                },
-                error: (error: unknown) => {
-                    if (axios.isAxiosError(error)) {
-                        return error.response?.data.detail;
-                    }
-                },
-            },
-            {
-                id: 'error',
-            },
-        );
-    };
+    const { submitHandler, isLoading } = useRegisterForm(reset, selectedInstitute);
 
     return (
-        <form className="flex flex-col gap-4 mb-5" onSubmit={handleSubmit(onSubmitHandler)}>
+        <form className="flex flex-col gap-4 mb-5" onSubmit={handleSubmit(submitHandler)}>
             <div className="grid col-span-2 gap-4">
                 <FormField
                     placeholder="Имя"
