@@ -6,16 +6,22 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import type { ClubEvent } from '@/lib/types/event';
 import { Copy, EllipsisVertical, OctagonAlert } from 'lucide-react';
 import Image from 'next/image';
+import { notFound } from 'next/navigation';
 import { FaCalendar, FaCompass } from 'react-icons/fa';
+import toast from 'react-hot-toast';
 
 export default function EventView({ event }: { event: ClubEvent | null }) {
+  if (!event) 
+    {
+      notFound();
+    };
 
   return (
     <article className="min-h-screen">
       <div className="fixed flex flex-row justify-between items-center p-4 z-20 w-full max-w-[1024px]">
         <div className="flex flex-row items-center">
             <BackButton />
-            <p className="text-lg ml-4 font-bold shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] bg-secondary font-geologica rounded-lg leading-8 h-10 py-1 px-3 hover:cursor-pointer" onClick={() => navigator.clipboard.writeText('@IKB_MIREA')}>
+            <p className="text-lg ml-4 font-bold shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] bg-secondary font-geologica rounded-lg leading-8 h-10 py-1 px-3 hover:cursor-pointer">
                 Подробности
             </p>
         </div>
@@ -30,7 +36,7 @@ export default function EventView({ event }: { event: ClubEvent | null }) {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
-            <DropdownMenuItem>
+            <DropdownMenuItem onClick={() => { navigator.clipboard.writeText(window.location.href); toast.success('Ссылка скопирована'); }}>
               <Copy />
               Скопировать ссылку
             </DropdownMenuItem>
@@ -57,7 +63,6 @@ export default function EventView({ event }: { event: ClubEvent | null }) {
         </div>
       </div>
       <div className="page flex flex-col gap-4">
-        {/* <p className="text-sm text-gray-200 font-inter">{event?.startDate.toLocaleDateString('ru-RU')}</p> */}
         <p className="font-inter font-light text-lg text-gray-200">{event?.description}</p>
         <div className="flex flex-col gap-2">
           <div className="flex flex-row gap-2 items-center">
@@ -66,7 +71,7 @@ export default function EventView({ event }: { event: ClubEvent | null }) {
           </div>
           <div className="flex flex-row gap-2 items-center">
             <FaCalendar className="w-4 h-4" />
-            <p className="font-inter text-md text-gray-white">{event?.startDate.toLocaleDateString('ru-RU')}</p>
+            <time className="font-inter text-md text-gray-white">{event?.startDate.toLocaleString('ru-RU', { dateStyle: 'medium', timeStyle: 'short' })}</time>
           </div>
         </div>
       </div>

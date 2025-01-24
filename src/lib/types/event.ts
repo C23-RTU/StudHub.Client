@@ -6,6 +6,6 @@ export type ClubEvent = {
     description: string;
     startDate: Date;
     location: string;
-    image?: string;
+    image: string;
     club?: Club;
 }
