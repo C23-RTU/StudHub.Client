@@ -10,7 +10,6 @@ export type Post = {
     tags?: Array<string>;
     postImages?: Array<string>;
 };
-
 export type Club = {
     id: number;
     name: string;

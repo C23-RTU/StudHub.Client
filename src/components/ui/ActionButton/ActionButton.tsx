@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { IoMdHeart, IoMdHeartEmpty } from 'react-icons/io';
 import { MdOutlineModeComment } from 'react-icons/md';
 
@@ -35,6 +35,10 @@ export function ActionButton({ type, initialValue, onClick, setHover }: Props) {
                 return <MdOutlineModeComment size={ICON_SIZE} />;
         }
     }, [type, status]);
+
+    useEffect(() => {
+        setValue(initialValue);
+    }, [initialValue]);
 
     return (
         <div

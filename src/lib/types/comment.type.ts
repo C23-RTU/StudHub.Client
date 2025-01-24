@@ -7,3 +7,10 @@ export interface IComment {
     createdAt: Date;
     deletedAt: Date;
 }
+
+export interface ICommentPayload {
+    content: string;
+    parentId: number | null;
+    personId: number;
+    postId: number;
+}

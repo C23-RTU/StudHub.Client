@@ -20,7 +20,7 @@ type PostCardProps = {
 
 export function PostCard({ className, post }: PostCardProps) {
     const pathname = usePathname();
-
+    console.log(post);
     return (
         <article className={cn('flex flex-col gap-3', className)}>
             <PostHeader post={post} />
