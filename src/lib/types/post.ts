@@ -6,7 +6,7 @@ export type Post = {
     // user: User;
     reactionCount: number;
     club: Club;
-    // commentsCount: number;
+    commentCount: number;
     tags?: Array<string>;
     postImages?: Array<string>;
 };
@@ -16,7 +16,7 @@ export type Club = {
     name: string;
     about: string;
     imageUrl: string;
-}
+};
 
 export type User = {
     id: number;

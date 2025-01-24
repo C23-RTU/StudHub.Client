@@ -1,17 +1,17 @@
 'use client';
 
 import Image from 'next/image';
-// import { usePathname } from 'next/navigation';
-// import { match } from 'path-to-regexp';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { match } from 'path-to-regexp';
 
-// import { AUTH_PAGE } from '@/lib/config/routes.config';
+import { AUTH_PAGE } from '@/lib/config/routes.config';
 
 import { ActionButton } from '../ui/ActionButton/ActionButton';
 
 import { PostHeader } from './PostHeader/PostHeader';
 import type { Post } from '@/lib/types/post';
 import { cn } from '@/lib/utils';
-// import Link from 'next/link';
 
 type PostCardProps = {
     className?: string;
@@ -19,7 +19,7 @@ type PostCardProps = {
 };
 
 export function PostCard({ className, post }: PostCardProps) {
-    // const pathname = usePathname();
+    const pathname = usePathname();
 
     return (
         <article className={cn('flex flex-col gap-3', className)}>
@@ -44,13 +44,13 @@ export function PostCard({ className, post }: PostCardProps) {
             <div className="flex items-center justify-between font-inter">
                 <div className="flex gap-4">
                     <ActionButton type={'like'} initialValue={post.reactionCount} />
-                    {/* <Link href={AUTH_PAGE.COMMENTS(post.id)}>
+                    <Link href={AUTH_PAGE.COMMENTS(post.id)}>
                         <ActionButton
                             type={'comment'}
-                            initialValue={post.commentsCount}
+                            initialValue={post.commentCount}
                             setHover={!!match(AUTH_PAGE.COMMENTS(post.id))(pathname)}
                         />
-                    </Link> */}
+                    </Link>
                 </div>
 
                 {/* <p className="text-xs opacity-50 font-inter">
