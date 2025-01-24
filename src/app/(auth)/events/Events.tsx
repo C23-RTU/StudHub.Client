@@ -9,9 +9,11 @@ export function Events({ events }: { events: ClubEvent[] }) {
             <Header>
                 <HeaderTitle>События</HeaderTitle>
             </Header>
-            {events.map((event) => (
-                <EventCard key={event.id} event={event} />
-            ))}
+            <div className='flex flex-col gap-6'>
+                {events.map((event) => (
+                    <EventCard key={event.id} event={event} />
+                ))}
+            </div>
         </div>
     );
 }
