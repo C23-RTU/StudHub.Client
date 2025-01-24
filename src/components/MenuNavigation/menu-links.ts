@@ -1,22 +1,23 @@
-import { CircleUserIcon, CompassIcon, GlobeIcon, HouseIcon } from 'lucide-react';
+import { GoHomeFill } from 'react-icons/go';
+import { FaCompass, FaGlobe, FaUser } from 'react-icons/fa';
 
 import { AUTH_PAGE } from '@/lib/config/routes.config';
 
 export const MENU_LINKS = [
     {
-        Icon: HouseIcon,
+        Icon: GoHomeFill,
         link: AUTH_PAGE.HOME,
     },
     {
-        Icon: CompassIcon,
+        Icon: FaCompass,
         link: AUTH_PAGE.EVENTS,
     },
     {
-        Icon: GlobeIcon,
+        Icon: FaGlobe,
         link: AUTH_PAGE.CLUBS,
     },
     {
-        Icon: CircleUserIcon,
+        Icon: FaUser,
         link: AUTH_PAGE.PROFILE,
     },
 ];

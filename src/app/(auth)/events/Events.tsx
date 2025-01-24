@@ -1,11 +1,17 @@
-import { Header, HeaderTitle } from '@/hoc/Header/Header';
+import { EventCard } from '@/components/EventCard/EventCard';
 
-export function Events() {
+import { Header, HeaderTitle } from '@/hoc/Header/Header';
+import type { ClubEvent } from '@/lib/types/event';
+
+export function Events({ events }: { events: ClubEvent[] }) {
     return (
         <div className="page">
             <Header>
                 <HeaderTitle>События</HeaderTitle>
             </Header>
+            {events.map((event) => (
+                <EventCard key={event.id} event={event} />
+            ))}
         </div>
     );
 }

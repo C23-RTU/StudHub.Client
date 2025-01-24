@@ -94,8 +94,8 @@ export function Club({ posts = [], id = '1' }: { posts: Post[]; id: string }) {
                         1.1М подписчиков
                     </Link>
                     <section className="flex gap-2 flex-row items-center cursor-pointer text-neutral-50">
-                        <MapPin />  
-                        г. Москва, ул. Стромынка д.2f
+                        <MapPin />
+                        г. Москва, ул. Стромынка д.2
                     </section>
                     <section className="flex gap-2 flex-row items-center cursor-pointer text-neutral-50">
                         <CircleAlert />

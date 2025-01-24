@@ -1,25 +1,29 @@
+'use client';
+
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
-export function EventCard() {
+import type { ClubEvent } from '@/lib/types/event';
+
+export function EventCard({ event }: { event: ClubEvent }) {
+    const router = useRouter();
     return (
-        <div className="flex justify-center relative overflow-hidden rounded-[8px]">
-            <div className="flex justify-center w-full">
-                <Image src={'/img/banner.png'} width={600} height={300} alt="" />
+        <figure
+            className="flex relative w-full rounded-2xl h-[220px] group overflow-hidden"
+            onClick={() => router.push(`/events/${event.id}`)}
+        >
+            <Image
+                src={event.image ? event.image : '/img/eventbanner.jpg'}
+                alt={`Event: ${event.title}`}
+                fill
+                className="rounded-2xl object-cover transition-transform duration-300 group-hover:scale-105"
+            />
+            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-black/90 via-black/50 to-transparent rounded-2xl"></div>
+            <div className="flex absolute z-10 flex-col items-start p-4 h-full w-full justify-end gap-2">
+                <time className="text-sm text-gray-200 font-inter">{event.startDate.toLocaleDateString('ru-RU')}</time>
+                <h3 className="font-geologica text-2xl font-semibold text-white line-clamp-2">{event.title}</h3>
+                <p className="font-inter text-sm text-gray-200 line-clamp-2">{event.description}</p>
             </div>
-
-            <div className="bg-white px-2 py-1 z-10 absolute rounded-md top-2 left-2">
-                <p className="uppercase text-[#4B4B4B] text-xs font-light">СКОРО НАЧНЕТСЯ</p>
-            </div>
-
-            <div className="absolute top-0 left-0 right-0 bottom-0 z-0 bg-[#1F1F1F] opacity-90" />
-
-            <div className="flex flex-col gap-1 absolute bottom-2 right-2 left-2 z-10">
-                <small className="text-xss text-[#777777]">01 January 1970 12:00:00 AM</small>
-                <h3 className="text-xl font-semibold">Lorem Ipsum</h3>
-                <p className="text-xs text-[#C9C9C9]">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vehicula eu nibh at suscipit.{' '}
-                </p>
-            </div>
-        </div>
+        </figure>
     );
 }
