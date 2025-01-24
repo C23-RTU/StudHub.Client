@@ -1,5 +1,4 @@
 import { NotificationBadge } from '@/components/Badge/NotificationBadge/NotificationBadge';
-import { EventCard } from '@/components/EventCard/EventCard';
 import { PostCard } from '@/components/PostCard/PostCard';
 import { SearchInput } from '@/components/ui/SearchInput/SearchInput';
 
@@ -16,9 +15,9 @@ export default async function Home({ posts }: { posts: Post[] }) {
             </Header>
 
             <MainContent>
-                <div className="flex justify-center">
+                {/* <div className="flex justify-center">
                     <EventCard />
-                </div>
+                </div> */}
                 <p className="text-xl font-semibold">Лента</p>
                 <div>
                     <SearchInput placeholder="Поиск по ленте..." />
