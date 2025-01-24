@@ -20,7 +20,8 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
     };
 }
 
-export const dynamic = 'force-dynamic';
+
+export const revalidate = 100;
 
 export default async function Page({ params }: { params: Promise<{ id: string }> }) {
     const id = (await params).id;

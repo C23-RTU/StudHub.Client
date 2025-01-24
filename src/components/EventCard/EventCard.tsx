@@ -4,13 +4,14 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
 import type { ClubEvent } from '@/lib/types/event';
+import { AUTH_PAGE } from '@/lib/config/routes.config';
 
 export function EventCard({ event }: { event: ClubEvent }) {
     const router = useRouter();
     return (
         <figure
             className="flex relative w-full rounded-2xl h-[220px] group overflow-hidden"
-            onClick={() => router.push(`/events/${event.id}`)}
+            onClick={() => router.push(AUTH_PAGE.EVENT(event.id))}
         >
             <Image
                 src={event.image ? event.image : '/img/eventbanner.jpg'}
