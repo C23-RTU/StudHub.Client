@@ -1,8 +1,7 @@
-import { AxiosError } from 'axios';
 import type { NextRequest } from 'next/server';
 
 import { jwtVerifyServer } from './jwt-verify';
-import { EnumTokens } from '@/lib/types/auth.type';
+import { EnumTokens } from '@/lib/types/login.type';
 import { getNewTokens } from '@/server-actions/actions/getRefreshTokens.action';
 
 export async function getTokensFromRequest(request: NextRequest) {
@@ -30,13 +29,13 @@ export async function getTokensFromRequest(request: NextRequest) {
             isRefresh = true;
         } catch (error) {
             console.log(error);
-            if (error instanceof AxiosError) {
-                if (error.status === 401) {
-                    console.log('Не валидный токен');
-                    request.cookies.delete(EnumTokens.ACCESS_TOKEN);
-                }
-            }
-
+            // if (error instanceof AxiosError) {
+            //     if (error.status === 401) {
+            //         console.log('Не валидный токен');
+            //         request.cookies.delete(EnumTokens.ACCESS_TOKEN);
+            //     }
+            // }
+            request.cookies.delete(EnumTokens.ACCESS_TOKEN);
             request.cookies.delete(EnumTokens.REFRESH_TOKEN);
             return null;
         }

@@ -1,6 +1,6 @@
 'use client';
 
-import { ArrowUpRight } from 'lucide-react';
+import Image from 'next/image';
 
 interface Props {
     status: 'online' | 'offline';
@@ -13,7 +13,13 @@ export function SubscriberCard({ status = 'offline', name, avatar, role }: Props
     return (
         <div className="flex w-full bg-secondary py-2 px-2 rounded-lg" role="listitem">
             <div className="relative">
-                <img src={avatar} alt={`${name}'s avatar`} className="rounded-full w-10 h-10 min-w-[40px]" />
+                <Image
+                    src={avatar}
+                    alt={`${name}'s avatar`}
+                    width={40}
+                    height={40}
+                    className="rounded-full w-10 h-10 min-w-[40px]"
+                />
                 <div
                     className={`w-3 h-3 rounded-full border border-bg absolute right-0 bottom-0 ${
                         status === 'online' ? 'bg-emerald-400' : 'bg-red-500'

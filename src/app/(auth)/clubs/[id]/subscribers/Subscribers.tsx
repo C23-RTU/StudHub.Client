@@ -36,7 +36,7 @@ export function Subscribers({ id }: { id: string }) {
                 {subscribers.map((subscriber, index) => (
                     <SubscriberCard
                         key={index}
-                        status={subscriber.status}
+                        status={subscriber.status as 'online' | 'offline'}
                         name={subscriber.name}
                         avatar={subscriber.avatarUrl || '/img/avatar.png'}
                         role={subscriber.major || 'Не указано'}

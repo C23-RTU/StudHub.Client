@@ -5,7 +5,7 @@ import { AUTH_PAGE } from '@/lib/config/routes.config';
 import { getTokensFromRequest } from './utils/get-tokens-from-request';
 import { jwtVerifyServer } from './utils/jwt-verify';
 import { nextRedirect } from './utils/next-redirect';
-import { EnumTokens } from '@/lib/types/auth.type';
+import { EnumTokens } from '@/lib/types/login.type';
 
 export async function loginProtect(request: NextRequest) {
     const response = NextResponse.next();
