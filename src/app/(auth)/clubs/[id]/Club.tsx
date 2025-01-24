@@ -26,11 +26,7 @@ export function Club({ posts = [], id = '1' }: { posts: Post[]; id: string }) {
                 <div className="fixed flex flex-row justify-between items-center p-4 w-full max-w-[1024px]">
                     <div className="flex flex-row items-center">
                         <BackButton />
-                        <p
-                            className="text-lg ml-4 font-bold shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] bg-secondary font-geologica rounded-lg leading-8 h-10 py-1 px-3 hover:cursor-pointer"
-                            onClick={() => navigator.clipboard.writeText('@IKB_MIREA')}
-                            // сделать tooltip
-                        >
+                        <p className="text-lg ml-4 font-bold shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] bg-secondary font-geologica rounded-lg leading-8 h-10 py-1 px-3 hover:cursor-pointer">
                             @IKB_MIREA
                         </p>
                     </div>
