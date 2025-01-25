@@ -1,6 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
-import axios from 'axios';
 import { SendHorizonalIcon } from 'lucide-react';
 import { type Dispatch, type SetStateAction } from 'react';
 import { type SubmitHandler, useForm } from 'react-hook-form';
