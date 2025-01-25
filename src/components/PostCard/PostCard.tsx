@@ -11,7 +11,7 @@ import { ActionButton } from '../ui/ActionButton/ActionButton';
 
 import { PostHeader } from './PostHeader/PostHeader';
 import type { Post } from '@/lib/types/post';
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/utils/utils';
 
 type PostCardProps = {
     className?: string;
@@ -20,7 +20,7 @@ type PostCardProps = {
 
 export function PostCard({ className, post }: PostCardProps) {
     const pathname = usePathname();
-    console.log(post);
+
     return (
         <article className={cn('flex flex-col gap-3', className)}>
             <PostHeader post={post} />

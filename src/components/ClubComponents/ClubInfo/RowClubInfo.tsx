@@ -1,6 +1,6 @@
 import type { PropsWithChildren } from 'react';
 
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/utils/utils';
 
 interface IRowClubInfo extends PropsWithChildren {
     className?: string;

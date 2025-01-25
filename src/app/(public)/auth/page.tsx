@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 
 import Auth from './Auth';
-import { Suspense } from 'react';
 
 export const metadata: Metadata = {
     title: 'Авторизация',
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default async function RegistrationPage() {
     return (
         <Suspense>
-            <main className="w-full h-[100svh] flex justify-center px-pageX max-w-[1024px] m-auto">
+            <main className="w-full h-[100svh] flex justify-center px-pageX">
                 <div className="flex flex-col gap-4 w-full">
                     <Auth />
                 </div>

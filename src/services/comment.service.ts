@@ -1,6 +1,6 @@
 import { api } from '@/api/api';
 
-import type { IComment, ICommentPayload } from '@/lib/types/comment.type';
+import type { IComment, TCommentPayloadSchema } from '@/lib/types/comment.type';
 
 class commentService {
     private _comments = '/comments';
@@ -13,7 +13,7 @@ class commentService {
         return (await api.get(`${this._comments}/getByPostId/${id}`)).data;
     }
 
-    async sendPost(payload: ICommentPayload) {
+    async sendPost(payload: TCommentPayloadSchema) {
         return await api.post(`${this._comments}`, payload);
     }
 }
