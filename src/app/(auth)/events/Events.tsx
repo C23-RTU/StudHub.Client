@@ -1,7 +1,7 @@
 import { EventCard } from '@/components/EventCard/EventCard';
-import ListView from '@/components/ListView/ListView';
 
 import { Header, HeaderTitle } from '@/hoc/Header/Header';
+import { MainContent } from '@/hoc/MainContent/MainContent';
 import type { ClubEvent } from '@/lib/types/event';
 
 export function Events({ events }: { events: ClubEvent[] }) {
@@ -10,11 +10,11 @@ export function Events({ events }: { events: ClubEvent[] }) {
             <Header>
                 <HeaderTitle>События</HeaderTitle>
             </Header>
-            <ListView>
+            <MainContent>
                 {events.map((event) => (
                     <EventCard key={event.id} event={event} />
                 ))}
-            </ListView>
+            </MainContent>
         </div>
     );
 }
