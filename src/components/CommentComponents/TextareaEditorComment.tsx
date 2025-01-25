@@ -31,7 +31,6 @@ export function TextareaEditorComment({
         resolver: zodResolver(CommentPayloadSchema),
         defaultValues: {
             parentId: null,
-            personId: 29,
             postId,
         },
     });

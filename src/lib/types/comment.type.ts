@@ -13,7 +13,6 @@ export interface IComment {
 export const CommentPayloadSchema = z.object({
     content: z.string().nonempty(),
     parentId: z.number().nullable(),
-    personId: z.number(),
     postId: z.number(),
 });
 
