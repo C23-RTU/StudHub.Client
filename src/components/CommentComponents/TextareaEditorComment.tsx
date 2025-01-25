@@ -49,10 +49,10 @@ export function TextareaEditorComment({
             resetField('content');
         },
         onError: async (error) => {
-            if (axios.isAxiosError(error)) {
-                const { toast } = await import('react-hot-toast');
-                toast.error(error.response?.data.detail);
-            }
+            const { toast } = await import('react-hot-toast');
+            toast.error('Ошибка', {
+                position: 'top-center',
+            });
         },
     });
 
