@@ -48,7 +48,7 @@ export function TextareaEditorComment({
             }));
             resetField('content');
         },
-        onError: async (error) => {
+        onError: async () => {
             const { toast } = await import('react-hot-toast');
             toast.error('Ошибка', {
                 position: 'top-center',
