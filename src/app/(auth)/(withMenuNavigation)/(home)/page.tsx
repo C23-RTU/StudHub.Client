@@ -8,8 +8,8 @@ export const metadata: Metadata = {
     description: 'Главная страница',
 };
 
-export const dynamic = 'force-static';
-export const revalidate = 100;
+// export const dynamic = 'force-static';
+// export const revalidate = 100;
 
 export default async function HomePage() {
     const posts = await PostService.getAll();

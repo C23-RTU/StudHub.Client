@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const BASE_API_URL = 'https://45.12.73.206/api';
+import { BASE_API_URL } from '@/lib/config/api.config';
 
 export const SERVER_AXIOS = axios.create({
     baseURL: BASE_API_URL,
