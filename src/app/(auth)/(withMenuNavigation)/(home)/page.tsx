@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
-import Home from './Home';
-import { PostService } from '@/services/post.service';
+// import Home from './Home';
+// import { PostService } from '@/services/post.service';
 
 export const metadata: Metadata = {
     title: 'Главная',
@@ -12,7 +12,9 @@ export const dynamic = 'force-static';
 export const revalidate = 100;
 
 export default async function HomePage() {
-    const posts = await PostService.getAll();
+    // const posts = await PostService.getAll();
 
-    return <Home posts={posts} />;
+    // return <Home posts={posts} />;
+
+    return <p></p>;
 }
