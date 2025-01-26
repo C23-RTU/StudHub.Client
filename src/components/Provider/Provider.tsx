@@ -1,19 +1,13 @@
 'use client';
 
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { QueryClientProvider } from '@tanstack/react-query';
 import { LazyMotion, domAnimation } from 'framer-motion';
 import type { PropsWithChildren } from 'react';
 import { Toaster } from 'react-hot-toast';
 
 import { COLORS } from '@/lib/constants/color.constant';
 
-const queryClient = new QueryClient({
-    defaultOptions: {
-        queries: {
-            refetchOnWindowFocus: false,
-        },
-    },
-});
+import { queryClient } from './getQueryClient';
 
 export default function ProviderLayout({ children }: PropsWithChildren) {
     return (
