@@ -8,6 +8,7 @@ class AuthPage {
     COMMENTS = (id: number | string) => `/comments/${id}`;
 
     CLUB_SUBSCRIBERS = (clubId: number | string) => `${this.CLUBS}/${clubId}/subscribers`;
+    EVENT = (id: number | string) => `${this.EVENTS}/${id}`;
 }
 
 class PublicPage {

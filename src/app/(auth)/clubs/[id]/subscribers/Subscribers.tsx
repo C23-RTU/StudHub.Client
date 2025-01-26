@@ -4,20 +4,23 @@ import { SubscriberCard } from '@/components/SubscriberCard/SubscriberCard';
 import { BackButton } from '@/components/ui/BackButton/BackButton';
 
 import { HeaderTitle } from '@/hoc/Header/Header';
+import type { User } from '@/lib/types/post';
 
 export function Subscribers({ id }: { id: string }) {
-    const subscribers = [
+    const subscribers: User[] = [
         {
+            id: 1,
             status: 'online',
             name: 'Станислав Алексеевич Кудж',
-            avatar: '/img/avatar.png',
-            role: 'Ректор РТУ МИРЭА',
+            avatarUrl: '/img/avatar.png',
+            major: 'Ректор РТУ МИРЭА',
         },
         {
+            id: 2,
             status: 'offline',
             name: 'Иван Иванов',
-            avatar: '/img/avatar.png',
-            role: 'Студент',
+            avatarUrl: '/img/avatar.png',
+            major: 'Студент',
         },
     ];
 
@@ -35,8 +38,8 @@ export function Subscribers({ id }: { id: string }) {
                         key={index}
                         status={subscriber.status as 'online' | 'offline'}
                         name={subscriber.name}
-                        avatar={subscriber.avatar}
-                        role={subscriber.role}
+                        avatar={subscriber.avatarUrl || '/img/avatar.png'}
+                        role={subscriber.major || 'Не указано'}
                     />
                 ))}
             </div>
