@@ -39,7 +39,13 @@ export function PostCard({ className, post }: PostCardProps) {
                     ))}
             </div>
             <div className="w-full h-full flex items-center justify-center ">
-                <Image src={'/img/banner.png'} height={200} width={600} alt={'banner'} className="rounded-md" />
+                <Image
+                    src={'/img/eventbanner.jpg'}
+                    height={200}
+                    width={600}
+                    alt={'banner'}
+                    className="rounded-md w-full"
+                />
             </div>
             <div className="flex items-center justify-between font-inter">
                 <div className="flex gap-4">
@@ -53,13 +59,13 @@ export function PostCard({ className, post }: PostCardProps) {
                     </Link>
                 </div>
 
-                {/* <p className="text-xs opacity-50 font-inter">
-                    {new Date(post.createdAt).toLocaleDateString('ru-RU', {
+                <p className="text-xs opacity-50 font-inter">
+                    {new Date().toLocaleDateString('ru-RU', {
                         day: 'numeric',
                         month: 'short',
                         year: 'numeric',
                     })}
-                </p> */}
+                </p>
             </div>
         </article>
     );

@@ -51,18 +51,26 @@ export function ClubHeader() {
                     </DropdownMenuContent>
                 </DropdownMenu>
             </div>
-            <div className="w-full h-full flex items-center justify-center">
+            <div className="w-full h-[220px] flex items-center justify-center">
                 <Image
-                    src={'/img/background.jpg'}
-                    height={200}
-                    width={600}
+                    src={'/img/eventbanner.jpg'}
+                    height={220}
+                    width={1000}
                     alt={'banner'}
-                    className="rounded-b-3xl w-full"
+                    className="rounded-b-3xl w-full object-cover"
                 />
             </div>
 
-            <div className="w-full h-full flex items-center justify-center mt-[-90px]">
-                <Image src={'/img/profile.png'} height={158} width={158} alt={'banner'} className="rounded-b-lg" />
+            <div className="w-full h-full flex items-center justify-center mt-[-50px]">
+                <Image
+                    src={
+                        'https://gravatar.com/avatar/d99cc6ace66fc8bd197c30c876b7224007211f4572ef6d8444693f67b4c33ab1?size=80'
+                    }
+                    height={128}
+                    width={128}
+                    alt={'avatar'}
+                    className="rounded-full border-[5px] border-background"
+                />
             </div>
         </div>
     );

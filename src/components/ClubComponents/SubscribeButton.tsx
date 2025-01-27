@@ -2,6 +2,7 @@
 
 import { SquareCheck, SquarePlus } from 'lucide-react';
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 
 import { Button } from '../ui/button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '../ui/sheet';
@@ -24,7 +25,13 @@ export function SubscribeButton() {
                         <SquarePlus />
                     </Button>
                 ) : (
-                    <Button onClick={() => setSubscribed(true)} className="my-5 w-full flex justify-center">
+                    <Button
+                        onClick={() => {
+                            setSubscribed(true);
+                            toast.success('Вы успешно подписались на клуб.');
+                        }}
+                        className="my-5 w-full flex justify-center"
+                    >
                         <span>Вступить</span>
                         <SquareCheck />
                     </Button>
@@ -40,6 +47,7 @@ export function SubscribeButton() {
                         onClick={() => {
                             setSubscribed(false);
                             setUnsubVisible(false);
+                            toast.success('Вы отписались от клуба.');
                         }}
                     >
                         Отписаться

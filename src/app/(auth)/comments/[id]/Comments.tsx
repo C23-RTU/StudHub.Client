@@ -24,6 +24,8 @@ export function Comments({ post }: { post: Post }) {
         queryFn: async () => await CommentService.getByPostId(post.id),
     });
 
+    console.log(data);
+
     return (
         <div className="page">
             <Header className="justify-start gap-4">
@@ -34,6 +36,8 @@ export function Comments({ post }: { post: Post }) {
             <MainContent>
                 <PostCard post={postState} />
                 <div className="flex flex-col gap-4 pb-[56px]">
+                    {!data && !isLoading && <p className="m-auto">Ошибка загрузки коментариев</p>}
+                    {data && data.length === 0 && <p className="m-auto">Комментариев нет</p>}
                     {isLoading &&
                         Array(3)
                             .fill(0)

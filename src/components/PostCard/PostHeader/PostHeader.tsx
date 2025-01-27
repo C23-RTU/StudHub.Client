@@ -1,5 +1,4 @@
 // import Image from 'next/image';
-
 import { MoreDropList } from './MoreDropList';
 import type { Post } from '@/lib/types/post';
 
@@ -18,9 +17,13 @@ export function PostHeader({ post }: Props) {
                         <div className="w-3 h-3 bg-emerald-400 rounded-full border border-bg absolute right-0 bottom-0"></div>
                     )} */}
                 </div>
-                <div className="flex flex-col ml-3">
-                    <p className="text-sm font-geologica font-semibold">{post.club.name}</p>
-                    <small className="text-[10px] font-inter font-normal">Lorem Ipsum</small>
+                <div className="flex flex-col ml-3 max-w-[200px] overflow-hidden">
+                    <p className="text-sm font-geologica font-semibold truncate" title={post.club.name}>
+                        {post.club.name}
+                    </p>
+                    <small className="text-[10px] font-inter font-normal truncate" title={post.title}>
+                        {post.title}
+                    </small>
                 </div>
             </div>
 
