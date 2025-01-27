@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-import { PUBLIC_PAGE } from './lib/config/routes.config';
+// import { PUBLIC_PAGE } from './lib/config/routes.config';
 import { authorizationProtect } from './server-actions/middleware/authorization-protect.middleware';
 import { loginProtect } from './server-actions/middleware/login-protect.middleware';
 
@@ -11,11 +11,11 @@ export async function middleware(request: NextRequest) {
 
     if (process.env.NODE_ENV === 'development') return NextResponse.next();
 
-    if (!pathname.includes(PUBLIC_PAGE.AUTH)) {
+    if (!pathname.includes('/auth')) {
         return authorizationProtect(request);
     }
 
-    if (pathname.includes(PUBLIC_PAGE.AUTH)) {
+    if (pathname.includes('/auth')) {
         return loginProtect(request);
     }
 

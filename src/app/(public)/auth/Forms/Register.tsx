@@ -1,11 +1,11 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useMutation } from '@tanstack/react-query';
-import { useRouter } from 'next/navigation';
+import { format } from 'date-fns';
 import { useState } from 'react';
-import { type SubmitHandler, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 
+import { BirthDatePicker } from '@/components/ui/BirthDatePicker/BirthDatePicker';
 import { FormField } from '@/components/ui/FormField/FormField';
 import { FormTextArea } from '@/components/ui/FormTextArea/FormTextArea';
 import { Button } from '@/components/ui/button';
@@ -17,10 +17,8 @@ import {
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
-import { AUTH_PAGE } from '@/lib/config/routes.config';
-
+import { useRegisterForm } from './useRegisterForm';
 import { RegisterDataSchema, type TRegisterDataSchema } from '@/lib/types/register.type';
-import { AuthService } from '@/services/auth.service';
 
 export default function Register() {
     const [selectedInstitute, setSelectedInstitute] = useState<{ id: number; name: string } | null>(null);
@@ -31,44 +29,22 @@ export default function Register() {
         { id: 3, name: 'ИПТИП' },
     ];
 
-    const router = useRouter();
-
     const {
         handleSubmit,
         reset,
         register,
+        watch,
+        setValue,
         formState: { errors, isValid },
     } = useForm<TRegisterDataSchema>({
         mode: 'onChange',
         resolver: zodResolver(RegisterDataSchema),
     });
 
-    const { mutate, isPending } = useMutation({
-        mutationKey: ['register'],
-        mutationFn: async (data: TRegisterDataSchema) => await AuthService.register(data),
-        onSuccess: () => {
-            router.push(AUTH_PAGE.HOME);
-            reset();
-        },
-        onError: (error) => {
-            console.log(error.message);
-        },
-    });
-
-    const onSubmitHandler: SubmitHandler<TRegisterDataSchema> = (data) => {
-        const formattedData = {
-            ...data,
-            middleName: data.middleName?.trim() || undefined,
-            about: data.about?.trim() || undefined,
-            instituteId: selectedInstitute?.id || null,
-            age: 25,
-        };
-    
-        mutate(formattedData);
-    };
+    const { submitHandler, isLoading } = useRegisterForm(reset, selectedInstitute);
 
     return (
-        <form className="flex flex-col gap-4 mb-5" onSubmit={handleSubmit(onSubmitHandler)}>
+        <form className="flex flex-col gap-4 mb-5" onSubmit={handleSubmit(submitHandler)}>
             <div className="grid col-span-2 gap-4">
                 <FormField
                     placeholder="Имя"
@@ -129,11 +105,13 @@ export default function Register() {
                         ))}
                     </DropdownMenuContent>
                 </DropdownMenu>
-                <FormField
-                    placeholder="Возраст"
-                    type="date"
-                    autoComplete="off"
-                    registration={register('birthDate', { valueAsDate: true })}
+                <BirthDatePicker
+                    value={watch('birthDate') ? format(new Date(watch('birthDate')), 'yyyy-MM-dd') : undefined}
+                    onChange={(date) => {
+                        if (date) {
+                            setValue('birthDate', date, { shouldValidate: true });
+                        }
+                    }}
                     error={errors.birthDate?.message}
                 />
             </div>
@@ -142,7 +120,7 @@ export default function Register() {
                 <FormTextArea placeholder="Расскажите о себе" registration={register('about')} />
             </div>
 
-            <Button className="col-span-3" type="submit" isLoading={isPending} disabled={!isValid}>
+            <Button className="col-span-3" type="submit" isLoading={isLoading} disabled={!isValid}>
                 Зарегистрироваться
             </Button>
         </form>

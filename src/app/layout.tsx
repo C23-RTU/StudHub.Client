@@ -28,7 +28,9 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <body className={`${inter.variable} ${geologica.variable} antialiased dark font-geologica`}>
+            <body
+                className={`${inter.variable} ${geologica.variable} antialiased dark font-geologica max-w-[1024px] mx-auto`}
+            >
                 <ProviderLayout>{children}</ProviderLayout>
             </body>
         </html>

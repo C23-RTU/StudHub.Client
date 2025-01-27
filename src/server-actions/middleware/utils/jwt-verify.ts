@@ -1,6 +1,5 @@
 'use server';
 
-import { AxiosError } from 'axios';
 import { jwtVerify } from 'jose';
 
 export async function jwtVerifyServer(accessToken: string) {
@@ -16,10 +15,10 @@ export async function jwtVerifyServer(accessToken: string) {
 
         return payload;
     } catch (error) {
-        if (error instanceof AxiosError && error.code === 'ERR_JWT_EXPIRED') {
-            console.log('Токен истек');
-            return null;
-        }
+        // if (error.code === 'ERR_JWT_EXPIRED') {
+        //     console.log('Токен истек');
+        //     return null;
+        // }
 
         console.log('Ошибка при верификации токена', error);
         return null;
