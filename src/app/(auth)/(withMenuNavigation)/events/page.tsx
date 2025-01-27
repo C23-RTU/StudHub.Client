@@ -7,6 +7,7 @@ export const metadata: Metadata = {
     title: 'События',
     description: '',
 };
+
 export default async function Page() {
     return <Events events={events} />;
 }
