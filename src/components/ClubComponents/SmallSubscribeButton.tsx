@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { Button } from '../ui/button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '../ui/sheet';
 
-export function SubscribeButton() {
+export function SmallSubscribeButton() {
     const [subscribed, setSubscribed] = useState<boolean>(false);
     const [unsubVisible, setUnsubVisible] = useState<boolean>(false);
 
@@ -18,14 +18,12 @@ export function SubscribeButton() {
                         onClick={() => {
                             setUnsubVisible(true);
                         }}
-                        className="my-5 w-full flex justify-center bg-secondary hover:bg-accent"
+                        className="bg-secondary hover:bg-accent p-3"
                     >
-                        <span>Вы подписаны</span>
                         <SquareCheck />
                     </Button>
                 ) : (
-                    <Button onClick={() => setSubscribed(true)} className="my-5 w-full flex justify-center">
-                        <span>Вступить</span>
+                    <Button onClick={() => setSubscribed(true)} className="p-3">
                         <SquarePlus />
                     </Button>
                 )}

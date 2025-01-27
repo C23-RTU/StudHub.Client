@@ -2,6 +2,8 @@
 
 import Image from 'next/image';
 
+import { SmallSubscribeButton } from './SmallSubscribeButton';
+
 interface Props {
     image: string;
     name: string;
@@ -21,7 +23,7 @@ export function ClubCard({ image, name, description }: Props) {
                 />
             </div>
 
-            <div className="flex flex-col ml-3 justify-between overflow-hidden">
+            <div className="flex flex-col flex-grow ml-3 justify-between overflow-hidden">
                 <p
                     className="text-m font-geologica font-semibold text-ellipsis overflow-hidden whitespace-nowrap"
                     title={name}
@@ -36,8 +38,8 @@ export function ClubCard({ image, name, description }: Props) {
                 </p>
             </div>
 
-            <div className="">
-                
+            <div>
+                <SmallSubscribeButton />
             </div>
         </article>
     );
