@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const BASE_API_URL = 'https://setka-rtu.ru/api';
+import { BASE_API_URL } from '@/lib/config/api.config';
 
 export const SERVER_AXIOS = axios.create({
     baseURL: BASE_API_URL,

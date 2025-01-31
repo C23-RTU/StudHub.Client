@@ -1,15 +1,12 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-// import { PUBLIC_PAGE } from './lib/config/routes.config';
 import { authorizationProtect } from './server-actions/middleware/authorization-protect.middleware';
 import { loginProtect } from './server-actions/middleware/login-protect.middleware';
 
 export async function middleware(request: NextRequest) {
     const url = new URL(request.url);
     const pathname = url.pathname;
-
-    if (process.env.NODE_ENV === 'development') return NextResponse.next();
 
     if (!pathname.includes('/auth')) {
         return authorizationProtect(request);

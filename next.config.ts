@@ -2,6 +2,7 @@ import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
     poweredByHeader: false,
+    skipTrailingSlashRedirect: true,
     images: {
         remotePatterns: [
             {
@@ -11,6 +12,14 @@ const nextConfig: NextConfig = {
                 pathname: '/**',
             },
         ],
+    },
+    async rewrites() {
+        return [
+            {
+                source: '/api/:path*',
+                destination: `${process.env.BASE_API_URL}/:path*`,
+            },
+        ];
     },
 };
 

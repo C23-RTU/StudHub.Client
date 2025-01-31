@@ -9,9 +9,6 @@ export const metadata: Metadata = {
     description: 'Комментарии',
 };
 
-export const dynamic = 'force-static';
-export const revalidate = 240;
-
 const Page = async ({ params }: { params: Promise<{ id: number }> }) => {
     const postId = (await params).id;
 
