@@ -20,7 +20,6 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
     };
 }
 
-
 export const revalidate = 100;
 
 export default async function Page({ params }: { params: Promise<{ id: string }> }) {
