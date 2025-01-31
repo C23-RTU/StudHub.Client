@@ -13,6 +13,14 @@ const nextConfig: NextConfig = {
             },
         ],
     },
+    async rewrites() {
+        return [
+            {
+                source: '/api/:path*',
+                destination: `${process.env.BASE_API_URL}/:path*`,
+            },
+        ];
+    },
 };
 
 export default nextConfig;

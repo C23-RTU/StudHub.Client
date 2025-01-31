@@ -3,6 +3,9 @@ import https from 'https';
 
 import { BASE_API_URL } from '@/lib/config/api.config';
 
+import { isClientSideRender } from '@/lib/helpers/isClientSideRender.helper';
+import { getServerSideCookies } from '@/server-actions/getServerSideCookies';
+
 export const api = axios.create({
     baseURL: BASE_API_URL,
     headers: {
@@ -12,4 +15,13 @@ export const api = axios.create({
         keepAlive: true,
     }),
     withCredentials: true,
+});
+
+api.interceptors.request.use(async (config) => {
+    if (!isClientSideRender) {
+        const { Cookie } = await getServerSideCookies();
+        config.headers['Cookie'] = Cookie;
+    }
+
+    return config;
 });
