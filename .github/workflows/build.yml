@@ -27,4 +27,6 @@ jobs:
               run: pnpm install
 
             - name: Build application
+              env:
+                  BASE_API_URL: ${{ secrets.BASE_API_URL }}
               run: pnpm run build
