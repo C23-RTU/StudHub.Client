@@ -2,9 +2,9 @@ import { EventCard } from '@/components/EventCard/EventCard';
 
 import { Header, HeaderTitle } from '@/hoc/Header/Header';
 import { MainContent } from '@/hoc/MainContent/MainContent';
-import type { ClubEvent } from '@/lib/types/event';
+import type { IClubEvent } from '@/lib/types/event.type';
 
-export function Events({ events }: { events: ClubEvent[] }) {
+export function Events({ events }: { events: IClubEvent[] }) {
     return (
         <div className="page">
             <Header>
