@@ -1,13 +1,14 @@
 import { z } from 'zod';
 
+import type { IUser } from './user.type';
+
 export interface IComment {
     id: number;
     content: string;
-    personId: number;
     parentId: number;
     postId: number;
+    personDetailDTO: IUser;
     createdAt: Date;
-    deletedAt: Date;
 }
 
 export const CommentPayloadSchema = z.object({

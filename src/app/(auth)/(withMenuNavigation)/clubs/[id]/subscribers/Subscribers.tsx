@@ -4,23 +4,21 @@ import { SubscriberCard } from '@/components/SubscriberCard/SubscriberCard';
 import { BackButton } from '@/components/ui/BackButton/BackButton';
 
 import { HeaderTitle } from '@/hoc/Header/Header';
-import type { User } from '@/lib/types/post';
+import type { IUser } from '@/lib/types/user.type';
 
 export function Subscribers({ id }: { id: string }) {
-    const subscribers: User[] = [
+    const subscribers: IUser[] = [
         {
             id: 1,
-            status: 'online',
-            name: 'Станислав Алексеевич Кудж',
-            avatarUrl: '/img/avatar.png',
-            major: 'Ректор РТУ МИРЭА',
-        },
-        {
-            id: 2,
-            status: 'offline',
-            name: 'Иван Иванов',
-            avatarUrl: '/img/avatar.png',
-            major: 'Студент',
+            firstName: 'Станислав',
+            lastName: 'Кудж',
+            middleName: 'Алексеевич',
+            birthDate: new Date(),
+            about: 'Ректор',
+            instituteId: 1,
+            roleId: 1,
+            activityStatusId: 1,
+            imagePath: null,
         },
     ];
 
@@ -36,10 +34,9 @@ export function Subscribers({ id }: { id: string }) {
                 {subscribers.map((subscriber, index) => (
                     <SubscriberCard
                         key={index}
-                        status={subscriber.status as 'online' | 'offline'}
-                        name={subscriber.name}
-                        avatar={subscriber.avatarUrl || '/img/avatar.png'}
-                        role={subscriber.major || 'Не указано'}
+                        username={`${subscriber.firstName} ${subscriber.middleName} ${subscriber.lastName}`}
+                        avatar={subscriber.imagePath || '/img/avatar.png'}
+                        role={'Не указано'}
                     />
                 ))}
             </div>

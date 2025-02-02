@@ -3,38 +3,37 @@
 import Image from 'next/image';
 
 interface Props {
-    status: 'online' | 'offline';
-    name: string;
+    username: string;
     avatar: string;
     role: string;
 }
 
-export function SubscriberCard({ status = 'offline', name, avatar, role }: Props) {
+export function SubscriberCard({ username, avatar, role }: Props) {
     return (
         <div className="flex w-full bg-secondary py-2 px-2 rounded-lg" role="listitem">
             <div className="relative">
                 <Image
                     src={avatar}
-                    alt={`${name}'s avatar`}
+                    alt={`${username}'s avatar`}
                     width={40}
                     height={40}
                     className="rounded-full w-10 h-10 min-w-[40px]"
                 />
-                <div
+                {/* <div
                     className={`w-3 h-3 rounded-full border border-bg absolute right-0 bottom-0 ${
                         status === 'online' ? 'bg-emerald-400' : 'bg-red-500'
                     }`}
                     role="status"
                     aria-label={`User is ${status}`}
-                />
+                /> */}
             </div>
 
             <div className="flex flex-col ml-3 justify-between overflow-hidden">
                 <p
                     className="text-m font-geologica font-semibold text-ellipsis overflow-hidden whitespace-nowrap"
-                    title={name}
+                    title={username}
                 >
-                    {name}
+                    {username}
                 </p>
                 <p
                     className="text-xs opacity-50 font-inter font-normal text-ellipsis overflow-hidden whitespace-nowrap"

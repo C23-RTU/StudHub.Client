@@ -16,11 +16,3 @@ export type Club = {
     about: string;
     imageUrl: string;
 };
-
-export type User = {
-    id: number;
-    name: string;
-    avatarUrl?: string;
-    major?: string;
-    status: 'online' | 'offline';
-};

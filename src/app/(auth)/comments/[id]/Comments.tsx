@@ -24,11 +24,9 @@ export function Comments({ post }: { post: Post }) {
         queryFn: async () => await CommentService.getByPostId(post.id),
     });
 
-    console.log(data);
-
     return (
-        <div className="page">
-            <Header className="justify-start gap-4">
+        <div className="page pt-[90px]">
+            <Header className="justify-start gap-4 fixed top-0 left-0 right-0 px-pageX bg-bg py-pageY z-10 m-0 shadow">
                 <BackButton onClick={() => router.back()} />
                 <HeaderTitle>Комментарии</HeaderTitle>
             </Header>
