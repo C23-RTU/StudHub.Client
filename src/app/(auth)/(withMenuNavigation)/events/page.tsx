@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 import { Events } from './Events';
-import { events } from '@/data/events';
+import { EventsService } from '@/services/events.service';
 
 export const metadata: Metadata = {
     title: 'События',
@@ -9,5 +9,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Page() {
+    const events = await EventsService.getEvents();
+
     return <Events events={events} />;
 }
