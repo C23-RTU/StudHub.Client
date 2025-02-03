@@ -16,6 +16,8 @@ import {
     DropdownMenuLabel,
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { useQuery } from '@tanstack/react-query';
+import { InstitutesService } from '@/services/institutes.service';
 
 import { useRegisterForm } from './useRegisterForm';
 import { RegisterDataSchema, type TRegisterDataSchema } from '@/lib/types/register.type';
@@ -23,11 +25,10 @@ import { RegisterDataSchema, type TRegisterDataSchema } from '@/lib/types/regist
 export default function Register() {
     const [selectedInstitute, setSelectedInstitute] = useState<{ id: number; name: string } | null>(null);
 
-    const institutes = [
-        { id: 1, name: 'ИКБ' },
-        { id: 2, name: 'ИИИ' },
-        { id: 3, name: 'ИПТИП' },
-    ];
+    const { data: institutes } = useQuery({
+        queryKey: ['fetch-institutes'],
+        queryFn: () => InstitutesService.getInstitutes(),
+    });
 
     const {
         handleSubmit,
@@ -92,14 +93,15 @@ export default function Register() {
                 />
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                        <Button className="w-full bg-secondary hover:bg-secondary/80 rounded-b-none border-b focus:border-b-2 focus:border-b-neutral-200 border-neutral-600">
+                        <Button className="w-full bg-secondary hover:bg-secondary/80 rounded-b-none border-b focus:border-b-2 focus:border-b-neutral-200 border-neutral-600 truncate">
                             {selectedInstitute?.name || 'Выберите институт'}
                         </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent>
                         <DropdownMenuLabel>Выберите институт</DropdownMenuLabel>
-                        {institutes.map((institute) => (
-                            <DropdownMenuItem key={institute.id} onClick={() => setSelectedInstitute(institute)}>
+                        <DropdownMenuItem onClick={() => setSelectedInstitute(null)}>—</DropdownMenuItem>
+                        {institutes?.map((institute) => (
+                            <DropdownMenuItem title={institute.name} key={institute.id} onClick={() => setSelectedInstitute(institute)}>
                                 {institute.name}
                             </DropdownMenuItem>
                         ))}
