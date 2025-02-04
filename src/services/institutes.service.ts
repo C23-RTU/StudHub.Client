@@ -1,14 +1,10 @@
 import { api } from '@/api/api';
-
-interface Institute {
-    id: number;
-    name: string;
-}
+import { type IInstitute } from '@/lib/types/institute.type';
 
 class institutesService {
     private _institutes = '/institutes';
 
-    async getInstitutes(): Promise<Institute[]> {
+    async getInstitutes(): Promise<IInstitute[]> {
         return (await api.get(this._institutes)).data;
     }
 }
