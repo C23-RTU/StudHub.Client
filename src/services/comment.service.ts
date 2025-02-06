@@ -9,8 +9,8 @@ class commentService {
      * Получить список комментариев к посту
      * @param postId
      */
-    async getByPostId(id: number): Promise<IComment[]> {
-        return (await api.get(`${this._comments}/getByPostId/${id}`)).data;
+    async getByPostId(id: number, pageIndex = 0, pageSize = 10): Promise<IComment[]> {
+        return (await api.get(`${this._comments}/getByPostId/${id}?pageIndex=${pageIndex}&pageSize=${pageSize}`)).data;
     }
 
     async sendPost(payload: TCommentPayloadSchema) {
