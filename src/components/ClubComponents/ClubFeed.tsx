@@ -9,12 +9,12 @@ import type { Post } from '@/lib/types/post';
 import { PostService } from '@/services/post.service';
 
 export function ClubFeed() {
-    const { clubId } = useParams();
+    const { id } = useParams();
+    const clubId = Number(id);
 
-    const { data: posts, isLoading } = useQuery({
+    const { data: data, isLoading } = useQuery({
         queryKey: ['fetch-club-posts', clubId],
-        queryFn: () => PostService.getByClubId(Number(clubId)),
-        enabled: !isNaN(Number(clubId)),
+        queryFn: async () => await PostService.getByClubId(Number(clubId)),
     });
 
     return (
@@ -25,8 +25,10 @@ export function ClubFeed() {
             <div className="flex flex-col gap-10">
                 {isLoading ? (
                     <p className="m-auto">Загрузка постов...</p>
-                ) : posts && posts.length > 0 ? (
-                    posts.map((post: Post) => <PostCard key={post.id} post={post} />)
+                ) : data && data.length > 0 ? (
+                    data.map((post: Post) => <PostCard key={post.id} post={post} />)
+                ) : !data ? (
+                    <p className="m-auto">Ошибка загрузки постов</p>
                 ) : (
                     <p className="m-auto">Нет постов</p>
                 )}
