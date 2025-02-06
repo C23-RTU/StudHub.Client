@@ -1,6 +1,7 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useQuery } from '@tanstack/react-query';
 import { format } from 'date-fns';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -18,16 +19,17 @@ import {
 } from '@/components/ui/dropdown-menu';
 
 import { useRegisterForm } from './useRegisterForm';
+import { type IInstitute } from '@/lib/types/institute.type';
 import { RegisterDataSchema, type TRegisterDataSchema } from '@/lib/types/register.type';
+import { InstitutesService } from '@/services/institutes.service';
 
 export default function Register() {
-    const [selectedInstitute, setSelectedInstitute] = useState<{ id: number; name: string } | null>(null);
+    const [selectedInstitute, setSelectedInstitute] = useState<IInstitute | null>(null);
 
-    const institutes = [
-        { id: 1, name: 'ИКБ' },
-        { id: 2, name: 'ИИИ' },
-        { id: 3, name: 'ИПТИП' },
-    ];
+    const { data: institutes } = useQuery({
+        queryKey: ['fetch-institutes'],
+        queryFn: async () => await InstitutesService.getInstitutes(),
+    });
 
     const {
         handleSubmit,
@@ -92,14 +94,19 @@ export default function Register() {
                 />
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                        <Button className="w-full bg-secondary hover:bg-secondary/80 rounded-b-none border-b focus:border-b-2 focus:border-b-neutral-200 border-neutral-600">
+                        <Button className="w-full bg-secondary hover:bg-secondary/80 rounded-b-none border-b focus:border-b-2 focus:border-b-neutral-200 border-neutral-600 truncate">
                             {selectedInstitute?.name || 'Выберите институт'}
                         </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent>
                         <DropdownMenuLabel>Выберите институт</DropdownMenuLabel>
-                        {institutes.map((institute) => (
-                            <DropdownMenuItem key={institute.id} onClick={() => setSelectedInstitute(institute)}>
+                        <DropdownMenuItem onClick={() => setSelectedInstitute(null)}>—</DropdownMenuItem>
+                        {institutes?.map((institute) => (
+                            <DropdownMenuItem
+                                title={institute.name}
+                                key={institute.id}
+                                onClick={() => setSelectedInstitute(institute)}
+                            >
                                 {institute.name}
                             </DropdownMenuItem>
                         ))}
