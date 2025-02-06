@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import { Fragment, useState } from 'react';
 
 import { CommentItem } from '@/components/CommentComponents/CommentItem';
-import { SkeletonCommentItem } from '@/components/CommentComponents/SkeletonCommentItem';
+import { SkeletonCommentsList } from '@/components/CommentComponents/SkeletonCommentsList';
 import { TextareaEditorComment } from '@/components/CommentComponents/TextareaEditorComment';
 import { PostCard } from '@/components/PostCard/PostCard';
 import { BackButton } from '@/components/ui/BackButton/BackButton';
@@ -34,10 +34,7 @@ export function Comments({ post }: { post: Post }) {
                 <PostCard post={postState} />
                 <div className="flex flex-col gap-4 pb-[56px]">
                     {data?.pages && data?.pages.length === 0 && <p className="m-auto">Комментариев нет</p>}
-                    {isLoading &&
-                        Array(3)
-                            .fill(0)
-                            .map((_, index) => <SkeletonCommentItem key={index} />)}
+                    {isLoading && <SkeletonCommentsList />}
 
                     {!isLoading &&
                         data?.pages?.map((page, index) => (
@@ -50,7 +47,7 @@ export function Comments({ post }: { post: Post }) {
                                 ))}
                             </Fragment>
                         ))}
-                    {isFetchingNextPage && <SkeletonCommentItem />}
+                    {isFetchingNextPage && <SkeletonCommentsList />}
                     {!isFetchingNextPage && <div ref={ref} />}
 
                     <TextareaEditorComment postId={post.id} updatePost={updatePostState} />

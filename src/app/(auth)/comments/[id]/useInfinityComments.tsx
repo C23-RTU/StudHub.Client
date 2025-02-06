@@ -18,6 +18,9 @@ export const useInfinityComments = (post_id: number) => {
     });
 
     useEffect(() => {
+        // FIXME: временная заглушка пока бекенд вместо null отдает [] при отсутсвии данных на новых станицах
+        if (infiniteQuery.data?.pages[infiniteQuery.data.pages.length - 1].length === 0) return;
+
         if (inView && infiniteQuery.hasNextPage) {
             infiniteQuery.fetchNextPage();
         }
