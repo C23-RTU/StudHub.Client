@@ -11,7 +11,6 @@ export default {
             fontFamily: {
                 inter: ['var(--font-inter)', ...fontFamily.sans],
                 geologica: ['var(--font-geologica)', ...fontFamily.sans],
-                syncopate: ['var(--font-syncopate)', ...fontFamily.sans],
             },
             colors: {
                 ...COLORS,

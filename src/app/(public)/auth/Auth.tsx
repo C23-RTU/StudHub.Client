@@ -1,9 +1,9 @@
 'use client';
 
+import Image from 'next/image';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-import { SetkaLogo } from '@/components/logo';
 import { Switcher } from '@/components/ui/Switcher/Switcher';
 
 import Login from './Forms/Login';
@@ -31,29 +31,14 @@ export default function Auth() {
     };
 
     return (
-        <div className="flex flex-col items-center gap-3 my-auto w-full">
-            {/* <Image src={'/img/logo.png'} width={255} height={255} quality={100} alt="logo" /> */}
-            <div className="flex flex-col items-start w-full">
-                <div className="flex flex-row gap-4 items-center">
-                    <h1 className="text-6xl font-syncopate leading-none">CETKA</h1>
-                    <SetkaLogo className='w-10 h-10' />
-                </div>
-
-                <p className="text-lg my-3">
-                    Социальная сеть для студентов РТУ МИРЭА с новостями из жизни университета.
-                </p>
-            </div>
-
+        <div className="flex flex-col items-center gap-3">
+            <Image src={'/img/logo.png'} width={255} height={255} quality={100} alt="logo" />
             <Switcher tabs={['Вход', 'Регистация']} activeTabIndex={formType} onChange={handleChange} />
 
             <div className="w-full">
                 {formType === Tabs.LOGIN && <Login />}
                 {formType === Tabs.REGISTRATION && <Register />}
             </div>
-
-            <small className="text-center text-xs text-neutral-500">
-                © C32-RTU, 2025. Сетка является неофициальным студенческим проектом в рамках университета РТУ МИРЭА.
-            </small>
         </div>
     );
 }

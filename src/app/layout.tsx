@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
-import { Geologica, Syncopate, Inter } from 'next/font/google';
+import { Geologica } from 'next/font/google';
+import { Inter } from 'next/font/google';
 
 import ProviderLayout from '@/components/Provider/Provider';
 
@@ -11,8 +12,6 @@ const geologica = Geologica({
 });
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
-
-const syncopate = Syncopate({ subsets: ['latin'], variable: '--font-syncopate', weight: ['700'] });
 
 export const metadata: Metadata = {
     title: {
@@ -30,7 +29,7 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body
-                className={`${inter.variable} ${geologica.variable} ${syncopate.variable} antialiased dark font-geologica max-w-[1024px] mx-auto`}
+                className={`${inter.variable} ${geologica.variable} antialiased dark font-geologica max-w-[1024px] mx-auto`}
             >
                 <ProviderLayout>{children}</ProviderLayout>
             </body>
