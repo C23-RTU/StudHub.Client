@@ -11,16 +11,14 @@ export const useInfinityComments = (post_id: number) => {
         queryKey: ['fetch-post-comments', post_id],
         queryFn: async ({ pageParam }) => await CommentService.getByPostId(post_id, pageParam),
         initialPageParam: 0,
-        getNextPageParam: (_, __, lastPageParam) => {
+        getNextPageParam: (lastPage, __, lastPageParam) => {
+            if (!lastPage.length) return null;
             return lastPageParam + 1;
         },
-        staleTime: Infinity,
+        enabled: !!post_id,
     });
 
     useEffect(() => {
-        // FIXME: временная заглушка пока бекенд вместо null отдает [] при отсутсвии данных на новых станицах
-        if (infiniteQuery.data?.pages[infiniteQuery.data.pages.length - 1].length === 0) return;
-
         if (inView && infiniteQuery.hasNextPage) {
             infiniteQuery.fetchNextPage();
         }
