@@ -10,18 +10,19 @@ import { PostCard } from '@/components/PostCard/PostCard';
 import { BackButton } from '@/components/ui/BackButton/BackButton';
 import { Skeleton } from '@/components/ui/skeleton';
 
+import { commentApi } from '@/api/api';
+import type { PostDetailDTO } from '@/api/axios-client/api';
+
 import { Header, HeaderTitle } from '@/hoc/Header/Header';
 import { MainContent } from '@/hoc/MainContent/MainContent';
-import type { Post } from '@/lib/types/post';
-import { CommentService } from '@/services/comment.service';
 
-export function Comments({ post }: { post: Post }) {
+export function Comments({ post }: { post: PostDetailDTO }) {
     const router = useRouter();
     const [postState, updatePostState] = useState(post);
 
     const { data, isLoading } = useQuery({
         queryKey: ['fetch-post-comments', post.id],
-        queryFn: async () => await CommentService.getByPostId(post.id),
+        queryFn: async () => (await commentApi.commentsGetByPostId(post.id as number)).data,
     });
 
     return (
@@ -49,7 +50,7 @@ export function Comments({ post }: { post: Post }) {
                             </Fragment>
                         ))}
 
-                    <TextareaEditorComment postId={post.id} updatePost={updatePostState} />
+                    <TextareaEditorComment postId={post.id as number} updatePost={updatePostState} />
                 </div>
             </MainContent>
         </div>

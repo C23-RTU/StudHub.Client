@@ -13,10 +13,11 @@ import {
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
-import type { IClubEvent } from '@/lib/types/event.type';
+import type { EventDetailDTO } from '@/api/axios-client';
+
 import { parseLocalTime } from '@/lib/utils/time.util';
 
-export default function EventView({ event }: { event: IClubEvent }) {
+export default function EventView({ event }: { event: EventDetailDTO }) {
     return (
         <article>
             <div className="fixed flex flex-row justify-between items-center p-4 z-20 w-full max-w-[1024px]">
@@ -56,7 +57,7 @@ export default function EventView({ event }: { event: IClubEvent }) {
             </div>
             <div className="relative flex w-full h-[400px]">
                 <Image
-                    src={event?.eventImages[0] || '/img/eventbanner.jpg'}
+                    src={(event?.eventImages && event?.eventImages[0]) || '/img/eventbanner.jpg'}
                     fill
                     alt={event?.title || 'Event banner'}
                     className="object-cover"
@@ -78,7 +79,9 @@ export default function EventView({ event }: { event: IClubEvent }) {
                     </div>
                     <div className="flex flex-row gap-2 items-center">
                         <FaCalendar className="w-4 h-4" />
-                        <time className="font-inter text-md text-gray-white">{parseLocalTime(event.startTime)}</time>
+                        <time className="font-inter text-md text-gray-white">
+                            {parseLocalTime(event.startTime as string)}
+                        </time>
                     </div>
                 </div>
             </div>

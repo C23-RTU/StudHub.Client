@@ -7,20 +7,19 @@ import toast from 'react-hot-toast';
 
 import { PUBLIC_PAGE } from '@/lib/config/routes.config';
 
-import { type TRegisterDataSchema } from '@/lib/types/register.type';
-import { AuthService } from '@/services/auth.service';
+import { authApi } from '@/api/api';
+import type { Institute } from '@/api/axios-client';
 
-export const useRegisterForm = (
-    reset: UseFormReset<TRegisterDataSchema>,
-    selectedInstitute: { id: number; name: string } | null,
-) => {
+import { type TRegisterDataSchema } from '@/lib/types/register.type';
+
+export const useRegisterForm = (reset: UseFormReset<TRegisterDataSchema>, selectedInstitute: Institute | null) => {
     const router = useRouter();
 
     const [isPending, startTransition] = useTransition();
 
     const { mutateAsync, isPending: isRegisterPending } = useMutation({
         mutationKey: ['register'],
-        mutationFn: async (data: TRegisterDataSchema) => await AuthService.register(data),
+        mutationFn: async (data: TRegisterDataSchema) => authApi.authRegister({ registerDTO: data }),
         onError: (error) => {
             console.log(error.message);
         },
@@ -31,8 +30,6 @@ export const useRegisterForm = (
             ...data,
             instituteId: selectedInstitute?.id || null,
         };
-
-        console.log(updatedData);
 
         toast.promise(
             mutateAsync(updatedData),

@@ -7,18 +7,19 @@ import { type SubmitHandler, useForm } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 
+import { commentApi } from '@/api/api';
+import type { PostDetailDTO } from '@/api/axios-client';
+
 import { queryClient } from '../Provider/getQueryClient';
 
 import { CommentPayloadSchema, type TCommentPayloadSchema } from '@/lib/types/comment.type';
-import type { Post } from '@/lib/types/post';
-import { CommentService } from '@/services/comment.service';
 
 export function TextareaEditorComment({
     postId,
     updatePost,
 }: {
     postId: number;
-    updatePost: Dispatch<SetStateAction<Post>>;
+    updatePost: Dispatch<SetStateAction<PostDetailDTO>>;
 }) {
     const {
         handleSubmit,
@@ -36,14 +37,14 @@ export function TextareaEditorComment({
 
     const { mutate, isPending } = useMutation({
         mutationKey: ['send-comment'],
-        mutationFn: async (payload: TCommentPayloadSchema) => await CommentService.sendPost(payload),
+        mutationFn: async (payload: TCommentPayloadSchema) => await commentApi.commentsAdd({ commentDTO: payload }),
         onSuccess: () => {
             queryClient.invalidateQueries({
                 queryKey: ['fetch-post-comments'],
             });
             updatePost((prevState) => ({
                 ...prevState,
-                commentCount: prevState.commentCount + 1,
+                commentCount: (prevState.commentCount as number) + 1,
             }));
             resetField('content');
         },

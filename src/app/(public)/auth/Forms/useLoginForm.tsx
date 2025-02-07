@@ -8,8 +8,9 @@ import toast from 'react-hot-toast';
 
 import { AUTH_PAGE } from '@/lib/config/routes.config';
 
+import { authApi } from '@/api/api';
+
 import { EnumTokens, type TLoginDataSchema } from '@/lib/types/login.type';
-import { AuthService } from '@/services/auth.service';
 
 export const useLoginForm = (reset: UseFormReset<TLoginDataSchema>) => {
     const router = useRouter();
@@ -17,10 +18,10 @@ export const useLoginForm = (reset: UseFormReset<TLoginDataSchema>) => {
 
     const { mutateAsync, isPending: isLoginPending } = useMutation({
         mutationKey: ['login'],
-        mutationFn: async (data: TLoginDataSchema) => await AuthService.login(data),
+        mutationFn: async (data: TLoginDataSchema) => (await authApi.authLogin({ loginDTO: data })).data,
         onSuccess: ({ accessToken, refreshToken }) => {
-            Cookies.set(EnumTokens.ACCESS_TOKEN, accessToken, { expires: 30 }); // 30 дней
-            Cookies.set(EnumTokens.REFRESH_TOKEN, refreshToken, { expires: 30 }); // 30 дней
+            Cookies.set(EnumTokens.ACCESS_TOKEN, accessToken as string, { expires: 30 }); // 30 дней
+            Cookies.set(EnumTokens.REFRESH_TOKEN, refreshToken as string, { expires: 30 }); // 30 дней
         },
     });
 

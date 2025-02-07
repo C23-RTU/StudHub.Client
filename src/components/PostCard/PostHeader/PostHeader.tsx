@@ -1,9 +1,12 @@
 // import Image from 'next/image';
+import type { PostDetailDTO } from '@/api/axios-client';
+
 import { MoreDropList } from './MoreDropList';
-import type { Post } from '@/lib/types/post';
+
+// import type { Post } from '@/lib/types/post';
 
 type Props = {
-    post: Post;
+    post: PostDetailDTO;
 };
 
 export function PostHeader({ post }: Props) {
@@ -18,8 +21,8 @@ export function PostHeader({ post }: Props) {
                     )} */}
                 </div>
                 <div className="flex flex-col ml-3 max-w-[200px] overflow-hidden">
-                    <p className="text-sm font-geologica font-semibold truncate" title={post.club.name}>
-                        {post.club.name}
+                    <p className="text-sm font-geologica font-semibold truncate" title={post.club?.name}>
+                        {post.club?.name}
                     </p>
                     <small className="text-[10px] font-inter font-normal truncate" title={post.title}>
                         {post.title}

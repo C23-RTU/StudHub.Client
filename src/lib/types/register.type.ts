@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export type TRegisterDataSchema = z.infer<typeof RegisterDataSchema>
+export type TRegisterDataSchema = z.infer<typeof RegisterDataSchema>;
 
 export const RegisterDataSchema = z
     .object({
@@ -29,7 +29,7 @@ export const RegisterDataSchema = z
             .refine((value) => {
                 const isValidFormat = /^\d{4}-\d{2}-\d{2}$/.test(value);
                 if (!isValidFormat) return false;
-        
+
                 const date = new Date(value);
                 return !isNaN(date.getTime()) && date <= new Date();
             }, 'Введите корректную дату'),
@@ -41,16 +41,9 @@ export const RegisterDataSchema = z
             .regex(/[A-Z]/, 'Пароль должен содержать заглавную букву')
             .regex(/\d/, 'Пароль должен содержать цифру')
             .regex(/[^A-Za-z0-9]/, 'Пароль должен содержать спец. символ'),
-        confirmPassword: z
-            .string(),
-        about: z
-            .string()
-            .max(200, 'Описание не может превышать 200 символов')
-            .optional(),
-        instituteId: z
-            .number()
-            .optional()
-            .nullable(),
+        confirmPassword: z.string(),
+        about: z.string().max(200, 'Описание не может превышать 200 символов').optional(),
+        instituteId: z.number().optional().nullable(),
     })
     .refine((data) => data.password === data.confirmPassword, {
         message: 'Пароли не совпадают',

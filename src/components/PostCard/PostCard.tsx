@@ -7,15 +7,16 @@ import { match } from 'path-to-regexp';
 
 import { AUTH_PAGE } from '@/lib/config/routes.config';
 
+import type { PostDetailDTO } from '@/api/axios-client';
+
 import { ActionButton } from '../ui/ActionButton/ActionButton';
 
 import { PostHeader } from './PostHeader/PostHeader';
-import type { Post } from '@/lib/types/post';
 import { cn } from '@/lib/utils/utils';
 
 type PostCardProps = {
     className?: string;
-    post: Post;
+    post: PostDetailDTO;
 };
 
 export function PostCard({ className, post }: PostCardProps) {
@@ -28,7 +29,7 @@ export function PostCard({ className, post }: PostCardProps) {
                 <p className="text-sm font-inter text-gray-300">{post.content}</p>
             </div>
             <div className="flex gap-2">
-                {post.tags &&
+                {/* {post.tags &&
                     post.tags.map((tag, index) => (
                         <p
                             className="text-xs font-inter text-gray-300 bg-neutral-800 py-2 rounded-3xl px-3 cursor-pointer"
@@ -36,7 +37,7 @@ export function PostCard({ className, post }: PostCardProps) {
                         >
                             #{tag}
                         </p>
-                    ))}
+                    ))} */}
             </div>
             <div className="w-full h-full flex items-center justify-center ">
                 <Image
@@ -49,12 +50,12 @@ export function PostCard({ className, post }: PostCardProps) {
             </div>
             <div className="flex items-center justify-between font-inter">
                 <div className="flex gap-4">
-                    <ActionButton type={'like'} initialValue={post.reactionCount} />
-                    <Link href={AUTH_PAGE.COMMENTS(post.id)}>
+                    <ActionButton type={'like'} initialValue={post.reactionCount || 0} />
+                    <Link href={AUTH_PAGE.COMMENTS(post.id as number)}>
                         <ActionButton
                             type={'comment'}
-                            initialValue={post.commentCount}
-                            setHover={!!match(AUTH_PAGE.COMMENTS(post.id))(pathname)}
+                            initialValue={post.commentCount as number}
+                            setHover={!!match(AUTH_PAGE.COMMENTS(post.id as number))(pathname)}
                         />
                     </Link>
                 </div>
