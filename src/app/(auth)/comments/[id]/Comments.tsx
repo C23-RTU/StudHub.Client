@@ -22,9 +22,8 @@ export function Comments({ post }: { post: PostDetailDTO }) {
 
     const { data, isLoading } = useQuery({
         queryKey: ['fetch-post-comments', post.id],
-        queryFn: async () => (await commentApi.commentsGetByPostId(post.id as number)).data,
+        queryFn: async () => (await commentApi.commentsGetByPostId(post.id)).data,
     });
-
     return (
         <div className="page pt-[90px]">
             <Header className="justify-start gap-4 fixed top-0 left-0 right-0 px-pageX bg-bg py-pageY z-10 m-0 shadow">
@@ -50,7 +49,7 @@ export function Comments({ post }: { post: PostDetailDTO }) {
                             </Fragment>
                         ))}
 
-                    <TextareaEditorComment postId={post.id as number} updatePost={updatePostState} />
+                    <TextareaEditorComment postId={post.id} updatePost={updatePostState} />
                 </div>
             </MainContent>
         </div>

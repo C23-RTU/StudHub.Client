@@ -37,14 +37,14 @@ export function TextareaEditorComment({
 
     const { mutate, isPending } = useMutation({
         mutationKey: ['send-comment'],
-        mutationFn: async (payload: TCommentPayloadSchema) => await commentApi.commentsAdd({ commentDTO: payload }),
+        mutationFn: async (payload: TCommentPayloadSchema) => await commentApi.commentsAdd(payload),
         onSuccess: () => {
             queryClient.invalidateQueries({
                 queryKey: ['fetch-post-comments'],
             });
             updatePost((prevState) => ({
                 ...prevState,
-                commentCount: (prevState.commentCount as number) + 1,
+                commentCount: prevState.commentCount + 1,
             }));
             resetField('content');
         },

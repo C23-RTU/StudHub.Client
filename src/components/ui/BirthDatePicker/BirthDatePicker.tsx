@@ -102,7 +102,10 @@ export function BirthDatePicker({ value, onChange, error }: DatePickerProps) {
                             locale={ru}
                         />
                         <div className="flex justify-center">
-                            <button className="text-xs text-center bg-primary rounded-md py-2 w-full hover:bg-primary/80" onClick={() => setIsOpen(false)}>
+                            <button
+                                className="text-xs text-center bg-primary rounded-md py-2 w-full hover:bg-primary/80"
+                                onClick={() => setIsOpen(false)}
+                            >
                                 Готово
                             </button>
                         </div>

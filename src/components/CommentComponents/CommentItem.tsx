@@ -4,8 +4,6 @@ import Image from 'next/image';
 
 import type { CommentDetailDTO } from '@/api/axios-client';
 
-// import { ActionButton } from '../ui/ActionButton/ActionButton';
-
 import { parseLocalDate } from '@/lib/utils/time.util';
 
 export function CommentItem({ comment }: { comment: CommentDetailDTO }) {
@@ -22,10 +20,10 @@ export function CommentItem({ comment }: { comment: CommentDetailDTO }) {
             <div className="flex flex-col gap-2 w-full overflow-hidden ">
                 <div className="flex justify-between items-center">
                     <p className="font-geologica font-medium text-sm">
-                        {comment.personDetailDTO?.firstName} {comment.personDetailDTO?.lastName}
+                        {comment.personDetailDTO?.firstName} {comment.personDetailDTO.lastName}
                     </p>
                     <small className="text-xss opacity-50 font-inter font-normal">
-                        {parseLocalDate(comment.createdAt as string)}
+                        {parseLocalDate(comment.createdAt)}
                     </small>
                 </div>
                 <p className="text-xs font-inter font-normal text-[#B8B8B8] leading-snug break-words whitespace-pre-line">
