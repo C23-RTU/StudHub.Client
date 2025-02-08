@@ -19,7 +19,7 @@ export const useRegisterForm = (reset: UseFormReset<TRegisterDataSchema>, select
 
     const { mutateAsync, isPending: isRegisterPending } = useMutation({
         mutationKey: ['register'],
-        mutationFn: async (data: TRegisterDataSchema) => authApi.authRegister({ registerDTO: data }),
+        mutationFn: async (data: TRegisterDataSchema) => authApi.authRegister(data),
         onError: (error) => {
             console.log(error.message);
         },

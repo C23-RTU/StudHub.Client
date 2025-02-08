@@ -11,7 +11,7 @@ import { BackButton } from '@/components/ui/BackButton/BackButton';
 import { Skeleton } from '@/components/ui/skeleton';
 
 import { commentApi } from '@/api/api';
-import type { PostDetailDTO } from '@/api/axios-client/api';
+import type { PostDetailDTO } from '@/api/axios-client';
 
 import { Header, HeaderTitle } from '@/hoc/Header/Header';
 import { MainContent } from '@/hoc/MainContent/MainContent';

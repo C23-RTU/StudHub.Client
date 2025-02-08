@@ -8,7 +8,6 @@
                 "generatorName": "typescript-axios",
                 "output": "./src/api/axios-client",
                 "inputSpec": "https://setka-rtu.ru/api/openapi/v1.json",
-                "skipValidateSpec": true,
                 "additionalProperties": {
                     "supportsES6": true
                 }
