@@ -57,7 +57,7 @@ export default function EventView({ event }: { event: EventDetailDTO }) {
             </div>
             <div className="relative flex w-full h-[400px]">
                 <Image
-                    src={event.eventImages[0] || '/img/eventbanner.jpg'}
+                    src={(event.eventImages && event.eventImages[0]) || '/img/eventbanner.jpg'}
                     fill
                     alt={event.title || 'Event banner'}
                     className="object-cover"
@@ -79,7 +79,9 @@ export default function EventView({ event }: { event: EventDetailDTO }) {
                     </div>
                     <div className="flex flex-row gap-2 items-center">
                         <FaCalendar className="w-4 h-4" />
-                        <time className="font-inter text-md text-gray-white">{parseLocalTime(event.startTime)}</time>
+                        <time className="font-inter text-md text-gray-white">
+                            {parseLocalTime(event.startTime as string)}
+                        </time>
                     </div>
                 </div>
             </div>

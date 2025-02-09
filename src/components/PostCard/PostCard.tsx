@@ -51,11 +51,11 @@ export function PostCard({ className, post }: PostCardProps) {
             <div className="flex items-center justify-between font-inter">
                 <div className="flex gap-4">
                     <ActionButton type={'like'} initialValue={post.reactionCount || 0} />
-                    <Link href={AUTH_PAGE.COMMENTS(post.id)}>
+                    <Link href={AUTH_PAGE.COMMENTS(post.id as number)}>
                         <ActionButton
                             type={'comment'}
-                            initialValue={post.commentCount}
-                            setHover={!!match(AUTH_PAGE.COMMENTS(post.id))(pathname)}
+                            initialValue={post.commentCount as number}
+                            setHover={!!match(AUTH_PAGE.COMMENTS(post.id as number))(pathname)}
                         />
                     </Link>
                 </div>
