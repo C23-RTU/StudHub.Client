@@ -1,25 +1,22 @@
-import { RiHome2Line } from 'react-icons/ri';
-import { FaRegCompass } from "react-icons/fa6";
-import { BiGlobe } from "react-icons/bi";
-import { LuUserRound } from "react-icons/lu";
+import { Home, Search, User, Zap } from 'lucide-react';
 
 import { AUTH_PAGE } from '@/lib/config/routes.config';
 
 export const MENU_LINKS = [
     {
-        Icon: RiHome2Line,
+        Icon: Home,
         link: AUTH_PAGE.HOME,
     },
     {
-        Icon: FaRegCompass,
+        Icon: Zap,
         link: AUTH_PAGE.EVENTS,
     },
     {
-        Icon: BiGlobe,
+        Icon: Search,
         link: AUTH_PAGE.CLUBS,
     },
     {
-        Icon: LuUserRound,
+        Icon: User,
         link: AUTH_PAGE.PROFILE,
     },
 ];
