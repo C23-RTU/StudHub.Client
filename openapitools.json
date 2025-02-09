@@ -9,7 +9,12 @@
                 "output": "./src/api/axios-client",
                 "inputSpec": "https://setka-rtu.ru/api/openapi/v1.json",
                 "additionalProperties": {
-                    "supportsES6": true
+                    "supportsES6": true,
+                    "snapshot": true,
+                    "withInterfaces": true,
+                    "withSeparateModelsAndApi": true,
+                    "apiPackage": "api",
+                    "modelPackage": "models"
                 }
             }
         }

@@ -13,6 +13,30 @@
  */
 
 
-export * from "./api";
-export * from "./configuration";
-export * from "./models";
+
+/**
+ * 
+ * @export
+ * @interface CommentDTO
+ */
+export interface CommentDTO {
+    /**
+     * 
+     * @type {string}
+     * @memberof CommentDTO
+     */
+    'content': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof CommentDTO
+     */
+    'parentId'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof CommentDTO
+     */
+    'postId': number;
+}
+

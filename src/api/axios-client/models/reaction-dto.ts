@@ -13,6 +13,24 @@
  */
 
 
-export * from "./api";
-export * from "./configuration";
-export * from "./models";
+
+/**
+ * 
+ * @export
+ * @interface ReactionDTO
+ */
+export interface ReactionDTO {
+    /**
+     * 
+     * @type {number}
+     * @memberof ReactionDTO
+     */
+    'postId': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ReactionDTO
+     */
+    'typeId'?: number;
+}
+

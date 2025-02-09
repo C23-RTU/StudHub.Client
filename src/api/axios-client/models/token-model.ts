@@ -13,6 +13,24 @@
  */
 
 
-export * from "./api";
-export * from "./configuration";
-export * from "./models";
+
+/**
+ * 
+ * @export
+ * @interface TokenModel
+ */
+export interface TokenModel {
+    /**
+     * 
+     * @type {string}
+     * @memberof TokenModel
+     */
+    'accessToken'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TokenModel
+     */
+    'refreshToken'?: string;
+}
+

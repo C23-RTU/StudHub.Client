@@ -13,6 +13,24 @@
  */
 
 
-export * from "./api";
-export * from "./configuration";
-export * from "./models";
+
+/**
+ * 
+ * @export
+ * @interface Institute
+ */
+export interface Institute {
+    /**
+     * 
+     * @type {number}
+     * @memberof Institute
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof Institute
+     */
+    'name'?: string;
+}
+
