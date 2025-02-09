@@ -1,23 +1,22 @@
-import { GoHomeFill } from 'react-icons/go';
-import { FaCompass, FaGlobe, FaUser } from 'react-icons/fa';
+import { Home, Search, User, Zap } from 'lucide-react';
 
 import { AUTH_PAGE } from '@/lib/config/routes.config';
 
 export const MENU_LINKS = [
     {
-        Icon: GoHomeFill,
+        Icon: Home,
         link: AUTH_PAGE.HOME,
     },
     {
-        Icon: FaCompass,
+        Icon: Zap,
         link: AUTH_PAGE.EVENTS,
     },
     {
-        Icon: FaGlobe,
+        Icon: Search,
         link: AUTH_PAGE.CLUBS,
     },
     {
-        Icon: FaUser,
+        Icon: User,
         link: AUTH_PAGE.PROFILE,
     },
 ];
