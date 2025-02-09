@@ -1,23 +1,25 @@
-import { GoHomeFill } from 'react-icons/go';
-import { FaCompass, FaGlobe, FaUser } from 'react-icons/fa';
+import { RiHome2Line } from 'react-icons/ri';
+import { FaRegCompass } from "react-icons/fa6";
+import { BiGlobe } from "react-icons/bi";
+import { LuUserRound } from "react-icons/lu";
 
 import { AUTH_PAGE } from '@/lib/config/routes.config';
 
 export const MENU_LINKS = [
     {
-        Icon: GoHomeFill,
+        Icon: RiHome2Line,
         link: AUTH_PAGE.HOME,
     },
     {
-        Icon: FaCompass,
+        Icon: FaRegCompass,
         link: AUTH_PAGE.EVENTS,
     },
     {
-        Icon: FaGlobe,
+        Icon: BiGlobe,
         link: AUTH_PAGE.CLUBS,
     },
     {
-        Icon: FaUser,
+        Icon: LuUserRound,
         link: AUTH_PAGE.PROFILE,
     },
 ];
