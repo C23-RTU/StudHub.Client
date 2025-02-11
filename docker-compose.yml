@@ -35,6 +35,8 @@ services:
 
     backend_api:
         build: /opt/setka/Setka.Server
+        volumes:
+            - '/opt/setka/SetkaImages/:/SetkaImages/:rw'
         ports:
             - 5293:8080
         networks:
