@@ -25,12 +25,12 @@ export interface TokenModel {
      * @type {string}
      * @memberof TokenModel
      */
-    'accessToken'?: string;
+    'accessToken': string;
     /**
      * 
      * @type {string}
      * @memberof TokenModel
      */
-    'refreshToken'?: string;
+    'refreshToken': string;
 }
 

@@ -23,7 +23,7 @@ export function CommentItem({ comment }: { comment: CommentDetailDTO }) {
                         {comment.personDetailDTO?.firstName} {comment.personDetailDTO?.lastName}
                     </p>
                     <small className="text-xss opacity-50 font-inter font-normal">
-                        {parseLocalDate(comment.createdAt as string)}
+                        {parseLocalDate(comment.createdAt)}
                     </small>
                 </div>
                 <p className="text-xs font-inter font-normal text-[#B8B8B8] leading-snug break-words whitespace-pre-line">

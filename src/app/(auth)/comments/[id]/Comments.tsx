@@ -22,7 +22,7 @@ export function Comments({ post }: { post: PostDetailDTO }) {
     const {
         ref,
         infiniteQuery: { data, isLoading, isFetchingNextPage },
-    } = useInfinityComments(post.id as number);
+    } = useInfinityComments(post.id);
 
     return (
         <div className="page pt-[90px]">
@@ -51,7 +51,7 @@ export function Comments({ post }: { post: PostDetailDTO }) {
                     {isFetchingNextPage && <SkeletonCommentsList />}
                     {!isFetchingNextPage && <div ref={ref} />}
 
-                    <TextareaEditorComment postId={post.id as number} updatePost={updatePostState} />
+                    <TextareaEditorComment postId={post.id} updatePost={updatePostState} />
                 </div>
             </MainContent>
         </div>

@@ -17,32 +17,32 @@
 /**
  * 
  * @export
- * @interface ClubDetailDTO
+ * @interface ReactionDetailDTO
  */
-export interface ClubDetailDTO {
+export interface ReactionDetailDTO {
     /**
      * 
      * @type {number}
-     * @memberof ClubDetailDTO
+     * @memberof ReactionDetailDTO
      */
     'id': number;
     /**
      * 
-     * @type {string}
-     * @memberof ClubDetailDTO
+     * @type {number}
+     * @memberof ReactionDetailDTO
      */
-    'name': string;
+    'postId': number;
     /**
      * 
-     * @type {string}
-     * @memberof ClubDetailDTO
+     * @type {number}
+     * @memberof ReactionDetailDTO
      */
-    'about'?: string | null;
+    'personId': number;
     /**
      * 
-     * @type {string}
-     * @memberof ClubDetailDTO
+     * @type {number}
+     * @memberof ReactionDetailDTO
      */
-    'imageUrl'?: string | null;
+    'typeId': number;
 }
 

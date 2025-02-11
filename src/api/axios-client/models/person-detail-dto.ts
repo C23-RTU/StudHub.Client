@@ -25,19 +25,19 @@ export interface PersonDetailDTO {
      * @type {number}
      * @memberof PersonDetailDTO
      */
-    'id'?: number;
+    'id': number;
     /**
      * 
      * @type {string}
      * @memberof PersonDetailDTO
      */
-    'firstName'?: string;
+    'firstName': string;
     /**
      * 
      * @type {string}
      * @memberof PersonDetailDTO
      */
-    'lastName'?: string;
+    'lastName': string;
     /**
      * 
      * @type {string}
@@ -49,7 +49,7 @@ export interface PersonDetailDTO {
      * @type {string}
      * @memberof PersonDetailDTO
      */
-    'birthDate'?: string;
+    'birthDate': string;
     /**
      * 
      * @type {string}
@@ -67,13 +67,13 @@ export interface PersonDetailDTO {
      * @type {number}
      * @memberof PersonDetailDTO
      */
-    'roleId'?: number;
+    'roleId': number;
     /**
      * 
      * @type {number}
      * @memberof PersonDetailDTO
      */
-    'activityStatusId'?: number;
+    'activityStatusId': number;
     /**
      * 
      * @type {string}

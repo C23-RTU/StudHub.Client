@@ -14,13 +14,18 @@
 
 
 
-export * from './api/auth-api';
-export * from './api/clubs-api';
-export * from './api/comments-api';
-export * from './api/events-api';
-export * from './api/images-api';
-export * from './api/institutes-api';
-export * from './api/posts-api';
-export * from './api/reactions-api';
-export * from './api/users-api';
+/**
+ * 
+ * @export
+ * @enum {number}
+ */
+
+export const SortOrder = {
+    NUMBER_0: 0,
+    NUMBER_1: 1
+} as const;
+
+export type SortOrder = typeof SortOrder[keyof typeof SortOrder];
+
+
 

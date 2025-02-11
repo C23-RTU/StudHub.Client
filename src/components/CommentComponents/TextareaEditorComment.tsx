@@ -44,7 +44,7 @@ export function TextareaEditorComment({
             });
             updatePost((prevState) => ({
                 ...prevState,
-                commentCount: (prevState.commentCount as number) + 1,
+                commentCount: prevState.commentCount + 1,
             }));
             resetField('content');
         },

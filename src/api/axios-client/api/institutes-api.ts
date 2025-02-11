@@ -22,7 +22,7 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
-import type { Institute } from '../models';
+import type { InstituteDetailDTO } from '../models';
 /**
  * InstitutesApi - axios parameter creator
  * @export
@@ -73,7 +73,7 @@ export const InstitutesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async institutesGetAll(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Institute>>> {
+        async institutesGetAll(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<InstituteDetailDTO>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.institutesGetAll(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['InstitutesApi.institutesGetAll']?.[localVarOperationServerIndex]?.url;
@@ -94,7 +94,7 @@ export const InstitutesApiFactory = function (configuration?: Configuration, bas
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        institutesGetAll(options?: RawAxiosRequestConfig): AxiosPromise<Array<Institute>> {
+        institutesGetAll(options?: RawAxiosRequestConfig): AxiosPromise<Array<InstituteDetailDTO>> {
             return localVarFp.institutesGetAll(options).then((request) => request(axios, basePath));
         },
     };
@@ -112,7 +112,7 @@ export interface InstitutesApiInterface {
      * @throws {RequiredError}
      * @memberof InstitutesApiInterface
      */
-    institutesGetAll(options?: RawAxiosRequestConfig): AxiosPromise<Array<Institute>>;
+    institutesGetAll(options?: RawAxiosRequestConfig): AxiosPromise<Array<InstituteDetailDTO>>;
 
 }
 

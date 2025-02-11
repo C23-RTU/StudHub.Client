@@ -22,63 +22,22 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
+import type { ClubDetailDTO } from '../models';
+// @ts-ignore
 import type { ProblemDetails } from '../models';
-// @ts-ignore
-import type { ReactionDTO } from '../models';
-// @ts-ignore
-import type { ReactionDetailDTO } from '../models';
 /**
- * ReactionsApi - axios parameter creator
+ * ClubsApi - axios parameter creator
  * @export
  */
-export const ReactionsApiAxiosParamCreator = function (configuration?: Configuration) {
+export const ClubsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * 
-         * @param {ReactionDTO} reactionDTO 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        reactionsAdd: async (reactionDTO: ReactionDTO, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'reactionDTO' is not null or undefined
-            assertParamExists('reactionsAdd', 'reactionDTO', reactionDTO)
-            const localVarPath = `/reactions`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(reactionDTO, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {number} postId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        reactionsGetByPostId: async (postId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'postId' is not null or undefined
-            assertParamExists('reactionsGetByPostId', 'postId', postId)
-            const localVarPath = `/reactions/getByPostId/{postId}`
-                .replace(`{${"postId"}}`, encodeURIComponent(String(postId)));
+        clubsGetAll: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/clubs`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -103,12 +62,15 @@ export const ReactionsApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
-         * @param {number} [id] 
+         * @param {number} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        reactionsRemove: async (id?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/reactions`;
+        clubsGetAllByPersonId: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('clubsGetAllByPersonId', 'id', id)
+            const localVarPath = `/clubs/getByPersonId/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -116,13 +78,42 @@ export const ReactionsApiAxiosParamCreator = function (configuration?: Configura
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            if (id !== undefined) {
-                localVarQueryParameter['id'] = id;
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        clubsGetById: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('clubsGetById', 'id', id)
+            const localVarPath = `/clubs/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
             }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
 
 
     
@@ -139,161 +130,157 @@ export const ReactionsApiAxiosParamCreator = function (configuration?: Configura
 };
 
 /**
- * ReactionsApi - functional programming interface
+ * ClubsApi - functional programming interface
  * @export
  */
-export const ReactionsApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = ReactionsApiAxiosParamCreator(configuration)
+export const ClubsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = ClubsApiAxiosParamCreator(configuration)
     return {
         /**
          * 
-         * @param {ReactionDTO} reactionDTO 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async reactionsAdd(reactionDTO: ReactionDTO, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.reactionsAdd(reactionDTO, options);
+        async clubsGetAll(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ClubDetailDTO>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.clubsGetAll(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ReactionsApi.reactionsAdd']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['ClubsApi.clubsGetAll']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * 
-         * @param {number} postId 
+         * @param {number} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async reactionsGetByPostId(postId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ReactionDetailDTO>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.reactionsGetByPostId(postId, options);
+        async clubsGetAllByPersonId(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ClubDetailDTO>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.clubsGetAllByPersonId(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ReactionsApi.reactionsGetByPostId']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['ClubsApi.clubsGetAllByPersonId']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * 
-         * @param {number} [id] 
+         * @param {number} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async reactionsRemove(id?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.reactionsRemove(id, options);
+        async clubsGetById(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ClubDetailDTO>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.clubsGetById(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ReactionsApi.reactionsRemove']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['ClubsApi.clubsGetById']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
 
 /**
- * ReactionsApi - factory interface
+ * ClubsApi - factory interface
  * @export
  */
-export const ReactionsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = ReactionsApiFp(configuration)
+export const ClubsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = ClubsApiFp(configuration)
     return {
         /**
          * 
-         * @param {ReactionDTO} reactionDTO 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        reactionsAdd(reactionDTO: ReactionDTO, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.reactionsAdd(reactionDTO, options).then((request) => request(axios, basePath));
+        clubsGetAll(options?: RawAxiosRequestConfig): AxiosPromise<Array<ClubDetailDTO>> {
+            return localVarFp.clubsGetAll(options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {number} postId 
+         * @param {number} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        reactionsGetByPostId(postId: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<ReactionDetailDTO>> {
-            return localVarFp.reactionsGetByPostId(postId, options).then((request) => request(axios, basePath));
+        clubsGetAllByPersonId(id: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<ClubDetailDTO>> {
+            return localVarFp.clubsGetAllByPersonId(id, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {number} [id] 
+         * @param {number} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        reactionsRemove(id?: number, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.reactionsRemove(id, options).then((request) => request(axios, basePath));
+        clubsGetById(id: number, options?: RawAxiosRequestConfig): AxiosPromise<ClubDetailDTO> {
+            return localVarFp.clubsGetById(id, options).then((request) => request(axios, basePath));
         },
     };
 };
 
 /**
- * ReactionsApi - interface
+ * ClubsApi - interface
  * @export
- * @interface ReactionsApi
+ * @interface ClubsApi
  */
-export interface ReactionsApiInterface {
+export interface ClubsApiInterface {
     /**
      * 
-     * @param {ReactionDTO} reactionDTO 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ReactionsApiInterface
+     * @memberof ClubsApiInterface
      */
-    reactionsAdd(reactionDTO: ReactionDTO, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    clubsGetAll(options?: RawAxiosRequestConfig): AxiosPromise<Array<ClubDetailDTO>>;
 
     /**
      * 
-     * @param {number} postId 
+     * @param {number} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ReactionsApiInterface
+     * @memberof ClubsApiInterface
      */
-    reactionsGetByPostId(postId: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<ReactionDetailDTO>>;
+    clubsGetAllByPersonId(id: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<ClubDetailDTO>>;
 
     /**
      * 
-     * @param {number} [id] 
+     * @param {number} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ReactionsApiInterface
+     * @memberof ClubsApiInterface
      */
-    reactionsRemove(id?: number, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    clubsGetById(id: number, options?: RawAxiosRequestConfig): AxiosPromise<ClubDetailDTO>;
 
 }
 
 /**
- * ReactionsApi - object-oriented interface
+ * ClubsApi - object-oriented interface
  * @export
- * @class ReactionsApi
+ * @class ClubsApi
  * @extends {BaseAPI}
  */
-export class ReactionsApi extends BaseAPI implements ReactionsApiInterface {
+export class ClubsApi extends BaseAPI implements ClubsApiInterface {
     /**
      * 
-     * @param {ReactionDTO} reactionDTO 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ReactionsApi
+     * @memberof ClubsApi
      */
-    public reactionsAdd(reactionDTO: ReactionDTO, options?: RawAxiosRequestConfig) {
-        return ReactionsApiFp(this.configuration).reactionsAdd(reactionDTO, options).then((request) => request(this.axios, this.basePath));
+    public clubsGetAll(options?: RawAxiosRequestConfig) {
+        return ClubsApiFp(this.configuration).clubsGetAll(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
-     * @param {number} postId 
+     * @param {number} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ReactionsApi
+     * @memberof ClubsApi
      */
-    public reactionsGetByPostId(postId: number, options?: RawAxiosRequestConfig) {
-        return ReactionsApiFp(this.configuration).reactionsGetByPostId(postId, options).then((request) => request(this.axios, this.basePath));
+    public clubsGetAllByPersonId(id: number, options?: RawAxiosRequestConfig) {
+        return ClubsApiFp(this.configuration).clubsGetAllByPersonId(id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
-     * @param {number} [id] 
+     * @param {number} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ReactionsApi
+     * @memberof ClubsApi
      */
-    public reactionsRemove(id?: number, options?: RawAxiosRequestConfig) {
-        return ReactionsApiFp(this.configuration).reactionsRemove(id, options).then((request) => request(this.axios, this.basePath));
+    public clubsGetById(id: number, options?: RawAxiosRequestConfig) {
+        return ClubsApiFp(this.configuration).clubsGetById(id, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

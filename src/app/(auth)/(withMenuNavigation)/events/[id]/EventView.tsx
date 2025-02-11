@@ -79,9 +79,7 @@ export default function EventView({ event }: { event: EventDetailDTO }) {
                     </div>
                     <div className="flex flex-row gap-2 items-center">
                         <FaCalendar className="w-4 h-4" />
-                        <time className="font-inter text-md text-gray-white">
-                            {parseLocalTime(event.startTime as string)}
-                        </time>
+                        <time className="font-inter text-md text-gray-white">{parseLocalTime(event.startTime)}</time>
                     </div>
                 </div>
             </div>

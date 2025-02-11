@@ -25,19 +25,19 @@ export interface EventDetailDTO {
      * @type {number}
      * @memberof EventDetailDTO
      */
-    'id'?: number;
+    'id': number;
     /**
      * 
      * @type {string}
      * @memberof EventDetailDTO
      */
-    'title'?: string;
+    'title': string;
     /**
      * 
      * @type {string}
      * @memberof EventDetailDTO
      */
-    'description'?: string;
+    'description': string;
     /**
      * 
      * @type {string}
@@ -49,18 +49,18 @@ export interface EventDetailDTO {
      * @type {string}
      * @memberof EventDetailDTO
      */
-    'startTime'?: string;
+    'startTime': string;
     /**
      * 
      * @type {string}
      * @memberof EventDetailDTO
      */
-    'createdAt'?: string;
+    'createdAt': string;
     /**
      * 
      * @type {Array<string>}
      * @memberof EventDetailDTO
      */
-    'eventImages'?: Array<string>;
+    'eventImages': Array<string>;
 }
 

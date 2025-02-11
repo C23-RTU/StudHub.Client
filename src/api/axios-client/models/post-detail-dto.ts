@@ -28,54 +28,54 @@ export interface PostDetailDTO {
      * @type {number}
      * @memberof PostDetailDTO
      */
-    'id'?: number;
+    'id': number;
     /**
      * 
      * @type {string}
      * @memberof PostDetailDTO
      */
-    'title'?: string;
+    'title': string;
     /**
      * 
      * @type {string}
      * @memberof PostDetailDTO
      */
-    'content'?: string;
+    'content': string;
     /**
      * 
      * @type {number}
      * @memberof PostDetailDTO
      */
-    'reactionCount'?: number;
+    'reactionCount': number;
     /**
      * 
      * @type {number}
      * @memberof PostDetailDTO
      */
-    'commentCount'?: number;
+    'commentCount': number;
     /**
      * 
      * @type {boolean}
      * @memberof PostDetailDTO
      */
-    'isUserReacted'?: boolean;
+    'isUserReacted': boolean;
     /**
      * 
      * @type {ClubDetailDTO}
      * @memberof PostDetailDTO
      */
-    'club'?: ClubDetailDTO;
+    'club': ClubDetailDTO;
     /**
      * 
      * @type {Array<string>}
      * @memberof PostDetailDTO
      */
-    'postImages'?: Array<string>;
+    'postImages': Array<string>;
     /**
      * 
      * @type {string}
      * @memberof PostDetailDTO
      */
-    'createdAt'?: string;
+    'createdAt': string;
 }
 

@@ -28,19 +28,19 @@ export interface CommentDetailDTO {
      * @type {number}
      * @memberof CommentDetailDTO
      */
-    'id'?: number;
+    'id': number;
     /**
      * 
      * @type {string}
      * @memberof CommentDetailDTO
      */
-    'content'?: string;
+    'content': string;
     /**
      * 
      * @type {PersonDetailDTO}
      * @memberof CommentDetailDTO
      */
-    'personDetailDTO'?: PersonDetailDTO;
+    'personDetailDTO': PersonDetailDTO;
     /**
      * 
      * @type {number}
@@ -52,12 +52,12 @@ export interface CommentDetailDTO {
      * @type {number}
      * @memberof CommentDetailDTO
      */
-    'postId'?: number;
+    'postId': number;
     /**
      * 
      * @type {string}
      * @memberof CommentDetailDTO
      */
-    'createdAt'?: string;
+    'createdAt': string;
 }
 

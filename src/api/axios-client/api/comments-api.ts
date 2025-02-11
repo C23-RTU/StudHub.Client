@@ -27,6 +27,8 @@ import type { CommentDTO } from '../models';
 import type { CommentDetailDTO } from '../models';
 // @ts-ignore
 import type { ProblemDetails } from '../models';
+// @ts-ignore
+import type { SortOrder } from '../models';
 /**
  * CommentsApi - axios parameter creator
  * @export
@@ -137,12 +139,13 @@ export const CommentsApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * 
          * @param {number} postId 
+         * @param {SortOrder} [sortOrder] 
          * @param {number} [pageIndex] 
          * @param {number} [pageSize] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        commentsGetByPostId: async (postId: number, pageIndex?: number, pageSize?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        commentsGetByPostId: async (postId: number, sortOrder?: SortOrder, pageIndex?: number, pageSize?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'postId' is not null or undefined
             assertParamExists('commentsGetByPostId', 'postId', postId)
             const localVarPath = `/comments/getByPostId/{postId}`
@@ -157,6 +160,10 @@ export const CommentsApiAxiosParamCreator = function (configuration?: Configurat
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            if (sortOrder !== undefined) {
+                localVarQueryParameter['SortOrder'] = sortOrder;
+            }
 
             if (pageIndex !== undefined) {
                 localVarQueryParameter['PageIndex'] = pageIndex;
@@ -226,13 +233,14 @@ export const CommentsApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {number} postId 
+         * @param {SortOrder} [sortOrder] 
          * @param {number} [pageIndex] 
          * @param {number} [pageSize] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async commentsGetByPostId(postId: number, pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<CommentDetailDTO>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.commentsGetByPostId(postId, pageIndex, pageSize, options);
+        async commentsGetByPostId(postId: number, sortOrder?: SortOrder, pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<CommentDetailDTO>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.commentsGetByPostId(postId, sortOrder, pageIndex, pageSize, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CommentsApi.commentsGetByPostId']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -277,13 +285,14 @@ export const CommentsApiFactory = function (configuration?: Configuration, baseP
         /**
          * 
          * @param {number} postId 
+         * @param {SortOrder} [sortOrder] 
          * @param {number} [pageIndex] 
          * @param {number} [pageSize] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        commentsGetByPostId(postId: number, pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<CommentDetailDTO>> {
-            return localVarFp.commentsGetByPostId(postId, pageIndex, pageSize, options).then((request) => request(axios, basePath));
+        commentsGetByPostId(postId: number, sortOrder?: SortOrder, pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<CommentDetailDTO>> {
+            return localVarFp.commentsGetByPostId(postId, sortOrder, pageIndex, pageSize, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -324,13 +333,14 @@ export interface CommentsApiInterface {
     /**
      * 
      * @param {number} postId 
+     * @param {SortOrder} [sortOrder] 
      * @param {number} [pageIndex] 
      * @param {number} [pageSize] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof CommentsApiInterface
      */
-    commentsGetByPostId(postId: number, pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<CommentDetailDTO>>;
+    commentsGetByPostId(postId: number, sortOrder?: SortOrder, pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<CommentDetailDTO>>;
 
 }
 
@@ -377,14 +387,15 @@ export class CommentsApi extends BaseAPI implements CommentsApiInterface {
     /**
      * 
      * @param {number} postId 
+     * @param {SortOrder} [sortOrder] 
      * @param {number} [pageIndex] 
      * @param {number} [pageSize] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof CommentsApi
      */
-    public commentsGetByPostId(postId: number, pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig) {
-        return CommentsApiFp(this.configuration).commentsGetByPostId(postId, pageIndex, pageSize, options).then((request) => request(this.axios, this.basePath));
+    public commentsGetByPostId(postId: number, sortOrder?: SortOrder, pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig) {
+        return CommentsApiFp(this.configuration).commentsGetByPostId(postId, sortOrder, pageIndex, pageSize, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
