@@ -10,7 +10,7 @@ export const useInfinityComments = (post_id: number) => {
 
     const infiniteQuery = useInfiniteQuery({
         queryKey: ['fetch-post-comments', post_id],
-        queryFn: async ({ pageParam }) => (await commentApi.commentsGetByPostId(post_id, pageParam)).data,
+        queryFn: async ({ pageParam }) => (await commentApi.commentsGetByPostId(post_id, 0, pageParam)).data,
         initialPageParam: 0,
         getNextPageParam: (lastPage, __, lastPageParam) => {
             if (!lastPage.length) return null;

@@ -8,11 +8,14 @@ import toast from 'react-hot-toast';
 import { PUBLIC_PAGE } from '@/lib/config/routes.config';
 
 import { authApi } from '@/api/api';
-import type { Institute } from '@/api/axios-client';
+import type { InstituteDetailDTO } from '@/api/axios-client/models';
 
 import { type TRegisterDataSchema } from '@/lib/types/register.type';
 
-export const useRegisterForm = (reset: UseFormReset<TRegisterDataSchema>, selectedInstitute: Institute | null) => {
+export const useRegisterForm = (
+    reset: UseFormReset<TRegisterDataSchema>,
+    selectedInstitute: InstituteDetailDTO | null,
+) => {
     const router = useRouter();
 
     const [isPending, startTransition] = useTransition();

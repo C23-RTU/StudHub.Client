@@ -19,13 +19,13 @@ import {
 } from '@/components/ui/dropdown-menu';
 
 import { instituteApi } from '@/api/api';
-import type { Institute } from '@/api/axios-client';
+import type { InstituteDetailDTO } from '@/api/axios-client/models';
 
 import { useRegisterForm } from './useRegisterForm';
 import { RegisterDataSchema, type TRegisterDataSchema } from '@/lib/types/register.type';
 
 export default function Register() {
-    const [selectedInstitute, setSelectedInstitute] = useState<Institute | null>(null);
+    const [selectedInstitute, setSelectedInstitute] = useState<InstituteDetailDTO | null>(null);
 
     const { data: institutes } = useQuery({
         queryKey: ['fetch-institutes'],
