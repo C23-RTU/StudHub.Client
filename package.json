@@ -6,6 +6,7 @@
         "dev": "next dev --turbopack --experimental-https",
         "build": "next build",
         "start": "next start",
+        "api:code-gen": "pnpm openapi-generator-cli generate",
         "lint": "next lint"
     },
     "dependencies": {
@@ -41,6 +42,7 @@
     "devDependencies": {
         "@eslint/eslintrc": "^3.2.0",
         "@next/eslint-plugin-next": "^15.1.3",
+        "@openapitools/openapi-generator-cli": "^2.16.3",
         "@tanstack/eslint-plugin-query": "^5.62.15",
         "@trivago/prettier-plugin-sort-imports": "^5.2.1",
         "@types/js-cookie": "^3.0.6",
@@ -53,8 +55,7 @@
         "eslint-plugin-react-hooks": "^5.1.0",
         "postcss": "^8.4.49",
         "sass": "^1.83.1",
-        "tailwindcss": "^3.4.17",
-        "typescript": "^5.7.2"
+        "tailwindcss": "^3.4.17"
     },
     "packageManager": "pnpm@10.0.0-rc.2+sha512.b6e59b96f90ca92449ac2f6dca9b430880448fc97d21f0fa9200e3d5ddb5289ad535255400554f7f3486e2d60058492161aaa9b58828e81f50c096718be9d156"
 }

@@ -7,14 +7,15 @@ import { PostCard } from '@/components/PostCard/PostCard';
 import { SearchInput } from '@/components/ui/SearchInput/SearchInput';
 import { Skeleton } from '@/components/ui/skeleton';
 
+import { postApi } from '@/api/api';
+
 import { Header, HeaderTitle } from '@/hoc/Header/Header';
 import { MainContent } from '@/hoc/MainContent/MainContent';
-import { PostService } from '@/services/post.service';
 
 export default function Home() {
     const { data: posts, isLoading } = useQuery({
         queryKey: ['fetch-posts'],
-        queryFn: async () => await PostService.getAll(),
+        queryFn: async () => (await postApi.postsGetAll()).data,
     });
 
     return (

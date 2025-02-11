@@ -15,7 +15,9 @@ export async function authorizationProtect(request: NextRequest) {
     if (!verifiedData) return redirectToAuth(request);
 
     if (tokens.isRefresh) {
-        response.cookies.set(EnumTokens.ACCESS_TOKEN, tokens.accessToken, { expires: Date.now() + 2592000000 }); // 30 дней
+        response.cookies.set(EnumTokens.ACCESS_TOKEN, tokens.accessToken, {
+            expires: Date.now() + 2592000000,
+        }); // 30 дней
         response.cookies.set(EnumTokens.REFRESH_TOKEN, tokens.refreshToken, {
             expires: Date.now() + 2592000000,
         }); // 30 дней

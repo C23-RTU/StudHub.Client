@@ -9,12 +9,13 @@ import { TextareaEditorComment } from '@/components/CommentComponents/TextareaEd
 import { PostCard } from '@/components/PostCard/PostCard';
 import { BackButton } from '@/components/ui/BackButton/BackButton';
 
+import type { PostDetailDTO } from '@/api/axios-client/models';
+
 import { useInfinityComments } from './useInfinityComments';
 import { Header, HeaderTitle } from '@/hoc/Header/Header';
 import { MainContent } from '@/hoc/MainContent/MainContent';
-import type { Post } from '@/lib/types/post';
 
-export function Comments({ post }: { post: Post }) {
+export function Comments({ post }: { post: PostDetailDTO }) {
     const router = useRouter();
     const [postState, updatePostState] = useState(post);
 

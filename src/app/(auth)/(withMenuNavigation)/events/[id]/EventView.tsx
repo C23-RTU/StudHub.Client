@@ -13,10 +13,11 @@ import {
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
-import type { IClubEvent } from '@/lib/types/event.type';
+import type { EventDetailDTO } from '@/api/axios-client';
+
 import { parseLocalTime } from '@/lib/utils/time.util';
 
-export default function EventView({ event }: { event: IClubEvent }) {
+export default function EventView({ event }: { event: EventDetailDTO }) {
     return (
         <article>
             <div className="fixed flex flex-row justify-between items-center p-4 z-20 w-full max-w-[1024px]">
@@ -56,25 +57,25 @@ export default function EventView({ event }: { event: IClubEvent }) {
             </div>
             <div className="relative flex w-full h-[400px]">
                 <Image
-                    src={event?.eventImages[0] || '/img/eventbanner.jpg'}
+                    src={(event.eventImages && event.eventImages[0]) || '/img/eventbanner.jpg'}
                     fill
-                    alt={event?.title || 'Event banner'}
+                    alt={event.title || 'Event banner'}
                     className="object-cover"
                     priority
                 />
                 <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-black/90 via-black/50 to-transparent"></div>
                 <div className="container mx-auto">
                     <div className="flex absolute z-10 flex-col items-start px-4 h-full w-full justify-end gap-3 pb-4">
-                        <h1 className="font-geologica text-4xl font-semibold text-white">{event?.title}</h1>
+                        <h1 className="font-geologica text-4xl font-semibold text-white">{event.title}</h1>
                     </div>
                 </div>
             </div>
             <div className="page flex flex-col gap-4">
-                <p className="font-inter font-light text-lg text-gray-200">{event?.description}</p>
+                <p className="font-inter font-light text-lg text-gray-200">{event.description}</p>
                 <div className="flex flex-col gap-2">
                     <div className="flex flex-row gap-2 items-center">
                         <FaCompass className="w-4 h-4" />
-                        <p className="font-inter text-md text-gray-white">{event?.location}</p>
+                        <p className="font-inter text-md text-gray-white">{event.location}</p>
                     </div>
                     <div className="flex flex-row gap-2 items-center">
                         <FaCalendar className="w-4 h-4" />

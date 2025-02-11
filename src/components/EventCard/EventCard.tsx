@@ -5,10 +5,11 @@ import { useRouter } from 'next/navigation';
 
 import { AUTH_PAGE } from '@/lib/config/routes.config';
 
-import type { IClubEvent } from '@/lib/types/event.type';
+import type { EventDetailDTO } from '@/api/axios-client';
+
 import { parseLocalTime } from '@/lib/utils/time.util';
 
-export function EventCard({ event }: { event: IClubEvent }) {
+export function EventCard({ event }: { event: EventDetailDTO }) {
     const router = useRouter();
     return (
         <figure
@@ -16,7 +17,7 @@ export function EventCard({ event }: { event: IClubEvent }) {
             onClick={() => router.push(AUTH_PAGE.EVENT(event.id))}
         >
             <Image
-                src={event.eventImages.length > 0 ? event.eventImages[0] : '/img/eventbanner.jpg'}
+                src={event.eventImages && event.eventImages.length > 0 ? event.eventImages[0] : '/img/eventbanner.jpg'}
                 alt={`Event: ${event.title}`}
                 fill
                 priority

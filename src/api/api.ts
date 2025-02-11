@@ -1,27 +1,8 @@
-import axios from 'axios';
-import https from 'https';
+import { AuthApi, CommentsApi, EventsApi, InstitutesApi, PostsApi } from './axios-client/api';
+import { BASE_API } from './base-axios-instance';
 
-import { BASE_API_URL } from '@/lib/config/api.config';
-
-import { isClientSideRender } from '@/lib/helpers/isClientSideRender.helper';
-import { getServerSideCookies } from '@/server-actions/getServerSideCookies';
-
-export const api = axios.create({
-    baseURL: BASE_API_URL,
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    httpAgent: new https.Agent({
-        keepAlive: true,
-    }),
-    withCredentials: true,
-});
-
-api.interceptors.request.use(async (config) => {
-    if (!isClientSideRender) {
-        const { Cookie } = await getServerSideCookies();
-        config.headers['Cookie'] = Cookie;
-    }
-
-    return config;
-});
+export const postApi = new PostsApi(undefined, undefined, BASE_API);
+export const commentApi = new CommentsApi(undefined, undefined, BASE_API);
+export const eventsApi = new EventsApi(undefined, undefined, BASE_API);
+export const authApi = new AuthApi(undefined, undefined, BASE_API);
+export const instituteApi = new InstitutesApi(undefined, undefined, BASE_API);

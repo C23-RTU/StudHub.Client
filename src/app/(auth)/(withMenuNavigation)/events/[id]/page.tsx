@@ -1,10 +1,11 @@
+import { eventsApi } from '@/api/api';
+
 import EventNotFound from './EventNotFound';
 import EventView from './EventView';
-import { EventsService } from '@/services/events.service';
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
     const id = (await params).id;
-    const event = await EventsService.getById(id);
+    const event = (await eventsApi.eventsGetById(Number(id))).data;
 
     if (!event) {
         return {
@@ -24,6 +25,6 @@ export const revalidate = 100;
 export default async function Page({ params }: { params: Promise<{ id: string }> }) {
     const id = (await params).id;
 
-    const event = await EventsService.getById(id);
+    const event = (await eventsApi.eventsGetById(Number(id))).data;
     return event ? <EventView event={event} /> : <EventNotFound />;
 }
