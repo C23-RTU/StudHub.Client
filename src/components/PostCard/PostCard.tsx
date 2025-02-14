@@ -26,6 +26,7 @@ export function PostCard({ className, post }: PostCardProps) {
         <article className={cn('flex flex-col gap-3', className)}>
             <PostHeader post={post} />
             <div>
+                <p className="text-lg my-1 text-neutral-50">{post.title}</p>
                 <p className="text-sm font-inter text-gray-300">{post.content}</p>
             </div>
             <div className="flex gap-2">
@@ -60,13 +61,13 @@ export function PostCard({ className, post }: PostCardProps) {
                     </Link>
                 </div>
 
-                <p className="text-xs opacity-50 font-inter">
+                {/* <p className="text-xs opacity-50 font-inter">
                     {new Date().toLocaleDateString('ru-RU', {
                         day: 'numeric',
                         month: 'short',
                         year: 'numeric',
                     })}
-                </p>
+                </p> */}
             </div>
         </article>
     );
