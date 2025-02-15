@@ -11,7 +11,7 @@ export function SmallSubscribeButton() {
     const [unsubVisible, setUnsubVisible] = useState<boolean>(false);
 
     return (
-        <figure className="">
+        <>
             <div className="flex justify-center">
                 {subscribed ? (
                     <Button
@@ -28,7 +28,7 @@ export function SmallSubscribeButton() {
                     </Button>
                 )}
             </div>
-            <Sheet open={unsubVisible} onOpenChange={setUnsubVisible}>
+            <Sheet open={unsubVisible} onOpenChange={setUnsubVisible} modal={true}>
                 <SheetContent side="bottom">
                     <SheetHeader>
                         <SheetTitle className="text-center">Вы хотите отписаться от клуба?</SheetTitle>
@@ -44,6 +44,6 @@ export function SmallSubscribeButton() {
                     </Button>
                 </SheetContent>
             </Sheet>
-        </figure>
+        </>
     );
 }
