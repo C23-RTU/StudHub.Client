@@ -1,15 +1,10 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { match } from 'path-to-regexp';
-
-import { AUTH_PAGE } from '@/lib/config/routes.config';
 
 import type { PostDetailDTO } from '@/api/axios-client';
 
-import { ActionButton } from '../ui/ActionButton/ActionButton';
+import { ActionButton } from '../ui/PostActionButton/PostActionButton';
 
 import { PostHeader } from './PostHeader/PostHeader';
 import { cn } from '@/lib/utils/utils';
@@ -20,8 +15,6 @@ type PostCardProps = {
 };
 
 export function PostCard({ className, post }: PostCardProps) {
-    const pathname = usePathname();
-
     return (
         <article className={cn('flex flex-col gap-3', className)}>
             <PostHeader post={post} />
@@ -51,14 +44,8 @@ export function PostCard({ className, post }: PostCardProps) {
             </div>
             <div className="flex items-center justify-between font-inter">
                 <div className="flex gap-4">
-                    <ActionButton type={'like'} initialValue={post.reactionCount || 0} />
-                    <Link href={AUTH_PAGE.COMMENTS(post.id)}>
-                        <ActionButton
-                            type={'comment'}
-                            initialValue={post.commentCount}
-                            setHover={!!match(AUTH_PAGE.COMMENTS(post.id))(pathname)}
-                        />
-                    </Link>
+                    <ActionButton post={post} type={'like'} />
+                    <ActionButton post={post} type={'comment'} />
                 </div>
 
                 {/* <p className="text-xs opacity-50 font-inter">

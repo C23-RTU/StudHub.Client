@@ -8,7 +8,6 @@ export * from './login-dto';
 export * from './person-detail-dto';
 export * from './post-detail-dto';
 export * from './problem-details';
-export * from './reaction-dto';
 export * from './reaction-detail-dto';
 export * from './register-dto';
 export * from './sort-order';
