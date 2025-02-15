@@ -28,9 +28,9 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en">
+        <html lang="en" className=''>
             <body
-                className={`${inter.variable} ${geologica.variable} ${syncopate.variable} antialiased dark font-geologica max-w-[1024px] mx-auto`}
+                className={`${inter.variable} ${geologica.variable} ${syncopate.variable} antialiased dark font-geologica`}
             >
                 <ProviderLayout>{children}</ProviderLayout>
             </body>

@@ -24,8 +24,12 @@ export function PostHeader({ post }: Props) {
                     <p className="text-sm font-geologica font-semibold truncate" title={post.club?.name}>
                         {post.club?.name}
                     </p>
-                    <small className="text-[10px] font-inter font-normal truncate" title={post.title}>
-                        {post.title}
+                    <small className="text-[10px] font-inter font-normal truncate">
+                    {new Date().toLocaleDateString('ru-RU', {
+                        day: 'numeric',
+                        month: 'short',
+                        year: 'numeric',
+                    })}
                     </small>
                 </div>
             </div>
