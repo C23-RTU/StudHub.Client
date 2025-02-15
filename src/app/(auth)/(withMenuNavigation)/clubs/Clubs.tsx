@@ -12,7 +12,7 @@ import { MainContent } from '@/hoc/MainContent/MainContent';
 
 export function Clubs() {
     const { data: clubs } = useQuery({
-        queryKey: ['fetch-club'],
+        queryKey: ['fetch-clubs'],
         queryFn: async () => (await clubsApi.clubsGetAll()).data,
     });
 
