@@ -24,8 +24,6 @@ import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError
 // @ts-ignore
 import type { ProblemDetails } from '../models';
 // @ts-ignore
-import type { ReactionDTO } from '../models';
-// @ts-ignore
 import type { ReactionDetailDTO } from '../models';
 /**
  * ReactionsApi - axios parameter creator
@@ -33,41 +31,6 @@ import type { ReactionDetailDTO } from '../models';
  */
 export const ReactionsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
-        /**
-         * 
-         * @param {ReactionDTO} reactionDTO 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        reactionsAdd: async (reactionDTO: ReactionDTO, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'reactionDTO' is not null or undefined
-            assertParamExists('reactionsAdd', 'reactionDTO', reactionDTO)
-            const localVarPath = `/reactions`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(reactionDTO, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
         /**
          * 
          * @param {number} postId 
@@ -103,12 +66,15 @@ export const ReactionsApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
-         * @param {number} [id] 
+         * @param {number} postId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        reactionsRemove: async (id?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/reactions`;
+        reactionsToggleReaction: async (postId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'postId' is not null or undefined
+            assertParamExists('reactionsToggleReaction', 'postId', postId)
+            const localVarPath = `/reactions/toggleReaction/{postId}`
+                .replace(`{${"postId"}}`, encodeURIComponent(String(postId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -116,13 +82,9 @@ export const ReactionsApiAxiosParamCreator = function (configuration?: Configura
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            if (id !== undefined) {
-                localVarQueryParameter['id'] = id;
-            }
 
 
     
@@ -147,18 +109,6 @@ export const ReactionsApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
-         * @param {ReactionDTO} reactionDTO 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async reactionsAdd(reactionDTO: ReactionDTO, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.reactionsAdd(reactionDTO, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ReactionsApi.reactionsAdd']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
          * @param {number} postId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -171,14 +121,14 @@ export const ReactionsApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {number} [id] 
+         * @param {number} postId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async reactionsRemove(id?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.reactionsRemove(id, options);
+        async reactionsToggleReaction(postId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.reactionsToggleReaction(postId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ReactionsApi.reactionsRemove']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['ReactionsApi.reactionsToggleReaction']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
@@ -193,15 +143,6 @@ export const ReactionsApiFactory = function (configuration?: Configuration, base
     return {
         /**
          * 
-         * @param {ReactionDTO} reactionDTO 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        reactionsAdd(reactionDTO: ReactionDTO, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.reactionsAdd(reactionDTO, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
          * @param {number} postId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -211,12 +152,12 @@ export const ReactionsApiFactory = function (configuration?: Configuration, base
         },
         /**
          * 
-         * @param {number} [id] 
+         * @param {number} postId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        reactionsRemove(id?: number, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.reactionsRemove(id, options).then((request) => request(axios, basePath));
+        reactionsToggleReaction(postId: number, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.reactionsToggleReaction(postId, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -229,15 +170,6 @@ export const ReactionsApiFactory = function (configuration?: Configuration, base
 export interface ReactionsApiInterface {
     /**
      * 
-     * @param {ReactionDTO} reactionDTO 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ReactionsApiInterface
-     */
-    reactionsAdd(reactionDTO: ReactionDTO, options?: RawAxiosRequestConfig): AxiosPromise<void>;
-
-    /**
-     * 
      * @param {number} postId 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -247,12 +179,12 @@ export interface ReactionsApiInterface {
 
     /**
      * 
-     * @param {number} [id] 
+     * @param {number} postId 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ReactionsApiInterface
      */
-    reactionsRemove(id?: number, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    reactionsToggleReaction(postId: number, options?: RawAxiosRequestConfig): AxiosPromise<void>;
 
 }
 
@@ -263,17 +195,6 @@ export interface ReactionsApiInterface {
  * @extends {BaseAPI}
  */
 export class ReactionsApi extends BaseAPI implements ReactionsApiInterface {
-    /**
-     * 
-     * @param {ReactionDTO} reactionDTO 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ReactionsApi
-     */
-    public reactionsAdd(reactionDTO: ReactionDTO, options?: RawAxiosRequestConfig) {
-        return ReactionsApiFp(this.configuration).reactionsAdd(reactionDTO, options).then((request) => request(this.axios, this.basePath));
-    }
-
     /**
      * 
      * @param {number} postId 
@@ -287,13 +208,13 @@ export class ReactionsApi extends BaseAPI implements ReactionsApiInterface {
 
     /**
      * 
-     * @param {number} [id] 
+     * @param {number} postId 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ReactionsApi
      */
-    public reactionsRemove(id?: number, options?: RawAxiosRequestConfig) {
-        return ReactionsApiFp(this.configuration).reactionsRemove(id, options).then((request) => request(this.axios, this.basePath));
+    public reactionsToggleReaction(postId: number, options?: RawAxiosRequestConfig) {
+        return ReactionsApiFp(this.configuration).reactionsToggleReaction(postId, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

@@ -126,6 +126,73 @@ export const ClubsApiAxiosParamCreator = function (configuration?: Configuration
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 
+         * @param {string} [searchString] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        clubsSearch: async (searchString?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/clubs/search`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (searchString !== undefined) {
+                localVarQueryParameter['searchString'] = searchString;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        clubsToggleSubscription: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('clubsToggleSubscription', 'id', id)
+            const localVarPath = `/clubs/toggleSubscription/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -171,6 +238,30 @@ export const ClubsApiFp = function(configuration?: Configuration) {
             const localVarOperationServerBasePath = operationServerMap['ClubsApi.clubsGetById']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
+        /**
+         * 
+         * @param {string} [searchString] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async clubsSearch(searchString?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ClubDetailDTO>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.clubsSearch(searchString, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ClubsApi.clubsSearch']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async clubsToggleSubscription(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.clubsToggleSubscription(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ClubsApi.clubsToggleSubscription']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
     }
 };
 
@@ -207,6 +298,24 @@ export const ClubsApiFactory = function (configuration?: Configuration, basePath
         clubsGetById(id: number, options?: RawAxiosRequestConfig): AxiosPromise<ClubDetailDTO> {
             return localVarFp.clubsGetById(id, options).then((request) => request(axios, basePath));
         },
+        /**
+         * 
+         * @param {string} [searchString] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        clubsSearch(searchString?: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<ClubDetailDTO>> {
+            return localVarFp.clubsSearch(searchString, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        clubsToggleSubscription(id: number, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.clubsToggleSubscription(id, options).then((request) => request(axios, basePath));
+        },
     };
 };
 
@@ -241,6 +350,24 @@ export interface ClubsApiInterface {
      * @memberof ClubsApiInterface
      */
     clubsGetById(id: number, options?: RawAxiosRequestConfig): AxiosPromise<ClubDetailDTO>;
+
+    /**
+     * 
+     * @param {string} [searchString] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ClubsApiInterface
+     */
+    clubsSearch(searchString?: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<ClubDetailDTO>>;
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ClubsApiInterface
+     */
+    clubsToggleSubscription(id: number, options?: RawAxiosRequestConfig): AxiosPromise<void>;
 
 }
 
@@ -281,6 +408,28 @@ export class ClubsApi extends BaseAPI implements ClubsApiInterface {
      */
     public clubsGetById(id: number, options?: RawAxiosRequestConfig) {
         return ClubsApiFp(this.configuration).clubsGetById(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} [searchString] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ClubsApi
+     */
+    public clubsSearch(searchString?: string, options?: RawAxiosRequestConfig) {
+        return ClubsApiFp(this.configuration).clubsSearch(searchString, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ClubsApi
+     */
+    public clubsToggleSubscription(id: number, options?: RawAxiosRequestConfig) {
+        return ClubsApiFp(this.configuration).clubsToggleSubscription(id, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
