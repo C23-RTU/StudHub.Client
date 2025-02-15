@@ -63,7 +63,7 @@ export function TextareaEditorComment({ post }: { post: PostDetailDTO }) {
                 placeholder="Комментарий"
                 {...register('content')}
             />
-            <Button className="h-[40px] w-[40px] rounded-full " type="submit" disabled={!isValid} isLoading={isPending}>
+            <Button className="h-[40px] w-[40px] rounded " type="submit" disabled={!isValid} isLoading={isPending}>
                 <SendHorizonalIcon />
             </Button>
         </form>

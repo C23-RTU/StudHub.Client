@@ -1,5 +1,6 @@
 'use client';
 
+import { m } from 'framer-motion';
 import { usePathname, useRouter } from 'next/navigation';
 import { match } from 'path-to-regexp';
 import { useMemo } from 'react';
@@ -16,7 +17,6 @@ import { cn } from '@/lib/utils/utils';
 interface Props {
     type: 'like' | 'comment';
     post: PostDetailDTO;
-    setHover?: boolean;
 }
 
 const ICON_SIZE = 21;
@@ -46,14 +46,17 @@ export function ActionButton({ type, post }: Props) {
     };
 
     return (
-        <div
-            className={cn('flex items-center gap-2 cursor-pointer', {
+        <m.div
+            className={cn('flex items-center gap-2 cursor-pointer select-none', {
                 'text-blue': isCommentType ? !!match(AUTH_PAGE.COMMENTS(post.id))(pathname) : false,
             })}
             onClick={clickHandler}
+            whileTap={{
+                scale: isCommentType ? 1 : 1.4,
+            }}
         >
             {computedIcon}
             <p className="text-xs">{isCommentType ? post.commentCount : post.reactionCount}</p>
-        </div>
+        </m.div>
     );
 }
