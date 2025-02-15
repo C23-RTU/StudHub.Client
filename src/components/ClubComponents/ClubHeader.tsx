@@ -1,3 +1,4 @@
+import { useQuery } from '@tanstack/react-query';
 import { Copy, EllipsisVertical, OctagonAlert } from 'lucide-react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -11,11 +12,19 @@ import {
 
 import { AUTH_PAGE } from '@/lib/config/routes.config';
 
+import { clubsApi } from '@/api/api';
+import { API_PATH } from '@/api/axios-client/base';
+
 import { BackButton } from '../ui/BackButton/BackButton';
 import { Button } from '../ui/button';
 
-export function ClubHeader() {
+export function ClubHeader({ clubId }: { clubId: string }) {
     const router = useRouter();
+
+    const { data: club } = useQuery({
+        queryKey: ['fetch-club'],
+        queryFn: async () => (await clubsApi.clubsGetById(Number(clubId))).data,
+    });
 
     return (
         <div>
@@ -53,7 +62,9 @@ export function ClubHeader() {
             </div>
             <div className="w-full h-[220px] flex items-center justify-center">
                 <Image
-                    src={'/img/eventbanner.jpg'}
+                    src={club?.imageUrl ? `${API_PATH}/${club.imageUrl}` : '/img/eventbanner.jpg'}
+                    blurDataURL='/img/clubplaceholder.png' // нужна нормальная картинка под лоадер и плейсхолдер
+                    placeholder="blur"
                     height={220}
                     width={1000}
                     alt={'banner'}

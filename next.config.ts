@@ -11,6 +11,12 @@ const nextConfig: NextConfig = {
                 port: '',
                 pathname: '/**',
             },
+            {
+                protocol: 'https',
+                hostname: 'setka-rtu.ru',
+                port: '',
+                pathname: '/**',
+            },
         ],
     },
     async rewrites() {

@@ -20,6 +20,7 @@ import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
 
 export const BASE_PATH = "https://setka-rtu.ru".replace(/\/+$/, "");
+export const API_PATH = `${BASE_PATH}/api`.replace(/\/+$/, "");
 
 /**
  *
