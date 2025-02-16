@@ -17,7 +17,7 @@ export function EventCard({ event }: { event: EventDetailDTO }) {
             onClick={() => router.push(AUTH_PAGE.EVENT(event.id))}
         >
             <Image
-                src={event.eventImages && event.eventImages.length > 0 ? event.eventImages[0] : '/img/eventbanner.jpg'}
+                src={'/img/eventbanner.jpg'}
                 alt={`Event: ${event.title}`}
                 fill
                 priority
