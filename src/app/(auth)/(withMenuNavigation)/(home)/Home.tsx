@@ -14,7 +14,7 @@ import { MainContent } from '@/hoc/MainContent/MainContent';
 
 export default function Home({ username }: { username: string }) {
     const { data: posts, isLoading } = useQuery({
-        queryKey: ['fetch-posts'],
+        queryKey: ['fetch-posts-list'],
         queryFn: async () => (await postApi.postsGetAll()).data,
     });
 

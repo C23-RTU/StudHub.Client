@@ -15,7 +15,7 @@ const Page = async ({ params }: { params: Promise<{ id: number }> }) => {
 
     try {
         const post = (await postApi.postsGetById(postId)).data;
-        return <Comments post={post} />;
+        return <Comments serverPost={post} />;
     } catch {
         return notFound();
     }

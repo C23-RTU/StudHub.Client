@@ -1,7 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
 import { SendHorizonalIcon } from 'lucide-react';
-import { type Dispatch, type SetStateAction } from 'react';
 import { type SubmitHandler, useForm } from 'react-hook-form';
 
 import { Button } from '@/components/ui/button';
@@ -14,13 +13,7 @@ import { queryClient } from '../Provider/getQueryClient';
 
 import { CommentPayloadSchema, type TCommentPayloadSchema } from '@/lib/types/comment.type';
 
-export function TextareaEditorComment({
-    postId,
-    updatePost,
-}: {
-    postId: number;
-    updatePost: Dispatch<SetStateAction<PostDetailDTO>>;
-}) {
+export function TextareaEditorComment({ post }: { post: PostDetailDTO }) {
     const {
         handleSubmit,
         resetField,
@@ -31,7 +24,7 @@ export function TextareaEditorComment({
         resolver: zodResolver(CommentPayloadSchema),
         defaultValues: {
             parentId: null,
-            postId,
+            postId: post.id,
         },
     });
 
@@ -42,10 +35,9 @@ export function TextareaEditorComment({
             queryClient.invalidateQueries({
                 queryKey: ['fetch-post-comments'],
             });
-            updatePost((prevState) => ({
-                ...prevState,
-                commentCount: prevState.commentCount + 1,
-            }));
+            queryClient.setQueryData(['fetch-post', post.id], () => {
+                return { ...post, commentCount: post.commentCount + 1 };
+            });
             resetField('content');
         },
         onError: async () => {
@@ -71,7 +63,7 @@ export function TextareaEditorComment({
                 placeholder="Комментарий"
                 {...register('content')}
             />
-            <Button className="h-[40px] w-[40px] rounded-full " type="submit" disabled={!isValid} isLoading={isPending}>
+            <Button className="h-[40px] w-[40px] rounded " type="submit" disabled={!isValid} isLoading={isPending}>
                 <SendHorizonalIcon />
             </Button>
         </form>
