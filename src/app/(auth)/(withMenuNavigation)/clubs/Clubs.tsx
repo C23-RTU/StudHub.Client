@@ -26,7 +26,7 @@ export function Clubs() {
 
             <MainContent>
                 <SearchInput placeholder="Поиск по клубам..." />
-                <div>
+                <div className="flex flex-col">
                     <p className="text-lg font-semibold mb-3">Рекомендуем</p>
                     <div className="flex flex-col gap-4">
                         {clubsData.map((club, index) => (

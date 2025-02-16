@@ -18,7 +18,7 @@ export function ClubHeader() {
     const router = useRouter();
 
     return (
-        <div>
+        <>
             <div className="fixed flex flex-row justify-between items-center p-4 w-full max-w-[1024px]">
                 <div className="flex flex-row items-center">
                     <BackButton onClick={() => router.push(AUTH_PAGE.CLUBS)} />
@@ -51,17 +51,17 @@ export function ClubHeader() {
                     </DropdownMenuContent>
                 </DropdownMenu>
             </div>
-            <div className="w-full h-[220px] flex items-center justify-center">
+            <div className="w-full flex items-center justify-center">
                 <Image
                     src={'/img/eventbanner.jpg'}
                     height={220}
                     width={1000}
                     alt={'banner'}
-                    className="rounded-b-3xl w-full object-cover"
+                    className="rounded-b-3xl w-full h-[250px] object-cover"
                 />
             </div>
 
-            <div className="w-full h-full flex items-center justify-center mt-[-50px]">
+            <div className="w-full h-full flex items-center justify-center mt-[-70px]">
                 <Image
                     src={
                         'https://gravatar.com/avatar/d99cc6ace66fc8bd197c30c876b7224007211f4572ef6d8444693f67b4c33ab1?size=80'
@@ -72,6 +72,6 @@ export function ClubHeader() {
                     className="rounded-full border-[5px] border-background"
                 />
             </div>
-        </div>
+        </>
     );
 }
