@@ -3,9 +3,9 @@
 import Image from 'next/image';
 
 import type { CommentDetailDTO } from '@/api/axios-client';
-import { API_PATH } from '@/api/axios-client/base';
 
 import { parseLocalDate } from '@/lib/utils/time.util';
+import { getStaticImg } from '@/lib/helpers/getStaticImg.helper';
 
 export function CommentItem({ comment }: { comment: CommentDetailDTO }) {
     return (
@@ -14,7 +14,7 @@ export function CommentItem({ comment }: { comment: CommentDetailDTO }) {
                 <Image
                     src={
                         comment.personDetailDTO?.imagePath
-                            ? `${API_PATH}/${comment.personDetailDTO.imagePath}`
+                            ? getStaticImg(comment.personDetailDTO.imagePath)
                             : '/img/avatar.png'
                     }
                     width={40}

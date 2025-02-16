@@ -6,12 +6,14 @@ import { MdModeComment } from 'react-icons/md';
 import { SettingBadge } from '@/components/Badge/SettingBadge/SettingBadge';
 
 import type { ClubDetailDTO, PersonDetailDTO } from '@/api/axios-client';
-import { API_PATH } from '@/api/axios-client/base';
 
 import { Header, HeaderTitle } from '@/hoc/Header/Header';
 import { MainContent } from '@/hoc/MainContent/MainContent';
+import { getStaticImg } from '@/lib/helpers/getStaticImg.helper';
 
 export default async function Profile({ user, userClubs }: { user: PersonDetailDTO; userClubs: ClubDetailDTO[] }) {
+    console.log(userClubs);
+
     return (
         <div className="page">
             <Header>
@@ -24,7 +26,7 @@ export default async function Profile({ user, userClubs }: { user: PersonDetailD
                     <Image
                         src={
                             user.imagePath
-                                ? `${API_PATH}/${user.imagePath}`
+                                ? getStaticImg(user.imagePath)
                                 : 'https://gravatar.com/avatar/d99cc6ace66fc8bd197c30c876b7224007211f4572ef6d8444693f67b4c33ab1?size=80'
                         }
                         width={80}

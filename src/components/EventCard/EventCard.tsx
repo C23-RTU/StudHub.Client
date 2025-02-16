@@ -6,9 +6,9 @@ import { useRouter } from 'next/navigation';
 import { AUTH_PAGE } from '@/lib/config/routes.config';
 
 import type { EventDetailDTO } from '@/api/axios-client';
-import { API_PATH } from '@/api/axios-client/base';
 
 import { parseLocalTime } from '@/lib/utils/time.util';
+import { getStaticImg } from '@/lib/helpers/getStaticImg.helper';
 
 export function EventCard({ event }: { event: EventDetailDTO }) {
     const router = useRouter();
@@ -19,7 +19,7 @@ export function EventCard({ event }: { event: EventDetailDTO }) {
             onClick={() => router.push(AUTH_PAGE.EVENT(event.id))}
         >
             <Image
-                src={(event.eventImages.length > 0 && `${API_PATH}/${event.eventImages[0]}`) || '/img/eventbanner.jpg'}
+                src={(event.eventImages.length > 0 && getStaticImg(event.eventImages[0])) || '/img/eventbanner.jpg'}
                 alt={`Event: ${event.title}`}
                 fill
                 priority

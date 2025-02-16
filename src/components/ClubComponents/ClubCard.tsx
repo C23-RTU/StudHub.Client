@@ -2,9 +2,8 @@
 
 import Image from 'next/image';
 
-import { API_PATH } from '@/api/axios-client/base';
-
 import { SmallSubscribeButton } from './SmallSubscribeButton';
+import { getStaticImg } from '@/lib/helpers/getStaticImg.helper';
 
 interface Props {
     imageUrl: string | undefined | null;
@@ -16,7 +15,7 @@ export function ClubCard({ imageUrl, name, description }: Props) {
     return (
         <figure className="flex w-full hover:cursor-pointer items-center" role="listitem">
             <Image
-                src={imageUrl ? `${API_PATH}/${imageUrl}` : '/img/clubplaceholder.png'}
+                src={imageUrl ? getStaticImg(imageUrl) : '/img/blank.png'}
                 alt={`${name}'s avatar`}
                 width={32}
                 height={32}

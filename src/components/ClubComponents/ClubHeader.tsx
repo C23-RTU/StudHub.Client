@@ -13,10 +13,11 @@ import {
 import { AUTH_PAGE } from '@/lib/config/routes.config';
 
 import { clubsApi } from '@/api/api';
-import { API_PATH } from '@/api/axios-client/base';
 
 import { BackButton } from '../ui/BackButton/BackButton';
 import { Button } from '../ui/button';
+
+import { getStaticImg } from '@/lib/helpers/getStaticImg.helper';
 
 export function ClubHeader({ clubId }: { clubId: string }) {
     const router = useRouter();
@@ -62,8 +63,8 @@ export function ClubHeader({ clubId }: { clubId: string }) {
             </div>
             <div className="w-full flex items-center justify-center">
                 <Image
-                    src={club?.imageUrl ? `${API_PATH}/${club.imageUrl}` : '/img/eventbanner.jpg'}
-                    blurDataURL='/img/clubplaceholder.png' // нужна нормальная картинка под лоадер и плейсхолдер
+                    src={'/img/clubplaceholder.png'}
+                    blurDataURL="/img/clubplaceholder.png"
                     placeholder="blur"
                     height={220}
                     width={1000}
@@ -75,7 +76,9 @@ export function ClubHeader({ clubId }: { clubId: string }) {
             <div className="w-full h-full flex items-center justify-center mt-[-70px]">
                 <Image
                     src={
-                        'https://gravatar.com/avatar/d99cc6ace66fc8bd197c30c876b7224007211f4572ef6d8444693f67b4c33ab1?size=80'
+                        club?.imageUrl
+                            ? getStaticImg(club.imageUrl)
+                            : 'https://gravatar.com/avatar/d99cc6ace66fc8bd197c30c876b7224007211f4572ef6d8444693f67b4c33ab1?size=80'
                     }
                     height={128}
                     width={128}
