@@ -22,7 +22,7 @@ export function ClubHeader({ clubId }: { clubId: string }) {
     const router = useRouter();
 
     const { data: club } = useQuery({
-        queryKey: ['fetch-club'],
+        queryKey: ['fetch-club', clubId],
         queryFn: async () => (await clubsApi.clubsGetById(Number(clubId))).data,
     });
 

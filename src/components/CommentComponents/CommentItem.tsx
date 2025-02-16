@@ -3,6 +3,7 @@
 import Image from 'next/image';
 
 import type { CommentDetailDTO } from '@/api/axios-client';
+import { API_PATH } from '@/api/axios-client/base';
 
 import { parseLocalDate } from '@/lib/utils/time.util';
 
@@ -11,7 +12,11 @@ export function CommentItem({ comment }: { comment: CommentDetailDTO }) {
         <div className="flex gap-2">
             <div className="shrink-0">
                 <Image
-                    src={comment.personDetailDTO?.imagePath || '/img/avatar.png'}
+                    src={
+                        comment.personDetailDTO?.imagePath
+                            ? `${API_PATH}/${comment.personDetailDTO.imagePath}`
+                            : '/img/avatar.png'
+                    }
                     width={40}
                     height={40}
                     alt="avatar"

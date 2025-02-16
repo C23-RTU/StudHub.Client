@@ -14,6 +14,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 
 import type { EventDetailDTO } from '@/api/axios-client';
+import { API_PATH } from '@/api/axios-client/base';
 
 import { parseLocalTime } from '@/lib/utils/time.util';
 
@@ -57,7 +58,10 @@ export default function EventView({ event }: { event: EventDetailDTO }) {
             </div>
             <div className="relative flex w-full h-[400px]">
                 <Image
-                    src={(event.eventImages && event.eventImages[0]) || '/img/eventbanner.jpg'}
+                    src={
+                        (event.eventImages.length > 0 && `${API_PATH}/${event.eventImages[0]}`) ||
+                        '/img/eventbanner.jpg'
+                    }
                     fill
                     alt={event.title || 'Event banner'}
                     className="object-cover"

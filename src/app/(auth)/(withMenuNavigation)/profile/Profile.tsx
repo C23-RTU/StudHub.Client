@@ -12,8 +12,6 @@ import { Header, HeaderTitle } from '@/hoc/Header/Header';
 import { MainContent } from '@/hoc/MainContent/MainContent';
 
 export default async function Profile({ user, userClubs }: { user: PersonDetailDTO; userClubs: ClubDetailDTO[] }) {
-    console.log(userClubs);
-
     return (
         <div className="page">
             <Header>
