@@ -16,6 +16,7 @@ export default function Home({ username }: { username: string }) {
     const { data: posts, isLoading } = useQuery({
         queryKey: ['fetch-posts-list'],
         queryFn: async () => (await postApi.postsGetAll()).data,
+        staleTime: 30000, // кешируем  на 30 секунд
     });
 
     return (
