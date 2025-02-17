@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { Copy, EllipsisVertical, OctagonAlert } from 'lucide-react';
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
 import {
@@ -14,6 +13,7 @@ import { AUTH_PAGE } from '@/lib/config/routes.config';
 
 import { clubsApi } from '@/api/api';
 
+import LoaderImage from '../LoaderImage/LoaderImage';
 import { BackButton } from '../ui/BackButton/BackButton';
 import { Button } from '../ui/button';
 
@@ -62,10 +62,8 @@ export function ClubHeader({ clubId }: { clubId: string }) {
                 </DropdownMenu>
             </div>
             <div className="w-full flex items-center justify-center">
-                <Image
+                <LoaderImage
                     src={'/img/clubplaceholder.png'}
-                    blurDataURL="/img/clubplaceholder.png"
-                    placeholder="blur"
                     height={220}
                     width={1000}
                     alt={'banner'}
@@ -74,7 +72,7 @@ export function ClubHeader({ clubId }: { clubId: string }) {
             </div>
 
             <div className="w-full h-full flex items-center justify-center mt-[-70px]">
-                <Image
+                <LoaderImage
                     src={
                         club?.imageUrl
                             ? getStaticImg(club.imageUrl)

@@ -4,6 +4,7 @@ const nextConfig: NextConfig = {
     poweredByHeader: false,
     skipTrailingSlashRedirect: true,
     images: {
+        formats: ['image/avif', 'image/webp'],
         remotePatterns: [
             {
                 protocol: 'https',
