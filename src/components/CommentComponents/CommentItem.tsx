@@ -1,17 +1,22 @@
 'use client';
 
-import Image from 'next/image';
-
 import type { CommentDetailDTO } from '@/api/axios-client';
 
+import LoaderImage from '../LoaderImage/LoaderImage';
+
+import { getStaticImg } from '@/lib/helpers/getStaticImg.helper';
 import { parseLocalDate } from '@/lib/utils/time.util';
 
 export function CommentItem({ comment }: { comment: CommentDetailDTO }) {
     return (
         <div className="flex gap-2">
             <div className="shrink-0">
-                <Image
-                    src={comment.personDetailDTO?.imagePath || '/img/avatar.png'}
+                <LoaderImage
+                    src={
+                        comment.personDetailDTO?.imagePath
+                            ? getStaticImg(comment.personDetailDTO.imagePath)
+                            : '/img/avatar.png'
+                    }
                     width={40}
                     height={40}
                     alt="avatar"
