@@ -15,11 +15,6 @@ export async function jwtVerifyServer(accessToken: string) {
 
         return payload;
     } catch (error) {
-        // if (error.code === 'ERR_JWT_EXPIRED') {
-        //     console.log('Токен истек');
-        //     return null;
-        // }
-
         console.log('Ошибка при верификации токена', error);
         return null;
     }

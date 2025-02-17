@@ -18,6 +18,7 @@ export async function getTokensFromRequest(request: NextRequest) {
     }
 
     const verifiedData = await jwtVerifyServer(accessToken);
+
     if (!verifiedData) {
         try {
             const data = await getNewTokens(refreshToken, accessToken);
@@ -27,14 +28,7 @@ export async function getTokensFromRequest(request: NextRequest) {
             accessToken = data.accessToken;
 
             isRefresh = true;
-        } catch (error) {
-            console.log(error);
-            // if (error instanceof AxiosError) {
-            //     if (error.status === 401) {
-            //         console.log('Не валидный токен');
-            //         request.cookies.delete(EnumTokens.ACCESS_TOKEN);
-            //     }
-            // }
+        } catch {
             request.cookies.delete(EnumTokens.ACCESS_TOKEN);
             request.cookies.delete(EnumTokens.REFRESH_TOKEN);
             return null;

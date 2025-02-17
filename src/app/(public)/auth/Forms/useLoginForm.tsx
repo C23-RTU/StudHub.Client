@@ -1,6 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
-import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
 import { useTransition } from 'react';
 import type { SubmitHandler, UseFormReset } from 'react-hook-form';
@@ -10,7 +9,7 @@ import { AUTH_PAGE } from '@/lib/config/routes.config';
 
 import { authApi } from '@/api/api';
 
-import { EnumTokens, type TLoginDataSchema } from '@/lib/types/login.type';
+import { type TLoginDataSchema } from '@/lib/types/login.type';
 
 export const useLoginForm = (reset: UseFormReset<TLoginDataSchema>) => {
     const router = useRouter();
@@ -19,10 +18,6 @@ export const useLoginForm = (reset: UseFormReset<TLoginDataSchema>) => {
     const { mutateAsync, isPending: isLoginPending } = useMutation({
         mutationKey: ['login'],
         mutationFn: async (data: TLoginDataSchema) => (await authApi.authLogin(data)).data,
-        onSuccess: ({ accessToken, refreshToken }) => {
-            Cookies.set(EnumTokens.ACCESS_TOKEN, accessToken, { expires: 30 }); // 30 дней
-            Cookies.set(EnumTokens.REFRESH_TOKEN, refreshToken, { expires: 30 }); // 30 дней
-        },
     });
 
     const submitHandler: SubmitHandler<TLoginDataSchema> = (data) => {

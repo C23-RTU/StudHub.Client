@@ -8,6 +8,6 @@ export const LoginDataSchema = z.object({
 export type TLoginDataSchema = z.infer<typeof LoginDataSchema>;
 
 export enum EnumTokens {
-    ACCESS_TOKEN = 'accessToken',
-    REFRESH_TOKEN = 'refreshToken',
+    ACCESS_TOKEN = 'AccessToken',
+    REFRESH_TOKEN = 'RefreshToken',
 }

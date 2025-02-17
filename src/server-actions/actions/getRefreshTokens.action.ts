@@ -8,6 +8,5 @@ export async function getNewTokens(refreshToken: string, accessToken: string) {
             Cookie: `refreshToken=${refreshToken};accessToken=${accessToken}`,
         },
     });
-
     return response.data;
 }
