@@ -23,7 +23,7 @@ export default async function Profile({ user, userClubs }: { user: PersonDetailD
 
             <MainContent>
                 <div className="flex flex-row gap-4">
-                    <Avatar src={user.imagePath} width={80} height={80} alt={'Изображение профиля'} />
+                    <Avatar src={user.imagePath} size={80} alt={'Изображение профиля'} />
                     <div className="flex flex-col my-auto gap-0">
                         <p className="text-xl font-bold font-geologica max-w-[250px] overflow-hidden whitespace-nowrap text-ellipsis">
                             Костя Жигайло

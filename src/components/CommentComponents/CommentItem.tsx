@@ -13,8 +13,7 @@ export function CommentItem({ comment }: { comment: CommentDetailDTO }) {
                 <Avatar
                     src={comment.personDetailDTO?.imagePath}
                     loaderSize={15}
-                    width={40}
-                    height={40}
+                    size={40}
                     alt={comment.personDetailDTO.lastName}
                 />
             </div>
