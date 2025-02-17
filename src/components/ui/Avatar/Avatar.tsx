@@ -19,6 +19,7 @@ export function Avatar({ src, size, alt, loaderSize }: Props) {
                 loaderSize={loaderSize}
                 width={size}
                 height={size}
+                className={`m-h-[${size}px] m-w-[${size}px]`}
                 alt={alt || 'avatar'}
             />
         </div>
