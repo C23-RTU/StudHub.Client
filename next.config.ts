@@ -4,10 +4,17 @@ const nextConfig: NextConfig = {
     poweredByHeader: false,
     skipTrailingSlashRedirect: true,
     images: {
+        formats: ['image/avif', 'image/webp'],
         remotePatterns: [
             {
                 protocol: 'https',
                 hostname: 'gravatar.com',
+                port: '',
+                pathname: '/**',
+            },
+            {
+                protocol: 'https',
+                hostname: 'setka-rtu.ru',
                 port: '',
                 pathname: '/**',
             },

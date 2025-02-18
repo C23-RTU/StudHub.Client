@@ -1,7 +1,8 @@
 'use client';
 
+import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
-import { Fragment, useState } from 'react';
+import { Fragment } from 'react';
 
 import { CommentItem } from '@/components/CommentComponents/CommentItem';
 import { SkeletonCommentsList } from '@/components/CommentComponents/SkeletonCommentsList';
@@ -9,20 +10,26 @@ import { TextareaEditorComment } from '@/components/CommentComponents/TextareaEd
 import { PostCard } from '@/components/PostCard/PostCard';
 import { BackButton } from '@/components/ui/BackButton/BackButton';
 
+import { postApi } from '@/api/api';
 import type { PostDetailDTO } from '@/api/axios-client/models';
 
 import { useInfinityComments } from './useInfinityComments';
 import { Header, HeaderTitle } from '@/hoc/Header/Header';
 import { MainContent } from '@/hoc/MainContent/MainContent';
 
-export function Comments({ post }: { post: PostDetailDTO }) {
+export function Comments({ serverPost }: { serverPost: PostDetailDTO }) {
     const router = useRouter();
-    const [postState, updatePostState] = useState(post);
+
+    const { data: post } = useQuery({
+        queryKey: ['fetch-post', serverPost.id],
+        queryFn: async () => (await postApi.postsGetById(serverPost.id)).data,
+        initialData: serverPost,
+    });
 
     const {
         ref,
         infiniteQuery: { data, isLoading, isFetchingNextPage },
-    } = useInfinityComments(post.id);
+    } = useInfinityComments(serverPost.id);
 
     return (
         <div className="page pt-[90px]">
@@ -32,7 +39,7 @@ export function Comments({ post }: { post: PostDetailDTO }) {
             </Header>
 
             <MainContent>
-                <PostCard post={postState} />
+                <PostCard post={post} />
                 <div className="flex flex-col gap-4 pb-[56px]">
                     {data?.pages && data?.pages.length === 0 && <p className="m-auto">Комментариев нет</p>}
                     {isLoading && <SkeletonCommentsList />}
@@ -51,7 +58,7 @@ export function Comments({ post }: { post: PostDetailDTO }) {
                     {isFetchingNextPage && <SkeletonCommentsList />}
                     {!isFetchingNextPage && <div ref={ref} />}
 
-                    <TextareaEditorComment postId={post.id} updatePost={updatePostState} />
+                    <TextareaEditorComment post={post} />
                 </div>
             </MainContent>
         </div>

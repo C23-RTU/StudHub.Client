@@ -8,7 +8,7 @@ import { SubscribeButton } from '@/components/ClubComponents/SubscribeButton';
 export function Club({ id = '1' }: { id: string }) {
     return (
         <div className="relative p-0">
-            <ClubHeader />
+            <ClubHeader clubId={id} />
             <div className="page pt-0">
                 <ClubInfo clubId={id} />
                 <SubscribeButton />

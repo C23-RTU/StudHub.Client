@@ -4,11 +4,16 @@ import { IoMdMail } from 'react-icons/io';
 import { MdModeComment } from 'react-icons/md';
 
 import { SettingBadge } from '@/components/Badge/SettingBadge/SettingBadge';
+import { Avatar } from '@/components/ui/Avatar/Avatar';
+
+import type { ClubDetailDTO, PersonDetailDTO } from '@/api/axios-client';
 
 import { Header, HeaderTitle } from '@/hoc/Header/Header';
 import { MainContent } from '@/hoc/MainContent/MainContent';
 
-export default async function Profile() {
+export default async function Profile({ user, userClubs }: { user: PersonDetailDTO; userClubs: ClubDetailDTO[] }) {
+    console.log(userClubs);
+
     return (
         <div className="page">
             <Header>
@@ -18,15 +23,7 @@ export default async function Profile() {
 
             <MainContent>
                 <div className="flex flex-row gap-4">
-                    <Image
-                        src={
-                            'https://gravatar.com/avatar/d99cc6ace66fc8bd197c30c876b7224007211f4572ef6d8444693f67b4c33ab1?size=80'
-                        }
-                        width={80}
-                        height={80}
-                        alt={'Изображение профиля'}
-                        className="rounded-full"
-                    />
+                    <Avatar src={user.imagePath} size={80} alt={'Изображение профиля'} />
                     <div className="flex flex-col my-auto gap-0">
                         <p className="text-xl font-bold font-geologica max-w-[250px] overflow-hidden whitespace-nowrap text-ellipsis">
                             Костя Жигайло

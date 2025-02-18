@@ -1,5 +1,5 @@
+import { useQuery } from '@tanstack/react-query';
 import { Copy, EllipsisVertical, OctagonAlert } from 'lucide-react';
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
 import {
@@ -11,14 +11,24 @@ import {
 
 import { AUTH_PAGE } from '@/lib/config/routes.config';
 
+import { clubsApi } from '@/api/api';
+
+import LoaderImage from '../LoaderImage/LoaderImage';
 import { BackButton } from '../ui/BackButton/BackButton';
 import { Button } from '../ui/button';
 
-export function ClubHeader() {
+import { getStaticImg } from '@/lib/helpers/getStaticImg.helper';
+
+export function ClubHeader({ clubId }: { clubId: string }) {
     const router = useRouter();
 
+    const { data: club } = useQuery({
+        queryKey: ['fetch-club', clubId],
+        queryFn: async () => (await clubsApi.clubsGetById(Number(clubId))).data,
+    });
+
     return (
-        <div>
+        <header>
             <div className="fixed flex flex-row justify-between items-center z-50 p-4 w-full max-w-[1024px]">
                 <div className="flex flex-row items-center">
                     <BackButton onClick={() => router.push(AUTH_PAGE.CLUBS)} />
@@ -51,20 +61,22 @@ export function ClubHeader() {
                     </DropdownMenuContent>
                 </DropdownMenu>
             </div>
-            <div className="w-full h-[220px] flex items-center justify-center">
-                <Image
-                    src={'/img/eventbanner.jpg'}
+            <div className="w-full flex items-center justify-center">
+                <LoaderImage
+                    src={'/img/clubplaceholder.png'}
                     height={220}
                     width={1000}
                     alt={'banner'}
-                    className="rounded-b-3xl w-full object-cover"
+                    className="rounded-b-3xl w-full h-[250px] object-cover"
                 />
             </div>
 
-            <div className="w-full h-full flex items-center justify-center mt-[-50px]">
-                <Image
+            <div className="w-full h-full flex items-center justify-center mt-[-70px]">
+                <LoaderImage
                     src={
-                        'https://gravatar.com/avatar/d99cc6ace66fc8bd197c30c876b7224007211f4572ef6d8444693f67b4c33ab1?size=80'
+                        club?.imageUrl
+                            ? getStaticImg(club.imageUrl)
+                            : 'https://gravatar.com/avatar/d99cc6ace66fc8bd197c30c876b7224007211f4572ef6d8444693f67b4c33ab1?size=80'
                     }
                     height={128}
                     width={128}
@@ -72,6 +84,6 @@ export function ClubHeader() {
                     className="rounded-full border-[5px] border-background"
                 />
             </div>
-        </div>
+        </header>
     );
 }

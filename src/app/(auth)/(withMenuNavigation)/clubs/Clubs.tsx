@@ -1,22 +1,20 @@
+'use client';
+
+import { useQuery } from '@tanstack/react-query';
+
 import { ClubCard } from '@/components/ClubComponents/ClubCard';
 import { SearchInput } from '@/components/ui/SearchInput/SearchInput';
+
+import { clubsApi } from '@/api/api';
 
 import { Header, HeaderTitle } from '@/hoc/Header/Header';
 import { MainContent } from '@/hoc/MainContent/MainContent';
 
 export function Clubs() {
-    const clubsData = [
-        {
-            image: '/img/test.jpg',
-            name: 'Клуб хакатонщиков',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vehicula eu',
-        },
-        {
-            image: '/img/test.jpg',
-            name: 'Клуб хакатонщиков',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vehicula eu',
-        },
-    ];
+    const { data: clubs } = useQuery({
+        queryKey: ['fetch-clubs'],
+        queryFn: async () => (await clubsApi.clubsGetAll()).data,
+    });
 
     return (
         <div className="page">
@@ -26,11 +24,11 @@ export function Clubs() {
 
             <MainContent>
                 <SearchInput placeholder="Поиск по клубам..." />
-                <div>
+                <div className="flex flex-col">
                     <p className="text-lg font-semibold mb-3">Рекомендуем</p>
                     <div className="flex flex-col gap-4">
-                        {clubsData.map((club, index) => (
-                            <ClubCard key={index} image={club.image} name={club.name} description={club.description} />
+                        {clubs?.map((club, index) => (
+                            <ClubCard key={index} imageUrl={club.imageUrl} name={club.name} description={club.about} />
                         ))}
                     </div>
                 </div>
@@ -38,8 +36,8 @@ export function Clubs() {
                 <div>
                     <p className="text-lg font-semibold mb-3">Популярные</p>
                     <div className="flex flex-col gap-4">
-                        {clubsData.map((club, index) => (
-                            <ClubCard key={index} image={club.image} name={club.name} description={club.description} />
+                        {clubs?.map((club, index) => (
+                            <ClubCard key={index} imageUrl={club.imageUrl} name={club.name} description={club.about} />
                         ))}
                     </div>
                 </div>

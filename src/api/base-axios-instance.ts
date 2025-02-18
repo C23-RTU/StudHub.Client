@@ -25,3 +25,13 @@ BASE_API.interceptors.request.use(async (config) => {
 
     return config;
 });
+
+BASE_API.interceptors.response.use(async (config) => {
+    const statusCode = config.status;
+
+    if (statusCode === 401) {
+        location.reload();
+    }
+
+    return config;
+});

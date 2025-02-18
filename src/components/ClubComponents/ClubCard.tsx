@@ -3,27 +3,26 @@
 import Image from 'next/image';
 
 import { SmallSubscribeButton } from './SmallSubscribeButton';
+import { getStaticImg } from '@/lib/helpers/getStaticImg.helper';
 
 interface Props {
-    image: string;
+    imageUrl: string | undefined | null;
     name: string;
-    description: string;
+    description: string | undefined | null;
 }
 
-export function ClubCard({ image, name, description }: Props) {
+export function ClubCard({ imageUrl, name, description }: Props) {
     return (
-        <article className="flex w-full hover:cursor-pointer" role="listitem">
-            <div>
-                <Image
-                    src={image}
-                    alt={`${name}'s avatar`}
-                    width={40}
-                    height={40}
-                    className="rounded-md w-14 h-14 min-w-[40px]"
-                />
-            </div>
+        <figure className="flex w-full hover:cursor-pointer items-center" role="listitem">
+            <Image
+                src={imageUrl ? getStaticImg(imageUrl) : '/img/blank.png'}
+                alt={`${name}'s avatar`}
+                width={32}
+                height={32}
+                className="rounded-lg w-12 h-12"
+            />
 
-            <div className="flex flex-col flex-grow ml-3 justify-between overflow-hidden">
+            <div className="flex flex-col flex-grow ml-3 mr-3 justify-between overflow-hidden">
                 <p
                     className="text-m font-geologica font-semibold text-ellipsis overflow-hidden whitespace-nowrap"
                     title={name}
@@ -32,15 +31,13 @@ export function ClubCard({ image, name, description }: Props) {
                 </p>
                 <p
                     className="text-xs opacity-50 font-inter font-normal text-ellipsis overflow-hidden whitespace-nowrap"
-                    title={description}
+                    title={description || ''}
                 >
                     {description}
                 </p>
             </div>
 
-            <div>
-                <SmallSubscribeButton />
-            </div>
-        </article>
+            <SmallSubscribeButton />
+        </figure>
     );
 }
