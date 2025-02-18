@@ -19,7 +19,7 @@ export function ClubHeader() {
 
     return (
         <div>
-            <div className="fixed flex flex-row justify-between items-center p-4 w-full max-w-[1024px]">
+            <div className="fixed flex flex-row justify-between items-center z-50 p-4 w-full max-w-[1024px]">
                 <div className="flex flex-row items-center">
                     <BackButton onClick={() => router.push(AUTH_PAGE.CLUBS)} />
                     <p
