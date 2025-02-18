@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { Copy, EllipsisVertical, OctagonAlert } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
 
 import {
     DropdownMenu,
@@ -29,12 +30,15 @@ export function ClubHeader({ clubId }: { clubId: string }) {
 
     return (
         <>
-            <div className="fixed flex flex-row justify-between items-center p-4 w-full max-w-[1024px]">
+            <div className="fixed flex flex-row justify-between items-center p-4 w-full max-w-[1024px] z-50">
                 <div className="flex flex-row items-center">
                     <BackButton onClick={() => router.push(AUTH_PAGE.CLUBS)} />
                     <p
                         className="text-lg ml-4 font-bold shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] bg-secondary font-geologica rounded-lg leading-8 h-10 py-1 px-3 hover:cursor-pointer"
-                        onClick={() => navigator.clipboard.writeText('@IKB_MIREA')}
+                        onClick={() => {
+                            navigator.clipboard.writeText('@IKB_MIREA');
+                            toast.success('Тег скопирован');
+                        }}
                     >
                         @IKB_MIREA
                     </p>
