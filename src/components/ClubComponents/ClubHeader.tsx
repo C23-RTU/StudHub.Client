@@ -81,7 +81,7 @@ export function ClubHeader({ clubId }: { clubId: string }) {
                     height={128}
                     width={128}
                     alt={'avatar'}
-                    className="rounded-full border-[5px] border-background"
+                    className="rounded-full border-[5px] w-[128px] h-[128px] border-background"
                 />
             </div>
         </header>
