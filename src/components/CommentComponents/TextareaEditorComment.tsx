@@ -1,6 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
 import { SendHorizonalIcon } from 'lucide-react';
+import { useEffect } from 'react';
 import { type SubmitHandler, useForm } from 'react-hook-form';
 
 import { Button } from '@/components/ui/button';
@@ -11,21 +12,23 @@ import type { PostDetailDTO } from '@/api/axios-client';
 
 import { queryClient } from '../Provider/getQueryClient';
 
+import { useCommentStore } from './useComment.store';
 import { CommentPayloadSchema, type TCommentPayloadSchema } from '@/lib/types/comment.type';
 
 export function TextareaEditorComment({ post }: { post: PostDetailDTO }) {
+    const commentPayload = useCommentStore((store) => store.commentPayload);
+    const resetCommentPayload = useCommentStore((store) => store.resetCommentPayload);
+
     const {
         handleSubmit,
         resetField,
+        reset,
         register,
         formState: { isValid },
     } = useForm<TCommentPayloadSchema>({
         mode: 'onChange',
         resolver: zodResolver(CommentPayloadSchema),
-        defaultValues: {
-            parentId: null,
-            postId: post.id,
-        },
+        defaultValues: { ...commentPayload },
     });
 
     const { mutate, isPending } = useMutation({
@@ -39,6 +42,7 @@ export function TextareaEditorComment({ post }: { post: PostDetailDTO }) {
                 return { ...post, commentCount: post.commentCount + 1 };
             });
             resetField('content');
+            resetCommentPayload();
         },
         onError: async () => {
             const { toast } = await import('react-hot-toast');
@@ -51,6 +55,14 @@ export function TextareaEditorComment({ post }: { post: PostDetailDTO }) {
     const sendCommentHandler: SubmitHandler<TCommentPayloadSchema> = (data) => {
         mutate(data);
     };
+
+    useEffect(() => {
+        reset({
+            content: commentPayload.content,
+            postId: post.id,
+            parentId: commentPayload.parentId,
+        });
+    }, [commentPayload, post.id, reset]);
 
     return (
         <form
