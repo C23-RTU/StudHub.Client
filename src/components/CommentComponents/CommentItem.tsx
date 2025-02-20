@@ -19,7 +19,7 @@ export function CommentItem({
     className?: string;
     replies: CommentDetailDTO[];
 }) {
-    const setCommentPayload = useCommentStore((store) => store.setCommentPayload);
+    const setCommentForReply = useCommentStore((store) => store.setCommentForReply);
 
     return (
         <div className="flex flex-col gap-3">
@@ -50,20 +50,12 @@ export function CommentItem({
                             type="button"
                             className="text-xs text-gray-500 flex items-center"
                             onClick={() => {
-                                setCommentPayload({
-                                    postId: comment.postId,
-                                    content: `${comment.personDetailDTO.firstName}, `,
-                                    parentId: comment.parentId !== null ? (comment.parentId as number) : comment.id,
-                                });
-
-                                console.log(comment.parentId !== null ? (comment.parentId as number) : comment.id);
+                                setCommentForReply(comment);
                             }}
                         >
                             Ответить
                             <ChevronRight size={14} />
                         </button>
-                        {/* <ActionButton type={'like'} initialValue={11} /> */}
-                        {/* <ActionButton type={'comment'} initialValue={10} /> */}
                     </div>
                 </div>
             </div>
