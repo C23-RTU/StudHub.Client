@@ -2,16 +2,17 @@
 
 import Image from 'next/image';
 
-import { SmallSubscribeButton } from './SmallSubscribeButton';
+import { SmallSubscribeButton } from './SubscribeButtons/SmallSubscribeButton';
 import { getStaticImg } from '@/lib/helpers/getStaticImg.helper';
 
 interface Props {
     imageUrl: string | undefined | null;
     name: string;
     description: string | undefined | null;
+    clubId: number;
 }
 
-export function ClubCard({ imageUrl, name, description }: Props) {
+export function ClubCard({ imageUrl, name, description, clubId }: Props) {
     return (
         <figure className="flex w-full hover:cursor-pointer items-center" role="listitem">
             <Image
@@ -37,7 +38,7 @@ export function ClubCard({ imageUrl, name, description }: Props) {
                 </p>
             </div>
 
-            <SmallSubscribeButton />
+            <SmallSubscribeButton clubId={clubId} />
         </figure>
     );
 }

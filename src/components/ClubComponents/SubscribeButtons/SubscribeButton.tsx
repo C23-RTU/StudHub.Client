@@ -7,8 +7,9 @@ import toast from 'react-hot-toast';
 
 import { clubsApi } from '@/api/api';
 
-import { Button } from '../ui/button';
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from '../ui/sheet';
+import { Button } from '../../ui/button';
+
+import { UnsubSheet } from './UnsubSheet';
 
 export function SubscribeButton({ clubId }: { clubId: string }) {
     const queryClient = useQueryClient();
@@ -67,21 +68,11 @@ export function SubscribeButton({ clubId }: { clubId: string }) {
                     </Button>
                 )}
             </div>
-            <Sheet open={unsubVisible} onOpenChange={setUnsubVisible}>
-                <SheetContent side="bottom">
-                    <SheetHeader>
-                        <SheetTitle className="text-center">
-                            <SheetDescription>Вы хотите отписаться от клуба?</SheetDescription>
-                        </SheetTitle>
-                    </SheetHeader>
-                    <Button
-                        className="w-full justify-center mx-auto mt-3"
-                        onClick={async () => await unsubscribeMutation()}
-                    >
-                        Отписаться
-                    </Button>
-                </SheetContent>
-            </Sheet>
+            <UnsubSheet
+                unsubVisible={unsubVisible}
+                setUnsubVisible={setUnsubVisible}
+                onClick={async () => await unsubscribeMutation()}
+            />
         </figure>
     );
 }

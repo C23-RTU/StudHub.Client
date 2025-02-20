@@ -24,22 +24,17 @@ export function Clubs() {
 
             <MainContent>
                 <SearchInput placeholder="Поиск по клубам..." />
-                <div className="flex flex-col">
-                    <p className="text-lg font-semibold mb-3">Рекомендуем</p>
-                    <div className="flex flex-col gap-4">
-                        {clubs?.map((club, index) => (
-                            <ClubCard key={index} imageUrl={club.imageUrl} name={club.name} description={club.about} />
-                        ))}
-                    </div>
-                </div>
 
-                <div>
-                    <p className="text-lg font-semibold mb-3">Популярные</p>
-                    <div className="flex flex-col gap-4">
-                        {clubs?.map((club, index) => (
-                            <ClubCard key={index} imageUrl={club.imageUrl} name={club.name} description={club.about} />
-                        ))}
-                    </div>
+                <div className="flex flex-col gap-4">
+                    {clubs?.map((club, index) => (
+                        <ClubCard
+                            key={index}
+                            imageUrl={club.imageUrl}
+                            name={club.name}
+                            description={club.about}
+                            clubId={club.id}
+                        />
+                    ))}
                 </div>
             </MainContent>
         </div>
