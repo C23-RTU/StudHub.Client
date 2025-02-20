@@ -1,8 +1,8 @@
 'use client';
 
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { SquareCheck, SquarePlus } from 'lucide-react';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import toast from 'react-hot-toast';
 
 import { clubsApi } from '@/api/api';
@@ -11,25 +11,22 @@ import { Button } from '../ui/button';
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from '../ui/sheet';
 
 export function SubscribeButton({ clubId }: { clubId: string }) {
-    const [subscribed, setSubscribed] = useState<boolean>(false);
+    const queryClient = useQueryClient();
     const [unsubVisible, setUnsubVisible] = useState<boolean>(false);
 
-    useQuery({
+    const { data: club, isLoading } = useQuery({
         queryKey: ['check-subscription', clubId],
-        queryFn: async () => {
-            const data = await clubsApi.clubsGetAllByPersonId(Number(clubId));
-            console.log(data);
-            if (data) setSubscribed(true);
-            return null; // чтобы не ругался
-        },
+        queryFn: async () => (await clubsApi.clubsGetById(Number(clubId))).data,
     });
+
+    const subscribed = useMemo(() => club?.isUserSubscribed ?? false, [club]);
 
     const { mutateAsync: subscribeMutation, isPending: isSubscribePending } = useMutation({
         mutationKey: ['club-subscribe', clubId],
         mutationFn: async () => await clubsApi.clubsToggleSubscription(Number(clubId)),
         onSuccess: () => {
-            setSubscribed(true);
             toast.success('Вы подписались на клуб');
+            queryClient.invalidateQueries({ queryKey: ['check-subscription', clubId] });
         },
     });
 
@@ -37,16 +34,20 @@ export function SubscribeButton({ clubId }: { clubId: string }) {
         mutationKey: ['club-unsubscribe', clubId],
         mutationFn: async () => await clubsApi.clubsToggleSubscription(Number(clubId)),
         onSuccess: () => {
-            setSubscribed(false);
             setUnsubVisible(false);
             toast.success('Вы отписались от клуба');
+            queryClient.invalidateQueries({ queryKey: ['check-subscription', clubId] });
         },
     });
 
     return (
         <figure>
             <div className="flex justify-center">
-                {subscribed ? (
+                {isLoading ? (
+                    <Button className="my-5 w-full flex justify-center bg-secondary" disabled>
+                        <span>Загрузка...</span>
+                    </Button>
+                ) : subscribed ? (
                     <Button
                         onClick={() => setUnsubVisible(true)}
                         className="my-5 w-full flex justify-center bg-secondary hover:bg-accent"

@@ -1,6 +1,8 @@
+'use client';
+
 import { useQuery } from '@tanstack/react-query';
 import { Copy, EllipsisVertical, OctagonAlert } from 'lucide-react';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 
 import {
@@ -22,6 +24,7 @@ import { getStaticImg } from '@/lib/helpers/getStaticImg.helper';
 
 export function ClubHeader({ clubId }: { clubId: string }) {
     const router = useRouter();
+    const pathname = usePathname();
 
     const { data: club } = useQuery({
         queryKey: ['fetch-club', clubId],
@@ -54,7 +57,12 @@ export function ClubHeader({ clubId }: { clubId: string }) {
                         </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent>
-                        <DropdownMenuItem>
+                        <DropdownMenuItem
+                            onClick={() => {
+                                navigator.clipboard.writeText(pathname);
+                                toast.success('Ссылка скопирована');
+                            }}
+                        >
                             <Copy />
                             Скопировать ссылку
                         </DropdownMenuItem>
