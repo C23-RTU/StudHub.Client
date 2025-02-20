@@ -14,7 +14,7 @@ import { AUTH_PAGE } from '@/lib/config/routes.config';
 
 import { clubsApi } from '@/api/api';
 
-import LoaderImage from '../LoaderImage/LoaderImage';
+import LoaderImage from '../ImageLoader/ImageLoader';
 import { BackButton } from '../ui/BackButton/BackButton';
 import { Button } from '../ui/button';
 

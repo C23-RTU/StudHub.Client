@@ -8,12 +8,13 @@ import { PostCard } from '../PostCard/PostCard';
 import { SearchInput } from '../ui/SearchInput/SearchInput';
 
 import { MainContent } from '@/hoc/MainContent/MainContent';
+import { PostLoader } from '../ui/PostLoader/PostLoader';
 
 export function ClubFeed() {
     const { id } = useParams();
     const clubId = Number(id);
 
-    const { data, isLoading } = useQuery({
+    const { data: posts, isLoading } = useQuery({
         queryKey: ['fetch-club-posts', clubId],
         queryFn: async () => (await postApi.postsGetByClubId(clubId)).data,
     });
@@ -25,10 +26,10 @@ export function ClubFeed() {
 
             <div className="flex flex-col gap-10">
                 {isLoading ? (
-                    <p className="m-auto">Загрузка постов...</p>
-                ) : data && data.length > 0 ? (
-                    data.map((post: PostDetailDTO) => <PostCard key={post.id} post={post} />)
-                ) : !data ? (
+                    <PostLoader isLoading={isLoading} posts={posts} amount={1} />
+                ) : posts && posts.length > 0 ? (
+                    posts.map((post: PostDetailDTO) => <PostCard key={post.id} post={post} />)
+                ) : !posts ? (
                     <p className="m-auto">Ошибка загрузки постов</p>
                 ) : (
                     <p className="m-auto">Нет постов</p>

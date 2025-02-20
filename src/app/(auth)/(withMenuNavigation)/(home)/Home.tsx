@@ -11,6 +11,7 @@ import { postApi } from '@/api/api';
 
 import { Header, HeaderTitle } from '@/hoc/Header/Header';
 import { MainContent } from '@/hoc/MainContent/MainContent';
+import { PostLoader } from '@/components/ui/PostLoader/PostLoader';
 
 export default function Home({ username }: { username: string }) {
     const { data: posts, isLoading } = useQuery({
@@ -34,12 +35,8 @@ export default function Home({ username }: { username: string }) {
                 <div>
                     <SearchInput placeholder="Поиск по ленте..." />
                 </div>
-                <div className="flex flex-col gap-10">
-                    {isLoading &&
-                        Array(2)
-                            .fill(0)
-                            .map((_, index) => <Skeleton key={index} className="h-[320px] w-full" />)}
-                    {posts && posts.map((post) => <PostCard key={post.id} post={post} />)}
+                <div>
+                    <PostLoader isLoading={isLoading} posts={posts} />
                 </div>
             </MainContent>
         </div>
