@@ -3,9 +3,7 @@
 import { useQuery } from '@tanstack/react-query';
 
 import { NotificationBadge } from '@/components/Badge/NotificationBadge/NotificationBadge';
-import { PostCard } from '@/components/PostCard/PostCard';
 import { SearchInput } from '@/components/ui/SearchInput/SearchInput';
-import { Skeleton } from '@/components/ui/skeleton';
 
 import { postApi } from '@/api/api';
 
