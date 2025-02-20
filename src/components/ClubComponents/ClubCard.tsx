@@ -1,9 +1,11 @@
 'use client';
 
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 import { SmallSubscribeButton } from './SubscribeButtons/SmallSubscribeButton';
 import { getStaticImg } from '@/lib/helpers/getStaticImg.helper';
+import { AUTH_PAGE } from '@/lib/config/routes.config';
 
 interface Props {
     imageUrl: string | undefined | null;
@@ -13,8 +15,14 @@ interface Props {
 }
 
 export function ClubCard({ imageUrl, name, description, clubId }: Props) {
+    const router = useRouter();
+
     return (
-        <figure className="flex w-full hover:cursor-pointer items-center" role="listitem">
+        <figure
+            className="flex w-full hover:cursor-pointer items-center"
+            role="listitem"
+            onClick={() => router.push(`${AUTH_PAGE.CLUBS}/${clubId}`)}
+        >
             <Image
                 src={imageUrl ? getStaticImg(imageUrl) : '/img/blank.png'}
                 alt={`${name}'s avatar`}

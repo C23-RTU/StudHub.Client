@@ -22,6 +22,11 @@ export function ClubInfo({ clubId }: { clubId: string }) {
         queryFn: async () => (await clubsApi.clubsGetById(Number(clubId))).data,
     });
 
+    const { data: subscribers, isLoading } = useQuery({
+        queryKey: ['club-subscribers', clubId],
+        queryFn: async () => (await clubsApi.clubsGetAllByClubId(Number(clubId))).data,
+    })
+
     return (
         <div>
             <div className="flex flex-col gap-1">
@@ -32,7 +37,7 @@ export function ClubInfo({ clubId }: { clubId: string }) {
             <div className="flex flex-col gap-2 mt-5">
                 <RowClubInfo onClick={() => router.push(AUTH_PAGE.CLUB_SUBSCRIBERS(clubId))}>
                     <UsersRound size={18} />
-                    1.1М подписчиков
+                    {isLoading ? '...' : subscribers?.length} подписчиков
                 </RowClubInfo>
                 <RowClubInfo>
                     <MapPin size={18} />
