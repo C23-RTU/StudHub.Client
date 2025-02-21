@@ -1,0 +1,28 @@
+{
+    "name": "Web Development Container",
+    "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+    "features": {
+      "node": "23"
+    },
+    "postStartCommand": "bash /workspaces/Setka.Client/.devcontainer/build.sh",
+    "forwardPorts": [
+      3000
+    ],
+    "remoteEnv": {
+    },
+    "customizations": {
+      "vscode": {
+        "extensions": [
+          "bradlc.vscode-tailwindcss",
+          "dbaeumer.vscode-eslint",
+          "esbenp.prettier-vscode",
+          "wix.vscode-import-cost",
+          "YoavBls.pretty-ts-errors"
+        ],
+        "settings": {
+          "workbench.colorTheme": "Default Dark Modern",
+          "npm.packageManager": "pnpm"
+        }
+      }
+    }
+  }
