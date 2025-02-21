@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useMutation } from '@tanstack/react-query';
+import { type InfiniteData, type UseInfiniteQueryResult, useMutation } from '@tanstack/react-query';
 import { m } from 'framer-motion';
 import { CircleXIcon, SendHorizonalIcon } from 'lucide-react';
 import { useEffect } from 'react';
@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 
 import { commentApi } from '@/api/api';
-import type { PostDetailDTO } from '@/api/axios-client';
+import type { CommentDetailDTO, PostDetailDTO } from '@/api/axios-client';
 
 import { queryClient } from '../Provider/getQueryClient';
 
@@ -17,8 +17,6 @@ import { useCommentStore } from './useComment.store';
 import { CommentPayloadSchema, type TCommentPayloadSchema } from '@/lib/types/comment.type';
 
 export function TextareaEditorComment({ post }: { post: PostDetailDTO }) {
-    // const commentPayload = useCommentStore((store) => store.commentPayload);
-
     const commentForReply = useCommentStore((store) => store.commentForReply);
     const resetCommentForReply = useCommentStore((store) => store.resetCommentForReply);
 
@@ -39,13 +37,24 @@ export function TextareaEditorComment({ post }: { post: PostDetailDTO }) {
 
     const { mutate, isPending } = useMutation({
         mutationKey: ['send-comment'],
-        mutationFn: async (payload: TCommentPayloadSchema) => await commentApi.commentsAdd(payload),
-        onSuccess: () => {
-            queryClient.invalidateQueries({
-                queryKey: ['fetch-post-comments'],
-            });
+        mutationFn: async (payload: TCommentPayloadSchema) => (await commentApi.commentsAdd(payload)).data,
+        onSuccess: (comment) => {
             queryClient.setQueryData(['fetch-post', post.id], () => {
                 return { ...post, commentCount: post.commentCount + 1 };
+            });
+
+            queryClient.setQueryData(['fetch-post-comments', post.id], (data: InfiniteData<CommentDetailDTO[], unknown>) => {
+                const lastPage = data.pages.splice(data.pages.length - 1, 1).pop();
+                lastPage?.push(comment);
+                const newPagesWithoutLast = data.pages.slice(0, data.pages.length - 2);
+
+                return {
+                    pageParams: data.pageParams,
+                    pages: [
+                        newPagesWithoutLast,
+                        lastPage
+                    ],
+                };
             });
 
             resetAllData();
@@ -58,7 +67,7 @@ export function TextareaEditorComment({ post }: { post: PostDetailDTO }) {
         },
     });
 
-    const sendCommentHandler: SubmitHandler<TCommentPayloadSchema> = (data) => {
+    const sendCommentHandler: SubmitHandler = (data) => {
         mutate(data);
     };
 
