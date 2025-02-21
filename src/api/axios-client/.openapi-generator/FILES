@@ -5,6 +5,7 @@ api/auth-api.ts
 api/clubs-api.ts
 api/comments-api.ts
 api/events-api.ts
+api/images-api.ts
 api/institutes-api.ts
 api/posts-api.ts
 api/reactions-api.ts
@@ -24,6 +25,7 @@ models/index.ts
 models/institute-detail-dto.ts
 models/login-dto.ts
 models/person-detail-dto.ts
+models/person-summary-dto.ts
 models/post-detail-dto.ts
 models/problem-details.ts
 models/reaction-detail-dto.ts

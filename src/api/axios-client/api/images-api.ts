@@ -21,8 +21,6 @@ import globalAxios from 'axios';
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
-// @ts-ignore
-import type { ProblemDetails } from '../models';
 /**
  * ImagesApi - axios parameter creator
  * @export
@@ -67,39 +65,6 @@ export const ImagesApiAxiosParamCreator = function (configuration?: Configuratio
                 options: localVarRequestOptions,
             };
         },
-        /**
-         * 
-         * @param {number} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        imagesGetPathById: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('imagesGetPathById', 'id', id)
-            const localVarPath = `/images/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
     }
 };
 
@@ -122,18 +87,6 @@ export const ImagesApiFp = function(configuration?: Configuration) {
             const localVarOperationServerBasePath = operationServerMap['ImagesApi.imagesCreate']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
-        /**
-         * 
-         * @param {number} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async imagesGetPathById(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.imagesGetPathById(id, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ImagesApi.imagesGetPathById']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
     }
 };
 
@@ -153,15 +106,6 @@ export const ImagesApiFactory = function (configuration?: Configuration, basePat
         imagesCreate(file?: File | null, options?: RawAxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.imagesCreate(file, options).then((request) => request(axios, basePath));
         },
-        /**
-         * 
-         * @param {number} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        imagesGetPathById(id: number, options?: RawAxiosRequestConfig): AxiosPromise<string> {
-            return localVarFp.imagesGetPathById(id, options).then((request) => request(axios, basePath));
-        },
     };
 };
 
@@ -179,15 +123,6 @@ export interface ImagesApiInterface {
      * @memberof ImagesApiInterface
      */
     imagesCreate(file?: File | null, options?: RawAxiosRequestConfig): AxiosPromise<void>;
-
-    /**
-     * 
-     * @param {number} id 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ImagesApiInterface
-     */
-    imagesGetPathById(id: number, options?: RawAxiosRequestConfig): AxiosPromise<string>;
 
 }
 
@@ -207,17 +142,6 @@ export class ImagesApi extends BaseAPI implements ImagesApiInterface {
      */
     public imagesCreate(file?: File | null, options?: RawAxiosRequestConfig) {
         return ImagesApiFp(this.configuration).imagesCreate(file, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {number} id 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ImagesApi
-     */
-    public imagesGetPathById(id: number, options?: RawAxiosRequestConfig) {
-        return ImagesApiFp(this.configuration).imagesGetPathById(id, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
