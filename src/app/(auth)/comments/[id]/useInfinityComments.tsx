@@ -18,7 +18,7 @@ export const useInfinityComments = (post_id: number) => {
             if (!lastPage.length || lastPage.length < PAGE_SIZE) return null;
             return lastPageParam + 1;
         },
-        enabled: !!post_id,
+        getPreviousPageParam: (_, __, firstPageParam) => firstPageParam,
     });
 
     useEffect(() => {
@@ -26,7 +26,7 @@ export const useInfinityComments = (post_id: number) => {
             infiniteQuery.fetchNextPage();
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [inView, infiniteQuery.hasNextPage]);
+    }, [inView]);
 
     return {
         ref,

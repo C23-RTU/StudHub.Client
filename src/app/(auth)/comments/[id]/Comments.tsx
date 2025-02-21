@@ -28,7 +28,7 @@ export function Comments({ serverPost }: { serverPost: PostDetailDTO }) {
 
     const {
         ref,
-        infiniteQuery: { data, isLoading, isFetchingNextPage },
+        infiniteQuery: { data, isLoading, isFetchingNextPage, hasNextPage },
     } = useInfinityComments(serverPost.id);
 
     const flatComments = useMemo(() => {
@@ -73,7 +73,7 @@ export function Comments({ serverPost }: { serverPost: PostDetailDTO }) {
                     {isFetchingNextPage && <SkeletonCommentsList />}
                     {!isFetchingNextPage && <div ref={ref} />}
 
-                    <TextareaEditorComment post={post} />
+                    <TextareaEditorComment post={post} hasNextPage={hasNextPage} />
                 </div>
             </MainContent>
         </div>

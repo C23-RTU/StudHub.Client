@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { type InfiniteData, type UseInfiniteQueryResult, useMutation } from '@tanstack/react-query';
+import { type InfiniteData, useMutation } from '@tanstack/react-query';
 import { m } from 'framer-motion';
 import { CircleXIcon, SendHorizonalIcon } from 'lucide-react';
 import { useEffect } from 'react';
@@ -16,7 +16,7 @@ import { queryClient } from '../Provider/getQueryClient';
 import { useCommentStore } from './useComment.store';
 import { CommentPayloadSchema, type TCommentPayloadSchema } from '@/lib/types/comment.type';
 
-export function TextareaEditorComment({ post }: { post: PostDetailDTO }) {
+export function TextareaEditorComment({ post, hasNextPage }: { post: PostDetailDTO; hasNextPage: boolean }) {
     const commentForReply = useCommentStore((store) => store.commentForReply);
     const resetCommentForReply = useCommentStore((store) => store.resetCommentForReply);
 
@@ -43,19 +43,25 @@ export function TextareaEditorComment({ post }: { post: PostDetailDTO }) {
                 return { ...post, commentCount: post.commentCount + 1 };
             });
 
-            queryClient.setQueryData(['fetch-post-comments', post.id], (data: InfiniteData<CommentDetailDTO[], unknown>) => {
-                const lastPage = data.pages.splice(data.pages.length - 1, 1).pop();
-                lastPage?.push(comment);
-                const newPagesWithoutLast = data.pages.slice(0, data.pages.length - 2);
+            if ((!comment.parentId && !hasNextPage) || comment.parentId) {
+                console.log(hasNextPage);
+                queryClient.setQueryData(
+                    ['fetch-post-comments', post.id],
+                    (oldData: InfiniteData<CommentDetailDTO[], unknown>) => {
+                        if (!oldData) return;
+                        const lastPageIndex = oldData.pages.length - 1;
+                        const lastPage = oldData.pages[lastPageIndex];
+                        return {
+                            pageParams: oldData.pageParams,
+                            pages: [...oldData.pages.slice(0, lastPageIndex), [...lastPage, comment]],
+                        };
+                    },
+                );
+            }
 
-                return {
-                    pageParams: data.pageParams,
-                    pages: [
-                        newPagesWithoutLast,
-                        lastPage
-                    ],
-                };
-            });
+            // queryClient.invalidateQueries({
+            //     queryKey: ['fetch-post-comments', post.id],
+            // });
 
             resetAllData();
         },
@@ -67,7 +73,7 @@ export function TextareaEditorComment({ post }: { post: PostDetailDTO }) {
         },
     });
 
-    const sendCommentHandler: SubmitHandler = (data) => {
+    const sendCommentHandler: SubmitHandler<TCommentPayloadSchema> = (data) => {
         mutate(data);
     };
 

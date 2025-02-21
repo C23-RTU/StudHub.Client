@@ -20,10 +20,15 @@ export function CommentItem({
     replies: CommentDetailDTO[];
 }) {
     const setCommentForReply = useCommentStore((store) => store.setCommentForReply);
+    const commentForReply = useCommentStore((store) => store.commentForReply);
 
     return (
         <div className="flex flex-col gap-3">
-            <div className={cn('flex gap-2', className)}>
+            <div
+                className={cn('flex gap-2 rounded-md p-1 transition-colors', className, {
+                    'bg-secondary': commentForReply?.id === comment.id,
+                })}
+            >
                 <div className="shrink-0">
                     <Avatar
                         src={comment.personDetailDTO?.imagePath}
