@@ -33,10 +33,8 @@ export function Clubs() {
                     {clubs?.map((club, index) => (
                         <ClubCard
                             key={index}
-                            imageUrl={club.imageUrl}
-                            name={club.name}
-                            description={club.about}
-                            clubId={club.id}
+                            club={club}
+                            showSubscribe
                         />
                     ))}
                     <Button onClick={() => {}}>
