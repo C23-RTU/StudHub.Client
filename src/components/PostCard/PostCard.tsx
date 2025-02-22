@@ -44,17 +44,17 @@ export function PostCard({ className, post }: PostCardProps) {
                 {!showFull && isLong && (
                     <button
                         onClick={() => setShowFull(true)}
-                        className="text-blue-400 text-sm font-inter mt-1 focus:outline-none"
+                        className="text-blue text-sm font-inter mt-1 focus:outline-none"
                     >
-                        Показать все...
+                        Показать все
                     </button>
                 )}
                 {showFull && isLong && (
                     <button
                         onClick={() => setShowFull(false)}
-                        className="text-blue-400 text-sm font-inter mt-1 focus:outline-none"
+                        className="text-blue text-sm font-inter mt-1 focus:outline-none"
                     >
-                        Скрыть все...
+                        Скрыть все
                     </button>
                 )}
             </div>
