@@ -6,7 +6,7 @@ import { AUTH_PAGE } from '@/lib/config/routes.config';
 
 import type { EventDetailDTO } from '@/api/axios-client';
 
-import LoaderImage from '../LoaderImage/LoaderImage';
+import LoaderImage from '../ImageLoader/ImageLoader';
 
 import { getStaticImg } from '@/lib/helpers/getStaticImg.helper';
 import { parseLocalTime } from '@/lib/utils/time.util';

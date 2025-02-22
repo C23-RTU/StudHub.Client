@@ -17,38 +17,38 @@
 /**
  * 
  * @export
- * @interface ClubDetailDTO
+ * @interface PersonSummaryDTO
  */
-export interface ClubDetailDTO {
+export interface PersonSummaryDTO {
     /**
      * 
      * @type {number}
-     * @memberof ClubDetailDTO
+     * @memberof PersonSummaryDTO
      */
     'id': number;
     /**
      * 
      * @type {string}
-     * @memberof ClubDetailDTO
+     * @memberof PersonSummaryDTO
      */
-    'name': string;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof ClubDetailDTO
-     */
-    'isUserSubscribed': boolean;
+    'firstName': string;
     /**
      * 
      * @type {string}
-     * @memberof ClubDetailDTO
+     * @memberof PersonSummaryDTO
      */
-    'about'?: string | null;
+    'lastName': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof PersonSummaryDTO
+     */
+    'instituteId'?: number | null;
     /**
      * 
      * @type {string}
-     * @memberof ClubDetailDTO
+     * @memberof PersonSummaryDTO
      */
-    'imageUrl'?: string | null;
+    'imagePath'?: string | null;
 }
 

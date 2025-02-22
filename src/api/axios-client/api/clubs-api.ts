@@ -24,6 +24,8 @@ import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError
 // @ts-ignore
 import type { ClubDetailDTO } from '../models';
 // @ts-ignore
+import type { PersonSummaryDTO } from '../models';
+// @ts-ignore
 import type { ProblemDetails } from '../models';
 /**
  * ClubsApi - axios parameter creator
@@ -48,6 +50,49 @@ export const ClubsApiAxiosParamCreator = function (configuration?: Configuration
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} clubid 
+         * @param {number} [pageIndex] 
+         * @param {number} [pageSize] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        clubsGetAllByClubId: async (clubid: number, pageIndex?: number, pageSize?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'clubid' is not null or undefined
+            assertParamExists('clubsGetAllByClubId', 'clubid', clubid)
+            const localVarPath = `/clubs/getPersonsByClubId/{clubid}`
+                .replace(`{${"clubid"}}`, encodeURIComponent(String(clubid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (pageIndex !== undefined) {
+                localVarQueryParameter['PageIndex'] = pageIndex;
+            }
+
+            if (pageSize !== undefined) {
+                localVarQueryParameter['PageSize'] = pageSize;
+            }
 
 
     
@@ -216,6 +261,20 @@ export const ClubsApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {number} clubid 
+         * @param {number} [pageIndex] 
+         * @param {number} [pageSize] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async clubsGetAllByClubId(clubid: number, pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<PersonSummaryDTO>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.clubsGetAllByClubId(clubid, pageIndex, pageSize, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ClubsApi.clubsGetAllByClubId']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
          * @param {number} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -282,6 +341,17 @@ export const ClubsApiFactory = function (configuration?: Configuration, basePath
         },
         /**
          * 
+         * @param {number} clubid 
+         * @param {number} [pageIndex] 
+         * @param {number} [pageSize] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        clubsGetAllByClubId(clubid: number, pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<PersonSummaryDTO>> {
+            return localVarFp.clubsGetAllByClubId(clubid, pageIndex, pageSize, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @param {number} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -332,6 +402,17 @@ export interface ClubsApiInterface {
      * @memberof ClubsApiInterface
      */
     clubsGetAll(options?: RawAxiosRequestConfig): AxiosPromise<Array<ClubDetailDTO>>;
+
+    /**
+     * 
+     * @param {number} clubid 
+     * @param {number} [pageIndex] 
+     * @param {number} [pageSize] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ClubsApiInterface
+     */
+    clubsGetAllByClubId(clubid: number, pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<PersonSummaryDTO>>;
 
     /**
      * 
@@ -386,6 +467,19 @@ export class ClubsApi extends BaseAPI implements ClubsApiInterface {
      */
     public clubsGetAll(options?: RawAxiosRequestConfig) {
         return ClubsApiFp(this.configuration).clubsGetAll(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} clubid 
+     * @param {number} [pageIndex] 
+     * @param {number} [pageSize] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ClubsApi
+     */
+    public clubsGetAllByClubId(clubid: number, pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig) {
+        return ClubsApiFp(this.configuration).clubsGetAllByClubId(clubid, pageIndex, pageSize, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

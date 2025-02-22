@@ -2,7 +2,7 @@
 
 import type { PostDetailDTO } from '@/api/axios-client';
 
-import LoaderImage from '../LoaderImage/LoaderImage';
+import LoaderImage from '../ImageLoader/ImageLoader';
 import { ActionButton } from '../ui/PostActionButton/PostActionButton';
 
 import { PostHeader } from './PostHeader/PostHeader';
