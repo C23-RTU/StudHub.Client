@@ -179,7 +179,7 @@ export const AuthApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async authLogin(loginDTO: LoginDTO, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TokenModel>> {
+        async authLogin(loginDTO: LoginDTO, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.authLogin(loginDTO, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['AuthApi.authLogin']?.[localVarOperationServerIndex]?.url;
@@ -235,7 +235,7 @@ export const AuthApiFactory = function (configuration?: Configuration, basePath?
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authLogin(loginDTO: LoginDTO, options?: RawAxiosRequestConfig): AxiosPromise<TokenModel> {
+        authLogin(loginDTO: LoginDTO, options?: RawAxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.authLogin(loginDTO, options).then((request) => request(axios, basePath));
         },
         /**
@@ -279,7 +279,7 @@ export interface AuthApiInterface {
      * @throws {RequiredError}
      * @memberof AuthApiInterface
      */
-    authLogin(loginDTO: LoginDTO, options?: RawAxiosRequestConfig): AxiosPromise<TokenModel>;
+    authLogin(loginDTO: LoginDTO, options?: RawAxiosRequestConfig): AxiosPromise<void>;
 
     /**
      * 

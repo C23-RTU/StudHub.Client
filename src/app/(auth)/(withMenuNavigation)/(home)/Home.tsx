@@ -3,9 +3,8 @@
 import { useQuery } from '@tanstack/react-query';
 
 import { NotificationBadge } from '@/components/Badge/NotificationBadge/NotificationBadge';
-import { PostCard } from '@/components/PostCard/PostCard';
+import { PostLoader } from '@/components/ui/PostLoader/PostLoader';
 import { SearchInput } from '@/components/ui/SearchInput/SearchInput';
-import { Skeleton } from '@/components/ui/skeleton';
 
 import { postApi } from '@/api/api';
 
@@ -34,12 +33,8 @@ export default function Home({ username }: { username: string }) {
                 <div>
                     <SearchInput placeholder="Поиск по ленте..." />
                 </div>
-                <div className="flex flex-col gap-10">
-                    {isLoading &&
-                        Array(2)
-                            .fill(0)
-                            .map((_, index) => <Skeleton key={index} className="h-[320px] w-full" />)}
-                    {posts && posts.map((post) => <PostCard key={post.id} post={post} />)}
+                <div>
+                    <PostLoader isLoading={isLoading} posts={posts} />
                 </div>
             </MainContent>
         </div>
