@@ -35,7 +35,7 @@ export function Subscribers({ id }: { id: string }) {
                         key={index}
                         firstName={subscriber.firstName}
                         lastName={subscriber.lastName}
-                        avatar={getStaticImg(subscriber.imagePath)}
+                        avatar={getStaticImg(subscriber.imagePath || '')}
                         role={'Не указано'}
                     />
                 ))}
