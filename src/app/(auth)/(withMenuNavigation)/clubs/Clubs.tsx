@@ -1,17 +1,17 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
+import { ChevronRight } from 'lucide-react';
 
 import { ClubCard } from '@/components/ClubComponents/ClubCard';
+import { SkeletonClubsList } from '@/components/ClubComponents/SkeletonClubsList';
 import { SearchInput } from '@/components/ui/SearchInput/SearchInput';
+import { Button } from '@/components/ui/button';
 
 import { clubsApi } from '@/api/api';
 
 import { Header, HeaderTitle } from '@/hoc/Header/Header';
 import { MainContent } from '@/hoc/MainContent/MainContent';
-import { Button } from '@/components/ui/button';
-import { ChevronRight } from 'lucide-react';
-import { SkeletonClubsList } from '@/components/ClubComponents/SkeletonClubsList';
 
 export function Clubs() {
     const { data: clubs, isLoading } = useQuery({

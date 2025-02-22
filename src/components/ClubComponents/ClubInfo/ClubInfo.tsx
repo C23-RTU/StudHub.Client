@@ -25,7 +25,7 @@ export function ClubInfo({ clubId }: { clubId: string }) {
     const { data: subscribers, isLoading } = useQuery({
         queryKey: ['club-subscribers', clubId],
         queryFn: async () => (await clubsApi.clubsGetAllByClubId(Number(clubId))).data,
-    })
+    });
 
     return (
         <div>

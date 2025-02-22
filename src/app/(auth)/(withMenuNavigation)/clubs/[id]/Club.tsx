@@ -11,7 +11,7 @@ export function Club({ id = '1' }: { id: string }) {
             <ClubHeader clubId={id} />
             <div className="page pt-0">
                 <ClubInfo clubId={id} />
-                <SubscribeButton clubId={id} />
+                <SubscribeButton clubId={id} isBig={true} />
                 <ClubFeed />
             </div>
         </div>

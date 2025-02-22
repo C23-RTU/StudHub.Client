@@ -3,13 +3,13 @@
 import { useQuery } from '@tanstack/react-query';
 
 import { NotificationBadge } from '@/components/Badge/NotificationBadge/NotificationBadge';
+import { PostLoader } from '@/components/ui/PostLoader/PostLoader';
 import { SearchInput } from '@/components/ui/SearchInput/SearchInput';
 
 import { postApi } from '@/api/api';
 
 import { Header, HeaderTitle } from '@/hoc/Header/Header';
 import { MainContent } from '@/hoc/MainContent/MainContent';
-import { PostLoader } from '@/components/ui/PostLoader/PostLoader';
 
 export default function Home({ username }: { username: string }) {
     const { data: posts, isLoading } = useQuery({
