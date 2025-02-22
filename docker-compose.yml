@@ -12,6 +12,7 @@ services:
         volumes:
             - './.next/:/usr/share/nginx/html/'
             - './nginx.conf:/etc/nginx/conf.d/default.conf'
+            - '/opt/.htpasswd:/etc/nginx/.htpasswd'
             - './certbot/www/:/var/www/certbot/'
             - './certbot/conf/:/etc/nginx/certs/'
         networks:
