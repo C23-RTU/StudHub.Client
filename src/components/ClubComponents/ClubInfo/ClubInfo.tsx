@@ -30,18 +30,17 @@ export function ClubInfo({ clubId }: { clubId: string }) {
     return (
         <div>
             <div className="flex flex-col gap-1">
-                <h1 className="text-2xl font-bold text-center">{club?.name}</h1>
-                <p className="text-center opacity-50">{club?.about}</p>
+                <h1 className="text-2xl font-bold text-center mt-3">{club?.name}</h1>
             </div>
 
             <div className="flex flex-col gap-2 mt-5">
                 <RowClubInfo onClick={() => router.push(AUTH_PAGE.CLUB_SUBSCRIBERS(clubId))}>
                     <UsersRound size={18} />
-                    {isLoading ? '...' : subscribers?.length} подписчиков
+                    {isLoading ? '...' : subscribers?.length} подписчика
                 </RowClubInfo>
                 <RowClubInfo>
                     <MapPin size={18} />
-                    г. Москва, ул. Стромынка д.2
+                    г. Москва, ул. Стромынка д. 20
                 </RowClubInfo>
                 <RowClubInfo onClick={() => setShowInfo(true)}>
                     <CircleAlert size={18} />
