@@ -48,7 +48,7 @@ export default async function Profile({ user, userClubs }: { user: PersonDetailD
                 <div className="flex flex-col gap-4">
                     <div className="flex flex-row justify-between">
                         <p className="font-geologica font-bold text-lg">Клубы</p>
-                        <p className="font-inter font-light text-primary">Показать все</p>
+                        {/* <p className="font-inter font-light text-primary">Показать все</p> */}
                     </div>
                     {userClubs.length == 0 && <p className="text-neutral-400">Вы пока не подписаны ни на один клуб</p>}
                     {userClubs.map((club) => (
