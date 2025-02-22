@@ -30,7 +30,7 @@ export function ClubCard({ club, showSubscribe = false }: Props) {
 
             <div
                 className="flex flex-col flex-grow ml-3 mr-3 justify-between overflow-hidden"
-                onClick={() => router.push(`${AUTH_PAGE.CLUBS}/${club.id}}`)}
+                onClick={() => router.push(`${AUTH_PAGE.CLUBS}/${club.id}`)}
             >
                 <p
                     className="text-m font-geologica font-semibold text-ellipsis overflow-hidden whitespace-nowrap"

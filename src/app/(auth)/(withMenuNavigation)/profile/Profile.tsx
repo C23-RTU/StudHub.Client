@@ -9,6 +9,7 @@ import type { ClubDetailDTO, PersonDetailDTO } from '@/api/axios-client';
 import { Header, HeaderTitle } from '@/hoc/Header/Header';
 import { MainContent } from '@/hoc/MainContent/MainContent';
 import { ClubCard } from '@/components/ClubComponents/ClubCard';
+import { IdCard, MessageSquare } from 'lucide-react';
 
 export default async function Profile({ user, userClubs }: { user: PersonDetailDTO; userClubs: ClubDetailDTO[] }) {
     console.log(userClubs);
@@ -32,16 +33,16 @@ export default async function Profile({ user, userClubs }: { user: PersonDetailD
                 </div>
                 <div className="flex flex-col gap-4">
                     <div className="flex flex-row gap-2">
-                        <MdModeComment size={20} />
-                        <p className="text-sm font-geologica">{user.about || '...'}</p>
+                        <MessageSquare size={20} />
+                        <p className="text-sm">{user.about || '...'}</p>
                     </div>
                     {/* <div className="flex flex-row gap-2">
                         <IoMdMail size={20} />
                         <p className="text-sm font-geologica">zero@kostyazero.com</p>
                     </div> */}
                     <div className="flex flex-row gap-2">
-                        <HiIdentification size={20} />
-                        <p className="text-sm font-geologica">Студент ИТУ </p>
+                        <IdCard size={20} />
+                        <p className="text-sm">Студент ИТУ </p>
                     </div>
                 </div>
                 <div className="flex flex-col gap-4">
