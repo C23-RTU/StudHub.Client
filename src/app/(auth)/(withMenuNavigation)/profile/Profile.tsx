@@ -39,7 +39,7 @@ export default async function Profile({ user, userClubs }: { user: PersonDetailD
                     </div> */}
                     <div className="flex flex-row gap-2">
                         <IdCard size={20} />
-                        <p className="text-sm">Студент ИТУ </p>
+                        <p className="text-sm">{user.institute.name}</p>
                     </div>
                 </div>
                 <div className="flex flex-col gap-4">
