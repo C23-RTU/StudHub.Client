@@ -1,6 +1,3 @@
-import { HiIdentification } from 'react-icons/hi2';
-import { MdModeComment } from 'react-icons/md';
-
 import { SettingBadge } from '@/components/Badge/SettingBadge/SettingBadge';
 import { Avatar } from '@/components/ui/Avatar/Avatar';
 
