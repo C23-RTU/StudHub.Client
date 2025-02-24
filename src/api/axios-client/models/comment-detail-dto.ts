@@ -15,7 +15,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { PersonDetailDTO } from './person-detail-dto';
+import type { PersonSummaryDTO } from './person-summary-dto';
 
 /**
  * 
@@ -37,10 +37,10 @@ export interface CommentDetailDTO {
     'content': string;
     /**
      * 
-     * @type {PersonDetailDTO}
+     * @type {PersonSummaryDTO}
      * @memberof CommentDetailDTO
      */
-    'personDetailDTO': PersonDetailDTO;
+    'personSummaryDTO': PersonSummaryDTO;
     /**
      * 
      * @type {number}
