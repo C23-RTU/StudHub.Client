@@ -13,6 +13,9 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { PersonDetailDTOInstitute } from './person-detail-dtoinstitute';
 
 /**
  * 
@@ -58,10 +61,10 @@ export interface PersonDetailDTO {
     'about'?: string | null;
     /**
      * 
-     * @type {number}
+     * @type {PersonDetailDTOInstitute}
      * @memberof PersonDetailDTO
      */
-    'instituteId'?: number | null;
+    'institute'?: PersonDetailDTOInstitute | null;
     /**
      * 
      * @type {number}

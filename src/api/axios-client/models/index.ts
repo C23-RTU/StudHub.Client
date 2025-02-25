@@ -6,6 +6,7 @@ export * from './event-detail-dto';
 export * from './institute-detail-dto';
 export * from './login-dto';
 export * from './person-detail-dto';
+export * from './person-detail-dtoinstitute';
 export * from './person-summary-dto';
 export * from './post-detail-dto';
 export * from './problem-details';

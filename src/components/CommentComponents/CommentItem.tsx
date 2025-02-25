@@ -31,10 +31,10 @@ export function CommentItem({
             >
                 <div className="shrink-0">
                     <Avatar
-                        src={comment.personDetailDTO?.imagePath}
+                        src={comment.personSummaryDTO?.imagePath}
                         loaderSize={15}
                         size={40}
-                        alt={comment.personDetailDTO.lastName}
+                        alt={comment.personSummaryDTO.lastName}
                     />
                 </div>
                 <div className="flex flex-col gap-2 w-full overflow-hidden ">
