@@ -40,7 +40,7 @@ export function CommentItem({
                 <div className="flex flex-col gap-2 w-full overflow-hidden ">
                     <div className="flex justify-between items-center">
                         <p className="font-geologica font-medium text-sm">
-                            {comment.personDetailDTO?.firstName} {comment.personDetailDTO?.lastName}
+                            {comment.personSummaryDTO?.firstName} {comment.personSummaryDTO?.lastName}
                         </p>
                         <small className="text-xss opacity-50 font-inter font-normal">
                             {parseLocalDate(comment.createdAt)}
