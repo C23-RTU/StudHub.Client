@@ -1,7 +1,7 @@
 import { SkeletonClubItem } from './SkeletonClubItem';
 
-export function SkeletonClubsList() {
-    return Array(5)
+export function SkeletonClubsList({amount = 5} : {amount?: number}) {
+    return Array(amount)
         .fill(0)
         .map((_, index) => <SkeletonClubItem key={index} />);
 }
