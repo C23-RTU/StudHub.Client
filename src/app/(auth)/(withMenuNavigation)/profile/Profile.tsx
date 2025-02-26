@@ -7,6 +7,7 @@ import { Header, HeaderTitle } from '@/hoc/Header/Header';
 import { MainContent } from '@/hoc/MainContent/MainContent';
 import { ClubCard } from '@/components/ClubComponents/ClubCard';
 import { IdCard, MessageSquare } from 'lucide-react';
+import Link from 'next/link';
 
 export default async function Profile({ user, userClubs }: { user: PersonDetailDTO; userClubs: ClubDetailDTO[] }) {
     console.log(userClubs);
@@ -44,8 +45,10 @@ export default async function Profile({ user, userClubs }: { user: PersonDetailD
                 </div>
                 <div className="flex flex-col gap-4">
                     <div className="flex flex-row justify-between">
-                        <p className="font-geologica font-bold text-lg">Клубы</p>
-                        {/* <p className="font-inter font-light text-primary">Показать все</p> */}
+                        <p className="font-geologica font-bold text-lg">Подписки</p>
+                        <Link href="/profile/clubs">
+                            <a className="font-inter font-light text-primary">Показать все</a>
+                        </Link>
                     </div>
                     {userClubs.length == 0 && <p className="text-neutral-400">Вы пока не подписаны ни на один клуб</p>}
                     {userClubs.map((club) => (

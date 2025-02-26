@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { Fragment } from 'react';
 
 import { CommentItem } from '@/components/CommentComponents/CommentItem';
-import { SkeletonCommentsList } from '@/components/CommentComponents/SkeletonCommentsList';
+import { SkeletonList } from '@/components/CommentComponents/SkeletonList';
 import { TextareaEditorComment } from '@/components/CommentComponents/TextareaEditorComment';
 import { PostCard } from '@/components/PostCard/PostCard';
 import { BackButton } from '@/components/ui/BackButton/BackButton';
@@ -42,7 +42,7 @@ export function Comments({ serverPost }: { serverPost: PostDetailDTO }) {
                 <PostCard post={post} />
                 <div className="flex flex-col gap-4 pb-[56px]">
                     {data?.pages && data?.pages.length === 0 && <p className="m-auto">Комментариев нет</p>}
-                    {isLoading && <SkeletonCommentsList />}
+                    {isLoading && <SkeletonList />}
 
                     {!isLoading &&
                         data?.pages?.map((page, index) => (
@@ -55,7 +55,7 @@ export function Comments({ serverPost }: { serverPost: PostDetailDTO }) {
                                 ))}
                             </Fragment>
                         ))}
-                    {isFetchingNextPage && <SkeletonCommentsList />}
+                    {isFetchingNextPage && <SkeletonList />}
                     {!isFetchingNextPage && <div ref={ref} />}
 
                     <TextareaEditorComment post={post} />

@@ -12,7 +12,7 @@ import { clubsApi } from '@/api/api';
 import { HeaderTitle } from '@/hoc/Header/Header';
 import { SubscriberCard } from '@/components/SubscriberCard/SubscriberCard';
 import { getStaticImg } from '@/lib/helpers/getStaticImg.helper';
-import { SkeletonCommentsList } from '@/components/CommentComponents/SkeletonCommentsList';
+import { SkeletonList } from '@/components/CommentComponents/SkeletonList';
 
 export function Subscribers({ id }: { id: string }) {
     const { data: subscribers, isLoading } = useQuery({
@@ -29,7 +29,7 @@ export function Subscribers({ id }: { id: string }) {
                 <HeaderTitle>Подписчики</HeaderTitle>
             </div>
             <div className="space-y-4">
-                {isLoading && <SkeletonCommentsList />}
+                {isLoading && <SkeletonList />}
                 {subscribers?.map((subscriber, index) => (
                     <SubscriberCard
                         key={index}
