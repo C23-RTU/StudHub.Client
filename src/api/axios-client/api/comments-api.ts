@@ -200,7 +200,7 @@ export const CommentsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async commentsAdd(commentDTO: CommentDTO, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async commentsAdd(commentDTO: CommentDTO, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CommentDetailDTO>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.commentsAdd(commentDTO, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CommentsApi.commentsAdd']?.[localVarOperationServerIndex]?.url;
@@ -212,7 +212,7 @@ export const CommentsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async commentsDelete(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async commentsDelete(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CommentDetailDTO>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.commentsDelete(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CommentsApi.commentsDelete']?.[localVarOperationServerIndex]?.url;
@@ -261,7 +261,7 @@ export const CommentsApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        commentsAdd(commentDTO: CommentDTO, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+        commentsAdd(commentDTO: CommentDTO, options?: RawAxiosRequestConfig): AxiosPromise<CommentDetailDTO> {
             return localVarFp.commentsAdd(commentDTO, options).then((request) => request(axios, basePath));
         },
         /**
@@ -270,7 +270,7 @@ export const CommentsApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        commentsDelete(id: number, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+        commentsDelete(id: number, options?: RawAxiosRequestConfig): AxiosPromise<CommentDetailDTO> {
             return localVarFp.commentsDelete(id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -310,7 +310,7 @@ export interface CommentsApiInterface {
      * @throws {RequiredError}
      * @memberof CommentsApiInterface
      */
-    commentsAdd(commentDTO: CommentDTO, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    commentsAdd(commentDTO: CommentDTO, options?: RawAxiosRequestConfig): AxiosPromise<CommentDetailDTO>;
 
     /**
      * 
@@ -319,7 +319,7 @@ export interface CommentsApiInterface {
      * @throws {RequiredError}
      * @memberof CommentsApiInterface
      */
-    commentsDelete(id: number, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    commentsDelete(id: number, options?: RawAxiosRequestConfig): AxiosPromise<CommentDetailDTO>;
 
     /**
      * 

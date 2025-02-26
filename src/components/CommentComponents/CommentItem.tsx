@@ -11,16 +11,16 @@ export function CommentItem({ comment }: { comment: CommentDetailDTO }) {
         <div className="flex gap-2">
             <div className="shrink-0">
                 <Avatar
-                    src={comment.personDetailDTO?.imagePath}
+                    src={comment.personSummaryDTO?.imagePath}
                     loaderSize={15}
                     size={40}
-                    alt={comment.personDetailDTO.lastName}
+                    alt={comment.personSummaryDTO.lastName}
                 />
             </div>
             <div className="flex flex-col gap-2 w-full overflow-hidden ">
                 <div className="flex justify-between items-center">
                     <p className="font-geologica font-medium text-sm">
-                        {comment.personDetailDTO?.firstName} {comment.personDetailDTO?.lastName}
+                        {comment.personSummaryDTO?.firstName} {comment.personSummaryDTO?.lastName}
                     </p>
                     <small className="text-xss opacity-50 font-inter font-normal">
                         {parseLocalDate(comment.createdAt)}

@@ -32,8 +32,8 @@ export function ClubHeader({ clubId }: { clubId: string }) {
     });
 
     return (
-        <>
-            <div className="fixed flex flex-row justify-between items-center p-4 w-full max-w-[1024px] z-50">
+        <header>
+            <div className="fixed flex flex-row justify-between items-center z-50 p-4 w-full max-w-[1024px]">
                 <div className="flex flex-row items-center">
                     <BackButton onClick={() => router.push(AUTH_PAGE.CLUBS)} />
                     <p
@@ -93,9 +93,9 @@ export function ClubHeader({ clubId }: { clubId: string }) {
                     height={128}
                     width={128}
                     alt={'avatar'}
-                    className="rounded-full border-[5px] border-background"
+                    className="rounded-full border-[5px] w-[128px] h-[128px] border-background"
                 />
             </div>
-        </>
+        </header>
     );
 }
