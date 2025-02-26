@@ -1,6 +1,5 @@
 'use client';
 
-import { useQuery } from '@tanstack/react-query';
 import { Copy, EllipsisVertical, OctagonAlert } from 'lucide-react';
 import { usePathname, useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
@@ -12,7 +11,7 @@ import {
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
-import { clubsApi } from '@/api/api';
+import type { ClubDetailDTO } from '@/api/axios-client';
 
 import LoaderImage from '../ImageLoader/ImageLoader';
 import { BackButton } from '../ui/BackButton/BackButton';
@@ -20,14 +19,9 @@ import { Button } from '../ui/button';
 
 import { getStaticImg } from '@/lib/helpers/getStaticImg.helper';
 
-export function ClubHeader({ clubId }: { clubId: string }) {
+export function ClubHeader({ club }: { club: ClubDetailDTO | undefined }) {
     const router = useRouter();
     const pathname = usePathname();
-
-    const { data: club } = useQuery({
-        queryKey: ['fetch-club', clubId],
-        queryFn: async () => (await clubsApi.clubsGetById(Number(clubId))).data,
-    });
 
     return (
         <header>
