@@ -1,6 +1,8 @@
-import { useQuery } from '@tanstack/react-query';
+'use client';
+
 import { Copy, EllipsisVertical, OctagonAlert } from 'lucide-react';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
 
 import {
     DropdownMenu,
@@ -9,32 +11,29 @@ import {
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
-import { AUTH_PAGE } from '@/lib/config/routes.config';
+import type { ClubDetailDTO } from '@/api/axios-client';
 
-import { clubsApi } from '@/api/api';
-
-import LoaderImage from '../LoaderImage/LoaderImage';
+import LoaderImage from '../ImageLoader/ImageLoader';
 import { BackButton } from '../ui/BackButton/BackButton';
 import { Button } from '../ui/button';
 
 import { getStaticImg } from '@/lib/helpers/getStaticImg.helper';
 
-export function ClubHeader({ clubId }: { clubId: string }) {
+export function ClubHeader({ club }: { club: ClubDetailDTO | undefined }) {
     const router = useRouter();
-
-    const { data: club } = useQuery({
-        queryKey: ['fetch-club', clubId],
-        queryFn: async () => (await clubsApi.clubsGetById(Number(clubId))).data,
-    });
+    const pathname = usePathname();
 
     return (
-        <>
-            <div className="fixed flex flex-row justify-between items-center p-4 w-full max-w-[1024px]">
+        <header>
+            <div className="fixed flex flex-row justify-between items-center z-50 p-4 w-full max-w-[1024px]">
                 <div className="flex flex-row items-center">
-                    <BackButton onClick={() => router.push(AUTH_PAGE.CLUBS)} />
+                    <BackButton onClick={() => router.back()} />
                     <p
                         className="text-lg ml-4 font-bold shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] bg-secondary font-geologica rounded-lg leading-8 h-10 py-1 px-3 hover:cursor-pointer"
-                        onClick={() => navigator.clipboard.writeText('@IKB_MIREA')}
+                        onClick={() => {
+                            navigator.clipboard.writeText('@IKB_MIREA');
+                            toast.success('Тег скопирован');
+                        }}
                     >
                         @IKB_MIREA
                     </p>
@@ -50,7 +49,12 @@ export function ClubHeader({ clubId }: { clubId: string }) {
                         </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent>
-                        <DropdownMenuItem>
+                        <DropdownMenuItem
+                            onClick={() => {
+                                navigator.clipboard.writeText(pathname);
+                                toast.success('Ссылка скопирована');
+                            }}
+                        >
                             <Copy />
                             Скопировать ссылку
                         </DropdownMenuItem>
@@ -81,9 +85,9 @@ export function ClubHeader({ clubId }: { clubId: string }) {
                     height={128}
                     width={128}
                     alt={'avatar'}
-                    className="rounded-full border-[5px] border-background"
+                    className="rounded-full border-[5px] w-[128px] h-[128px] border-background"
                 />
             </div>
-        </>
+        </header>
     );
 }

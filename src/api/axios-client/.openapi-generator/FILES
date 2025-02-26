@@ -25,6 +25,7 @@ models/index.ts
 models/institute-detail-dto.ts
 models/login-dto.ts
 models/person-detail-dto.ts
+models/person-detail-dtoinstitute.ts
 models/person-summary-dto.ts
 models/post-detail-dto.ts
 models/problem-details.ts
