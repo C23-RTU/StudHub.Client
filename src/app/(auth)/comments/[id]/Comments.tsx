@@ -2,7 +2,7 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
-import { Fragment, useCallback, useMemo } from 'react';
+import { Fragment } from 'react';
 
 import { CommentItem } from '@/components/CommentComponents/CommentItem';
 import { SkeletonCommentsList } from '@/components/CommentComponents/SkeletonCommentsList';
@@ -31,25 +31,6 @@ export function Comments({ serverPost }: { serverPost: PostDetailDTO }) {
         infiniteQuery: { data, isLoading, isFetchingNextPage, hasNextPage },
     } = useInfinityComments(serverPost.id);
 
-    const flatComments = useMemo(() => {
-        return data?.pages.reduce((current, next) => current.concat(next)) || [];
-    }, [data?.pages]);
-
-    const flatCommentsWithoutReplies = useMemo(() => {
-        return flatComments.filter((c) => !c.parentId);
-    }, [flatComments]);
-
-    const flatCommentsReplies = useMemo(() => {
-        return flatComments.filter((c) => c.parentId);
-    }, [flatComments]);
-
-    const getCommentReplies = useCallback(
-        (commentId: number) => {
-            return flatCommentsReplies.filter((c) => c.parentId === commentId);
-        },
-        [flatCommentsReplies],
-    );
-
     return (
         <div className="page pt-[90px]">
             <Header className="justify-start gap-4 fixed top-0 left-0 right-0 px-pageX bg-bg py-pageY z-10 m-0 shadow">
@@ -64,10 +45,14 @@ export function Comments({ serverPost }: { serverPost: PostDetailDTO }) {
                     {isLoading && <SkeletonCommentsList />}
 
                     {!isLoading &&
-                        flatCommentsWithoutReplies.map((item, index) => (
-                            <Fragment key={item.id}>
-                                {index > 0 && <span className="h-[1px] bg-secondary w-3/5 mx-auto" />}
-                                <CommentItem comment={item} replies={getCommentReplies(item.id)} />
+                        data?.pages?.map((page, index) => (
+                            <Fragment key={index}>
+                                {page.map((item) => (
+                                    <Fragment key={item.id}>
+                                        {index > 0 && <span className="h-[1px] bg-secondary w-3/5 mx-auto" />}
+                                        <CommentItem comment={item} />
+                                    </Fragment>
+                                ))}
                             </Fragment>
                         ))}
                     {isFetchingNextPage && <SkeletonCommentsList />}

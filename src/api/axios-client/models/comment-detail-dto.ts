@@ -46,7 +46,19 @@ export interface CommentDetailDTO {
      * @type {number}
      * @memberof CommentDetailDTO
      */
-    'parentId'?: number | null;
+    'inReplyTo'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof CommentDetailDTO
+     */
+    'threadId'?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof CommentDetailDTO
+     */
+    'replyCount'?: number;
     /**
      * 
      * @type {number}

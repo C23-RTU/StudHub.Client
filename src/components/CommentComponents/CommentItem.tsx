@@ -1,26 +1,34 @@
 'use client';
 
 import { ChevronRight } from 'lucide-react';
+import { useMemo } from 'react';
 
 import type { CommentDetailDTO } from '@/api/axios-client';
 
 import { Avatar } from '../ui/Avatar/Avatar';
 
-import { useCommentStore } from './useComment.store';
+import { CommentReplies } from './CommentReplies';
+import { useCommentReplies } from './hooks/useCommentReplies';
+import { useCommentStore } from './store/useComment.store';
 import { parseLocalDate } from '@/lib/utils/time.util';
 import { cn } from '@/lib/utils/utils';
 
-export function CommentItem({
-    comment,
-    className,
-    replies,
-}: {
-    comment: CommentDetailDTO;
-    className?: string;
-    replies: CommentDetailDTO[];
-}) {
+export function CommentItem({ comment, className }: { comment: CommentDetailDTO; className?: string }) {
     const setCommentForReply = useCommentStore((store) => store.setCommentForReply);
     const commentForReply = useCommentStore((store) => store.commentForReply);
+
+    const {
+        isOpenMoreReplies,
+        openMoreReplies,
+        data: replies,
+        isLoading,
+        hasNextPage,
+        fetchNextPage,
+    } = useCommentReplies(comment);
+
+    const showRepliesBtn = useMemo(() => {
+        return comment.threadId == null && comment.replyCount != null && comment.replyCount > 0 && !isOpenMoreReplies;
+    }, [isOpenMoreReplies, comment]);
 
     return (
         <div className="flex flex-col gap-3">
@@ -61,13 +69,21 @@ export function CommentItem({
                             Ответить
                             <ChevronRight size={14} />
                         </button>
+                        {showRepliesBtn && (
+                            <button type="button" className="text-xs text-primary" onClick={openMoreReplies}>
+                                Показать ответы
+                            </button>
+                        )}
                     </div>
                 </div>
             </div>
-            {replies.length > 0 &&
-                replies.map((reply) => (
-                    <CommentItem className="ml-[40px]" key={reply.id} comment={reply} replies={[]} />
-                ))}
+
+            <CommentReplies
+                replies={replies?.pages || []}
+                isLoading={isLoading}
+                hasNextPage={hasNextPage}
+                fetchNextPage={fetchNextPage}
+            />
         </div>
     );
 }

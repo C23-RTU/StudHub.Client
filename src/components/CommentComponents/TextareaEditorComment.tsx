@@ -1,5 +1,4 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { type InfiniteData, useMutation } from '@tanstack/react-query';
 import { m } from 'framer-motion';
 import { CircleXIcon, SendHorizonalIcon } from 'lucide-react';
 import { useEffect } from 'react';
@@ -8,18 +7,12 @@ import { type SubmitHandler, useForm } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 
-import { commentApi } from '@/api/api';
-import type { CommentDetailDTO, PostDetailDTO } from '@/api/axios-client';
+import type { PostDetailDTO } from '@/api/axios-client';
 
-import { queryClient } from '../Provider/getQueryClient';
-
-import { useCommentStore } from './useComment.store';
+import { useSendCommentAndReply } from './hooks/useSendCommentAndReply';
 import { CommentPayloadSchema, type TCommentPayloadSchema } from '@/lib/types/comment.type';
 
 export function TextareaEditorComment({ post, hasNextPage }: { post: PostDetailDTO; hasNextPage: boolean }) {
-    const commentForReply = useCommentStore((store) => store.commentForReply);
-    const resetCommentForReply = useCommentStore((store) => store.resetCommentForReply);
-
     const {
         handleSubmit,
         reset,
@@ -30,69 +23,21 @@ export function TextareaEditorComment({ post, hasNextPage }: { post: PostDetailD
         mode: 'onChange',
         resolver: zodResolver(CommentPayloadSchema),
         defaultValues: {
-            parentId: null,
+            inReplyTo: null,
             postId: post.id,
         },
     });
 
-    const { mutate, isPending } = useMutation({
-        mutationKey: ['send-comment'],
-        mutationFn: async (payload: TCommentPayloadSchema) => (await commentApi.commentsAdd(payload)).data,
-        onSuccess: (comment) => {
-            queryClient.setQueryData(['fetch-post', post.id], () => {
-                return { ...post, commentCount: post.commentCount + 1 };
-            });
-
-            if ((!comment.parentId && !hasNextPage) || comment.parentId) {
-                console.log(hasNextPage);
-                queryClient.setQueryData(
-                    ['fetch-post-comments', post.id],
-                    (oldData: InfiniteData<CommentDetailDTO[], unknown>) => {
-                        if (!oldData) return;
-                        const lastPageIndex = oldData.pages.length - 1;
-                        const lastPage = oldData.pages[lastPageIndex];
-                        return {
-                            pageParams: oldData.pageParams,
-                            pages: [...oldData.pages.slice(0, lastPageIndex), [...lastPage, comment]],
-                        };
-                    },
-                );
-            }
-
-            // queryClient.invalidateQueries({
-            //     queryKey: ['fetch-post-comments', post.id],
-            // });
-
-            resetAllData();
-        },
-        onError: async () => {
-            const { toast } = await import('react-hot-toast');
-            toast.error('Ошибка', {
-                position: 'top-center',
-            });
-        },
-    });
+    const { commentForReply, mutate, resetAllData, isPending } = useSendCommentAndReply(post, hasNextPage, reset);
 
     const sendCommentHandler: SubmitHandler<TCommentPayloadSchema> = (data) => {
         mutate(data);
     };
 
-    const resetAllData = () => {
-        reset({
-            content: '',
-            parentId: null,
-            postId: post.id,
-        });
-        resetCommentForReply();
-    };
-
     useEffect(() => {
         if (!commentForReply) return;
 
-        const parentIdValue =
-            commentForReply.parentId !== null ? (commentForReply.parentId as number) : commentForReply.id;
-
-        setValue('parentId', parentIdValue);
+        setValue('inReplyTo', commentForReply.id);
         setValue('content', `${commentForReply.personSummaryDTO.firstName}, `);
     }, [commentForReply, setValue]);
 
