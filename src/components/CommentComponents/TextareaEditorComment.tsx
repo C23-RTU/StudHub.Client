@@ -93,7 +93,7 @@ export function TextareaEditorComment({ post, hasNextPage }: { post: PostDetailD
             commentForReply.parentId !== null ? (commentForReply.parentId as number) : commentForReply.id;
 
         setValue('parentId', parentIdValue);
-        setValue('content', `${commentForReply.personDetailDTO.firstName}, `);
+        setValue('content', `${commentForReply.personSummaryDTO.firstName}, `);
     }, [commentForReply, setValue]);
 
     return (
@@ -109,7 +109,7 @@ export function TextareaEditorComment({ post, hasNextPage }: { post: PostDetailD
                 >
                     <div className="flex gap-1">
                         <p>ответ пользователю </p>
-                        <p className="text-primary font-medium">{commentForReply.personDetailDTO.firstName}</p>
+                        <p className="text-primary font-medium">{commentForReply.personSummaryDTO.firstName}</p>
                     </div>
                     <button type="button" onClick={resetAllData}>
                         <CircleXIcon size={15} className="text-gray-400" />
