@@ -31,12 +31,6 @@ export interface CommentDTO {
      * @type {number}
      * @memberof CommentDTO
      */
-    'parentId'?: number | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof CommentDTO
-     */
     'postId': number;
 }
 
