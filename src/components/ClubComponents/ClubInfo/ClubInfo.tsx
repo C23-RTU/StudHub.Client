@@ -12,15 +12,21 @@ import { AUTH_PAGE } from '@/lib/config/routes.config';
 import { clubsApi } from '@/api/api';
 
 import { RowClubInfo } from './RowClubInfo';
+import type { ClubDetailDTO } from '@/api/axios-client';
 
-export function ClubInfo({ clubId }: { clubId: string }) {
+export function ClubInfo({ club, clubId }: { club: ClubDetailDTO | undefined, clubId: string }) {
     const router = useRouter();
     const [showInfo, setShowInfo] = useState(false);
 
-    const { data: club } = useQuery({
-        queryKey: ['fetch-club', clubId],
-        queryFn: async () => (await clubsApi.clubsGetById(Number(clubId))).data,
-    });
+    function getSubscribersText(count: number) {
+        if (count === 0) return 'Нет подписчиков';
+        const lastDigit = count % 10;
+        const lastTwoDigits = count % 100;
+        if (lastTwoDigits >= 11 && lastTwoDigits <= 19) return `${count} подписчиков`;
+        if (lastDigit === 1) return `${count} подписчик`;
+        if (lastDigit >= 2 && lastDigit <= 4) return `${count} подписчика`;
+        return `${count} подписчиков`;
+    }
 
     const { data: subscribers, isLoading } = useQuery({
         queryKey: ['club-subscribers', clubId],
@@ -36,7 +42,7 @@ export function ClubInfo({ clubId }: { clubId: string }) {
             <div className="flex flex-col gap-2 mt-5">
                 <RowClubInfo onClick={() => router.push(AUTH_PAGE.CLUB_SUBSCRIBERS(clubId))}>
                     <UsersRound size={18} />
-                    {isLoading ? '...' : subscribers?.length} подписчика
+                    {isLoading ? '...' : getSubscribersText(subscribers?.length || 0)}
                 </RowClubInfo>
                 <RowClubInfo>
                     <MapPin size={18} />
