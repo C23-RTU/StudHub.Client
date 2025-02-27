@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
 
-import ProfileClubs from './ProfileClubs';
 import { userApi } from '@/api/api';
 import type { ClubDetailDTO } from '@/api/axios-client';
+
+import ProfileClubs from './ProfileClubs';
 
 export const metadata: Metadata = {
     title: 'Подписки',

@@ -22,7 +22,7 @@ export default function ProfileClubs({ clubs }: Props) {
             </div>
             <div className="space-y-4">
                 {clubs?.length === 0 ? (
-                    <p className="text-center">Нет подписок</p>
+                    <p className="text-center text-neutral-400">Вы пока не подписаны ни на один клуб</p>
                 ) : (
                     clubs.map((club) => <ClubCard key={club.id} club={club} showSubscribe />)
                 )}
