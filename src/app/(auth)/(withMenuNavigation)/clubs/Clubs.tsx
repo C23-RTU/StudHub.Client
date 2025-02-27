@@ -19,6 +19,8 @@ export function Clubs() {
         queryFn: async () => (await clubsApi.clubsGetAll()).data,
     });
 
+    console.log(clubs);
+
     return (
         <div className="page">
             <Header>

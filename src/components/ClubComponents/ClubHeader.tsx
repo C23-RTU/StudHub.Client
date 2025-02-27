@@ -1,6 +1,5 @@
 'use client';
 
-import { useQuery } from '@tanstack/react-query';
 import { Copy, EllipsisVertical, OctagonAlert } from 'lucide-react';
 import { usePathname, useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
@@ -12,9 +11,7 @@ import {
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
-import { AUTH_PAGE } from '@/lib/config/routes.config';
-
-import { clubsApi } from '@/api/api';
+import type { ClubDetailDTO } from '@/api/axios-client';
 
 import LoaderImage from '../ImageLoader/ImageLoader';
 import { BackButton } from '../ui/BackButton/BackButton';
@@ -22,20 +19,15 @@ import { Button } from '../ui/button';
 
 import { getStaticImg } from '@/lib/helpers/getStaticImg.helper';
 
-export function ClubHeader({ clubId }: { clubId: string }) {
+export function ClubHeader({ club }: { club: ClubDetailDTO | undefined }) {
     const router = useRouter();
     const pathname = usePathname();
-
-    const { data: club } = useQuery({
-        queryKey: ['fetch-club', clubId],
-        queryFn: async () => (await clubsApi.clubsGetById(Number(clubId))).data,
-    });
 
     return (
         <header>
             <div className="fixed flex flex-row justify-between items-center z-50 p-4 w-full max-w-[1024px]">
                 <div className="flex flex-row items-center">
-                    <BackButton onClick={() => router.push(AUTH_PAGE.CLUBS)} />
+                    <BackButton onClick={() => router.back()} />
                     <p
                         className="text-lg ml-4 font-bold shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] bg-secondary font-geologica rounded-lg leading-8 h-10 py-1 px-3 hover:cursor-pointer"
                         onClick={() => {

@@ -1,6 +1,7 @@
 export * from './club-detail-dto';
 export * from './comment-dto';
 export * from './comment-detail-dto';
+export * from './comment-reply-dto';
 export * from './event-dto';
 export * from './event-detail-dto';
 export * from './institute-detail-dto';

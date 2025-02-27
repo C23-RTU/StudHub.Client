@@ -18,7 +18,7 @@ export function SubscriberCard({ firstName, lastName, avatar, role }: Props) {
                     alt={`Фото профиля ${firstName}`}
                     width={40}
                     height={40}
-                    className="rounded-full w-10 h-10 min-w-[40px]"
+                    className="rounded-full w-10 h-10 min-w-[40px] overflow-hidden"
                 />
                 {/* <div
                     className={`w-3 h-3 rounded-full border border-bg absolute right-0 bottom-0 ${

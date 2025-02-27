@@ -25,11 +25,11 @@ export function PostHeader({ post }: Props) {
                         {post.club?.name}
                     </p>
                     <small className="text-[10px] font-inter font-normal truncate">
-                    {new Date().toLocaleDateString('ru-RU', {
+                        {/* {new Date().toLocaleDateString('ru-RU', {
                         day: 'numeric',
                         month: 'short',
                         year: 'numeric',
-                    })}
+                    })} */}
                     </small>
                 </div>
             </div>
