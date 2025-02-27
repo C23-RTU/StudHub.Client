@@ -1,12 +1,12 @@
-import { SkeletonCommentItem } from '@/components/CommentComponents/SkeletonCommentItem';
+import { SkeletonItem } from '@/components/Skeletons/SkeletonItem';
 
-export function SkeletonCommentsList() {
+export function SkeletonList() {
     return (
         <div className="flex flex-col gap-4">
             {Array(3)
                 .fill(0)
                 .map((_, index) => (
-                    <SkeletonCommentItem key={index} />
+                    <SkeletonItem key={index} />
                 ))}
         </div>
     );
