@@ -10,10 +10,11 @@ import { TextareaEditorComment } from '@/components/CommentComponents/TextareaEd
 import { PostCard } from '@/components/PostCard/PostCard';
 import { BackButton } from '@/components/ui/BackButton/BackButton';
 
-import { postApi } from '@/api/api';
+import { useInfinityScroll } from '@/hooks/useInfinityScroll';
+
+import { commentApi, postApi } from '@/api/api';
 import type { PostDetailDTO } from '@/api/axios-client/models';
 
-import { useInfinityComments } from './useInfinityComments';
 import { Header, HeaderTitle } from '@/hoc/Header/Header';
 import { MainContent } from '@/hoc/MainContent/MainContent';
 
@@ -29,7 +30,11 @@ export function Comments({ serverPost }: { serverPost: PostDetailDTO }) {
     const {
         ref,
         infiniteQuery: { data, isLoading, isFetchingNextPage, hasNextPage },
-    } = useInfinityComments(serverPost.id);
+    } = useInfinityScroll({
+        queryKey: ['fetch-post-comments', serverPost.id],
+        queryFn: async ({ pageParam }) => (await commentApi.commentsGetByPostId(serverPost.id, 0, pageParam, 100)).data,
+        pageSize: 100,
+    });
 
     return (
         <div className="page pt-[90px]">
