@@ -43,7 +43,7 @@ export function Clubs() {
                 />
 
                 <div className="flex flex-col gap-4">
-                    {isLoading && <SkeletonList />}
+                    {isLoading && <SkeletonList amount={5} />}
                     {clubs?.map((club, index) => (
                         <ClubCard
                             key={index}
