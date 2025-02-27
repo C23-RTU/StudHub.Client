@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { useDebounce } from 'use-debounce';
 
 import { ClubCard } from '@/components/ClubComponents/ClubCard';
-import { SkeletonClubsList } from '@/components/ClubComponents/SkeletonClubsList';
+import { SkeletonList } from '@/components/Skeletons/SkeletonList';
 import { SearchInput } from '@/components/ui/SearchInput/SearchInput';
 import { Button } from '@/components/ui/button';
 
@@ -43,8 +43,14 @@ export function Clubs() {
                 />
 
                 <div className="flex flex-col gap-4">
-                    {isLoading && <SkeletonClubsList />}
-                    {clubs?.map((club, index) => <ClubCard key={index} club={club} showSubscribe />)}
+                    {isLoading && <SkeletonList />}
+                    {clubs?.map((club, index) => (
+                        <ClubCard
+                            key={index}
+                            club={club}
+                            showSubscribe
+                        />
+                    ))}
                     <Button onClick={() => {}}>
                         <p>Показать все</p>
                         <ChevronRight />

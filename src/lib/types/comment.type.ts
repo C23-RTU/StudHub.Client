@@ -2,8 +2,8 @@ import { z } from 'zod';
 
 export const CommentPayloadSchema = z.object({
     content: z.string().nonempty(),
-    parentId: z.number().nullable(),
-    postId: z.number(),
+    inReplyTo: z.number().nullable(),
+    postId: z.number().nullable(),
 });
 
 export type TCommentPayloadSchema = z.infer<typeof CommentPayloadSchema>;
