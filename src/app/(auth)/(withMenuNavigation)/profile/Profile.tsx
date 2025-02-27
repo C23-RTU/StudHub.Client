@@ -8,6 +8,7 @@ import { MainContent } from '@/hoc/MainContent/MainContent';
 import { ClubCard } from '@/components/ClubComponents/ClubCard';
 import { IdCard, MessageSquare } from 'lucide-react';
 import Link from 'next/link';
+import { AUTH_PAGE } from '@/lib/config/routes.config';
 
 export default function Profile({ user, userClubs }: { user: PersonDetailDTO; userClubs: ClubDetailDTO[] }) {
     return (
@@ -40,7 +41,7 @@ export default function Profile({ user, userClubs }: { user: PersonDetailDTO; us
                 <div className="flex flex-col gap-4">
                     <div className="flex flex-row justify-between">
                         <p className="font-geologica font-bold text-lg">Подписки</p>
-                        <Link href="/profile/clubs" className="font-inter font-light text-primary">
+                        <Link href={`${AUTH_PAGE.PROFILE_CLUBS}`} className="font-inter font-light text-primary">
                             Показать все
                         </Link>
                     </div>
