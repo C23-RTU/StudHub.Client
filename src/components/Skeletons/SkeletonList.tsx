@@ -1,4 +1,4 @@
-import { SkeletonItem } from '@/components/CommentComponents/SkeletonItem';
+import { SkeletonItem } from '@/components/Skeletons/SkeletonItem';
 
 export function SkeletonList() {
     return Array(3)

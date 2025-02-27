@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { ChevronRight } from 'lucide-react';
 
 import { ClubCard } from '@/components/ClubComponents/ClubCard';
-import { SkeletonClubsList } from '@/components/ClubComponents/SkeletonClubsList';
+import { SkeletonList } from '@/components/Skeletons/SkeletonList';
 import { SearchInput } from '@/components/ui/SearchInput/SearchInput';
 import { Button } from '@/components/ui/button';
 
@@ -29,7 +29,7 @@ export function Clubs() {
                 <SearchInput placeholder="Поиск по клубам..." />
 
                 <div className="flex flex-col gap-4">
-                    {isLoading && <SkeletonClubsList />}
+                    {isLoading && <SkeletonList />}
                     {clubs?.map((club, index) => (
                         <ClubCard
                             key={index}

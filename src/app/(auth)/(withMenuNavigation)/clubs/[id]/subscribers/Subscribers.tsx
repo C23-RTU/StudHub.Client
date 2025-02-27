@@ -9,10 +9,10 @@ import { AUTH_PAGE } from '@/lib/config/routes.config';
 
 import { clubsApi } from '@/api/api';
 
-import { HeaderTitle } from '@/hoc/Header/Header';
+import { Header, HeaderTitle } from '@/hoc/Header/Header';
 import { SubscriberCard } from '@/components/SubscriberCard/SubscriberCard';
 import { getStaticImg } from '@/lib/helpers/getStaticImg.helper';
-import { SkeletonList } from '@/components/CommentComponents/SkeletonList';
+import { SkeletonList } from '@/components/Skeletons/SkeletonList';
 
 export function Subscribers({ id }: { id: string }) {
     const { data: subscribers, isLoading } = useQuery({
@@ -22,17 +22,17 @@ export function Subscribers({ id }: { id: string }) {
 
     return (
         <div className="page">
-            <div className="sticky top-1 left-0 flex items-center mb-4 gap-5">
+            <Header className='justify-start gap-4'>
                 <Link href={`${AUTH_PAGE.CLUBS}/${id}`}>
                     <BackButton />
                 </Link>
                 <HeaderTitle>Подписчики</HeaderTitle>
-            </div>
+            </Header>
             <div className="space-y-4">
                 {isLoading && <SkeletonList />}
-                {subscribers?.map((subscriber, index) => (
+                {subscribers?.map((subscriber) => (
                     <SubscriberCard
-                        key={index}
+                        key={subscriber.id}
                         firstName={subscriber.firstName}
                         lastName={subscriber.lastName}
                         avatar={getStaticImg(subscriber.imagePath || '')}

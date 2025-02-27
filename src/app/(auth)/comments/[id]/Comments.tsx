@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { Fragment } from 'react';
 
 import { CommentItem } from '@/components/CommentComponents/CommentItem';
-import { SkeletonList } from '@/components/CommentComponents/SkeletonList';
+import { SkeletonList } from '@/components/Skeletons/SkeletonList';
 import { TextareaEditorComment } from '@/components/CommentComponents/TextareaEditorComment';
 import { PostCard } from '@/components/PostCard/PostCard';
 import { BackButton } from '@/components/ui/BackButton/BackButton';
