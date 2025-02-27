@@ -4,6 +4,7 @@ class AuthPage {
     PROFILE = '/profile';
     CLUBS = '/clubs';
     FINDER = '/finder';
+    PROFILE_CLUBS = '/profile/clubs';
 
     COMMENTS = (id: number | string) => `/comments/${id}`;
 

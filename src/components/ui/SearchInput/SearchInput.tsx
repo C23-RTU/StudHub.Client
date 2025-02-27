@@ -8,7 +8,7 @@ type Props = ComponentProps<typeof Input>;
 export function SearchInput(props: Props) {
     return (
         <div className="relative z-0">
-            <Input {...props} className="pr-8" />
+            <Input {...props} className="pr-8" onChange={props.onChange} />
             <div
                 className="absolute right-2 top-[50%] translate-y-[-50%] flex items-center justify-center cursor-pointer active:scale-90 transition-all select-none"
                 onClick={props.onClick}
