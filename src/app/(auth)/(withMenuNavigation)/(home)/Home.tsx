@@ -15,7 +15,7 @@ import { MainContent } from '@/hoc/MainContent/MainContent';
 export default function Home({ username }: { username: string }) {
     const {
         ref,
-        infiniteQuery: { data, isLoading, isFetchingNextPage, hasNextPage },
+        infiniteQuery: { data, isLoading, isFetchingNextPage, hasNextPage, error },
     } = useInfinityScroll({
         queryKey: ['fetch-feed-posts'],
         queryFn: async ({ pageParam = 0 }) => (await feedApi.feedGetFeedPosts(pageParam, 10)).data,
@@ -35,18 +35,16 @@ export default function Home({ username }: { username: string }) {
                 </div> */}
                 <p className="text-xl font-semibold">Лента</p>
                 <SearchInput placeholder="Поиск по ленте..." />
-                <div>
-                    <div className="flex flex-col gap-10">
-                        {isLoading &&
-                            Array(3)
-                                .fill(0)
-                                .map((_, index) => <Skeleton key={index} className="h-[320px] w-full" />)}
-                        {data &&
-                            data.pages.flatMap((page) => page).map((post) => <PostCard key={post.id} post={post} />)}
-                        {isFetchingNextPage && <Skeleton className="h-[320px] w-full" />}
-                        {!hasNextPage && <p className="text-center text-neutral-400">На этом лента кончается!</p>}
-                        <div ref={ref}></div>
-                    </div>
+                <div className="flex flex-col gap-10">
+                    {isLoading &&
+                        Array(3)
+                            .fill(0)
+                            .map((_, index) => <Skeleton key={index} className="h-[320px] w-full" />)}
+                    {data && data.pages.flatMap((page) => page).map((post) => <PostCard key={post.id} post={post} />)}
+                    {isFetchingNextPage && <Skeleton className="h-[320px] w-full" />}
+                    {!hasNextPage && <p className="text-center text-neutral-400">На этом лента кончается!</p>}
+                    {error && <p className="text-center text-neutral-400">Ошибка загрузки постов</p>}
+                    <div ref={ref}></div>
                 </div>
             </MainContent>
         </div>
