@@ -5,15 +5,16 @@ import { useRouter } from 'next/navigation';
 import { Fragment } from 'react';
 
 import { CommentItem } from '@/components/CommentComponents/CommentItem';
-import { SkeletonList } from '@/components/Skeletons/SkeletonList';
 import { TextareaEditorComment } from '@/components/CommentComponents/TextareaEditorComment';
 import { PostCard } from '@/components/PostCard/PostCard';
+import { SkeletonList } from '@/components/Skeletons/SkeletonList';
 import { BackButton } from '@/components/ui/BackButton/BackButton';
 
-import { postApi } from '@/api/api';
+import { useInfinityScroll } from '@/hooks/useInfinityScroll';
+
+import { commentApi, postApi } from '@/api/api';
 import type { PostDetailDTO } from '@/api/axios-client/models';
 
-import { useInfinityComments } from './useInfinityComments';
 import { Header, HeaderTitle } from '@/hoc/Header/Header';
 import { MainContent } from '@/hoc/MainContent/MainContent';
 
@@ -29,7 +30,11 @@ export function Comments({ serverPost }: { serverPost: PostDetailDTO }) {
     const {
         ref,
         infiniteQuery: { data, isLoading, isFetchingNextPage, hasNextPage },
-    } = useInfinityComments(serverPost.id);
+    } = useInfinityScroll({
+        queryKey: ['fetch-post-comments', serverPost.id],
+        queryFn: async ({ pageParam }) => (await commentApi.commentsGetByPostId(serverPost.id, 0, pageParam, 100)).data,
+        pageSize: 100,
+    });
 
     return (
         <div className="page pt-[90px]">
@@ -58,6 +63,7 @@ export function Comments({ serverPost }: { serverPost: PostDetailDTO }) {
                     {isFetchingNextPage && <SkeletonList />}
                     {!isFetchingNextPage && <div ref={ref} />}
 
+                    <TextareaEditorComment post={post} hasNextPage={hasNextPage} />
                     <TextareaEditorComment post={post} hasNextPage={hasNextPage} />
                 </div>
             </MainContent>
