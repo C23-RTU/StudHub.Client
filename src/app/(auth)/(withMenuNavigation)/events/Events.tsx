@@ -1,3 +1,7 @@
+'use client';
+
+import { m } from 'framer-motion';
+
 import { EventCard } from '@/components/EventCard/EventCard';
 
 import type { EventDetailDTO } from '@/api/axios-client';
@@ -11,7 +15,19 @@ export function Events({ events }: { events: EventDetailDTO[] }) {
             <Header>
                 <HeaderTitle>События</HeaderTitle>
             </Header>
-            <MainContent>{events && events.map((event) => <EventCard key={event.id} event={event} />)}</MainContent>
+            <MainContent>
+                {events &&
+                    events.map((event, index) => (
+                        <m.div
+                            key={event.id}
+                            initial={{ scale: 0.8, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            transition={{ delay: index * 0.1 }}
+                        >
+                            <EventCard event={event} />
+                        </m.div>
+                    ))}
+            </MainContent>
         </div>
     );
 }
