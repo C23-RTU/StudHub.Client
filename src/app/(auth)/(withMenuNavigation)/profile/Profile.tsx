@@ -16,9 +16,7 @@ import { useProfile } from '@/hooks/useProfile';
 
 export default function Profile() {
 
-    const userProfile = useProfile();
-    const isLoading = userProfile.isLoading;
-    const user = userProfile.data;
+    const { data: user, isLoading } = useProfile();
     const { data: clubs, isLoading: isLoadingClubs } = useQuery({
         queryKey: ['fetch-user-clubs'],
         queryFn: async () => (await userApi.userGetSubscribedClubs()).data,
