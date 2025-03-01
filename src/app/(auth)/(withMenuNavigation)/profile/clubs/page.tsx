@@ -1,8 +1,5 @@
 import type { Metadata } from 'next';
 
-import { userApi } from '@/api/api';
-import type { ClubDetailDTO } from '@/api/axios-client';
-
 import ProfileClubs from './ProfileClubs';
 
 export const metadata: Metadata = {
@@ -11,7 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default async function Page() {
-    const clubs: ClubDetailDTO[] = (await userApi.userGetSubscribedClubs()).data;
-
-    return <ProfileClubs clubs={clubs} />;
+    return <ProfileClubs />;
 }
