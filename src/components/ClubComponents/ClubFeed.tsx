@@ -1,24 +1,28 @@
-'use client'
+'use client';
 
-import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'next/navigation';
 
+import { useInfinityScroll } from '@/hooks/useInfinityScroll';
+
 import { postApi } from '@/api/api';
-import type { PostDetailDTO } from '@/api/axios-client/models';
 
 import { PostCard } from '../PostCard/PostCard';
 import { SearchInput } from '../ui/SearchInput/SearchInput';
+import { Skeleton } from '../ui/skeleton';
 
 import { MainContent } from '@/hoc/MainContent/MainContent';
-import { PostLoader } from '../ui/PostLoader/PostLoader';
 
 export function ClubFeed() {
     const { id } = useParams();
     const clubId = Number(id);
 
-    const { data: posts, isLoading } = useQuery({
+    const {
+        ref,
+        infiniteQuery: { data, isLoading, isFetchingNextPage, hasNextPage, error },
+    } = useInfinityScroll({
         queryKey: ['fetch-club-posts', clubId],
-        queryFn: async () => (await postApi.postsGetByClubId(clubId)).data,
+        queryFn: async ({ pageParam = 0 }) => (await postApi.postsGetByClubId(clubId, pageParam, 10)).data,
+        pageSize: 10,
     });
 
     return (
@@ -27,15 +31,15 @@ export function ClubFeed() {
             <SearchInput placeholder="Поиск по постам..." />
 
             <div className="flex flex-col gap-10">
-                {isLoading ? (
-                    <PostLoader isLoading={isLoading} posts={posts} amount={1} />
-                ) : posts && posts.length > 0 ? (
-                    posts.map((post: PostDetailDTO) => <PostCard key={post.id} post={post} />)
-                ) : !posts ? (
-                    <p className="m-auto">Ошибка загрузки постов</p>
-                ) : (
-                    <p className="m-auto">Нет постов</p>
-                )}
+                {isLoading &&
+                    Array(3)
+                        .fill(0)
+                        .map((_, index) => <Skeleton key={index} className="h-[320px] w-full" />)}
+                {data && data.pages.flatMap((page) => page).map((post) => <PostCard key={post.id} post={post} />)}
+                {isFetchingNextPage && <Skeleton className="h-[320px] w-full" />}
+                {!hasNextPage && <p className="text-center text-neutral-400">На этом лента кончается!</p>}
+                {error && <p className="text-center text-neutral-400">Ошибка загрузки постов</p>}
+                <div ref={ref}></div>
             </div>
         </MainContent>
     );
