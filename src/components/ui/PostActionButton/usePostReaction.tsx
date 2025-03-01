@@ -1,10 +1,27 @@
-import { useMutation, useQueryClient, type InfiniteData } from '@tanstack/react-query';
+import { type InfiniteData, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useCallback } from 'react';
 
 import { reactionApi } from '@/api/api';
 import type { PostDetailDTO } from '@/api/axios-client/models';
 
 export const usePostReaction = (post: PostDetailDTO) => {
     const queryClient = useQueryClient();
+
+    const updatePostQueryHandler = useCallback(
+        (oldData: InfiniteData<PostDetailDTO[], unknown>, newPost: PostDetailDTO) => {
+            if (!oldData) return;
+
+            const pages = oldData.pages.map((page) => {
+                return page.map((post) => (post.id === newPost.id ? newPost : post));
+            });
+
+            return {
+                pageParams: oldData.pageParams,
+                pages,
+            };
+        },
+        [],
+    );
 
     const { mutate } = useMutation({
         mutationKey: ['toggle-reaction'],
@@ -21,20 +38,14 @@ export const usePostReaction = (post: PostDetailDTO) => {
             };
 
             queryClient.setQueryData(['fetch-post', post.id], () => newPost);
+            queryClient.setQueryData(['fetch-feed-posts'], (oldData: InfiniteData<PostDetailDTO[], unknown>) => {
+                return updatePostQueryHandler(oldData, newPost);
+            });
             queryClient.setQueryData(
-                ['fetch-feed-posts'],
+                ['fetch-club-posts', post.club.id],
                 (oldData: InfiniteData<PostDetailDTO[], unknown>) => {
-                    if (!oldData) return;
-
-                    const pages = oldData.pages.map((page) => {
-                        return page.map((post) => (post.id === newPost.id ? newPost : post));
-                    });
-
-                    return {
-                        pageParams: oldData.pageParams,
-                        pages
-                    }
-                }
+                    return updatePostQueryHandler(oldData, newPost);
+                },
             );
         },
     });
