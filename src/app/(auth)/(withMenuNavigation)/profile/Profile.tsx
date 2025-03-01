@@ -12,13 +12,13 @@ import { AUTH_PAGE } from '@/lib/config/routes.config';
 import { useQuery } from '@tanstack/react-query';
 import { userApi } from '@/api/api';
 import { Skeleton } from '@/components/ui/skeleton';
+import { useProfile } from '@/hooks/useProfile';
 
 export default function Profile() {
-    const { data: user, isLoading } = useQuery({
-        queryKey: ['fetch-user-profile'],
-        queryFn: async () => (await userApi.userGetPersonalDetails()).data,
-    })
 
+    const userProfile = useProfile();
+    const isLoading = userProfile.isLoading;
+    const user = userProfile.data;
     const { data: clubs, isLoading: isLoadingClubs } = useQuery({
         queryKey: ['fetch-user-clubs'],
         queryFn: async () => (await userApi.userGetSubscribedClubs()).data,
