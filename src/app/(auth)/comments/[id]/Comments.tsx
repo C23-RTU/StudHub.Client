@@ -2,10 +2,11 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
-import { Fragment } from 'react';
+import { Fragment, useEffect } from 'react';
 
 import { CommentItem } from '@/components/CommentComponents/CommentItem';
 import { TextareaEditorComment } from '@/components/CommentComponents/TextareaEditorComment';
+import { useCommentStore } from '@/components/CommentComponents/store/useComment.store';
 import { PostCard } from '@/components/PostCard/PostCard';
 import { SkeletonList } from '@/components/Skeletons/SkeletonList';
 import { BackButton } from '@/components/ui/BackButton/BackButton';
@@ -21,6 +22,9 @@ import { MainContent } from '@/hoc/MainContent/MainContent';
 export function Comments({ serverPost }: { serverPost: PostDetailDTO }) {
     const router = useRouter();
 
+    const highlightComment = useCommentStore((store) => store.highlightComment);
+    const resetHighlightComment = useCommentStore((store) => store.resetHighlightComment);
+
     const { data: post } = useQuery({
         queryKey: ['fetch-post', serverPost.id],
         queryFn: async () => (await postApi.postsGetById(serverPost.id)).data,
@@ -35,6 +39,23 @@ export function Comments({ serverPost }: { serverPost: PostDetailDTO }) {
         queryFn: async ({ pageParam }) => (await commentApi.commentsGetByPostId(serverPost.id, 0, pageParam, 100)).data,
         pageSize: 100,
     });
+
+    useEffect(() => {
+        if (!highlightComment) return;
+
+        document
+            .getElementById(`comment-${highlightComment.inReplyTo}`)
+            ?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+        const timerId = setTimeout(() => {
+            resetHighlightComment();
+        }, 1000);
+
+        return () => {
+            clearTimeout(timerId);
+        };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [highlightComment]);
 
     return (
         <div className="page pt-[90px]">
