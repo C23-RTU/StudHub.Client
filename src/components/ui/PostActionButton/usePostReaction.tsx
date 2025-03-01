@@ -22,8 +22,8 @@ export const usePostReaction = (post: PostDetailDTO) => {
             };
 
             queryClient.setQueryData(
-                ['fetch-posts-list'],
-                (oldData: PostDetailDTO[] | null) => oldData && oldData.map((p) => (p.id === post.id ? newPost : p)),
+                ['fetch-feed-posts'],
+                (oldData: PostDetailDTO[] | null) => oldData && oldData.map((p) => (p.id === post.id ? newPost : p))
             );
             queryClient.setQueryData(['fetch-post', post.id], () => newPost);
         },
