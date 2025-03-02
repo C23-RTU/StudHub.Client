@@ -6,6 +6,7 @@ import { Header, HeaderTitle } from '@/hoc/Header/Header';
 import { userApi } from '@/api/api';
 import { SkeletonList } from '@/components/Skeletons/SkeletonList';
 import { useInfinityScroll } from '@/hooks/useInfinityScroll';
+import { useMemo } from 'react';
 
 export default function ProfileClubs() {
     const { ref, infiniteQuery: { data: clubs, isLoading, isFetchingNextPage, hasNextPage } } = useInfinityScroll({
@@ -14,7 +15,9 @@ export default function ProfileClubs() {
         pageSize: 12,
     });
 
-    const userClubs = clubs ? clubs.pages.flatMap((page) => page) : [];
+    const userClubs = useMemo(() => 
+        clubs ? clubs.pages.flatMap((page) => page) : []
+    , [clubs]);
 
     return (
         <div className="page">
