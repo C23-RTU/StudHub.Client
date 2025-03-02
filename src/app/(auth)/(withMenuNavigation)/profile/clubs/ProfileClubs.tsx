@@ -4,14 +4,20 @@ import { BackButton } from '@/components/ui/BackButton/BackButton';
 
 import { Header, HeaderTitle } from '@/hoc/Header/Header';
 import { userApi } from '@/api/api';
-import { useQuery } from '@tanstack/react-query';
 import { SkeletonList } from '@/components/Skeletons/SkeletonList';
+import { useInfinityScroll } from '@/hooks/useInfinityScroll';
+import { useMemo } from 'react';
 
 export default function ProfileClubs() {
-    const { data: clubs, isLoading } = useQuery({
+    const { ref, infiniteQuery: { data: clubs, isLoading, isFetchingNextPage, hasNextPage } } = useInfinityScroll({
         queryKey: ['fetch-user-clubs'],
-        queryFn: async () => (await userApi.userGetSubscribedClubs()).data,
+        queryFn: async (page) => (await userApi.userGetSubscribedClubs(page.pageParam, 12)).data,
+        pageSize: 12,
     });
+
+    const userClubs = useMemo(() => 
+        clubs ? clubs.pages.flatMap((page) => page) : []
+    , [clubs]);
 
     return (
         <div className="page">
@@ -21,11 +27,14 @@ export default function ProfileClubs() {
             </Header>
             <div className="space-y-4">
                 { isLoading && <SkeletonList /> }
-                {clubs?.length === 0 ? (
+                {userClubs.length === 0 ? (
                     <p className="text-center text-neutral-400">Вы пока не подписаны ни на один клуб</p>
                 ) : (
-                    clubs?.map((club) => <ClubCard key={club.id} club={club} showSubscribe />)
+                    userClubs.map((club) => <ClubCard key={club.id} club={club} />)
                 )}
+                {isFetchingNextPage && <SkeletonList />}
+                {!hasNextPage && <p className="text-center text-neutral-400">На этом все!</p>}
+                <div ref={ref}></div>
             </div>
         </div>
     );
