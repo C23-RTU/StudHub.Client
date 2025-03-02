@@ -3,6 +3,8 @@
 import { ChevronRight } from 'lucide-react';
 import { type MouseEvent, useMemo } from 'react';
 
+import { useProfile } from '@/hooks/useProfile';
+
 import type { CommentDetailDTO } from '@/api/axios-client';
 
 import { Avatar } from '../ui/Avatar/Avatar';
@@ -13,12 +15,24 @@ import { useCommentStore } from './store/useComment.store';
 import { parseLocalDate } from '@/lib/utils/time.util';
 import { cn } from '@/lib/utils/utils';
 
-export function CommentItem({ comment, className }: { comment: CommentDetailDTO; className?: string }) {
+export function CommentItem({
+    comment,
+    className,
+    showMinimumComponent = false,
+}: {
+    comment: CommentDetailDTO;
+    className?: string;
+    showMinimumComponent?: boolean;
+}) {
+    const { data: user } = useProfile();
+
     const setCommentForReply = useCommentStore((store) => store.setCommentForReply);
     const commentForReply = useCommentStore((store) => store.commentForReply);
 
     const setHighlightComment = useCommentStore((store) => store.setHighlightComment);
     const highlightComment = useCommentStore((store) => store.highlightComment);
+
+    const openCommentMoreSheet = useCommentStore((store) => store.openCommentMoreSheet);
 
     const {
         isOpenMoreReplies,
@@ -33,22 +47,33 @@ export function CommentItem({ comment, className }: { comment: CommentDetailDTO;
         return comment.threadId == null && comment.replyCount != null && comment.replyCount > 0 && !isOpenMoreReplies;
     }, [isOpenMoreReplies, comment]);
 
-    const setHighlightCommentHandler = (event: MouseEvent) => {
+    const isMyComment = useMemo(() => {
+        return comment.personSummaryDTO.id === user?.id;
+    }, [comment, user]);
+
+    const setDefaultEvent = (event: MouseEvent) => {
         event.preventDefault();
         event.stopPropagation();
+    };
+
+    const setHighlightCommentHandler = (event: MouseEvent) => {
+        setDefaultEvent(event);
         setHighlightComment(comment);
     };
 
     const setCommentForReplyHandler = (event: MouseEvent) => {
-        event.preventDefault();
-        event.stopPropagation();
+        setDefaultEvent(event);
         setCommentForReply(comment);
     };
 
     const openMoreRepliesHandler = (event: MouseEvent) => {
-        event.preventDefault();
-        event.stopPropagation();
+        setDefaultEvent(event);
         openMoreReplies();
+    };
+
+    const openCommentMoreSheetHandler = (event: MouseEvent) => {
+        setDefaultEvent(event);
+        openCommentMoreSheet(comment);
     };
 
     return (
@@ -81,30 +106,45 @@ export function CommentItem({ comment, className }: { comment: CommentDetailDTO;
                         {comment.content}
                     </p>
 
-                    <div className="flex gap-2">
-                        <button
-                            type="button"
-                            className="text-xs text-gray-500 flex items-center"
-                            onClick={setCommentForReplyHandler}
-                        >
-                            Ответить
-                            <ChevronRight size={14} />
-                        </button>
-                        {showRepliesBtn && (
-                            <button type="button" className="text-xs text-primary" onClick={openMoreRepliesHandler}>
-                                Показать ответы
+                    {!showMinimumComponent && (
+                        <div className="flex gap-3">
+                            <button
+                                type="button"
+                                className="text-xs text-gray-500 flex items-center"
+                                onClick={setCommentForReplyHandler}
+                            >
+                                Ответить
                             </button>
-                        )}
-                    </div>
+
+                            {isMyComment && (
+                                <button
+                                    type="button"
+                                    className="text-xs text-gray-500 flex items-center"
+                                    onClick={openCommentMoreSheetHandler}
+                                >
+                                    Еще
+                                    <ChevronRight size={14} />
+                                </button>
+                            )}
+
+                            {showRepliesBtn && (
+                                <button type="button" className="text-xs text-primary" onClick={openMoreRepliesHandler}>
+                                    Показать ответы
+                                </button>
+                            )}
+                        </div>
+                    )}
                 </div>
             </div>
 
-            <CommentReplies
-                replies={replies?.pages || []}
-                isLoading={isLoading}
-                hasNextPage={hasNextPage}
-                fetchNextPage={fetchNextPage}
-            />
+            {!showMinimumComponent && (
+                <CommentReplies
+                    replies={replies?.pages || []}
+                    isLoading={isLoading}
+                    hasNextPage={hasNextPage}
+                    fetchNextPage={fetchNextPage}
+                />
+            )}
         </div>
     );
 }

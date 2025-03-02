@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { Fragment, useEffect } from 'react';
 
 import { CommentItem } from '@/components/CommentComponents/CommentItem';
+import { CommentMoreSheet } from '@/components/CommentComponents/CommentMoreSheet';
 import { TextareaEditorComment } from '@/components/CommentComponents/TextareaEditorComment';
 import { useCommentStore } from '@/components/CommentComponents/store/useComment.store';
 import { PostCard } from '@/components/PostCard/PostCard';
@@ -68,25 +69,24 @@ export function Comments({ serverPost }: { serverPost: PostDetailDTO }) {
                 <PostCard post={post} />
                 <div className="flex flex-col gap-4 pb-[56px]">
                     {data?.pages && data?.pages.length === 0 && <p className="m-auto">Комментариев нет</p>}
-                    {isLoading && <SkeletonList />}
 
                     {!isLoading &&
-                        data?.pages?.map((page, index) => (
-                            <Fragment key={index}>
-                                {page.map((item) => (
+                        data?.pages?.map((page, pageIndex) => (
+                            <Fragment key={pageIndex}>
+                                {page.map((item, itemIndex) => (
                                     <Fragment key={item.id}>
-                                        {index > 0 && <span className="h-[1px] bg-secondary w-3/5 mx-auto" />}
+                                        {itemIndex > 0 && <span className="h-[1px] bg-secondary w-3/5 mx-auto" />}
                                         <CommentItem comment={item} />
                                     </Fragment>
                                 ))}
                             </Fragment>
                         ))}
-                    {isFetchingNextPage && <SkeletonList />}
+                    {(isLoading || isFetchingNextPage) && <SkeletonList />}
                     {!isFetchingNextPage && <div ref={ref} />}
 
                     <TextareaEditorComment post={post} hasNextPage={hasNextPage} />
-                    <TextareaEditorComment post={post} hasNextPage={hasNextPage} />
                 </div>
+                <CommentMoreSheet />
             </MainContent>
         </div>
     );
