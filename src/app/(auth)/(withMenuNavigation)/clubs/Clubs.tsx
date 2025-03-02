@@ -1,14 +1,13 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-import { ChevronRight } from 'lucide-react';
+import { m } from 'framer-motion';
 import { useState } from 'react';
 import { useDebounce } from 'use-debounce';
 
 import { ClubCard } from '@/components/ClubComponents/ClubCard';
 import { SkeletonList } from '@/components/Skeletons/SkeletonList';
 import { SearchInput } from '@/components/ui/SearchInput/SearchInput';
-import { Button } from '@/components/ui/button';
 
 import { clubsApi } from '@/api/api';
 
@@ -45,16 +44,15 @@ export function Clubs() {
                 <div className="flex flex-col gap-4">
                     {isLoading && <SkeletonList amount={5} />}
                     {clubs?.map((club, index) => (
-                        <ClubCard
-                            key={index}
-                            club={club}
-                            showSubscribe
-                        />
+                        <m.div
+                            key={club.id}
+                            initial={{ scale: 0.8, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            transition={{ delay: index * 0.05 }}
+                        >
+                            <ClubCard club={club} showSubscribe />
+                        </m.div>
                     ))}
-                    <Button onClick={() => {}}>
-                        <p>Показать все</p>
-                        <ChevronRight />
-                    </Button>
                 </div>
             </MainContent>
         </div>

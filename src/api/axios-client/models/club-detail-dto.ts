@@ -50,5 +50,11 @@ export interface ClubDetailDTO {
      * @memberof ClubDetailDTO
      */
     'imageUrl'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ClubDetailDTO
+     */
+    'bannerUrl'?: string | null;
 }
 
