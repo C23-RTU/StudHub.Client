@@ -19,12 +19,12 @@ export const useCommentReplies = (comment: CommentDetailDTO) => {
             if (!lastPage.length || lastPage.length < PAGE_SIZE) return null;
             return lastPageParam + 1;
         },
-        getPreviousPageParam: (_, __, firstPageParam) => firstPageParam,
-        enabled: isOpenMoreReplies,
+        enabled: false,
     });
 
     const openMoreReplies = () => {
         setIsOpenMoreReplies(!isOpenMoreReplies);
+        infiniteQuery.refetch();
     };
 
     useEffect(() => {

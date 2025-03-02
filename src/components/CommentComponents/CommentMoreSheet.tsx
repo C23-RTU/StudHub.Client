@@ -1,38 +1,17 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useMemo } from 'react';
-
-import { commentApi } from '@/api/api';
-import type { CommentDetailDTO } from '@/api/axios-client/models';
 
 import { Button } from '../ui/button';
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from '../ui/sheet';
 
 import { CommentItem } from './CommentItem';
+import { useRemoveComment } from './hooks/useRemoveComment';
 import { useCommentStore } from './store/useComment.store';
 
 export function CommentMoreSheet() {
     const commentMoreSheet = useCommentStore((store) => store.commentMoreSheet);
     const closeCommentMoreSheet = useCommentStore((store) => store.closeCommentMoreSheet);
 
-    const queryClient = useQueryClient();
-
-    const { mutate, isPending } = useMutation({
-        mutationKey: ['delete-comment', commentMoreSheet?.id],
-        mutationFn: async () => (await commentApi.commentsDelete(commentMoreSheet?.id as number)).data,
-        onSuccess(updateComment: CommentDetailDTO) {
-            //FIXME:  тут тоже можно изменить логику на setQueryData
-            if (!updateComment.threadId) {
-                queryClient.invalidateQueries({ queryKey: ['fetch-post-comments', commentMoreSheet?.postId] });
-            }
-            if (updateComment.threadId) {
-                queryClient.invalidateQueries({
-                    queryKey: ['get-comment-replies', commentMoreSheet?.threadId],
-                });
-            }
-
-            closeCommentMoreSheet();
-        },
-    });
+    const { isPending, mutate } = useRemoveComment();
 
     const isCommentDelete = useMemo(() => {
         if (!commentMoreSheet) return true;
