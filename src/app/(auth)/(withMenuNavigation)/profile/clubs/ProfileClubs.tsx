@@ -24,10 +24,10 @@ export default function ProfileClubs() {
             </Header>
             <div className="space-y-4">
                 { isLoading && <SkeletonList /> }
-                {userClubs?.length === 0 ? (
+                {userClubs.length === 0 ? (
                     <p className="text-center text-neutral-400">Вы пока не подписаны ни на один клуб</p>
                 ) : (
-                    userClubs?.map((club) => <ClubCard key={club.id} club={club} showSubscribe />)
+                    userClubs.map((club) => <ClubCard key={club.id} club={club} />)
                 )}
                 {isFetchingNextPage && <SkeletonList />}
                 {!hasNextPage && <p className="text-center text-neutral-400">На этом все!</p>}

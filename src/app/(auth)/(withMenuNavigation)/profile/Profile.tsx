@@ -18,12 +18,12 @@ type Props = {
 };
 
 export default function Profile({ user }: Props) {
-  const { data: clubs, isLoading: isLoadingClubs } = useQuery({
+  const { data: clubs, isLoading: isLoadingClubs, error } = useQuery({
     queryKey: ['fetch-user-clubs'],
-    queryFn: async () => (await userApi.userGetSubscribedClubs(1, 3)).data,
+    queryFn: async () => (await userApi.userGetSubscribedClubs(0, 3)).data,
   });
 
-  const userClubs = clubs ?? [];
+  const userClubs = clubs ? clubs : [];
 
   return (
     <div className="page">
@@ -70,6 +70,7 @@ export default function Profile({ user }: Props) {
           ) : (
             userClubs.map((club) => <ClubCard key={club.id} club={club} />)
           )}
+          {error && <p className="text-neutral-400 text-center">Ошибка загрузки подписок</p>}
         </div>
       </MainContent>
     </div>
