@@ -35,10 +35,12 @@ export const ClubsApiAxiosParamCreator = function (configuration?: Configuration
     return {
         /**
          * 
+         * @param {number} [pageIndex] 
+         * @param {number} [pageSize] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        clubsGetAll: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        clubsGetAll: async (pageIndex?: number, pageSize?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/clubs`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -50,6 +52,14 @@ export const ClubsApiAxiosParamCreator = function (configuration?: Configuration
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            if (pageIndex !== undefined) {
+                localVarQueryParameter['PageIndex'] = pageIndex;
+            }
+
+            if (pageSize !== undefined) {
+                localVarQueryParameter['PageSize'] = pageSize;
+            }
 
 
     
@@ -108,10 +118,12 @@ export const ClubsApiAxiosParamCreator = function (configuration?: Configuration
         /**
          * 
          * @param {number} id 
+         * @param {number} [pageIndex] 
+         * @param {number} [pageSize] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        clubsGetAllByPersonId: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        clubsGetAllByPersonId: async (id: number, pageIndex?: number, pageSize?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('clubsGetAllByPersonId', 'id', id)
             const localVarPath = `/clubs/getByPersonId/{id}`
@@ -126,6 +138,14 @@ export const ClubsApiAxiosParamCreator = function (configuration?: Configuration
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            if (pageIndex !== undefined) {
+                localVarQueryParameter['PageIndex'] = pageIndex;
+            }
+
+            if (pageSize !== undefined) {
+                localVarQueryParameter['PageSize'] = pageSize;
+            }
 
 
     
@@ -174,10 +194,12 @@ export const ClubsApiAxiosParamCreator = function (configuration?: Configuration
         /**
          * 
          * @param {string} [searchString] 
+         * @param {number} [pageIndex] 
+         * @param {number} [pageSize] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        clubsSearch: async (searchString?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        clubsSearch: async (searchString?: string, pageIndex?: number, pageSize?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/clubs/search`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -192,6 +214,14 @@ export const ClubsApiAxiosParamCreator = function (configuration?: Configuration
 
             if (searchString !== undefined) {
                 localVarQueryParameter['searchString'] = searchString;
+            }
+
+            if (pageIndex !== undefined) {
+                localVarQueryParameter['PageIndex'] = pageIndex;
+            }
+
+            if (pageSize !== undefined) {
+                localVarQueryParameter['PageSize'] = pageSize;
             }
 
 
@@ -250,11 +280,13 @@ export const ClubsApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
+         * @param {number} [pageIndex] 
+         * @param {number} [pageSize] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async clubsGetAll(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ClubDetailDTO>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.clubsGetAll(options);
+        async clubsGetAll(pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ClubDetailDTO>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.clubsGetAll(pageIndex, pageSize, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ClubsApi.clubsGetAll']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -276,11 +308,13 @@ export const ClubsApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {number} id 
+         * @param {number} [pageIndex] 
+         * @param {number} [pageSize] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async clubsGetAllByPersonId(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ClubDetailDTO>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.clubsGetAllByPersonId(id, options);
+        async clubsGetAllByPersonId(id: number, pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ClubDetailDTO>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.clubsGetAllByPersonId(id, pageIndex, pageSize, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ClubsApi.clubsGetAllByPersonId']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -300,11 +334,13 @@ export const ClubsApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {string} [searchString] 
+         * @param {number} [pageIndex] 
+         * @param {number} [pageSize] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async clubsSearch(searchString?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ClubDetailDTO>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.clubsSearch(searchString, options);
+        async clubsSearch(searchString?: string, pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ClubDetailDTO>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.clubsSearch(searchString, pageIndex, pageSize, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ClubsApi.clubsSearch']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -333,11 +369,13 @@ export const ClubsApiFactory = function (configuration?: Configuration, basePath
     return {
         /**
          * 
+         * @param {number} [pageIndex] 
+         * @param {number} [pageSize] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        clubsGetAll(options?: RawAxiosRequestConfig): AxiosPromise<Array<ClubDetailDTO>> {
-            return localVarFp.clubsGetAll(options).then((request) => request(axios, basePath));
+        clubsGetAll(pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<ClubDetailDTO>> {
+            return localVarFp.clubsGetAll(pageIndex, pageSize, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -353,11 +391,13 @@ export const ClubsApiFactory = function (configuration?: Configuration, basePath
         /**
          * 
          * @param {number} id 
+         * @param {number} [pageIndex] 
+         * @param {number} [pageSize] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        clubsGetAllByPersonId(id: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<ClubDetailDTO>> {
-            return localVarFp.clubsGetAllByPersonId(id, options).then((request) => request(axios, basePath));
+        clubsGetAllByPersonId(id: number, pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<ClubDetailDTO>> {
+            return localVarFp.clubsGetAllByPersonId(id, pageIndex, pageSize, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -371,11 +411,13 @@ export const ClubsApiFactory = function (configuration?: Configuration, basePath
         /**
          * 
          * @param {string} [searchString] 
+         * @param {number} [pageIndex] 
+         * @param {number} [pageSize] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        clubsSearch(searchString?: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<ClubDetailDTO>> {
-            return localVarFp.clubsSearch(searchString, options).then((request) => request(axios, basePath));
+        clubsSearch(searchString?: string, pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<ClubDetailDTO>> {
+            return localVarFp.clubsSearch(searchString, pageIndex, pageSize, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -397,11 +439,13 @@ export const ClubsApiFactory = function (configuration?: Configuration, basePath
 export interface ClubsApiInterface {
     /**
      * 
+     * @param {number} [pageIndex] 
+     * @param {number} [pageSize] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ClubsApiInterface
      */
-    clubsGetAll(options?: RawAxiosRequestConfig): AxiosPromise<Array<ClubDetailDTO>>;
+    clubsGetAll(pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<ClubDetailDTO>>;
 
     /**
      * 
@@ -417,11 +461,13 @@ export interface ClubsApiInterface {
     /**
      * 
      * @param {number} id 
+     * @param {number} [pageIndex] 
+     * @param {number} [pageSize] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ClubsApiInterface
      */
-    clubsGetAllByPersonId(id: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<ClubDetailDTO>>;
+    clubsGetAllByPersonId(id: number, pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<ClubDetailDTO>>;
 
     /**
      * 
@@ -435,11 +481,13 @@ export interface ClubsApiInterface {
     /**
      * 
      * @param {string} [searchString] 
+     * @param {number} [pageIndex] 
+     * @param {number} [pageSize] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ClubsApiInterface
      */
-    clubsSearch(searchString?: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<ClubDetailDTO>>;
+    clubsSearch(searchString?: string, pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<ClubDetailDTO>>;
 
     /**
      * 
@@ -461,12 +509,14 @@ export interface ClubsApiInterface {
 export class ClubsApi extends BaseAPI implements ClubsApiInterface {
     /**
      * 
+     * @param {number} [pageIndex] 
+     * @param {number} [pageSize] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ClubsApi
      */
-    public clubsGetAll(options?: RawAxiosRequestConfig) {
-        return ClubsApiFp(this.configuration).clubsGetAll(options).then((request) => request(this.axios, this.basePath));
+    public clubsGetAll(pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig) {
+        return ClubsApiFp(this.configuration).clubsGetAll(pageIndex, pageSize, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -485,12 +535,14 @@ export class ClubsApi extends BaseAPI implements ClubsApiInterface {
     /**
      * 
      * @param {number} id 
+     * @param {number} [pageIndex] 
+     * @param {number} [pageSize] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ClubsApi
      */
-    public clubsGetAllByPersonId(id: number, options?: RawAxiosRequestConfig) {
-        return ClubsApiFp(this.configuration).clubsGetAllByPersonId(id, options).then((request) => request(this.axios, this.basePath));
+    public clubsGetAllByPersonId(id: number, pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig) {
+        return ClubsApiFp(this.configuration).clubsGetAllByPersonId(id, pageIndex, pageSize, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -507,12 +559,14 @@ export class ClubsApi extends BaseAPI implements ClubsApiInterface {
     /**
      * 
      * @param {string} [searchString] 
+     * @param {number} [pageIndex] 
+     * @param {number} [pageSize] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ClubsApi
      */
-    public clubsSearch(searchString?: string, options?: RawAxiosRequestConfig) {
-        return ClubsApiFp(this.configuration).clubsSearch(searchString, options).then((request) => request(this.axios, this.basePath));
+    public clubsSearch(searchString?: string, pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig) {
+        return ClubsApiFp(this.configuration).clubsSearch(searchString, pageIndex, pageSize, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

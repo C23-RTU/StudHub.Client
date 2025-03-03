@@ -91,10 +91,12 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
         },
         /**
          * 
+         * @param {number} [pageIndex] 
+         * @param {number} [pageSize] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        userGetSubscribedClubs: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        userGetSubscribedClubs: async (pageIndex?: number, pageSize?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/user/subscribedClubs`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -106,6 +108,14 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            if (pageIndex !== undefined) {
+                localVarQueryParameter['PageIndex'] = pageIndex;
+            }
+
+            if (pageSize !== undefined) {
+                localVarQueryParameter['PageSize'] = pageSize;
+            }
 
 
     
@@ -152,11 +162,13 @@ export const UserApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {number} [pageIndex] 
+         * @param {number} [pageSize] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async userGetSubscribedClubs(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ClubDetailDTO>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.userGetSubscribedClubs(options);
+        async userGetSubscribedClubs(pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ClubDetailDTO>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.userGetSubscribedClubs(pageIndex, pageSize, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['UserApi.userGetSubscribedClubs']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -189,11 +201,13 @@ export const UserApiFactory = function (configuration?: Configuration, basePath?
         },
         /**
          * 
+         * @param {number} [pageIndex] 
+         * @param {number} [pageSize] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        userGetSubscribedClubs(options?: RawAxiosRequestConfig): AxiosPromise<Array<ClubDetailDTO>> {
-            return localVarFp.userGetSubscribedClubs(options).then((request) => request(axios, basePath));
+        userGetSubscribedClubs(pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<ClubDetailDTO>> {
+            return localVarFp.userGetSubscribedClubs(pageIndex, pageSize, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -222,11 +236,13 @@ export interface UserApiInterface {
 
     /**
      * 
+     * @param {number} [pageIndex] 
+     * @param {number} [pageSize] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UserApiInterface
      */
-    userGetSubscribedClubs(options?: RawAxiosRequestConfig): AxiosPromise<Array<ClubDetailDTO>>;
+    userGetSubscribedClubs(pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<ClubDetailDTO>>;
 
 }
 
@@ -259,12 +275,14 @@ export class UserApi extends BaseAPI implements UserApiInterface {
 
     /**
      * 
+     * @param {number} [pageIndex] 
+     * @param {number} [pageSize] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UserApi
      */
-    public userGetSubscribedClubs(options?: RawAxiosRequestConfig) {
-        return UserApiFp(this.configuration).userGetSubscribedClubs(options).then((request) => request(this.axios, this.basePath));
+    public userGetSubscribedClubs(pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig) {
+        return UserApiFp(this.configuration).userGetSubscribedClubs(pageIndex, pageSize, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
