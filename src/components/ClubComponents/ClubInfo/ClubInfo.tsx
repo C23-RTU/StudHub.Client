@@ -56,7 +56,7 @@ export function ClubInfo({ club, clubId }: { club: ClubDetailDTO | undefined, cl
             <Sheet open={showInfo} onOpenChange={setShowInfo}>
                 <SheetContent side="bottom">
                     <SheetHeader>
-                        <SheetTitle className="text-start">Информация о клубе</SheetTitle>
+                        <SheetTitle className="text-start font-geologica">Информация о клубе</SheetTitle>
                     </SheetHeader>
                     <p className="font-normal font-inter text-neutral-300">{club?.about}</p>
                 </SheetContent>

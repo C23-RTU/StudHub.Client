@@ -25,11 +25,11 @@ export function ClubHeader({ club }: { club: ClubDetailDTO | undefined }) {
 
     return (
         <header>
-            <div className="fixed flex flex-row justify-between items-center z-50 p-4 w-full max-w-[1024px]">
+            <div className="fixed flex flex-row justify-between items-center z-50 p-4 w-full max-w-[1020px]">
                 <div className="flex flex-row items-center">
                     <BackButton onClick={() => router.back()} />
                     <p
-                        className="text-lg ml-4 font-bold shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] bg-secondary font-geologica rounded-lg leading-8 h-10 py-1 px-3 hover:cursor-pointer"
+                        className="text-lg ml-4 font-bold shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)] bg-secondary font-geologica rounded-lg leading-8 h-10 py-1 px-3 hover:cursor-pointer"
                         onClick={() => {
                             navigator.clipboard.writeText('@IKB_MIREA');
                             toast.success('Тег скопирован');
@@ -43,7 +43,7 @@ export function ClubHeader({ club }: { club: ClubDetailDTO | undefined }) {
                         <Button
                             variant={'outline'}
                             size="icon"
-                            className="rounded-lg w-10 h-10 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] bg-secondary"
+                            className="rounded-lg w-10 h-10 shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)] bg-secondary"
                         >
                             <EllipsisVertical />
                         </Button>
@@ -67,7 +67,7 @@ export function ClubHeader({ club }: { club: ClubDetailDTO | undefined }) {
             </div>
             <div className="w-full flex items-center justify-center">
                 <LoaderImage
-                    src={club?.bannerUrl ? getStaticImg(club.bannerUrl) : '/img/blank.png'}
+                    src={club?.bannerUrl ? getStaticImg(club.bannerUrl) : '/img/default-club-banner.jpg'}
                     height={250}
                     width={1000}
                     alt={'banner'}
@@ -80,7 +80,7 @@ export function ClubHeader({ club }: { club: ClubDetailDTO | undefined }) {
                     src={
                         club?.imageUrl
                             ? getStaticImg(club.imageUrl)
-                            : 'https://gravatar.com/avatar/d99cc6ace66fc8bd197c30c876b7224007211f4572ef6d8444693f67b4c33ab1?size=80'
+                            : '/img/default-club-avatar.png'
                     }
                     height={128}
                     width={128}

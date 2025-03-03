@@ -27,7 +27,7 @@ export function ClubFeed() {
 
     return (
         <MainContent>
-            <p className="text-xl font-semibold">Посты</p>
+            <p className="text-xl font-semibold font-geologica">Посты</p>
             <SearchInput placeholder="Поиск по постам..." />
 
             <div className="flex flex-col gap-10">

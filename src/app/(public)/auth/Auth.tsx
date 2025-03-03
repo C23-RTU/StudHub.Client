@@ -35,23 +35,23 @@ export default function Auth() {
             {/* <Image src={'/img/logo.png'} width={255} height={255} quality={100} alt="logo" /> */}
             <div className="flex flex-col items-start w-full">
                 <div className="flex flex-row gap-4 items-center">
-                    <h1 className="text-6xl font-syncopate leading-none">CETKA</h1>
+                    <h1 className="text-6xl font-unbounded font-bold">СЕТКА</h1>
                     <SetkaLogo className='w-10 h-10' />
                 </div>
 
-                <p className="text-lg my-3">
-                    Социальная сеть для студентов РТУ МИРЭА с новостями из жизни университета.
+                <p className="text-lg text-neutral-300 my-3 font-geologica">
+                    Социальная сеть для студентов РТУ МИРЭА с новостями из жизни университета
                 </p>
             </div>
 
-            <Switcher tabs={['Вход', 'Регистация']} activeTabIndex={formType} onChange={handleChange} />
+            <Switcher tabs={['Вход', 'Регистрация']} activeTabIndex={formType} onChange={handleChange} />
 
             <div className="w-full">
                 {formType === Tabs.LOGIN && <Login />}
                 {formType === Tabs.REGISTRATION && <Register />}
             </div>
 
-            <small className="text-center text-xs text-neutral-500">
+            <small className="text-center font-semibold text-xs text-neutral-500">
                 © C23-RTU, 2025. Сетка является неофициальным студенческим проектом в рамках университета РТУ МИРЭА.
             </small>
         </div>
