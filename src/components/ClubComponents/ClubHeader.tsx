@@ -67,8 +67,8 @@ export function ClubHeader({ club }: { club: ClubDetailDTO | undefined }) {
             </div>
             <div className="w-full flex items-center justify-center">
                 <LoaderImage
-                    src={'/img/clubplaceholder.png'}
-                    height={220}
+                    src={club?.bannerUrl ? getStaticImg(club.bannerUrl) : '/img/blank.png'}
+                    height={250}
                     width={1000}
                     alt={'banner'}
                     className="rounded-b-3xl w-full h-[250px] object-cover"
