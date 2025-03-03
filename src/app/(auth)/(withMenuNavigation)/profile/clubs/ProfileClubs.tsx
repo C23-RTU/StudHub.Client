@@ -15,7 +15,7 @@ import { Header, HeaderTitle } from '@/hoc/Header/Header';
 export default function ProfileClubs() {
     const {
         ref,
-        infiniteQuery: { data: clubs, isLoading, isFetchingNextPage, hasNextPage },
+        infiniteQuery: { data: clubs, isLoading, isFetchingNextPage },
     } = useInfinityScroll({
         queryKey: ['fetch-user-clubs'],
         queryFn: async (page) => (await userApi.userGetSubscribedClubs(page.pageParam, 12)).data,
@@ -37,7 +37,6 @@ export default function ProfileClubs() {
                 ) : (
                     userClubs.map((club) => <ClubCard key={club.id} club={club} />)
                 )}
-                {!hasNextPage && <p className="text-center text-neutral-400">На этом все!</p>}
                 <div ref={ref}></div>
             </div>
         </div>

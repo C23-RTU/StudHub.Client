@@ -42,8 +42,8 @@ export default function Home({ username }: { username: string }) {
                             .map((_, index) => <Skeleton key={index} className="h-[320px] w-full" />)}
                     {data && data.pages.flatMap((page) => page).map((post) => <PostCard key={post.id} post={post} />)}
                     {isFetchingNextPage && <Skeleton className="h-[320px] w-full" />}
-                    {!hasNextPage && <p className="text-center text-neutral-400">На этом лента кончается!</p>}
-                    {error && <p className="text-center text-neutral-400">Ошибка загрузки постов</p>}
+                    {!hasNextPage && <p className="text-center text-neutral-500">Ваша лента закончилась</p>}
+                    {error && <p className="text-center text-neutral-500">Не удалось выполнить загрузку постов. Пожалуйста, повторите позже.</p>}
                     <div ref={ref}></div>
                 </div>
             </MainContent>
