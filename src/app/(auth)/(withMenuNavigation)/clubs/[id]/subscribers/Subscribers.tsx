@@ -28,13 +28,13 @@ export function Subscribers({ id }: { id: string }) {
     return (
         <div className="page">
             <Header className="justify-start gap-4">
-                <Link href={`${AUTH_PAGE.CLUBS}/${id}`}>
+                <Link href={AUTH_PAGE.CLUB_SUBSCRIBERS(id)}>
                     <BackButton />
                 </Link>
                 <HeaderTitle>Подписчики</HeaderTitle>
             </Header>
             <div className="space-y-4">
-                {isLoading && <SkeletonList amount={5}/>}
+                {isLoading && <SkeletonList amount={5} />}
                 {subscribers?.pages.flatMap((page) =>
                     page.map((subscriber) => (
                         <SubscriberCard
@@ -44,7 +44,7 @@ export function Subscribers({ id }: { id: string }) {
                             avatar={getStaticImg(subscriber.imagePath || '')}
                             role={'Не указано'}
                         />
-                    )),
+                    ))
                 )}
                 <div ref={ref}></div>
             </div>
