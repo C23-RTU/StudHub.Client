@@ -1,6 +1,5 @@
 'use client';
 
-import { useQuery } from '@tanstack/react-query';
 import { m } from 'framer-motion';
 import { useState } from 'react';
 import { useDebounce } from 'use-debounce';
@@ -8,6 +7,8 @@ import { useDebounce } from 'use-debounce';
 import { ClubCard } from '@/components/ClubComponents/ClubCard';
 import { SkeletonList } from '@/components/Skeletons/SkeletonList';
 import { SearchInput } from '@/components/ui/SearchInput/SearchInput';
+
+import { useInfinityScroll } from '@/hooks/useInfinityScroll';
 
 import { clubsApi } from '@/api/api';
 
@@ -18,14 +19,18 @@ export function Clubs() {
     const [searchQuery, setSearchQuery] = useState('');
     const [debouncedQuery] = useDebounce(searchQuery, 300);
 
-    const { data: clubs, isLoading } = useQuery({
+    const {
+        ref,
+        infiniteQuery: { data: clubs, isLoading },
+    } = useInfinityScroll({
         queryKey: ['fetch-clubs', debouncedQuery],
-        queryFn: async () => {
+        queryFn: async ({ pageParam = 0 }) => {
             if (debouncedQuery) {
-                return (await clubsApi.clubsSearch(debouncedQuery)).data;
+                return (await clubsApi.clubsSearch(debouncedQuery, pageParam, 10)).data;
             }
-            return (await clubsApi.clubsGetAll()).data;
+            return (await clubsApi.clubsGetAll(pageParam, 10)).data;
         },
+        pageSize: 10,
     });
 
     return (
@@ -43,16 +48,19 @@ export function Clubs() {
 
                 <div className="flex flex-col gap-4">
                     {isLoading && <SkeletonList amount={5} />}
-                    {clubs?.map((club, index) => (
-                        <m.div
-                            key={club.id}
-                            initial={{ scale: 0.8, opacity: 0 }}
-                            animate={{ scale: 1, opacity: 1 }}
-                            transition={{ delay: index * 0.05 }}
-                        >
-                            <ClubCard club={club} showSubscribe />
-                        </m.div>
-                    ))}
+                    {clubs?.pages
+                        .flatMap((page) => page)
+                        .map((club, index) => (
+                            <m.div
+                                key={club.id}
+                                initial={{ scale: 0.8, opacity: 0 }}
+                                animate={{ scale: 1, opacity: 1 }}
+                                transition={{ delay: index * 0.05 }}
+                            >
+                                <ClubCard club={club} showSubscribe />
+                            </m.div>
+                        ))}
+                    <div ref={ref}></div>
                 </div>
             </MainContent>
         </div>
