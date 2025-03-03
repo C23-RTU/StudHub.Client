@@ -25,12 +25,12 @@ export function ClubCard({ club, showSubscribe = false }: Props) {
                 width={32}
                 height={32}
                 className="rounded-lg w-12 h-12"
-                onClick={() => router.push(`${AUTH_PAGE.CLUBS}/${club.id}`)}
+                onClick={() => router.push(AUTH_PAGE.CLUB(club.id))}
             />
 
             <div
                 className="flex flex-col flex-grow ml-3 mr-3 justify-between overflow-hidden"
-                onClick={() => router.push(`${AUTH_PAGE.CLUBS}/${club.id}`)}
+                onClick={() => router.push(AUTH_PAGE.CLUB(club.id))}
             >
                 <p
                     className="text-m font-geologica font-semibold text-ellipsis overflow-hidden whitespace-nowrap"
