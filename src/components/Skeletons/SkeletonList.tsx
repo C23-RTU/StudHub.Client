@@ -1,6 +1,6 @@
 import { SkeletonItem } from '@/components/Skeletons/SkeletonItem';
 
-export function SkeletonList({amount=3} : {amount?: number}) {
+export function SkeletonList({ amount = 3 }: { amount?: number }) {
     return (
         <div className="flex flex-col gap-4">
             {Array(amount)
