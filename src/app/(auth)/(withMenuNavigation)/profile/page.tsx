@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 
 import Profile from './Profile';
+import type { PersonDetailDTO } from '@/api/axios-client';
+import { userApi } from '@/api/api';
 
 export const metadata: Metadata = {
     title: 'Профиль',
@@ -8,5 +10,6 @@ export const metadata: Metadata = {
 };
 
 export default async function Page() {
-    return <Profile />;
+    const user: PersonDetailDTO = (await userApi.userGetPersonalDetails()).data;
+    return <Profile user={user} />;
 }
