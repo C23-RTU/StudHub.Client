@@ -71,5 +71,11 @@ export interface CommentDetailDTO {
      * @memberof CommentDetailDTO
      */
     'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CommentDetailDTO
+     */
+    'deletedAt'?: string | null;
 }
 
