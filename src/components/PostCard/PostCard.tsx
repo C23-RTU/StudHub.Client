@@ -1,14 +1,14 @@
 'use client';
 
+import { useState } from 'react';
+
 import type { PostDetailDTO } from '@/api/axios-client';
 
-import LoaderImage from '../ImageLoader/ImageLoader';
 import { ActionButton } from '../ui/PostActionButton/PostActionButton';
 
 import { PostHeader } from './PostHeader/PostHeader';
-import { getStaticImg } from '@/lib/helpers/getStaticImg.helper';
+import { PostImageWrapper } from './PostImageSwiper/PostImageWrapper';
 import { cn } from '@/lib/utils/utils';
-import { useState } from 'react';
 
 type PostCardProps = {
     className?: string;
@@ -58,26 +58,7 @@ export function PostCard({ className, post }: PostCardProps) {
                     </button>
                 )}
             </div>
-            <div className="flex gap-2">
-                {/* {post.tags &&
-                    post.tags.map((tag, index) => (
-                        <p
-                            className="text-xs font-inter text-gray-300 bg-neutral-800 py-2 rounded-3xl px-3 cursor-pointer"
-                            key={index}
-                        >
-                            #{tag}
-                        </p>
-                    ))} */}
-            </div>
-            <div className="w-full h-full flex items-center justify-center ">
-                <LoaderImage
-                    src={(post.postImages.length > 0 && getStaticImg(post.postImages[0])) || '/img/eventbanner.jpg'}
-                    height={200}
-                    width={600}
-                    alt={'banner'}
-                    className="rounded-md w-full"
-                />
-            </div>
+            <PostImageWrapper images={post.postImages} />
             <div className="flex items-center justify-between font-inter">
                 <div className="flex gap-4">
                     <ActionButton post={post} type={'like'} />
