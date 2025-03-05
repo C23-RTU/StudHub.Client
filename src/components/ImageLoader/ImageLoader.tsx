@@ -2,13 +2,13 @@ import { LoaderCircle } from 'lucide-react';
 import Image, { type ImageProps } from 'next/image';
 import { useState } from 'react';
 
-interface ImageLoaderProps extends ImageProps {
+interface LoaderImageProps extends ImageProps {
     src: string;
     loaderSize?: number;
     alt: string;
 }
 
-const ImageLoader: React.FC<ImageLoaderProps> = ({ src, alt, loaderSize = 30, ...props }) => {
+const LoaderImage: React.FC<LoaderImageProps> = ({ src, alt, loaderSize = 30, ...props }) => {
     const [loading, setLoading] = useState(true);
 
     return (
@@ -23,4 +23,4 @@ const ImageLoader: React.FC<ImageLoaderProps> = ({ src, alt, loaderSize = 30, ..
     );
 };
 
-export default ImageLoader;
+export default LoaderImage;
