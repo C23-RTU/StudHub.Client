@@ -6,9 +6,9 @@ import { ClubFeed } from '@/components/ClubComponents/ClubFeed';
 import { ClubHeader } from '@/components/ClubComponents/ClubHeader';
 import { ClubInfo } from '@/components/ClubComponents/ClubInfo/ClubInfo';
 import { SubscribeButton } from '@/components/ClubComponents/SubscribeButtons/SubscribeButton';
+import { Skeleton } from '@/components/ui/skeleton';
 
 import { clubsApi } from '@/api/api';
-import { Skeleton } from '@/components/ui/skeleton';
 
 export function Club({ id = '1' }: { id: string }) {
     const { data: club, isLoading } = useQuery({
@@ -29,9 +29,9 @@ export function Club({ id = '1' }: { id: string }) {
                 ) : (
                     <>
                         <Skeleton className="my-3 w-[250px] h-[32px] mx-auto" />
-                        {Array.from({ length: 3 }).map((_, index) => (
-                            <Skeleton key={index} className='w-full mt-2 h-[28px]' />
-                        ))}    
+                        {Array.from({ length: 2 }).map((_, index) => (
+                            <Skeleton key={index} className="w-full mt-2 h-[28px]" />
+                        ))}
                     </>
                 )}
             </div>

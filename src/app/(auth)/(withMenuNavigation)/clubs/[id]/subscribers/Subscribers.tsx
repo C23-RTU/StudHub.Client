@@ -41,7 +41,6 @@ export function Subscribers({ id }: { id: string }) {
                             firstName={subscriber.firstName}
                             lastName={subscriber.lastName}
                             avatar={subscriber.imagePath || ''}
-                            role={'Не указано'}
                         />
                     ))
                 )}

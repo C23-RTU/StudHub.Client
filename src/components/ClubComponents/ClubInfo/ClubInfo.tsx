@@ -1,7 +1,7 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-import { CircleAlert, MapPin, UsersRound } from 'lucide-react';
+import { CircleAlert, UsersRound } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
@@ -10,11 +10,11 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sh
 import { AUTH_PAGE } from '@/lib/config/routes.config';
 
 import { clubsApi } from '@/api/api';
-
-import { RowClubInfo } from './RowClubInfo';
 import type { ClubDetailDTO } from '@/api/axios-client';
 
-export function ClubInfo({ club, clubId }: { club: ClubDetailDTO | undefined, clubId: string }) {
+import { RowClubInfo } from './RowClubInfo';
+
+export function ClubInfo({ club, clubId }: { club: ClubDetailDTO | undefined; clubId: string }) {
     const router = useRouter();
     const [showInfo, setShowInfo] = useState(false);
 
@@ -28,7 +28,7 @@ export function ClubInfo({ club, clubId }: { club: ClubDetailDTO | undefined, cl
         return `${count} подписчиков`;
     }
 
-    const { data: subscribers, isLoading } = useQuery({
+    const { data: subscribers } = useQuery({
         queryKey: ['club-subscribers', clubId],
         queryFn: async () => (await clubsApi.clubsGetAllByClubId(Number(clubId))).data,
     });
@@ -42,12 +42,12 @@ export function ClubInfo({ club, clubId }: { club: ClubDetailDTO | undefined, cl
             <div className="flex flex-col gap-2">
                 <RowClubInfo onClick={() => router.push(AUTH_PAGE.CLUB_SUBSCRIBERS(clubId))}>
                     <UsersRound size={18} />
-                    {isLoading ? '...' : getSubscribersText(subscribers?.length || 0)}
+                    {getSubscribersText(subscribers?.length || 0)}
                 </RowClubInfo>
-                <RowClubInfo>
+                {/* <RowClubInfo>
                     <MapPin size={18} />
                     г. Москва, ул. Стромынка д. 20
-                </RowClubInfo>
+                </RowClubInfo> */}
                 <RowClubInfo onClick={() => setShowInfo(true)}>
                     <CircleAlert size={18} />
                     Подробная информация

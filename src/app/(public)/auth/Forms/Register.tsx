@@ -78,51 +78,49 @@ export default function Register() {
                     error={errors.email?.message}
                 />
             </div>
-            <div className="grid gap-4 grid-cols-2 col-span-2">
-                <FormField
-                    placeholder="Пароль"
-                    type="password"
-                    autoComplete="off"
-                    registration={register('password')}
-                    error={errors.password?.message}
-                />
-                <FormField
-                    placeholder="Повторите пароль"
-                    type="password"
-                    autoComplete="off"
-                    registration={register('confirmPassword')}
-                    error={errors.confirmPassword?.message}
-                />
-                <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                        <Button className="w-full bg-secondary hover:bg-secondary/80 rounded-b-none border-b focus:border-b-2 focus:border-b-neutral-200 border-neutral-600 truncate">
-                            {selectedInstitute?.name || 'Выберите институт'}
-                        </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent className='ml-4'>
-                        <DropdownMenuLabel>Выберите институт</DropdownMenuLabel>
-                        <DropdownMenuItem onClick={() => setSelectedInstitute(null)}>—</DropdownMenuItem>
-                        {institutes?.map((institute) => (
-                            <DropdownMenuItem
-                                title={institute.name}
-                                key={institute.id}
-                                onClick={() => setSelectedInstitute(institute)}
-                            >
-                                {institute.name}
-                            </DropdownMenuItem>
-                        ))}
-                    </DropdownMenuContent>
-                </DropdownMenu>
-                <BirthDatePicker
-                    value={watch('birthDate') ? format(new Date(watch('birthDate')), 'yyyy-MM-dd') : undefined}
-                    onChange={(date) => {
-                        if (date) {
-                            setValue('birthDate', date, { shouldValidate: true });
-                        }
-                    }}
-                    error={errors.birthDate?.message}
-                />
-            </div>
+            <FormField
+                placeholder="Пароль"
+                type="password"
+                autoComplete="off"
+                registration={register('password')}
+                error={errors.password?.message}
+            />
+            <FormField
+                placeholder="Повторите пароль"
+                type="password"
+                autoComplete="off"
+                registration={register('confirmPassword')}
+                error={errors.confirmPassword?.message}
+            />
+            <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                    <Button className="w-full bg-secondary hover:bg-secondary/80 rounded-b-none border-b focus:border-b-2 focus:border-b-neutral-200 border-neutral-600 truncate justify-start">
+                        {selectedInstitute?.name || 'Выберите институт'}
+                    </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="min-w-[2rem] max-w-full">
+                    <DropdownMenuLabel>Выберите институт</DropdownMenuLabel>
+                    <DropdownMenuItem onClick={() => setSelectedInstitute(null)}>—</DropdownMenuItem>
+                    {institutes?.map((institute) => (
+                        <DropdownMenuItem
+                            title={institute.name}
+                            key={institute.id}
+                            onClick={() => setSelectedInstitute(institute)}
+                        >
+                            {institute.name}
+                        </DropdownMenuItem>
+                    ))}
+                </DropdownMenuContent>
+            </DropdownMenu>
+            <BirthDatePicker
+                value={watch('birthDate') ? format(new Date(watch('birthDate')), 'yyyy-MM-dd') : undefined}
+                onChange={(date) => {
+                    if (date) {
+                        setValue('birthDate', date, { shouldValidate: true });
+                    }
+                }}
+                error={errors.birthDate?.message}
+            />
 
             <div className="col-span-3">
                 <FormTextArea placeholder="Расскажите о себе" registration={register('about')} />
