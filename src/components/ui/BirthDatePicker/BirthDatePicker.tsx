@@ -57,7 +57,7 @@ export function BirthDatePicker({ value, onChange, error }: DatePickerProps) {
                         {value ? format(new Date(value), 'PPP', { locale: ru }) : <span>Дата рождения</span>}
                     </Button>
                 </PopoverTrigger>
-                <PopoverContent className="w-auto p-0 rounded-md border-secondary">
+                <PopoverContent className="w-auto p-0 rounded-md mr-4 border-stroke bg-background shadow-md">
                     <div className="p-4">
                         <div className="flex justify-between">
                             <div className="relative">
