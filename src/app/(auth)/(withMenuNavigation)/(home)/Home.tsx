@@ -47,7 +47,7 @@ export default function Home({ username }: { username: string }) {
                 {/* <div className="flex justify-center">
                     <EventCard />
                 </div> */}
-                <p className="text-xl font-semibold">Лента</p>
+                {/* <p className="text-xl font-semibold">Лента</p> */}
                 <SearchInput placeholder="Поиск по ленте..." />
                 <div className="flex flex-col gap-10">
                     {isLoading &&
