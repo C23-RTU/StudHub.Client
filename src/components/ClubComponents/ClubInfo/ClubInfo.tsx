@@ -35,11 +35,11 @@ export function ClubInfo({ club, clubId }: { club: ClubDetailDTO | undefined, cl
 
     return (
         <div>
-            <div className="flex flex-col gap-1">
-                <h1 className="text-2xl font-bold text-center mt-3">{club?.name}</h1>
+            <div className="flex flex-col my-3">
+                <h1 className="text-2xl font-bold text-center">{club?.name}</h1>
             </div>
 
-            <div className="flex flex-col gap-2 mt-5">
+            <div className="flex flex-col gap-2">
                 <RowClubInfo onClick={() => router.push(AUTH_PAGE.CLUB_SUBSCRIBERS(clubId))}>
                     <UsersRound size={18} />
                     {isLoading ? '...' : getSubscribersText(subscribers?.length || 0)}
