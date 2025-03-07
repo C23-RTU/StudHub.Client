@@ -23,7 +23,6 @@ interface CalendarProps {
     events?: { [key: string]: any[] };
     onDateChange: (date: Date) => void;
 }
-
 const EventCalendar = ({ events = {}, onDateChange }: CalendarProps) => {
     const [currentDate, setCurrentDate] = useState(new Date());
     const [selectedDate, setSelectedDate] = useState(new Date());
