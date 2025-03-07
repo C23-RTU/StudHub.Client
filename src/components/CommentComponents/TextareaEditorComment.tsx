@@ -44,7 +44,7 @@ export function TextareaEditorComment({ post, hasNextPage }: { post: PostDetailD
     return (
         <form
             onSubmit={handleSubmit(sendCommentHandler)}
-            className="fixed left-0 right-0 bottom-0  bg-bg px-2 shadow-2xl shadow-black"
+            className="fixed left-0 right-0 bottom-0 max-w-[1024px] w-full mx-auto bg-bg px-2 shadow-2xl shadow-black"
         >
             {commentForReply && (
                 <m.div

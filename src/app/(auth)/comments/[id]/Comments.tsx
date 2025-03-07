@@ -59,10 +59,13 @@ export function Comments({ serverPost }: { serverPost: PostDetailDTO }) {
     }, [highlightComment]);
 
     return (
-        <div className="page pt-[90px]">
-            <Header className="justify-start gap-4 fixed top-0 left-0 right-0 px-pageX bg-bg py-pageY z-10 m-0 shadow">
-                <BackButton onClick={() => router.back()} />
-                <HeaderTitle>Комментарии</HeaderTitle>
+        <div className="page">
+            <Header className="flex flex-row justify-between items-center z-50 w-full max-w-[1020px]">
+                <div className='flex flex-row items-center gap-4'>
+                    <BackButton onClick={() => router.back()} />
+                    <HeaderTitle>Комментарии</HeaderTitle>
+                </div>
+                <div></div>
             </Header>
 
             <MainContent>

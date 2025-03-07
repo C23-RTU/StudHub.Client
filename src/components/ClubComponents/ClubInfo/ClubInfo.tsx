@@ -36,7 +36,7 @@ export function ClubInfo({ club, clubId }: { club: ClubDetailDTO | undefined, cl
     return (
         <div>
             <div className="flex flex-col my-3">
-                <h1 className="text-2xl font-bold text-center">{club?.name}</h1>
+                <h1 className="text-2xl font-bold text-center font-geologica">{club?.name}</h1>
             </div>
 
             <div className="flex flex-col gap-2">
@@ -56,7 +56,7 @@ export function ClubInfo({ club, clubId }: { club: ClubDetailDTO | undefined, cl
             <Sheet open={showInfo} onOpenChange={setShowInfo}>
                 <SheetContent side="bottom">
                     <SheetHeader>
-                        <SheetTitle className="text-start">Информация о клубе</SheetTitle>
+                        <SheetTitle className="text-start font-geologica">Информация о клубе</SheetTitle>
                     </SheetHeader>
                     <p className="font-normal font-inter text-neutral-300">{club?.about}</p>
                 </SheetContent>

@@ -37,14 +37,14 @@ export function PostCard({ className, post }: PostCardProps) {
             <PostHeader post={post} />
             <div>
                 <p className="text-2xl font-bold my-1 text-neutral-50">{post.title}</p>
-                <p className="text-sm font-inter text-gray-300">
+                <p className="font-inter font-light text-gray-300">
                     {displayText}
                     {!showFull && isLong && '...'}
                 </p>
                 {!showFull && isLong && (
                     <button
                         onClick={() => setShowFull(true)}
-                        className="text-blue text-sm font-inter mt-1 focus:outline-none"
+                        className="text-background-foreground text-sm font-inter mt-1 focus:outline-none"
                     >
                         Показать все
                     </button>
@@ -52,7 +52,7 @@ export function PostCard({ className, post }: PostCardProps) {
                 {showFull && isLong && (
                     <button
                         onClick={() => setShowFull(false)}
-                        className="text-blue text-sm font-inter mt-1 focus:outline-none"
+                        className="text-background-foreground text-sm font-inter mt-1 focus:outline-none"
                     >
                         Скрыть все
                     </button>

@@ -20,7 +20,7 @@ export function ClubCard({ club, showSubscribe = false }: Props) {
     return (
         <figure className="flex w-full hover:cursor-pointer items-center" role="listitem">
             <Image
-                src={club.imageUrl ? getStaticImg(club.imageUrl) : '/img/blank.png'}
+                src={club.imageUrl ? getStaticImg(club.imageUrl) : '/img/default-club-avatar.png'}
                 alt={`${club.name}'s avatar`}
                 width={32}
                 height={32}

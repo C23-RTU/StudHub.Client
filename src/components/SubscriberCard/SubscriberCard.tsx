@@ -1,5 +1,6 @@
 'use client';
 
+import { getStaticImg } from '@/lib/helpers/getStaticImg.helper';
 import Image from 'next/image';
 
 interface Props {
@@ -14,7 +15,7 @@ export function SubscriberCard({ firstName, lastName, avatar, role }: Props) {
         <div className="flex w-full bg-secondary py-2 px-2 rounded-lg" role="listitem">
             <div className="relative">
                 <Image
-                    src={avatar || '/img/avatar.png'}
+                    src={(avatar && avatar.trim() !== "" && getStaticImg(avatar)) || '/img/default-user-avatar.png'}
                     alt={`Фото профиля ${firstName}`}
                     width={40}
                     height={40}

@@ -21,7 +21,7 @@ export function Avatar({ src, size = 40, alt, loaderSize }: Props) {
             }}
         >
             <LoaderImage
-                src={src ? getStaticImg(src) : '/img/avatar.png'}
+                src={src ? getStaticImg(src) : '/img/default-user-avatar.png'}
                 loaderSize={loaderSize}
                 width={size}
                 height={size}

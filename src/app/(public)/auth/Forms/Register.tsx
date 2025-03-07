@@ -99,7 +99,7 @@ export default function Register() {
                             {selectedInstitute?.name || 'Выберите институт'}
                         </Button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent>
+                    <DropdownMenuContent className='ml-4'>
                         <DropdownMenuLabel>Выберите институт</DropdownMenuLabel>
                         <DropdownMenuItem onClick={() => setSelectedInstitute(null)}>—</DropdownMenuItem>
                         {institutes?.map((institute) => (
