@@ -23,21 +23,21 @@ const Input = React.forwardRef<HTMLInputElement, React.ComponentProps<'input'>>(
                 />
 
                 {type === 'password' && (
-                    <>
+                    <div className='bg-secondary absolute top-1/2 right-2 pl-2 -translate-y-1/2'>
                         {showPassword ? (
                             <Eye
-                                className="absolute top-1/2 right-2 -translate-y-1/2 cursor-pointer"
+                                className="bg-secondary cursor-pointer"
                                 size={20}
                                 onClick={() => setShowPassword(!showPassword)}
                             />
                         ) : (
                             <EyeClosed
-                                className="absolute top-1/2 right-2 -translate-y-1/2 cursor-pointer"
+                                className="bg-secondary cursor-pointer"
                                 size={20}
                                 onClick={() => setShowPassword(!showPassword)}
                             />
                         )}
-                    </>
+                    </div>
                 )}
             </div>
         );

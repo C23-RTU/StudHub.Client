@@ -19,7 +19,7 @@ export function PostImageWrapper({ images }: Props) {
     }, [images]);
 
     return (
-        <div className="w-auto flex items-center justify-center mx-[calc(theme(padding.pageX)*-1)]">
+        <div className="w-auto flex items-center justify-center rounded-md overflow-hidden">
             {isEmptyOrOne ? (
                 <LoaderImage
                     src={images.length ? getStaticImg(images[0]) : '/img/eventbanner.jpg'}

@@ -36,7 +36,7 @@ export function ClubInfo({ club, clubId }: { club: ClubDetailDTO | undefined, cl
     return (
         <div>
             <div className="flex flex-col my-3">
-                <h1 className="text-2xl font-bold text-center">{club?.name}</h1>
+                <h1 className="text-2xl font-bold text-center font-geologica">{club?.name}</h1>
             </div>
 
             <div className="flex flex-col gap-2">

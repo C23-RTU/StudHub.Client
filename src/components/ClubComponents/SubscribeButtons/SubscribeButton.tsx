@@ -38,7 +38,7 @@ export function SubscribeButton({
                 {subscribed ? (
                     <Button
                         onClick={() => setUnsubVisible(true)}
-                        className={`w-full flex bg-secondary justify-center hover:bg-accent ${isBig ? 'my-5' : 'p-3'}`}
+                        className={`w-full flex bg-secondary font-geologica justify-center hover:bg-accent ${isBig ? 'my-5' : 'p-3'}`}
                         disabled={isSubscribePending}
                     >
                         {isBig && <span>Вы подписаны</span>}
@@ -50,10 +50,10 @@ export function SubscribeButton({
                             await toggleSubscription();
                             toast.success('Вы подписались на клуб');
                         }}
-                        className={`w-full flex justify-center bg-primary hover:bg-primary/80 ${isBig ? 'my-5' : 'p-3'}`}
+                        className={`w-full flex justify-center font-geologica bg-primary hover:bg-primary/80 ${isBig ? 'my-5' : 'p-3'}`}
                         disabled={isSubscribePending}
                     >
-                        {isBig && <span>Вступить</span>}
+                        {isBig && <span>Подписаться</span>}
                         <SquarePlus />
                     </Button>
                 )}

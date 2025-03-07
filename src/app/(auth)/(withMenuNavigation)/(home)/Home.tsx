@@ -26,7 +26,7 @@ export default function Home({ username }: { username: string }) {
         <div className="page">
             <Header>
                 <HeaderTitle>Доброе утро, {username} 👋</HeaderTitle>
-                <NotificationBadge />
+                <NotificationBadge count={0} />
             </Header>
 
             <MainContent>

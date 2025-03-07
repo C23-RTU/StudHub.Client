@@ -13,7 +13,6 @@ import { useInfinityScroll } from '@/hooks/useInfinityScroll';
 import { clubsApi } from '@/api/api';
 
 import { Header, HeaderTitle } from '@/hoc/Header/Header';
-import { getStaticImg } from '@/lib/helpers/getStaticImg.helper';
 
 export function Subscribers({ id }: { id: string }) {
     const {
@@ -41,7 +40,7 @@ export function Subscribers({ id }: { id: string }) {
                             key={subscriber.id}
                             firstName={subscriber.firstName}
                             lastName={subscriber.lastName}
-                            avatar={getStaticImg(subscriber.imagePath || '')}
+                            avatar={subscriber.imagePath || ''}
                             role={'Не указано'}
                         />
                     ))

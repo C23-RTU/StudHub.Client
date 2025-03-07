@@ -22,13 +22,24 @@ export function PostImageSwiper({ images }: Props) {
             className="mySwiper"
         >
             {images.map((img, index) => (
-                <SwiperSlide key={index} className="!h-auto max-h-[500px]">
+                <SwiperSlide key={index} className="!h-auto max-h-[500px] relative">
+                    {/* Blurred background image */}
+                    <div className="absolute inset-0 overflow-hidden">
+                        <LoaderImage
+                            src={getStaticImg(img)}
+                            width={1000}
+                            height={1000}
+                            alt=""
+                            className="w-full h-full object-cover blur-lg opacity-50"
+                        />
+                    </div>
+                    {/* Main image */}
                     <LoaderImage
                         src={getStaticImg(img)}
-                        height={200}
-                        width={600}
-                        alt={'banner'}
-                        className="rounded-md w-full object-contain"
+                        width={1000}
+                        height={1000}
+                        alt={'Прикрепленное изображение'}
+                        className=" w-full object-contain relative z-10"
                     />
                 </SwiperSlide>
             ))}

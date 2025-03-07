@@ -30,7 +30,7 @@ export default function RootLayout({
     return (
         <html lang="en" className=''>
             <body
-                className={`${inter.variable} ${geologica.variable} ${unbounded.variable} antialiased dark font-inter`}
+                className={`${inter.variable} ${geologica.variable} ${unbounded.variable} antialiased dark font-inter max-w-[1024px] w-full mx-auto`}
             >
                 <ProviderLayout>{children}</ProviderLayout>
             </body>
