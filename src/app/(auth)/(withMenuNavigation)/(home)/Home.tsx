@@ -12,6 +12,20 @@ import { feedApi } from '@/api/api';
 import { Header, HeaderTitle } from '@/hoc/Header/Header';
 import { MainContent } from '@/hoc/MainContent/MainContent';
 
+const getTimeBasedGreeting = (): string => {
+    const currentHour = new Date().getHours();
+    
+    if (currentHour >= 5 && currentHour < 12) {
+        return 'Доброе утро';
+    } else if (currentHour >= 12 && currentHour < 18) {
+        return 'Добрый день';
+    } else if (currentHour >= 18 && currentHour < 23) {
+        return 'Добрый вечер';
+    } else {
+        return 'Доброй ночи';
+    }
+};
+
 export default function Home({ username }: { username: string }) {
     const {
         ref,
@@ -25,7 +39,7 @@ export default function Home({ username }: { username: string }) {
     return (
         <div className="page">
             <Header>
-                <HeaderTitle>Доброе утро, {username} 👋</HeaderTitle>
+                <HeaderTitle>{getTimeBasedGreeting()}, {username} 👋</HeaderTitle>
                 <NotificationBadge count={0} />
             </Header>
 
