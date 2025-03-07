@@ -76,6 +76,17 @@ export function CommentItem({
         openCommentMoreSheet(comment);
     };
 
+    const createdCommentDate = useMemo(() => {
+        return parseLocalDate(comment.createdAt);
+    }, [comment.createdAt]);
+
+    const displayContent = useMemo(() => {
+        return comment.deletedAt
+            ? comment.content + ` ${parseLocalDate(comment.deletedAt, { dateStyle: 'short' })}`
+            : comment.content;
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [comment.deletedAt]);
+
     return (
         <div className="flex flex-col gap-3">
             <div
@@ -98,12 +109,17 @@ export function CommentItem({
                         <p className="font-geologica font-medium text-sm">
                             {comment.personSummaryDTO?.firstName} {comment.personSummaryDTO?.lastName}
                         </p>
-                        <small className="text-xss opacity-50 font-inter font-normal">
-                            {parseLocalDate(comment.createdAt)}
-                        </small>
+                        <small className="text-xss opacity-50 font-inter font-normal">{createdCommentDate}</small>
                     </div>
-                    <p className="text-xs font-inter font-normal text-[#B8B8B8] leading-snug break-words whitespace-pre-line">
-                        {comment.content}
+                    <p
+                        className={cn(
+                            'text-xs font-inter font-normal text-[#B8B8B8] leading-snug break-words whitespace-pre-line',
+                            {
+                                'text-[#696868]': comment.deletedAt,
+                            }
+                        )}
+                    >
+                        {displayContent}
                     </p>
 
                     {!showMinimumComponent && (

@@ -1,5 +1,3 @@
-import { useMemo } from 'react';
-
 import { Button } from '../ui/button';
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from '../ui/sheet';
 
@@ -13,12 +11,6 @@ export function CommentMoreSheet() {
 
     const { isPending, mutate } = useRemoveComment();
 
-    const isCommentDelete = useMemo(() => {
-        if (!commentMoreSheet) return true;
-
-        return commentMoreSheet?.content === 'Комментарий удалён';
-    }, [commentMoreSheet]);
-
     return (
         <Sheet open={!!commentMoreSheet} onOpenChange={closeCommentMoreSheet}>
             <SheetContent side="bottom">
@@ -27,7 +19,7 @@ export function CommentMoreSheet() {
                         {commentMoreSheet && <CommentItem comment={commentMoreSheet} showMinimumComponent={true} />}
                     </SheetTitle>
                     <SheetDescription>
-                        {!isCommentDelete && (
+                        {commentMoreSheet && !commentMoreSheet?.deletedAt && (
                             <Button
                                 className="w-full justify-center mx-auto mt-3"
                                 variant={'red'}

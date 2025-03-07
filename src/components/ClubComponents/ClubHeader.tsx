@@ -18,8 +18,9 @@ import { BackButton } from '../ui/BackButton/BackButton';
 import { Button } from '../ui/button';
 
 import { getStaticImg } from '@/lib/helpers/getStaticImg.helper';
+import { Skeleton } from '../ui/skeleton';
 
-export function ClubHeader({ club }: { club: ClubDetailDTO | undefined }) {
+export function ClubHeader({ club, isLoading }: { club: ClubDetailDTO | undefined, isLoading?: boolean }) {
     const router = useRouter();
     const pathname = usePathname();
 
@@ -66,6 +67,10 @@ export function ClubHeader({ club }: { club: ClubDetailDTO | undefined }) {
                 </DropdownMenu>
             </div>
             <div className="w-full flex items-center justify-center">
+                {isLoading ? (
+                    <Skeleton className='w-full h-[250px] rounded-b-3xl' />
+                ) : (
+
                 <LoaderImage
                     src={club?.bannerUrl ? getStaticImg(club.bannerUrl) : '/img/default-club-banner.jpg'}
                     height={250}
@@ -73,9 +78,13 @@ export function ClubHeader({ club }: { club: ClubDetailDTO | undefined }) {
                     alt={'banner'}
                     className="rounded-b-3xl w-full h-[250px] object-cover"
                 />
+                )}
             </div>
 
             <div className="w-full h-full flex items-center justify-center mt-[-70px]">
+                {isLoading ? (
+                    <Skeleton className='w-[128px] h-[128px] rounded-full border-[5px] border-background' />
+                ) : (
                 <LoaderImage
                     src={
                         club?.imageUrl
@@ -87,6 +96,7 @@ export function ClubHeader({ club }: { club: ClubDetailDTO | undefined }) {
                     alt={'avatar'}
                     className="rounded-full border-[5px] w-[128px] h-[128px] border-background"
                 />
+                )}
             </div>
         </header>
     );
