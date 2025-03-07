@@ -28,7 +28,7 @@ export function MoreDropList({ post }: { post: PostDetailDTO }) {
                     <EllipsisIcon />
                 </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent sideOffset={0} className="bg-neutral-900 border-neutral-700 ">
+            <DropdownMenuContent  className="bg-neutral-900 border-neutral-700 mr-4">
                 <DropdownMenuItem
                     className="flex gap-2 font-light font-inter"
                     onClick={() => router.push(AUTH_PAGE.CLUB(post.club.id))}
