@@ -23,14 +23,12 @@ import type { EventDetailDTO } from '@/api/axios-client';
 
 import { Button } from '../ui/button';
 
+import { toUTCDate } from '@/lib/utils/time.util';
+
 interface CalendarProps {
     events?: { [key: string]: EventDetailDTO[] };
     onDateChange: (date: Date) => void;
 }
-
-const toUTCDate = (date: Date) => {
-    return new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
-};
 
 const EventCalendar = ({ events = {}, onDateChange }: CalendarProps) => {
     const [currentDate, setCurrentDate] = useState(new Date());

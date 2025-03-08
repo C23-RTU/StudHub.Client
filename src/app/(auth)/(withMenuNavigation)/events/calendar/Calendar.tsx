@@ -2,7 +2,7 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { format, parseISO } from 'date-fns';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import EventCalendar from '@/components/EventCalendar/EventCalendar';
 import { EventCard } from '@/components/EventCard/EventCard';
@@ -15,10 +15,7 @@ import type { EventDetailDTO } from '@/api/axios-client';
 
 import { Header, HeaderTitle } from '@/hoc/Header/Header';
 import { MainContent } from '@/hoc/MainContent/MainContent';
-
-const toUTCDate = (date: Date) => {
-    return new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
-};
+import { toUTCDate } from '@/lib/utils/time.util';
 
 export function Calendar() {
     const [selectedDate, setSelectedDate] = useState(new Date());
@@ -28,17 +25,19 @@ export function Calendar() {
         queryFn: async () => (await eventsApi.eventsGetAll()).data,
     });
 
-    const calendarEvents = allEvents?.reduce(
-        (acc, event) => {
-            const date = parseISO(event.startTime);
-            const utcDate = toUTCDate(date);
-            const dateKey = format(utcDate, 'yyyy-MM-dd');
-            if (!acc[dateKey]) acc[dateKey] = [];
-            acc[dateKey].push(event);
-            return acc;
-        },
-        {} as { [key: string]: EventDetailDTO[] }
-    );
+    const calendarEvents = useMemo(() => {
+        return allEvents?.reduce(
+            (acc, event) => {
+                const date = parseISO(event.startTime);
+                const utcDate = toUTCDate(date);
+                const dateKey = format(utcDate, 'yyyy-MM-dd');
+                if (!acc[dateKey]) acc[dateKey] = [];
+                acc[dateKey].push(event);
+                return acc;
+            },
+            {} as { [key: string]: EventDetailDTO[] }
+        );
+    }, [allEvents]);
 
     const {
         ref,
@@ -52,7 +51,9 @@ export function Calendar() {
         pageSize: 10,
     });
 
-    const hasEvents = eventsPages?.pages.some((page) => page.length > 0);
+    const hasEvents = useMemo(() => {
+        return eventsPages?.pages.some((page) => page.length > 0);
+    }, [eventsPages]);
 
     return (
         <div className="page">
