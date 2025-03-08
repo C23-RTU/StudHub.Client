@@ -54,6 +54,8 @@ export function Calendar() {
         setSelectedDate(date);
     };
 
+    const hasEvents = eventsPages?.pages.some((page) => page.length > 0);
+
     return (
         <div className="page">
             <Header>
@@ -62,11 +64,18 @@ export function Calendar() {
             <MainContent>
                 <EventCalendar events={calendarEvents || {}} onDateChange={handleDateChange} />
 
-                <div ref={ref} className="grid grid-cols-1 gap-4 mt-8">
-                    {eventsPages?.pages
-                        .flatMap((page) => page)
-                        .map((event, index) => <EventCard key={event.id} event={event} />)}
+                <div className="flex gap-4 flex-col">
+                    {hasEvents ? (
+                        eventsPages?.pages
+                            .flatMap((page) => page)
+                            .map((event) => <EventCard key={event.id} event={event} />)
+                    ) : (
+                        <div className="w-full flex justify-center items-center text-muted-foreground py-4">
+                            На выбранную дату событий не найдено
+                        </div>
+                    )}
                 </div>
+                <div ref={ref}></div>
             </MainContent>
         </div>
     );

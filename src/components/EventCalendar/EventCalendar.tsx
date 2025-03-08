@@ -40,15 +40,17 @@ const EventCalendar = ({ events = {}, onDateChange }: CalendarProps) => {
     }, [selectedDate]);
 
     const getDaysToRender = () => {
-        const utcDate = toUTCDate(currentDate);
+        const monthStart = startOfMonth(currentDate);
+        const monthEnd = endOfMonth(currentDate);
+
         if (isExpanded) {
-            const monthStart = startOfMonth(utcDate);
-            const monthEnd = endOfMonth(monthStart);
-            return eachDayOfInterval({ start: monthStart, end: monthEnd });
+            const start = startOfWeek(monthStart, { weekStartsOn: 1 });
+            const end = endOfWeek(monthEnd, { weekStartsOn: 1 });
+            return eachDayOfInterval({ start, end });
         }
 
-        const weekStart = startOfWeek(utcDate, { weekStartsOn: 1 });
-        const weekEnd = endOfWeek(utcDate, { weekStartsOn: 1 });
+        const weekStart = startOfWeek(currentDate, { weekStartsOn: 1 });
+        const weekEnd = endOfWeek(currentDate, { weekStartsOn: 1 });
         return eachDayOfInterval({ start: weekStart, end: weekEnd });
     };
 
