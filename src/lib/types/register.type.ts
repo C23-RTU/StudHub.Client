@@ -8,17 +8,17 @@ export const RegisterDataSchema = z
             .string()
             .min(1, 'Имя обязательно')
             .max(20, 'Имя не более 20 символов')
-            .regex(/^[A-Za-zА-Яа-яёЁ\s]+$/, 'Некорректное имя'),
+            .regex(/^[А-Я][а-я]+$/, 'Некорректное имя'),
         lastName: z
             .string()
             .min(1, 'Фамилия обязательна')
             .max(40, 'Фамилия не более 40 символов')
-            .regex(/^[A-Za-zА-Яа-яёЁ\s]+$/, 'Некорректная фамилия'),
+            .regex(/^[А-Я][а-я]+$/, 'Некорректная фамилия'),
         middleName: z
             .string()
             .max(25, 'Отчество не более 25 символов')
             .optional()
-            .refine((value) => value === undefined || value.trim() === '' || /^[A-Za-zА-Яа-яёЁ\s]+$/.test(value), {
+            .refine((value) => value === undefined || value.trim() === '' || /^[А-Я][а-я]+$/.test(value), {
                 message: 'Недопустимые символы',
             }),
         birthDate: z

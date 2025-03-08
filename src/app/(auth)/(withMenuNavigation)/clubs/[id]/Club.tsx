@@ -22,7 +22,7 @@ export function Club({ id = '1' }: { id: string }) {
             <div className="page pt-0">
                 {!isLoading ? (
                     <>
-                        <ClubInfo clubId={id} club={club} />
+                        <ClubInfo club={club} />
                         <SubscribeButton clubId={id} isBig={true} subscribed={club?.isUserSubscribed} />
                         <ClubFeed />
                     </>

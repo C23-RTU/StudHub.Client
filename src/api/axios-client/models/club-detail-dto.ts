@@ -34,6 +34,12 @@ export interface ClubDetailDTO {
     'name': string;
     /**
      * 
+     * @type {number}
+     * @memberof ClubDetailDTO
+     */
+    'subscriberCount': number;
+    /**
+     * 
      * @type {boolean}
      * @memberof ClubDetailDTO
      */

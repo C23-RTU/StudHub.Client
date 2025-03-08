@@ -1,37 +1,35 @@
 'use client';
 
-import { useQuery } from '@tanstack/react-query';
 import { CircleAlert, UsersRound } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 
 import { AUTH_PAGE } from '@/lib/config/routes.config';
 
-import { clubsApi } from '@/api/api';
 import type { ClubDetailDTO } from '@/api/axios-client';
 
 import { RowClubInfo } from './RowClubInfo';
 
-export function ClubInfo({ club, clubId }: { club: ClubDetailDTO | undefined; clubId: string }) {
+export function ClubInfo({ club }: { club: ClubDetailDTO | undefined }) {
     const router = useRouter();
     const [showInfo, setShowInfo] = useState(false);
 
-    function getSubscribersText(count: number) {
-        if (count === 0) return 'Нет подписчиков';
-        const lastDigit = count % 10;
-        const lastTwoDigits = count % 100;
-        if (lastTwoDigits >= 11 && lastTwoDigits <= 19) return `${count} подписчиков`;
-        if (lastDigit === 1) return `${count} подписчик`;
-        if (lastDigit >= 2 && lastDigit <= 4) return `${count} подписчика`;
-        return `${count} подписчиков`;
-    }
+    const displaySubscribers = useMemo(() => {
+        const subscribers = club?.subscriberCount || 0;
 
-    const { data: subscribers } = useQuery({
-        queryKey: ['club-subscribers', clubId],
-        queryFn: async () => (await clubsApi.clubsGetAllByClubId(Number(clubId))).data,
-    });
+        if (subscribers === 0) return 'Нет подписчиков';
+
+        const lastDigit = subscribers % 10;
+        const lastTwoDigits = subscribers % 100;
+
+        if (lastTwoDigits >= 11 && lastTwoDigits <= 19) return `${subscribers} подписчиков`;
+        if (lastDigit === 1) return `${subscribers} подписчик`;
+        if (lastDigit >= 2 && lastDigit <= 4) return `${subscribers} подписчика`;
+
+        return `${subscribers} подписчиков`;
+    }, [club?.subscriberCount]);
 
     return (
         <div>
@@ -40,9 +38,9 @@ export function ClubInfo({ club, clubId }: { club: ClubDetailDTO | undefined; cl
             </div>
 
             <div className="flex flex-col gap-2">
-                <RowClubInfo onClick={() => router.push(AUTH_PAGE.CLUB_SUBSCRIBERS(clubId))}>
+                <RowClubInfo onClick={() => router.push(AUTH_PAGE.CLUB_SUBSCRIBERS(club?.id as number))}>
                     <UsersRound size={18} />
-                    {getSubscribersText(subscribers?.length || 0)}
+                    {displaySubscribers}
                 </RowClubInfo>
                 {/* <RowClubInfo>
                     <MapPin size={18} />
