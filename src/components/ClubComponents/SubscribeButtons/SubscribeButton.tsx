@@ -29,18 +29,13 @@ export function SubscribeButton({
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['fetch-clubs'] });
             queryClient.setQueryData(['fetch-club', clubId], (oldData: ClubDetailDTO | undefined) => {
-                if (subscribed)
-                    return {
-                        ...oldData,
-                        subscriberCount: (oldData?.subscriberCount as number) - 1,
-                        isUserSubscribed: false,
-                    };
-                else
-                    return {
-                        ...oldData,
-                        subscriberCount: (oldData?.subscriberCount as number) + 1,
-                        isUserSubscribed: true,
-                    };
+                return {
+                    ...oldData,
+                    subscriberCount: subscribed
+                        ? (oldData?.subscriberCount as number) - 1
+                        : (oldData?.subscriberCount as number) + 1,
+                    isUserSubscribed: !subscribed,
+                };
             });
         },
     });
