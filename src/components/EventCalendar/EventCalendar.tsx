@@ -1,3 +1,5 @@
+'use client';
+
 import {
     addMonths,
     addWeeks,
@@ -23,6 +25,11 @@ interface CalendarProps {
     events?: { [key: string]: any[] };
     onDateChange: (date: Date) => void;
 }
+
+const toUTCDate = (date: Date) => {
+    return new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+};
+
 const EventCalendar = ({ events = {}, onDateChange }: CalendarProps) => {
     const [currentDate, setCurrentDate] = useState(new Date());
     const [selectedDate, setSelectedDate] = useState(new Date());
@@ -30,23 +37,25 @@ const EventCalendar = ({ events = {}, onDateChange }: CalendarProps) => {
 
     useEffect(() => {
         onDateChange(selectedDate);
-    }, [selectedDate, onDateChange]);
+    }, [selectedDate]);
 
     const getDaysToRender = () => {
+        const utcDate = toUTCDate(currentDate);
         if (isExpanded) {
-            const monthStart = startOfMonth(currentDate);
-            const monthEnd = endOfMonth(currentDate);
+            const monthStart = startOfMonth(utcDate);
+            const monthEnd = endOfMonth(monthStart);
             return eachDayOfInterval({ start: monthStart, end: monthEnd });
         }
 
-        const weekStart = startOfWeek(currentDate, { weekStartsOn: 1 });
-        const weekEnd = endOfWeek(currentDate, { weekStartsOn: 1 });
+        const weekStart = startOfWeek(utcDate, { weekStartsOn: 1 });
+        const weekEnd = endOfWeek(utcDate, { weekStartsOn: 1 });
         return eachDayOfInterval({ start: weekStart, end: weekEnd });
     };
 
     const handleDateClick = (day: Date) => {
-        if (!isSameMonth(day, currentDate)) return;
-        setSelectedDate(day);
+        const utcDay = toUTCDate(day);
+        if (!isSameMonth(utcDay, toUTCDate(currentDate))) return;
+        setSelectedDate(utcDay);
     };
 
     const handleNavigation = (direction: 'prev' | 'next') => {
@@ -59,7 +68,8 @@ const EventCalendar = ({ events = {}, onDateChange }: CalendarProps) => {
     };
 
     const hasEvents = (day: Date) => {
-        const dateKey = format(day, 'yyyy-MM-dd');
+        const utcDay = toUTCDate(day);
+        const dateKey = format(utcDay, 'yyyy-MM-dd');
         return events[dateKey]?.length > 0;
     };
 
@@ -114,8 +124,9 @@ const EventCalendar = ({ events = {}, onDateChange }: CalendarProps) => {
                 <motion.div className="grid grid-cols-7 gap-1" layout transition={{ duration: 0.2 }}>
                     <AnimatePresence mode="popLayout">
                         {days.map((day) => {
-                            const isCurrentMonth = isSameMonth(day, currentDate);
-                            const isSelected = isSameDay(day, selectedDate);
+                            const utcDay = toUTCDate(day);
+                            const isCurrentMonth = isSameMonth(utcDay, toUTCDate(currentDate));
+                            const isSelected = isSameDay(utcDay, toUTCDate(selectedDate));
 
                             return (
                                 <motion.button
@@ -126,23 +137,17 @@ const EventCalendar = ({ events = {}, onDateChange }: CalendarProps) => {
                                     transition={{ duration: 0.2 }}
                                     onClick={() => handleDateClick(day)}
                                     className={`
-                      rounded-lg relative py-2
-                      ${isSelected && 'bg-primary text-white hover:bg-primary'}
-                      ${!isCurrentMonth ? 'text-gray-500' : 'hover:bg-primary/80'}
-                    `}
+                    rounded-lg relative py-2
+                    ${isSelected && 'bg-primary text-white hover:bg-primary'}
+                    ${!isCurrentMonth ? 'text-gray-500' : 'hover:bg-primary/80'}
+                  `}
                                     disabled={!isCurrentMonth}
                                     whileHover={isCurrentMonth ? { scale: 1.05 } : undefined}
                                     whileTap={isCurrentMonth ? { scale: 0.95 } : undefined}
                                 >
                                     {format(day, 'd')}
                                     {hasEvents(day) && (
-                                        <motion.div
-                                            className="absolute bottom-1 left-1/2 -translate-x-1/2"
-                                            initial={{ scale: 0 }}
-                                            animate={{ scale: 1 }}
-                                        >
-                                            <div className="w-1 h-1 bg-red-500 rounded-full" />
-                                        </motion.div>
+                                        <div className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-red-500 rounded-full" />
                                     )}
                                 </motion.button>
                             );
