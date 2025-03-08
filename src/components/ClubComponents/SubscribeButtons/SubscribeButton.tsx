@@ -5,6 +5,7 @@ import { SquareCheck, SquarePlus } from 'lucide-react';
 import { useState } from 'react';
 
 import { clubsApi } from '@/api/api';
+import type { ClubDetailDTO } from '@/api/axios-client/models';
 
 import { Button } from '../../ui/button';
 
@@ -26,8 +27,16 @@ export function SubscribeButton({
         mutationKey: ['club-toggle-subscribe', clubId],
         mutationFn: async () => await clubsApi.clubsToggleSubscription(Number(clubId)),
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ['fetch-club', clubId] });
             queryClient.invalidateQueries({ queryKey: ['fetch-clubs'] });
+            queryClient.setQueryData(['fetch-club', clubId], (oldData: ClubDetailDTO | undefined) => {
+                return {
+                    ...oldData,
+                    subscriberCount: subscribed
+                        ? (oldData?.subscriberCount as number) - 1
+                        : (oldData?.subscriberCount as number) + 1,
+                    isUserSubscribed: !subscribed,
+                };
+            });
         },
     });
 

@@ -58,7 +58,7 @@ export default function EventView({ event }: { event: EventDetailDTO }) {
             </div>
             <div className="relative flex w-full h-[400px]">
                 <Image
-                    src={(event.eventImages.length > 0 && getStaticImg(event.eventImages[0])) || '/img/eventbanner.jpg'}
+                    src={(event.eventImages.length > 0 && getStaticImg(event.eventImages[0])) || '/img/default-club-banner.jpg'}
                     fill
                     alt={event.title || 'Event banner'}
                     className="object-cover"
