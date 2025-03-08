@@ -6,6 +6,7 @@ import { useState } from 'react';
 
 import EventCalendar from '@/components/EventCalendar/EventCalendar';
 import { EventCard } from '@/components/EventCard/EventCard';
+import { BackButton } from '@/components/ui/BackButton/BackButton';
 
 import { useInfinityScroll } from '@/hooks/useInfinityScroll';
 
@@ -55,7 +56,8 @@ export function Calendar() {
 
     return (
         <div className="page">
-            <Header>
+            <Header className="justify-start gap-4">
+                <BackButton />
                 <HeaderTitle>Календарь событий</HeaderTitle>
             </Header>
             <MainContent>
