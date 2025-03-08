@@ -58,7 +58,7 @@ export function PostCard({ className, post }: PostCardProps) {
                     </button>
                 )}
             </div>
-            <PostImageWrapper images={post.postImages} />
+            {post.postImages.length !== 0 && <PostImageWrapper images={post.postImages} />}
             <div className="flex items-center justify-between font-inter">
                 <div className="flex gap-4">
                     <ActionButton post={post} type={'like'} />
