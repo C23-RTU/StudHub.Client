@@ -19,10 +19,12 @@ import { AnimatePresence, LayoutGroup, motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
+import type { EventDetailDTO } from '@/api/axios-client';
+
 import { Button } from '../ui/button';
 
 interface CalendarProps {
-    events?: { [key: string]: any[] };
+    events?: { [key: string]: EventDetailDTO[] };
     onDateChange: (date: Date) => void;
 }
 
@@ -37,7 +39,7 @@ const EventCalendar = ({ events = {}, onDateChange }: CalendarProps) => {
 
     useEffect(() => {
         onDateChange(selectedDate);
-    }, [selectedDate]);
+    }, [selectedDate, onDateChange]);
 
     const getDaysToRender = () => {
         const monthStart = startOfMonth(currentDate);
