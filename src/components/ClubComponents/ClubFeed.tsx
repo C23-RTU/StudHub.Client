@@ -7,7 +7,7 @@ import { useInfinityScroll } from '@/hooks/useInfinityScroll';
 import { postApi } from '@/api/api';
 
 import { PostCard } from '../PostCard/PostCard';
-import { SearchInput } from '../ui/SearchInput/SearchInput';
+// import { SearchInput } from '../ui/SearchInput/SearchInput';
 import { Skeleton } from '../ui/skeleton';
 
 import { MainContent } from '@/hoc/MainContent/MainContent';
@@ -27,8 +27,8 @@ export function ClubFeed() {
 
     return (
         <MainContent>
-            <p className="text-xl font-semibold font-geologica">Посты</p>
-            <SearchInput placeholder="Поиск по постам..." />
+            <p className="text-xl font-semibold font-geologica">Посты клуба</p>
+            {/* <SearchInput placeholder="Поиск по постам..." /> */}
 
             <div className="flex flex-col gap-10">
                 {isLoading &&
