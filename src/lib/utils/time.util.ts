@@ -16,3 +16,7 @@ export const parseLocalDate = (date: number | string | Date, options?: Intl.Date
 export const parseLocalTime = (date: number | string | Date, options?: Intl.DateTimeFormatOptions) => {
     return new Date(date).toLocaleString('ru-RU', options || defaultLocalTimeOptions);
 };
+
+export const toUTCDate = (date: Date) => {
+    return new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+};
