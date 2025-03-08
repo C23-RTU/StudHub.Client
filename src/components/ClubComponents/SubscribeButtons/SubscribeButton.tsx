@@ -3,7 +3,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { SquareCheck, SquarePlus } from 'lucide-react';
 import { useState } from 'react';
-import toast from 'react-hot-toast';
 
 import { clubsApi } from '@/api/api';
 
@@ -38,7 +37,7 @@ export function SubscribeButton({
                 {subscribed ? (
                     <Button
                         onClick={() => setUnsubVisible(true)}
-                        className={`w-full flex bg-secondary justify-center hover:bg-accent ${isBig ? 'my-5' : 'p-3'}`}
+                        className={`w-full flex bg-secondary font-geologica justify-center hover:bg-accent ${isBig ? 'my-5' : 'p-3'}`}
                         disabled={isSubscribePending}
                     >
                         {isBig && <span>Вы подписаны</span>}
@@ -48,12 +47,13 @@ export function SubscribeButton({
                     <Button
                         onClick={async () => {
                             await toggleSubscription();
-                            toast.success('Вы подписались на клуб');
+                            const { toast } = await import('react-hot-toast');
+                            toast.success('Вы подписались на клуб', { id: 'subscribe-toast' });
                         }}
-                        className={`w-full flex justify-center bg-primary hover:bg-primary/80 ${isBig ? 'my-5' : 'p-3'}`}
+                        className={`w-full flex justify-center font-geologica bg-primary hover:bg-primary/80 ${isBig ? 'my-5' : 'p-3'}`}
                         disabled={isSubscribePending}
                     >
-                        {isBig && <span>Вступить</span>}
+                        {isBig && <span>Подписаться</span>}
                         <SquarePlus />
                     </Button>
                 )}
@@ -64,7 +64,8 @@ export function SubscribeButton({
                 onClick={async () => {
                     await toggleSubscription();
                     setUnsubVisible(false);
-                    toast.success('Вы отписались от клуба');
+                    const { toast } = await import('react-hot-toast');
+                    toast.success('Вы отписались от клуба', { id: 'unsubscribe-toast' });
                 }}
             />
         </figure>

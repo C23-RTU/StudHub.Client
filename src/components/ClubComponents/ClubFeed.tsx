@@ -27,7 +27,7 @@ export function ClubFeed() {
 
     return (
         <MainContent>
-            <p className="text-xl font-semibold">Посты</p>
+            <p className="text-xl font-semibold font-geologica">Посты</p>
             <SearchInput placeholder="Поиск по постам..." />
 
             <div className="flex flex-col gap-10">
@@ -37,7 +37,7 @@ export function ClubFeed() {
                         .map((_, index) => <Skeleton key={index} className="h-[320px] w-full" />)}
                 {data && data.pages.flatMap((page) => page).map((post) => <PostCard key={post.id} post={post} />)}
                 {isFetchingNextPage && <Skeleton className="h-[320px] w-full" />}
-                {!hasNextPage && <p className="text-center text-neutral-400">На этом лента кончается!</p>}
+                {!hasNextPage && <p className="text-center text-neutral-400">Посты этого клуба закончились</p>}
                 {error && <p className="text-center text-neutral-400">Ошибка загрузки постов</p>}
                 <div ref={ref}></div>
             </div>

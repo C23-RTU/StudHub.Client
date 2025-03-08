@@ -1,7 +1,7 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-import { CircleAlert, MapPin, UsersRound } from 'lucide-react';
+import { CircleAlert, UsersRound } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
@@ -10,11 +10,11 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sh
 import { AUTH_PAGE } from '@/lib/config/routes.config';
 
 import { clubsApi } from '@/api/api';
-
-import { RowClubInfo } from './RowClubInfo';
 import type { ClubDetailDTO } from '@/api/axios-client';
 
-export function ClubInfo({ club, clubId }: { club: ClubDetailDTO | undefined, clubId: string }) {
+import { RowClubInfo } from './RowClubInfo';
+
+export function ClubInfo({ club, clubId }: { club: ClubDetailDTO | undefined; clubId: string }) {
     const router = useRouter();
     const [showInfo, setShowInfo] = useState(false);
 
@@ -28,26 +28,26 @@ export function ClubInfo({ club, clubId }: { club: ClubDetailDTO | undefined, cl
         return `${count} подписчиков`;
     }
 
-    const { data: subscribers, isLoading } = useQuery({
+    const { data: subscribers } = useQuery({
         queryKey: ['club-subscribers', clubId],
         queryFn: async () => (await clubsApi.clubsGetAllByClubId(Number(clubId))).data,
     });
 
     return (
         <div>
-            <div className="flex flex-col gap-1">
-                <h1 className="text-2xl font-bold text-center mt-3">{club?.name}</h1>
+            <div className="flex flex-col my-3">
+                <h1 className="text-2xl font-bold text-center font-geologica">{club?.name}</h1>
             </div>
 
-            <div className="flex flex-col gap-2 mt-5">
+            <div className="flex flex-col gap-2">
                 <RowClubInfo onClick={() => router.push(AUTH_PAGE.CLUB_SUBSCRIBERS(clubId))}>
                     <UsersRound size={18} />
-                    {isLoading ? '...' : getSubscribersText(subscribers?.length || 0)}
+                    {getSubscribersText(subscribers?.length || 0)}
                 </RowClubInfo>
-                <RowClubInfo>
+                {/* <RowClubInfo>
                     <MapPin size={18} />
                     г. Москва, ул. Стромынка д. 20
-                </RowClubInfo>
+                </RowClubInfo> */}
                 <RowClubInfo onClick={() => setShowInfo(true)}>
                     <CircleAlert size={18} />
                     Подробная информация
@@ -56,7 +56,7 @@ export function ClubInfo({ club, clubId }: { club: ClubDetailDTO | undefined, cl
             <Sheet open={showInfo} onOpenChange={setShowInfo}>
                 <SheetContent side="bottom">
                     <SheetHeader>
-                        <SheetTitle className="text-start">Информация о клубе</SheetTitle>
+                        <SheetTitle className="text-start font-geologica">Информация о клубе</SheetTitle>
                     </SheetHeader>
                     <p className="font-normal font-inter text-neutral-300">{club?.about}</p>
                 </SheetContent>
