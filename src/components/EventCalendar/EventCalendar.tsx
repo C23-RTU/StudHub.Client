@@ -15,7 +15,7 @@ import {
     subWeeks,
 } from 'date-fns';
 import { ru } from 'date-fns/locale';
-import { AnimatePresence, LayoutGroup, motion } from 'framer-motion';
+import { LayoutGroup, motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
