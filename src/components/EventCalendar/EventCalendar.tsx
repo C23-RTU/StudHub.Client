@@ -124,37 +124,46 @@ const EventCalendar = ({ events = {}, onDateChange }: CalendarProps) => {
                 </div>
 
                 <motion.div className="grid grid-cols-7 gap-1" layout transition={{ duration: 0.2 }}>
-                    <AnimatePresence mode="popLayout">
-                        {days.map((day) => {
-                            const utcDay = toUTCDate(day);
-                            const isCurrentMonth = isSameMonth(utcDay, toUTCDate(currentDate));
-                            const isSelected = isSameDay(utcDay, toUTCDate(selectedDate));
+                    {days.map((day) => {
+                        const utcDay = toUTCDate(day);
+                        const isCurrentMonth = isSameMonth(utcDay, toUTCDate(currentDate));
+                        const isSelected = isSameDay(utcDay, toUTCDate(selectedDate));
 
-                            return (
-                                <motion.button
-                                    key={day.toString()}
-                                    initial={{ opacity: 0, scale: 0.8 }}
-                                    animate={{ opacity: 1, scale: 1 }}
-                                    exit={{ opacity: 0, scale: 0.8 }}
-                                    transition={{ duration: 0.2 }}
-                                    onClick={() => handleDateClick(day)}
-                                    className={`
-                    rounded-lg relative py-2
-                    ${isSelected && 'bg-primary text-white hover:bg-primary'}
-                    ${!isCurrentMonth ? 'text-gray-500' : 'hover:bg-primary/80'}
-                  `}
-                                    disabled={!isCurrentMonth}
-                                    whileHover={isCurrentMonth ? { scale: 1.05 } : undefined}
-                                    whileTap={isCurrentMonth ? { scale: 0.95 } : undefined}
-                                >
-                                    {format(day, 'd')}
-                                    {hasEvents(day) && (
-                                        <div className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-red-500 rounded-full" />
-                                    )}
-                                </motion.button>
-                            );
-                        })}
-                    </AnimatePresence>
+                        return isSelected ? (
+                            <motion.button
+                                key="selected-date"
+                                layoutId="selected-date"
+                                animate={{
+                                    opacity: 1,
+                                    scale: 1,
+                                }}
+                                exit={{ opacity: 0, scale: 0.8 }}
+                                onClick={() => handleDateClick(day)}
+                                className="rounded-lg relative py-2 bg-primary text-white"
+                            >
+                                {format(day, 'd')}
+                                {hasEvents(day) && (
+                                    <div className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-red-500 rounded-full" />
+                                )}
+                            </motion.button>
+                        ) : (
+                            <motion.button
+                                key={day.toString()}
+                                onClick={() => handleDateClick(day)}
+                                className={`rounded-lg relative py-2 ${
+                                    !isCurrentMonth ? 'text-gray-500' : 'hover:bg-primary/80'
+                                }`}
+                                disabled={!isCurrentMonth}
+                                whileHover={isCurrentMonth ? { scale: 1.05 } : undefined}
+                                whileTap={isCurrentMonth ? { scale: 0.95 } : undefined}
+                            >
+                                {format(day, 'd')}
+                                {hasEvents(day) && (
+                                    <div className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-red-500 rounded-full" />
+                                )}
+                            </motion.button>
+                        );
+                    })}
                 </motion.div>
 
                 <Button className="mt-4 w-full" onClick={() => setIsExpanded(!isExpanded)}>
