@@ -2,6 +2,7 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { format, parseISO } from 'date-fns';
+import { m } from 'framer-motion';
 import { useMemo, useState } from 'react';
 
 import EventCalendar from '@/components/EventCalendar/EventCalendar';
@@ -68,7 +69,16 @@ export function Calendar() {
                     {hasEvents
                         ? eventsPages?.pages
                               .flatMap((page) => page)
-                              .map((event) => <EventCard key={event.id} event={event} />)
+                              .map((event, index) => (
+                                  <m.div
+                                      key={event.id}
+                                      initial={{ scale: 0.8, opacity: 0 }}
+                                      animate={{ scale: 1, opacity: 1 }}
+                                      transition={{ delay: index * 0.1 }}
+                                  >
+                                      <EventCard event={event} />
+                                  </m.div>
+                              ))
                         : !isLoading && (
                               <div className="w-full flex justify-center items-center text-muted-foreground py-4">
                                   В выбранный день событий нет
