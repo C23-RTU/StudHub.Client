@@ -52,7 +52,7 @@ export function ClubHeader({ club, isLoading }: { club: ClubDetailDTO | undefine
                     <DropdownMenuContent>
                         <DropdownMenuItem
                             onClick={() => {
-                                navigator.clipboard.writeText(pathname);
+                                navigator.clipboard.writeText(`https://setka-rtu.ru${pathname}`);
                                 toast.success('Ссылка скопирована');
                             }}
                         >

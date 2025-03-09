@@ -2,7 +2,10 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { format, parseISO } from 'date-fns';
+<<<<<<< HEAD
 import { m } from 'framer-motion';
+=======
+>>>>>>> main
 import { useMemo, useState } from 'react';
 
 import EventCalendar from '@/components/EventCalendar/EventCalendar';

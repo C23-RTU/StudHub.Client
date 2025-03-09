@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import type { PostDetailDTO } from '@/api/axios-client';
 
@@ -8,6 +8,7 @@ import { ActionButton } from '../ui/PostActionButton/PostActionButton';
 
 import { PostHeader } from './PostHeader/PostHeader';
 import { PostImageWrapper } from './PostImageSwiper/PostImageWrapper';
+import { truncateText } from '@/lib/utils/text.util';
 import { cn } from '@/lib/utils/utils';
 
 type PostCardProps = {
@@ -18,43 +19,31 @@ type PostCardProps = {
 export function PostCard({ className, post }: PostCardProps) {
     const [showFull, setShowFull] = useState(false);
 
-    const getTruncatedText = (text: string, limit: number) => {
-        if (text.length <= limit) return text;
-        const words = text.split(' ');
-        let truncated = '';
-        for (const word of words) {
-            if ((truncated + (truncated ? ' ' : '') + word).length > limit) break;
-            truncated += (truncated ? ' ' : '') + word;
-        }
-        return truncated;
-    };
-
-    const isLong = post.content.length > 356;
-    const displayText = !showFull && isLong ? getTruncatedText(post.content, 200) : post.content;
+    const isLong = useMemo(() => post.content.length > 356, [post]);
+    const displayText = useMemo(
+        () => (!showFull && isLong ? truncateText(post.content, 200) : post.content),
+        [post, isLong, showFull]
+    );
 
     return (
         <article className={cn('flex flex-col gap-3', className)}>
             <PostHeader post={post} />
             <div>
                 <p className="text-2xl font-bold my-1 text-neutral-50">{post.title}</p>
-                <p className="font-inter font-light text-gray-300">
+                <p className="font-inter font-light text-gray-300 whitespace-pre-line">
                     {displayText}
                     {!showFull && isLong && '...'}
                 </p>
-                {!showFull && isLong && (
+                {((!showFull && isLong) || (showFull && isLong)) && (
                     <button
-                        onClick={() => setShowFull(true)}
+                        onClick={() => setShowFull(!showFull && isLong ? true : false)}
                         className="text-background-foreground text-sm font-inter mt-1 focus:outline-none"
                     >
-                        Показать все
-                    </button>
-                )}
-                {showFull && isLong && (
-                    <button
-                        onClick={() => setShowFull(false)}
-                        className="text-background-foreground text-sm font-inter mt-1 focus:outline-none"
-                    >
-                        Скрыть все
+                        {(!showFull && isLong) || (showFull && isLong)
+                            ? showFull && isLong
+                                ? 'Скрыть все'
+                                : 'Показать все'
+                            : ''}
                     </button>
                 )}
             </div>

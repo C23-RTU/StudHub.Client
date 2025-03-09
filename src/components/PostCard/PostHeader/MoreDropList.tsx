@@ -1,5 +1,6 @@
 import { Copy, EllipsisIcon, ExternalLink, Share2, UserIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -16,7 +17,6 @@ import {
 import { AUTH_PAGE } from '@/lib/config/routes.config';
 
 import type { PostDetailDTO } from '@/api/axios-client/models';
-import toast from 'react-hot-toast';
 
 export function MoreDropList({ post }: { post: PostDetailDTO }) {
     const router = useRouter();
@@ -28,7 +28,7 @@ export function MoreDropList({ post }: { post: PostDetailDTO }) {
                     <EllipsisIcon />
                 </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent  className="bg-neutral-900 border-neutral-700 mr-4">
+            <DropdownMenuContent className="bg-neutral-900 border-neutral-700 mr-4">
                 <DropdownMenuItem
                     className="flex gap-2 font-light font-inter"
                     onClick={() => router.push(AUTH_PAGE.CLUB(post.club.id))}
@@ -43,7 +43,12 @@ export function MoreDropList({ post }: { post: PostDetailDTO }) {
                     </DropdownMenuSubTrigger>
                     <DropdownMenuPortal>
                         <DropdownMenuSubContent>
-                            <DropdownMenuItem onClick={() => {navigator.clipboard.writeText(`https://setka-rtu.ru/comments/${post.id}`); toast.success("Ссылка скопирована")}}>
+                            <DropdownMenuItem
+                                onClick={() => {
+                                    navigator.clipboard.writeText(`https://setka-rtu.ru/comments/${post.id}`);
+                                    toast.success('Ссылка скопирована');
+                                }}
+                            >
                                 <Copy size={20} /> Скопировать ссылку
                             </DropdownMenuItem>
                             <DropdownMenuItem
@@ -57,9 +62,9 @@ export function MoreDropList({ post }: { post: PostDetailDTO }) {
                                             .catch(console.error);
                                     } else {
                                         // На случай если юзер сидит с каким-нибудь Netscape Navigator.
-                                        console.log("Web Share API not supported");
+                                        console.log('Web Share API not supported');
                                         navigator.clipboard.writeText(`https://setka-rtu.ru/comments/${post.id}`);
-                                        toast.success("Не удалось поделиться, ссылка скопирована в буфер обмена");
+                                        toast.success('Не удалось поделиться, ссылка скопирована в буфер обмена');
                                     }
                                 }}
                             >
