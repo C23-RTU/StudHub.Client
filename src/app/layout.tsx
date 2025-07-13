@@ -16,10 +16,10 @@ const unbounded = Unbounded({ subsets: ['latin'], variable: '--font-unbounded' }
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'Сетка РТУ МИРЭА',
-        template: `%s | Сетка РТУ МИРЭА`,
+        absolute: 'СтудХаб РТУ МИРЭА',
+        template: `%s | СтудХаб РТУ МИРЭА`,
     },
-    description: 'Сетка РТУ МИРЭА',
+    description: 'СтудХаб РТУ МИРЭА',
 };
 
 export default function RootLayout({
@@ -28,7 +28,7 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en" className=''>
+        <html lang="en" className="">
             <body
                 className={`${inter.variable} ${geologica.variable} ${unbounded.variable} antialiased dark font-inter `}
             >
