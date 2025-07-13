@@ -1,9 +1,9 @@
 'use client';
 
+import { GraduationCapIcon } from 'lucide-react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-import { SetkaLogo } from '@/components/logo';
 import { Switcher } from '@/components/ui/Switcher/Switcher';
 
 import Login from './Forms/Login';
@@ -31,28 +31,24 @@ export default function Auth() {
     };
 
     return (
-        <div className="flex flex-col items-center gap-3 my-auto w-full">
-            {/* <Image src={'/img/logo.png'} width={255} height={255} quality={100} alt="logo" /> */}
-            <div className="flex flex-col items-start w-full">
-                <div className="flex flex-row gap-4 items-center">
-                    <h1 className="text-6xl font-unbounded font-bold">СТУДХАБ</h1>
-                    {/*<SetkaLogo className="w-10 h-10" />*/}
-                </div>
+        <div className="flex flex-col items-center mx-auto max-w-xl gap-3 my-auto w-full">
+            {/*TODO: Заменить на SVG-шку*/}
 
-                <p className="text-lg text-neutral-300 my-3 font-geologica">
-                    Социальная сеть для студентов РТУ МИРЭА с новостями из жизни университета
-                </p>
-            </div>
+            <figure className={'flex flex-row items-center gap-4'}>
+                <GraduationCapIcon size={64} />
+                <p className="text-5xl font-unbounded font-extrabold">СТУДХАБ</p>
+            </figure>
 
+            <p className="text-sm text-neutral-300 text-center font-inter">
+                Твоя студенческая жизнь в РТУ МИРЭА — все события и новости в одной сети.
+            </p>
             <Switcher tabs={['Вход', 'Регистрация']} activeTabIndex={formType} onChange={handleChange} />
-
             <div className="w-full">
                 {formType === Tabs.LOGIN && <Login />}
                 {formType === Tabs.REGISTRATION && <Register />}
             </div>
-
             <small className="text-center font-semibold text-xs text-neutral-500">
-                © C23-RTU, 2025. Сетка является неофициальным студенческим проектом в рамках университета РТУ МИРЭА.
+                © C23-RTU, 2025. СтудХаб является неофициальным студенческим проектом в рамках университета РТУ МИРЭА.
             </small>
         </div>
     );

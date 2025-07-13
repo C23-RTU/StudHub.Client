@@ -94,7 +94,7 @@ export default function Register() {
             />
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                    <Button className="w-full bg-secondary hover:bg-secondary/80 rounded-b-none border-b focus:border-b-2 focus:border-b-neutral-200 border-neutral-600 truncate justify-start">
+                    <Button className="w-full bg-secondary border hover:bg-secondary/80 text-white border-neutral-700 truncate justify-start">
                         {selectedInstitute?.name || 'Выберите институт'}
                     </Button>
                 </DropdownMenuTrigger>
