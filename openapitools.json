@@ -7,7 +7,7 @@
             "v1.0": {
                 "generatorName": "typescript-axios",
                 "output": "./src/api/axios-client",
-                "inputSpec": "https://setka-rtu.ru/api/openapi/v1.json",
+                "inputSpec": "https://api.setka-rtu.ru/openapi/v1.json",
                 "additionalProperties": {
                     "supportsES6": true,
                     "snapshot": true,

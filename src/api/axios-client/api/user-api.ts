@@ -33,44 +33,6 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
     return {
         /**
          * 
-         * @param {File | null} [file] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        userCreate: async (file?: File | null, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/user`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
-
-
-            if (file !== undefined) { 
-                localVarFormParams.append('file', file as any);
-            }
-    
-    
-            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = localVarFormParams;
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -178,18 +140,6 @@ export const UserApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
-         * @param {File | null} [file] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async userCreate(file?: File | null, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.userCreate(file, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['UserApi.userCreate']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -235,15 +185,6 @@ export const UserApiFactory = function (configuration?: Configuration, basePath?
     return {
         /**
          * 
-         * @param {File | null} [file] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        userCreate(file?: File | null, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.userCreate(file, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -279,15 +220,6 @@ export const UserApiFactory = function (configuration?: Configuration, basePath?
 export interface UserApiInterface {
     /**
      * 
-     * @param {File | null} [file] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof UserApiInterface
-     */
-    userCreate(file?: File | null, options?: RawAxiosRequestConfig): AxiosPromise<void>;
-
-    /**
-     * 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UserApiInterface
@@ -321,17 +253,6 @@ export interface UserApiInterface {
  * @extends {BaseAPI}
  */
 export class UserApi extends BaseAPI implements UserApiInterface {
-    /**
-     * 
-     * @param {File | null} [file] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof UserApi
-     */
-    public userCreate(file?: File | null, options?: RawAxiosRequestConfig) {
-        return UserApiFp(this.configuration).userCreate(file, options).then((request) => request(this.axios, this.basePath));
-    }
-
     /**
      * 
      * @param {*} [options] Override http request option.

@@ -19,7 +19,6 @@ export * from './api/clubs-api';
 export * from './api/comments-api';
 export * from './api/events-api';
 export * from './api/feed-api';
-export * from './api/images-api';
 export * from './api/institutes-api';
 export * from './api/posts-api';
 export * from './api/reactions-api';
