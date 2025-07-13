@@ -35,8 +35,8 @@ export default function Auth() {
             {/* <Image src={'/img/logo.png'} width={255} height={255} quality={100} alt="logo" /> */}
             <div className="flex flex-col items-start w-full">
                 <div className="flex flex-row gap-4 items-center">
-                    <h1 className="text-6xl font-unbounded font-bold">СЕТКА</h1>
-                    <SetkaLogo className='w-10 h-10' />
+                    <h1 className="text-6xl font-unbounded font-bold">СТУДХАБ</h1>
+                    {/*<SetkaLogo className="w-10 h-10" />*/}
                 </div>
 
                 <p className="text-lg text-neutral-300 my-3 font-geologica">

@@ -3,7 +3,7 @@ import { Geologica, Inter, Unbounded } from 'next/font/google';
 
 import ProviderLayout from '@/components/Provider/Provider';
 
-import '@/scss/globals.scss';
+import '@/css/globals.css';
 
 const geologica = Geologica({
     subsets: ['latin'],
@@ -30,7 +30,7 @@ export default function RootLayout({
     return (
         <html lang="en" className="">
             <body
-                className={`${inter.variable} ${geologica.variable} ${unbounded.variable} antialiased dark font-inter `}
+                className={`${inter.variable} ${geologica.variable} ${unbounded.variable} antialiased dark font-inter`}
             >
                 <ProviderLayout>{children}</ProviderLayout>
             </body>

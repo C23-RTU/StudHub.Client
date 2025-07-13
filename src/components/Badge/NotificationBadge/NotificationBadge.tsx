@@ -13,7 +13,7 @@ export function NotificationBadge({ count }: Props) {
         <BadgeWrapper onClick={() => console.log('Открываем уведомления')}>
             <BellIcon size={28} />
             {count > 0 && (
-                <span className="text-[8px] px-1 py-[0.1rem] rounded-full bg-blue absolute leading-none bottom-[6px] right-[5px] select-none">
+                <span className="text-[8px] px-1 py-[0.1rem] rounded-full bg-primary absolute leading-none bottom-[6px] right-[5px] select-none">
                     {count}
                 </span>
             )}
