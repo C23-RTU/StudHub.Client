@@ -6,7 +6,6 @@ api/clubs-api.ts
 api/comments-api.ts
 api/events-api.ts
 api/feed-api.ts
-api/images-api.ts
 api/institutes-api.ts
 api/posts-api.ts
 api/reactions-api.ts
