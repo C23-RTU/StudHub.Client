@@ -14,7 +14,7 @@ const nextConfig: NextConfig = {
             },
             {
                 protocol: 'https',
-                hostname: 'setka-rtu.ru',
+                hostname: 'api.setka-rtu.ru',
                 port: '',
                 pathname: '/**',
             },
