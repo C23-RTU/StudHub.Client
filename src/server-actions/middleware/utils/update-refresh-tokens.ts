@@ -12,14 +12,12 @@ export const updateRefreshTokens = (
             secure: true,
             httpOnly: true,
             sameSite: 'none',
-            domain: '.setka-rtu.ru',
         });
         response.cookies.set(EnumTokens.REFRESH_TOKEN, tokens.refreshToken, {
             expires: Date.now() + 2592000000,
             secure: true,
             httpOnly: true,
             sameSite: 'none',
-            domain: '.setka-rtu.ru',
         });
     }
 
