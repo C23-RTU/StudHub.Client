@@ -33,9 +33,7 @@ export function ClubInfo({ club }: { club: ClubDetailDTO | undefined }) {
 
     return (
         <section className="flex flex-col gap-3">
-            <div className="flex flex-col">
-                <h1 className="font-geologica text-center text-2xl font-bold">{club?.name}</h1>
-            </div>
+            <h1 className="font-geologica text-center text-2xl font-bold">{club?.name}</h1>
 
             <div className="flex flex-col gap-2">
                 <RowClubInfo onClick={() => router.push(AUTH_PAGE.CLUB_SUBSCRIBERS(club?.id as number))}>

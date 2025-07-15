@@ -10,9 +10,9 @@ const buttonVariants = cva(
     {
         variants: {
             variant: {
-                default: 'bg-primary text-primary-foreground hover:bg-primary/90',
+                default: 'bg-primary text-primary-foreground hover:bg-primary/0',
                 destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90',
-                outline: 'border border-input bg-background hover:bg-accent hover:text-accent-foreground',
+                outline: 'bg-background hover:bg-accent hover:text-accent-foreground',
                 secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
                 red: 'bg-red-700 text-white hover:bg-red-600',
                 ghost: 'hover:bg-accent hover:text-accent-foreground',
@@ -29,7 +29,7 @@ const buttonVariants = cva(
             variant: 'default',
             size: 'default',
         },
-    },
+    }
 );
 
 export interface ButtonProps
@@ -54,7 +54,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                 {isLoading ? <LoaderCircleIcon className="animate-spin" /> : props.children}
             </Comp>
         );
-    },
+    }
 );
 Button.displayName = 'Button';
 
