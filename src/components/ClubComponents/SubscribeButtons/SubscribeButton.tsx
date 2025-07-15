@@ -46,7 +46,7 @@ export function SubscribeButton({
                 {subscribed ? (
                     <Button
                         onClick={() => setUnsubVisible(true)}
-                        className={`bg-background-light font-geologica hover:bg-accent flex w-full justify-center ${isBig ? 'my-5' : 'p-3'}`}
+                        className={`bg-background-light hover:bg-secondary font-geologica flex w-full justify-center ${isBig ? 'my-5' : 'p-3'}`}
                         disabled={isSubscribePending}
                     >
                         {isBig && <span>Вы подписаны</span>}
@@ -59,7 +59,7 @@ export function SubscribeButton({
                             const { toast } = await import('react-hot-toast');
                             toast.success('Вы подписались на клуб', { id: 'subscribe-toast' });
                         }}
-                        className={`font-geologica bg-primary hover:bg-primary/80 flex w-full justify-center ${isBig ? 'my-5' : 'p-3'}`}
+                        className={`font-geologica bg-secondary hover:bg-primary flex w-full justify-center ${isBig ? 'my-5' : 'p-3'}`}
                         disabled={isSubscribePending}
                     >
                         {isBig && <span>Подписаться</span>}

@@ -26,7 +26,7 @@ export function ClubHeader({ club, isLoading }: { club: ClubDetailDTO | undefine
 
     return (
         <header>
-            <div className="fixed z-50 flex w-full max-w-[1020px] flex-row items-center justify-between bg-gradient-to-b from-neutral-900/80 to-neutral-900/0 p-4">
+            <div className="fixed z-50 -mt-[1px] flex w-full max-w-[1020px] flex-row items-center justify-between bg-gradient-to-b from-neutral-900/80 to-neutral-900/0 p-4">
                 <div className="flex flex-row items-center">
                     <BackButton onClick={() => router.back()} />
                     {/* <p
