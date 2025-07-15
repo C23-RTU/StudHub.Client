@@ -23,8 +23,7 @@ export const RegisterDataSchema = z
             }),
         birthDate: z
             .string({
-                required_error: 'Дата рождения обязательна',
-                invalid_type_error: 'Введите корректную дату',
+                error: (issue) => (issue.input === undefined ? 'Дата рождения обязательна' : 'Введите корректную дату'),
             })
             .refine((value) => {
                 const isValidFormat = /^\d{4}-\d{2}-\d{2}$/.test(value);
