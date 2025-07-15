@@ -38,6 +38,7 @@
 
 .dark {
   --background: hsl(0, 0%, 10%);
+  --background-light: hsl(0, 0%, 20%);
   --foreground: hsl(210 40% 98%);
   --card: hsl(222.2 84% 4.9%);
   --card-foreground: hsl(210 40% 98%);
@@ -45,10 +46,10 @@
   --popover-foreground: hsl(210 40% 98%);
   --primary: hsl(217, 100%, 50%);
   --primary-foreground: hsl(0, 0%, 100%);
-  --secondary: hsl(0, 0%, 15%);
+  --secondary: hsl(0, 0%, 14%);
   --secondary-foreground: hsl(0, 0%, 10%);
   --muted: hsl(217.2 32.6% 17.5%);
-  --muted-foreground: hsl(215 20.2% 65.1%);
+  --muted-foreground: hsl(209 0% 38.1%);
   --accent: hsl(0, 0%, 12%);
   --radius: 0.6rem;
   --accent-foreground: hsl(210 40% 98%);
@@ -75,6 +76,7 @@
 
 @theme inline {
   --color-background: var(--background);
+  --color-background-light: var(--background-light);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
@@ -103,6 +105,9 @@
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
   --height-menuNavigation: 48px;
+  --text-xss: 10px;
+  --padding-pageX: 18px;
+  --padding-pageY: 20px;
 }
 
 @layer base {
@@ -115,7 +120,7 @@
   }
 
   .page {
-    @apply h-full w-full font-inter px-6 py-8;
+    @apply h-full w-full font-inter px-pageX py-pageY;
   }
 
   .hidden-scroll {
