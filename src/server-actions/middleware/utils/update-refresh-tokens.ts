@@ -4,7 +4,7 @@ import { EnumTokens } from '@/lib/types/login.type';
 
 export const updateRefreshTokens = (
     response: NextResponse,
-    tokens: { accessToken: string; refreshToken: string; isRefresh: boolean },
+    tokens: { accessToken: string; refreshToken: string; isRefresh: boolean }
 ) => {
     if (tokens.isRefresh) {
         response.cookies.set(EnumTokens.ACCESS_TOKEN, tokens.accessToken, {
