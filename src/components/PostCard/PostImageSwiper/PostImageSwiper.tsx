@@ -22,7 +22,7 @@ export function PostImageSwiper({ images }: Props) {
             className="mySwiper"
         >
             {images.map((img, index) => (
-                <SwiperSlide key={index} className="!h-auto max-h-[500px] relative">
+                <SwiperSlide key={index} className="h-auto! max-h-[500px] relative">
                     {/* Blurred background image */}
                     <div className="absolute inset-0 overflow-hidden mx-0">
                         <LoaderImage

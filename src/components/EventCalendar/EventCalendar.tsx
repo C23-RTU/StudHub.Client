@@ -138,9 +138,9 @@ const EventCalendar = ({ events = {}, onDateChange }: CalendarProps) => {
                                 transition={{ duration: 0.2 }}
                                 onClick={() => handleDateClick(day)}
                                 className={`
-                                    rounded-lg relative py-2
+                                    rounded-lg relative py-2 duration-150 transition
                                     ${isSelected && 'bg-primary text-white hover:bg-primary'}
-                                    ${!isCurrentMonth ? 'text-gray-500' : 'hover:bg-primary/80'}
+                                    ${!isCurrentMonth ? 'text-muted-foreground' : 'hover:bg-primary/80'}
                                 `}
                                 disabled={!isCurrentMonth}
                                 whileHover={isCurrentMonth ? { scale: 1.05 } : undefined}

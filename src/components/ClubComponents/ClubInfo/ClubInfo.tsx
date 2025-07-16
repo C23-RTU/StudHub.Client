@@ -32,10 +32,8 @@ export function ClubInfo({ club }: { club: ClubDetailDTO | undefined }) {
     }, [club?.subscriberCount]);
 
     return (
-        <div>
-            <div className="flex flex-col my-3">
-                <h1 className="text-2xl font-bold text-center font-geologica">{club?.name}</h1>
-            </div>
+        <section className="flex flex-col gap-3">
+            <h1 className="font-geologica text-center text-2xl font-bold">{club?.name}</h1>
 
             <div className="flex flex-col gap-2">
                 <RowClubInfo onClick={() => router.push(AUTH_PAGE.CLUB_SUBSCRIBERS(club?.id as number))}>
@@ -54,11 +52,11 @@ export function ClubInfo({ club }: { club: ClubDetailDTO | undefined }) {
             <Sheet open={showInfo} onOpenChange={setShowInfo}>
                 <SheetContent side="bottom">
                     <SheetHeader>
-                        <SheetTitle className="text-start font-geologica">Информация о клубе</SheetTitle>
+                        <SheetTitle className="font-geologica text-start">Информация о клубе</SheetTitle>
                     </SheetHeader>
-                    <p className="font-normal font-inter text-neutral-300">{club?.about}</p>
+                    <p className="font-inter font-normal text-neutral-300">{club?.about}</p>
                 </SheetContent>
             </Sheet>
-        </div>
+        </section>
     );
 }

@@ -16,7 +16,7 @@ export function Switcher({
     };
 
     return (
-        <div className="bg-white rounded-lg font-geologica p-[2px] w-full">
+        <div className="bg-white rounded-lg font-geologica select-none p-[2px] w-full">
             <div className="flex justify-between w-full  h-[40px] relative box-border">
                 {tabs.map((name, index) => (
                     <Fragment key={index}>
@@ -38,7 +38,7 @@ export function Switcher({
                 ))}
 
                 <div
-                    className="glider flex bg-blue h-full rounded-lg absolute transition-all box-border"
+                    className="glider flex bg-primary h-full rounded-lg absolute transition-all box-border"
                     style={{ width: `calc(100% / ${2} )` }}
                 />
             </div>

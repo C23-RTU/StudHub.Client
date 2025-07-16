@@ -5,8 +5,6 @@ import { LazyMotion, domAnimation } from 'framer-motion';
 import type { PropsWithChildren } from 'react';
 import { Toaster } from 'react-hot-toast';
 
-import { COLORS } from '@/lib/constants/color.constant';
-
 import { queryClient } from './getQueryClient';
 
 export default function ProviderLayout({ children }: PropsWithChildren) {
@@ -22,8 +20,8 @@ export default function ProviderLayout({ children }: PropsWithChildren) {
                     duration: 2000,
                     removeDelay: 500,
                     style: {
-                        background: COLORS.secondary,
-                        color: COLORS.white,
+                        background: '#262626',
+                        color: '#fff',
                         width: '100%',
                     },
                 }}

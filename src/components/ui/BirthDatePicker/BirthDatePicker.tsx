@@ -50,7 +50,7 @@ export function BirthDatePicker({ value, onChange, error }: DatePickerProps) {
             <Popover open={isOpen} onOpenChange={setIsOpen}>
                 <PopoverTrigger asChild>
                     <Button
-                        className="w-full justify-start text-left rounded-t-md bg-secondary hover:bg-secondary/80 rounded-b-none border-b transition duration-300 focus:border-b-2 focus:border-b-neutral-200 border-neutral-600"
+                        className="w-full justify-start border text-left rounded-t-md bg-secondary hover:bg-secondary/80  transition duration-200 border-neutral-700"
                         onClick={() => setIsOpen(true)}
                     >
                         <CalendarIcon className="mr-2 h-4 w-4" />

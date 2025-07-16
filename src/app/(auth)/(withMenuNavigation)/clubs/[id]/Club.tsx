@@ -17,14 +17,13 @@ export function Club({ id = '1' }: { id: string }) {
     });
 
     return (
-        <div className="relative p-0">
+        <div>
             <ClubHeader club={club} isLoading={isLoading} />
-            <div className="page pt-0">
+            <div className="rounded-b-xl px-5 pt-0 bg-secondary">
                 {!isLoading ? (
                     <>
                         <ClubInfo club={club} />
                         <SubscribeButton clubId={id} isBig={true} subscribed={club?.isUserSubscribed} />
-                        <ClubFeed />
                     </>
                 ) : (
                     <>
@@ -34,6 +33,9 @@ export function Club({ id = '1' }: { id: string }) {
                         ))}
                     </>
                 )}
+            </div>
+            <div className="page">
+              <ClubFeed />
             </div>
         </div>
     );

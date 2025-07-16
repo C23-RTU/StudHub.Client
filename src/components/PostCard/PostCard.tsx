@@ -29,8 +29,8 @@ export function PostCard({ className, post }: PostCardProps) {
         <article className={cn('flex flex-col gap-3', className)}>
             <PostHeader post={post} />
             <div>
-                <p className="text-2xl font-bold my-1 text-neutral-50">{post.title}</p>
-                <p className="font-inter font-light text-gray-300 whitespace-pre-line">
+                <p className="text-xl font-bold my-1 text-neutral-50">{post.title}</p>
+                <p className="font-inter font-light text-neutral-400 whitespace-pre-line">
                     {displayText}
                     {!showFull && isLong && '...'}
                 </p>

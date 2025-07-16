@@ -16,11 +16,11 @@ export function PostHeader({ post }: Props) {
     return (
         <div className="flex items-center justify-between">
             <Link className="flex items-center" href={AUTH_PAGE.CLUB(post.club.id)}>
-                <div className="flex relative">
+                <div className="relative flex">
                     <Avatar src={post.club.imageUrl} />
                 </div>
-                <div className="flex flex-col ml-3 max-w-[200px] overflow-hidden">
-                    <p className="text-sm font-geologica font-semibold truncate" title={post.club?.name}>
+                <div className="ml-3 flex max-w-[250px] flex-col overflow-hidden">
+                    <p className="font-geologica truncate text-sm font-semibold" title={post.club?.name}>
                         {post.club?.name}
                     </p>
                 </div>

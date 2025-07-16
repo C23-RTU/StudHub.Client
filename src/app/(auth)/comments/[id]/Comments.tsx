@@ -78,7 +78,7 @@ export function Comments({ serverPost }: { serverPost: PostDetailDTO }) {
                             <Fragment key={pageIndex}>
                                 {page.map((item, itemIndex) => (
                                     <Fragment key={item.id}>
-                                        {itemIndex > 0 && <span className="h-[1px] bg-secondary w-3/5 mx-auto" />}
+                                        {itemIndex > 0 && <span className="h-px bg-secondary w-3/5 mx-auto" />}
                                         <CommentItem comment={item} />
                                     </Fragment>
                                 ))}

@@ -6,7 +6,7 @@ interface Props extends PropsWithChildren, DetailedHTMLProps<HTMLAttributes<HTML
 
 export function MainContent({ className, children, ...props }: Props) {
     return (
-        <main className={cn('flex flex-col gap-4 w-full', className)} {...props}>
+        <main className={cn('mb-10 flex w-full flex-col gap-4', className)} {...props}>
             {children}
         </main>
     );

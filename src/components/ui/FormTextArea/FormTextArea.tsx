@@ -32,7 +32,7 @@ export function FormTextArea({ error, registration, placeholder, textAreaProps }
                     maxLength={maxLength}
                     value={textAreaValue}
                     onChange={handleTextAreaChange}
-                    className="w-full placeholder:text-neutral-600 rounded-lg bg-secondary border px-4 py-2 text-sm focus:outline-none focus:border-b-2 focus:border-neutral-200 border-neutral-600"
+                    className="w-full placeholder:text-neutral-600 rounded-lg bg-secondary border px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-neutral-600 border-neutral-700"
                 />
                 <span className="absolute bottom-2 right-4 text-xs text-neutral-600">
                     {textAreaValue.length}/{maxLength}
