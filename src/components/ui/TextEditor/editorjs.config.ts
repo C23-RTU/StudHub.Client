@@ -1,20 +1,11 @@
-import Delimiter from '@editorjs/delimiter';
 import type { ToolConstructable, ToolSettings } from '@editorjs/editorjs/types/tools';
-import Header from '@editorjs/header';
-import ImageTool from '@editorjs/image';
 import EditorjsList from '@editorjs/list';
 import Paragraph from '@editorjs/paragraph';
+import Table from '@editorjs/table';
 
 export const BASE_EDITOR_CONFIG: {
     [toolName: string]: ToolConstructable | ToolSettings;
 } = {
-    header: {
-        class: Header as unknown as ToolConstructable,
-        config: {
-            levels: [2, 3, 4],
-            defaultLevel: 2,
-        },
-    },
     paragraph: {
         class: Paragraph as unknown as ToolConstructable,
         inlineToolbar: true,
@@ -27,27 +18,23 @@ export const BASE_EDITOR_CONFIG: {
             maxLevel: 1,
             counterTypes: ['numeric'],
         },
+        toolbox: [
+            {
+                data: { style: 'unordered' },
+            },
+            {
+                data: { style: 'ordered' },
+            },
+        ],
     },
-    delimiter: Delimiter,
-    image: {
-        class: ImageTool,
+    table: {
+        class: Table as unknown as ToolConstructable,
+        inlineToolbar: true,
         config: {
-            uploader: {
-                uploadByFile: (file: File) => {
-                    return {
-                        success: 1,
-                        file: {
-                            url: URL.createObjectURL(file),
-                            raw: file,
-                        },
-                    };
-                },
-            },
-            features: {
-                border: false,
-                caption: 'optional',
-                stretch: false,
-            },
+            rows: 2,
+            cols: 2,
+            maxRows: 5,
+            maxCols: 5,
         },
     },
 };

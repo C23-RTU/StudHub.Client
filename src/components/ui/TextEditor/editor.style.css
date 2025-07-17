@@ -1,0 +1,7 @@
+.tc-popover__item-label {
+    color: black;
+}
+
+.tc-popover__item-icon svg path {
+    stroke: black;
+}

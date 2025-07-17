@@ -4,6 +4,7 @@ import type { OutputData } from '@editorjs/editorjs';
 import EditorJS from '@editorjs/editorjs';
 import { useEffect, useId, useRef } from 'react';
 
+import './editor.style.css';
 import { BASE_EDITOR_CONFIG } from './editorjs.config';
 
 type EditorType = {
