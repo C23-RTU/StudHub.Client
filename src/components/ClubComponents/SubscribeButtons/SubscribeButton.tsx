@@ -8,7 +8,9 @@ import type { ClubDetailDTO } from '@/api/axios-client/models';
 
 import { Button } from '../../ui/button';
 
-const UnsubSheetDynamic = dynamic(() => import('./UnsubSheet').then((mod) => mod.UnsubSheet));
+const UnsubSheetDynamic = dynamic(() => import('./UnsubSheet').then((mod) => mod.UnsubSheet), {
+    ssr: false,
+});
 
 export function SubscribeButton({
     clubId,
@@ -38,6 +40,13 @@ export function SubscribeButton({
             });
         },
     });
+
+    const unsubSheetHandler = async () => {
+        await toggleSubscription();
+        setUnsubVisible(false);
+        const { toast } = await import('react-hot-toast');
+        toast.success('Вы отписались от клуба', { id: 'unsubscribe-toast' });
+    };
 
     return (
         <figure>
@@ -69,12 +78,7 @@ export function SubscribeButton({
             <UnsubSheetDynamic
                 unsubVisible={unsubVisible}
                 setUnsubVisible={setUnsubVisible}
-                onClick={async () => {
-                    await toggleSubscription();
-                    setUnsubVisible(false);
-                    const { toast } = await import('react-hot-toast');
-                    toast.success('Вы отписались от клуба', { id: 'unsubscribe-toast' });
-                }}
+                onClick={unsubSheetHandler}
             />
         </figure>
     );
