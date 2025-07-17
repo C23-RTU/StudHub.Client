@@ -5,3 +5,25 @@
 .tc-popover__item-icon svg path {
     stroke: black;
 }
+
+.ce-block__content,
+.ce-toolbar__content {
+    @apply max-w-none;
+}
+
+.ce-toolbar__plus,
+.ce-toolbar__settings-btn {
+    background: white;
+}
+
+.ce-inline-tool-input--showed {
+    color: black;
+}
+
+@media (max-width: 650px) {
+    .ce-toolbar__plus,
+    .ce-toolbar__settings-btn {
+        width: 26px;
+        height: 26px;
+    }
+}
