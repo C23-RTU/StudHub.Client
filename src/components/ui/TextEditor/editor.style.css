@@ -20,6 +20,10 @@
     color: black;
 }
 
+.ce-toolbar__actions--opened {
+    display: none;
+}
+
 @media (max-width: 650px) {
     .ce-toolbar__plus,
     .ce-toolbar__settings-btn {
