@@ -10,6 +10,7 @@
         "lint": "next lint"
     },
     "dependencies": {
+        "@editorjs/editorjs": "^2.30.8",
         "@hookform/resolvers": "^5.1.1",
         "@radix-ui/react-dialog": "^1.1.14",
         "@radix-ui/react-dropdown-menu": "^2.1.15",
