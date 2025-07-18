@@ -53,4 +53,9 @@
         border-radius: 0;
         position: static;
     }
+
+    .ce-popover.ce-popover--nested {
+        position: absolute;
+        bottom: 100%;
+    }
 }
