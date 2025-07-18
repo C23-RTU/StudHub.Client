@@ -57,7 +57,7 @@ export function Editor({ value, onChange, placeholder }: EditorType) {
         // console.log(toolbar, viewport);
         if (toolbar && viewport) {
             setValue(() => viewport);
-            const toolbarPosition = viewport?.height - 46;
+            const toolbarPosition = viewport?.height + viewport?.offsetTop - 46;
             toolbar.style.transform = `translateY(${toolbarPosition}px)`;
             // console.log(viewport?.height, toolbarPosition);
         }
