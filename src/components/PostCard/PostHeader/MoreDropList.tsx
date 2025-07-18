@@ -45,7 +45,9 @@ export function MoreDropList({ post }: { post: PostDetailDTO }) {
                         <DropdownMenuSubContent>
                             <DropdownMenuItem
                                 onClick={() => {
-                                    navigator.clipboard.writeText(`https://setka-rtu.ru/comments/${post.id}`);
+                                    navigator.clipboard.writeText(
+                                        `https://setka-rtu.ru${AUTH_PAGE.POST_COMMENTS(post.id)}`
+                                    );
                                     toast.success('Ссылка скопирована');
                                 }}
                             >
@@ -57,13 +59,15 @@ export function MoreDropList({ post }: { post: PostDetailDTO }) {
                                         navigator
                                             .share({
                                                 title: document.title,
-                                                url: `https://setka-rtu.ru/comments/${post.id}`,
+                                                url: `https://setka-rtu.ru${AUTH_PAGE.POST_COMMENTS(post.id)}`,
                                             })
                                             .catch(console.error);
                                     } else {
                                         // На случай если юзер сидит с каким-нибудь Netscape Navigator.
                                         console.log('Web Share API not supported');
-                                        navigator.clipboard.writeText(`https://setka-rtu.ru/comments/${post.id}`);
+                                        navigator.clipboard.writeText(
+                                            `https://setka-rtu.ru${AUTH_PAGE.POST_COMMENTS(post.id)}`
+                                        );
                                         toast.success('Не удалось поделиться, ссылка скопирована в буфер обмена');
                                     }
                                 }}

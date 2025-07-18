@@ -1,10 +1,10 @@
 'use client';
 
-import { LoaderCircle, PencilIcon } from 'lucide-react';
-import dynamic from 'next/dynamic';
+import { PencilIcon } from 'lucide-react';
+import Link from 'next/link';
 import { useParams } from 'next/navigation';
-import { useState } from 'react';
-import { createPortal } from 'react-dom';
+
+import { AUTH_PAGE } from '@/lib/config/routes.config';
 
 import { useInfinityScroll } from '@/hooks/useInfinityScroll';
 
@@ -16,22 +16,9 @@ import { Skeleton } from '../ui/skeleton';
 
 import { MainContent } from '@/hoc/MainContent/MainContent';
 
-const PostTextEditorDynamic = dynamic(
-    () => import('../PostTextEditor/PostTextEditor').then((mod) => mod.PostTextEditor),
-    {
-        ssr: false,
-        loading: () => (
-            <div className="bg-background fixed top-0 right-0 bottom-0 left-0 z-100 flex items-center justify-center">
-                <LoaderCircle className="animate-spin" size={30} />
-            </div>
-        ),
-    }
-);
-
 export function ClubFeed() {
     const { id } = useParams();
     const clubId = Number(id);
-    const [isOpenCreatePostEditor, setIsOpenCreatePostEditor] = useState(false);
 
     const {
         ref,
@@ -44,14 +31,13 @@ export function ClubFeed() {
 
     return (
         <MainContent>
-            {isOpenCreatePostEditor &&
-                createPortal(<PostTextEditorDynamic toggleOpen={setIsOpenCreatePostEditor} />, document.body)}
-
             <p className="font-geologica text-xl font-semibold">Посты клуба</p>
 
-            <Button variant={'default'} onClick={() => setIsOpenCreatePostEditor(true)}>
-                <PencilIcon />
-                Создать пост
+            <Button variant={'default'} asChild>
+                <Link href={AUTH_PAGE.POST_DRAFT}>
+                    <PencilIcon />
+                    Создать пост
+                </Link>
             </Button>
 
             <div className="flex flex-col gap-10">
