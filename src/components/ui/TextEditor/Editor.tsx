@@ -2,7 +2,7 @@
 
 import type { OutputData } from '@editorjs/editorjs';
 import EditorJS from '@editorjs/editorjs';
-import { useEffect, useId, useRef } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
 
 import './editor.style.css';
 import { BASE_EDITOR_CONFIG } from './editorjs.config';
@@ -16,6 +16,8 @@ type EditorType = {
 export function Editor({ value, onChange, placeholder }: EditorType) {
     const id = useId();
     const ref = useRef<EditorJS>(null);
+
+    const [vw, setValue] = useState<VisualViewport | null>(null);
 
     useEffect(() => {
         if (!ref.current) {
@@ -49,8 +51,33 @@ export function Editor({ value, onChange, placeholder }: EditorType) {
         };
     }, []);
 
+    const updateToolbarPosition = () => {
+        const toolbar = document.querySelector<HTMLDivElement>('.ce-inline-toolbar');
+        const viewport = window.visualViewport;
+        // console.log(toolbar, viewport);
+        if (toolbar && viewport) {
+            setValue(() => viewport);
+            const toolbarPosition = viewport?.height - 46;
+            toolbar.style.transform = `translateY(${toolbarPosition}px)`;
+            // console.log(viewport?.height, toolbarPosition);
+        }
+    };
+
+    useEffect(() => {
+        window.visualViewport?.addEventListener('resize', updateToolbarPosition);
+        window.visualViewport?.addEventListener('scroll', updateToolbarPosition);
+
+        return () => {
+            window.visualViewport?.removeEventListener('resize', updateToolbarPosition);
+            window.visualViewport?.removeEventListener('scroll', updateToolbarPosition);
+        };
+    }, []);
+
     return (
         <>
+            <p>
+                {vw?.height} | {vw?.offsetTop} | {vw?.pageTop}
+            </p>
             <div id={id} />
         </>
     );
