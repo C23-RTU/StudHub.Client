@@ -30,4 +30,21 @@
         width: 26px;
         height: 26px;
     }
+
+    .ce-inline-toolbar {
+        bottom: 0 !important;
+        top: auto !important;
+        left: -18px !important;
+        right: -10px !important;
+    }
+
+    .ce-popover--inline .ce-popover__container {
+        position: fixed;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        top: auto;
+        width: 100%;
+        border-radius: 0;
+    }
 }

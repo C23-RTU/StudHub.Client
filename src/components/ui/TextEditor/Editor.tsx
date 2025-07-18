@@ -21,8 +21,15 @@ export function Editor({ value, onChange, placeholder }: EditorType) {
         if (!ref.current) {
             const editor = new EditorJS({
                 holder: id,
-                tools: BASE_EDITOR_CONFIG,
-                placeholder,
+                tools: {
+                    ...BASE_EDITOR_CONFIG,
+                    paragraph: {
+                        config: {
+                            placeholder,
+                        },
+                    },
+                },
+                // placeholder,
                 autofocus: true,
                 data: value,
                 async onChange(api) {
