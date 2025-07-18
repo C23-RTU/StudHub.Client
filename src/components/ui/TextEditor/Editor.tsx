@@ -49,21 +49,6 @@ export function Editor({ value, onChange, placeholder }: EditorType) {
         };
     }, []);
 
-    useEffect(() => {
-        function handleResize() {
-            const toolbar = document.querySelector<HTMLDivElement>('.ce-popover__container');
-            const { innerHeight: height } = window;
-
-            if (toolbar) {
-                toolbar.style!.transform = `translateY(${height - 49}px)`;
-            }
-            console.log(height);
-        }
-
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
-
     return (
         <>
             <div id={id} />

@@ -37,11 +37,12 @@
         top: 0 !important;
         left: -18px !important;
         right: -10px !important;
-        height: 46px;
+        /* height: 46px; */
     }
 
     .ce-popover--inline .ce-popover__container {
         width: 100%;
         border-radius: 0;
+        height: 65px;
     }
 }
