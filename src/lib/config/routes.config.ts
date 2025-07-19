@@ -2,6 +2,7 @@ class AuthPage {
     HOME = '/';
     EVENTS = '/events';
     PROFILE = '/profile';
+    PROFILE_SETTINGS = `${this.PROFILE}/settings`;
     CLUBS = '/clubs';
     FINDER = '/finder';
     PROFILE_CLUBS = '/profile/clubs';

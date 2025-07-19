@@ -12,10 +12,10 @@ export function MenuNavigation() {
     const pathname = usePathname();
 
     return (
-        <div className="fixed bottom-0 left-1/2 flex h-menuNavigation w-full max-w-[1024px] z-50 -translate-x-1/2 items-center justify-between bg-secondary px-6">
+        <div className="h-menuNavigation fixed bottom-0 left-1/2 z-50 flex w-full max-w-[1024px] -translate-x-1/2 items-center justify-between border-t border-neutral-800 bg-neutral-900 px-6">
             {MENU_LINKS.map(({ Icon, link }, index) => (
                 <Link href={link} key={index}>
-                    <Icon color={match(link)(pathname) ? COLORS.blue : COLORS.white} size={24} />
+                    <Icon color={match(link)(pathname) ? COLORS.blue : COLORS.inactive} size={24} />
                 </Link>
             ))}
         </div>

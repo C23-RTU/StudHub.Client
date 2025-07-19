@@ -35,7 +35,10 @@ export default function Profile({ user }: Props) {
         <div className="page">
             <Header>
                 <HeaderTitle>Профиль</HeaderTitle>
+        <Link href={AUTH_PAGE.PROFILE_SETTINGS}>
+
                 <SettingBadge />
+        </Link>
             </Header>
 
             <MainContent>
