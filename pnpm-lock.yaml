@@ -11,9 +11,6 @@ importers:
       '@editorjs/editorjs':
         specifier: ^2.30.8
         version: 2.30.8
-      '@editorjs/list':
-        specifier: ^2.0.8
-        version: 2.0.8
       '@editorjs/paragraph':
         specifier: ^2.11.7
         version: 2.11.7
@@ -233,9 +230,6 @@ packages:
 
   '@editorjs/editorjs@2.30.8':
     resolution: {integrity: sha512-ClFuxI1qZTfXPJTacQfsJtOUP6bKoIe6BQNdAvGsDTDVwMnZEzoaSOwvUpdZEE56xppVfQueNK/1MElV9SJKHg==}
-
-  '@editorjs/list@2.0.8':
-    resolution: {integrity: sha512-/EJNvpeJYa1YDtYa85ug9R3sbDyI5ZlMHQ2bIh5S9iPa19qXe45jk6kgcew+jMNQq3j4NS4Q6YeeFbU1QkNMWw==}
 
   '@editorjs/paragraph@2.11.7':
     resolution: {integrity: sha512-qD6bbWvRc4VvP0mXDOm+hOhzzhUYR9ZjcAvgCuKWcCbUMpCvhVF1s8NX40zdjekPi6JEnuHTamCncTrSzVsVhw==}
@@ -3361,10 +3355,6 @@ snapshots:
   '@date-fns/tz@1.2.0': {}
 
   '@editorjs/editorjs@2.30.8': {}
-
-  '@editorjs/list@2.0.8':
-    dependencies:
-      '@codexteam/icons': 0.3.3
 
   '@editorjs/paragraph@2.11.7':
     dependencies:

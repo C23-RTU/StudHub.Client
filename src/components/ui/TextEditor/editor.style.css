@@ -11,6 +11,14 @@
     @apply max-w-none;
 }
 
+button[data-item-name="convert-to"] {
+  display: none !important;
+}
+
+.ce-popover--inline .ce-popover-item-separator {
+    display: none;
+}
+
 .ce-toolbar__plus,
 .ce-toolbar__settings-btn {
     background: white;
@@ -39,10 +47,17 @@
         padding-bottom: 46px !important;
     }
 
+    .ce-popover--inline .ce-popover--nested .ce-popover__container {
+        width: 100%;
+    }
+
+    .ce-popover.ce-popover--nested {
+        left: 0;
+        right: 0
+    }
+
     .ce-inline-toolbar {
         position: fixed;
-        /* bottom: 0 !important; */
-        /* left: -18px !important; */
         right: 0 !important;
         left: 0 !important;
         top: 0 !important;

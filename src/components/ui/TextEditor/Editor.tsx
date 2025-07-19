@@ -4,8 +4,9 @@ import type { OutputData } from '@editorjs/editorjs';
 import EditorJS from '@editorjs/editorjs';
 import { useEffect, useId, useRef } from 'react';
 
-import './editor.style.css';
 import { BASE_EDITOR_CONFIG } from './editorjs.config';
+import { useMobileToolbar } from './hook/useMobileToolbar';
+import { isMobile } from '@/lib/helpers/isMobile.helper';
 
 type EditorType = {
     value?: OutputData;
@@ -16,6 +17,8 @@ type EditorType = {
 export function Editor({ value, onChange, placeholder }: EditorType) {
     const id = useId();
     const ref = useRef<EditorJS>(null);
+
+    const { loadMobileToolbarEvent, unsubscribeToolbarEvent } = useMobileToolbar();
 
     useEffect(() => {
         if (!ref.current) {
@@ -28,6 +31,9 @@ export function Editor({ value, onChange, placeholder }: EditorType) {
                             placeholder,
                         },
                     },
+                },
+                async onReady() {
+                    if (isMobile()) await loadMobileToolbarEvent();
                 },
                 autofocus: true,
                 data: value,
@@ -44,26 +50,8 @@ export function Editor({ value, onChange, placeholder }: EditorType) {
         return () => {
             if (ref.current && ref.current.destroy) {
                 ref.current.destroy();
+                if (isMobile()) unsubscribeToolbarEvent();
             }
-        };
-    }, []);
-
-    const updateToolbarPosition = () => {
-        const toolbar = document.querySelector<HTMLDivElement>('.ce-inline-toolbar');
-        const viewport = window.visualViewport;
-        if (toolbar && viewport) {
-            const toolbarPosition = viewport?.height + viewport?.offsetTop - 46;
-            toolbar.style.transform = `translateY(${toolbarPosition}px)`;
-        }
-    };
-
-    useEffect(() => {
-        window.visualViewport?.addEventListener('resize', updateToolbarPosition);
-        window.visualViewport?.addEventListener('scroll', updateToolbarPosition);
-
-        return () => {
-            window.visualViewport?.removeEventListener('resize', updateToolbarPosition);
-            window.visualViewport?.removeEventListener('scroll', updateToolbarPosition);
         };
     }, []);
 
