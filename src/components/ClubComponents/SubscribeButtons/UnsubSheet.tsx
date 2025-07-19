@@ -15,10 +15,12 @@ export function UnsubSheet({ unsubVisible = false, setUnsubVisible, onClick }: P
             <SheetContent side="bottom">
                 <SheetHeader>
                     <SheetTitle className="text-center">
-                        <SheetDescription className='text-neutral-50 text-lg'>Вы хотите отписаться от клуба?</SheetDescription>
+                        <SheetDescription className="text-lg text-neutral-50">
+                            Вы хотите отписаться от клуба?
+                        </SheetDescription>
                     </SheetTitle>
                 </SheetHeader>
-                <Button className="w-full justify-center mx-auto mt-3" onClick={onClick}>
+                <Button className="mx-auto mt-3 w-full justify-center" onClick={onClick}>
                     Отписаться
                 </Button>
             </SheetContent>

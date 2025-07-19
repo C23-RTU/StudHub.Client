@@ -22,7 +22,7 @@ export function Events({ events }: { events: EventDetailDTO[] }) {
             <Header>
                 <HeaderTitle>События</HeaderTitle>
                 <Button onClick={() => router.push(AUTH_PAGE.EVENTS_CALENDAR())}>
-                    <CalendarClock size={30} />
+                    <CalendarClock size={35} />
                 </Button>
             </Header>
             <MainContent>

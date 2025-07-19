@@ -1,0 +1,76 @@
+.tc-popover__item-label {
+    color: black;
+}
+
+.tc-popover__item-icon svg path {
+    stroke: black;
+}
+
+.ce-block__content,
+.ce-toolbar__content {
+    @apply max-w-none;
+}
+
+button[data-item-name="convert-to"] {
+  display: none !important;
+}
+
+.ce-popover--inline .ce-popover-item-separator {
+    display: none;
+}
+
+.ce-toolbar__plus,
+.ce-toolbar__settings-btn {
+    background: white;
+}
+
+.ce-inline-tool-input--showed {
+    color: black;
+}
+
+.ce-toolbar__actions--opened {
+    display: none;
+}
+
+@media (max-width: 650px) {
+    .ce-toolbar__plus,
+    .ce-toolbar__settings-btn {
+        width: 26px;
+        height: 26px;
+    }
+
+    .codex-editor {
+        position: unset;
+    }
+
+    .codex-editor__redactor {
+        padding-bottom: 46px !important;
+    }
+
+    .ce-popover--inline .ce-popover--nested .ce-popover__container {
+        width: 100%;
+    }
+
+    .ce-popover.ce-popover--nested {
+        left: 0;
+        right: 0
+    }
+
+    .ce-inline-toolbar {
+        position: fixed;
+        right: 0 !important;
+        left: 0 !important;
+        top: 0 !important;
+    }
+
+    .ce-popover--inline .ce-popover__container {
+        width: 100%;
+        border-radius: 0;
+        position: static;
+    }
+
+    .ce-popover.ce-popover--nested {
+        position: absolute;
+        bottom: 100%;
+    }
+}

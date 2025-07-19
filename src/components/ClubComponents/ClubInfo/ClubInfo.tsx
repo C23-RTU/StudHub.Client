@@ -1,5 +1,3 @@
-'use client';
-
 import { CircleAlert, UsersRound } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useMemo, useState } from 'react';
@@ -12,7 +10,7 @@ import type { ClubDetailDTO } from '@/api/axios-client';
 
 import { RowClubInfo } from './RowClubInfo';
 
-export function ClubInfo({ club }: { club: ClubDetailDTO | undefined }) {
+export function ClubInfo({ club }: { club?: ClubDetailDTO }) {
     const router = useRouter();
     const [showInfo, setShowInfo] = useState(false);
 

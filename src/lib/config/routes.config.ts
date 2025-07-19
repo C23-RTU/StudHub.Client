@@ -6,8 +6,9 @@ class AuthPage {
     CLUBS = '/clubs';
     FINDER = '/finder';
     PROFILE_CLUBS = '/profile/clubs';
+    POST_DRAFT = '/post/draft';
 
-    COMMENTS = (id: number | string) => `/comments/${id}`;
+    POST_COMMENTS = (id: number | string) => `/post/comments/${id}`;
     CLUB = (clubId: number | string) => `${this.CLUBS}/${clubId}`;
     CLUB_SUBSCRIBERS = (clubId: number | string) => `${this.CLUBS}/${clubId}/subscribers`;
     EVENT = (id: number | string) => `${this.EVENTS}/${id}`;

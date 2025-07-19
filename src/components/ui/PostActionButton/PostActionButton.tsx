@@ -42,13 +42,13 @@ export function ActionButton({ type, post }: Props) {
 
     const clickHandler = () => {
         if (type === 'like') reactionHandler();
-        if (type === 'comment') router.push(AUTH_PAGE.COMMENTS(post.id));
+        if (type === 'comment') router.push(AUTH_PAGE.POST_COMMENTS(post.id));
     };
 
     return (
         <m.div
-            className={cn('flex items-center gap-2 cursor-pointer select-none', {
-                'text-blue': isCommentType ? !!match(AUTH_PAGE.COMMENTS(post.id))(pathname) : false,
+            className={cn('flex cursor-pointer items-center gap-2 select-none', {
+                'text-blue': isCommentType ? !!match(AUTH_PAGE.POST_COMMENTS(post.id))(pathname) : false,
             })}
             onClick={clickHandler}
             whileTap={{
