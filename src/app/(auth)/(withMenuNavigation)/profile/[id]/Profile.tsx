@@ -122,7 +122,7 @@ export default function Profile({ user }: Props) {
                 <div className="flex flex-col gap-4">
                     <div className="flex flex-row justify-between">
                         <p className="font-geologica text-lg font-bold">Подписки</p>
-                        <Link href={AUTH_PAGE.PROFILE_CLUBS} className="font-inter text-primary font-light">
+                        <Link href={`${AUTH_PAGE.PROFILE}/${user.id}${AUTH_PAGE.CLUBS}`} className="font-inter text-primary font-light">
                             Показать все
                         </Link>
                     </div>

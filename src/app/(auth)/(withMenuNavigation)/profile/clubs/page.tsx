@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import ProfileClubs from './ProfileClubs';
 
 export const metadata: Metadata = {
-    title: 'Подписки',
+    title: 'Ваши подписки',
     description: '',
 };
 
