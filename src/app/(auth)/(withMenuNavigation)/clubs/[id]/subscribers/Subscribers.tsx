@@ -38,6 +38,7 @@ export function Subscribers({ id }: { id: string }) {
                     page.map((subscriber) => (
                         <SubscriberCard
                             key={subscriber.id}
+                            userId={subscriber.id}
                             firstName={subscriber.firstName}
                             lastName={subscriber.lastName}
                             avatar={subscriber.imagePath || ''}

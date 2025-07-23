@@ -6,7 +6,7 @@ import type { PersonDetailDTO } from '@/api/axios-client';
 import Profile from './Profile';
 
 export const metadata: Metadata = {
-    title: `Профиль пользователя {user}`,
+    title: 'Профиль',
     description: '',
 };
 
