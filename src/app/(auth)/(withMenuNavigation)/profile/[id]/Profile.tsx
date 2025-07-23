@@ -1,6 +1,7 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
+import { motion as m} from 'framer-motion';
 import { Copy, EllipsisVertical, IdCard, MessageSquare, OctagonAlert } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -76,12 +77,28 @@ export default function Profile({ user }: Props) {
 
             <MainContent>
                 <div className="bg-secondary flex flex-col items-center gap-4 rounded-2xl p-10 text-center">
-                    <Avatar
-                        src={user?.imagePath}
-                        size={160}
-                        alt="Изображение профиля"
-                        className="border-background relative z-10 h-[128px] w-[128px] rounded-full border-[5px]"
-                    />
+                    <div className="relative">
+                        <m.div
+                            className="bg-primary/40 absolute -inset-2 rounded-full blur-sm"
+                            animate={{
+                                rotate: 360,
+                                x: [0, 2, 0, -2, 0],
+                                y: [0, -2, 0, 2, 0],
+                            }}
+                            transition={{
+                                rotate: { duration: 7, repeat: Infinity, ease: 'linear' },
+                                x: { duration: 7, repeat: Infinity, ease: 'easeInOut', repeatType: 'mirror' },
+                                y: { duration: 6, repeat: Infinity, ease: 'easeInOut', repeatType: 'mirror' },
+                            }}
+                        />
+
+                        <Avatar
+                            src={user?.imagePath}
+                            size={160}
+                            alt="Изображение профиля"
+                            className="border-background relative z-10 h-[128px] w-[128px] rounded-full border-[5px]"
+                        />
+                    </div>
 
                     <div className="flex flex-col gap-0">
                         <p className="font-geologica max-w-[250px] overflow-hidden text-xl font-bold text-ellipsis">
@@ -93,9 +110,7 @@ export default function Profile({ user }: Props) {
                 <div className="flex flex-col gap-4">
                     <div className="flex flex-row gap-2">
                         <MessageSquare size={20} />
-                        <p className="max-w-full overflow-hidden text-sm text-ellipsis">
-                            {user?.about || '...'}
-                        </p>
+                        <p className="max-w-full overflow-hidden text-sm text-ellipsis">{user?.about || '...'}</p>
                     </div>
                     <div className="flex flex-row gap-2">
                         <IdCard size={20} />
@@ -115,7 +130,16 @@ export default function Profile({ user }: Props) {
                     {!isLoading &&
                         userClubs &&
                         userClubs.length > 0 &&
-                        userClubs.map((club) => <ClubCard key={club.id} club={club} />)}
+                        userClubs.map((club, index) => (
+                            <m.div
+                                key={club.id}
+                                initial={{ scale: 0.8, opacity: 0 }}
+                                animate={{ scale: 1, opacity: 1 }}
+                                transition={{ delay: (index + 2.5) * 0.05 }}
+                            >
+                                <ClubCard club={club} />
+                            </m.div>
+                        ))}
                     {error && <p className="text-center text-neutral-500">Не удалось загрузить подписки</p>}
                 </div>
             </MainContent>
