@@ -1,11 +1,11 @@
 import type { Metadata } from 'next';
 
-import Profile from './Profile';
+import Profile from './UserProfile';
 import type { PersonDetailDTO } from '@/api/axios-client';
 import { userApi } from '@/api/api';
 
 export const metadata: Metadata = {
-    title: 'Профиль',
+    title: 'Ваш профиль',
     description: '',
 };
 

@@ -16,7 +16,7 @@ export function EventCard({ event }: { event: EventDetailDTO }) {
 
     return (
         <figure
-            className="flex relative w-full rounded-2xl h-[220px] group overflow-hidden"
+            className="flex relative w-full rounded-2xl h-[220px] group overflow-hidden cursor-pointer"
             onClick={() => router.push(AUTH_PAGE.EVENT(event.id))}
         >
             <LoaderImage
