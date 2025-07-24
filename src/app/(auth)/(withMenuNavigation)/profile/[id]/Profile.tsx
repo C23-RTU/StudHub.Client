@@ -1,7 +1,7 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-import { motion as m} from 'framer-motion';
+import { motion as m } from 'framer-motion';
 import { Copy, EllipsisVertical, IdCard, MessageSquare, OctagonAlert } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -21,7 +21,7 @@ import {
 
 import { AUTH_PAGE } from '@/lib/config/routes.config';
 
-import { userApi } from '@/api/api';
+import { clubsApi } from '@/api/api';
 import type { PersonDetailDTO } from '@/api/axios-client/models';
 
 import { Header } from '@/hoc/Header/Header';
@@ -37,8 +37,8 @@ export default function Profile({ user }: Props) {
         isLoading,
         error,
     } = useQuery({
-        queryKey: ['fetch-profile-user-clubs'],
-        queryFn: async () => (await userApi.userGetSubscribedClubs(0, 3)).data,
+        queryKey: [user.id, 'fetch-profile-user-clubs'],
+        queryFn: async () => (await clubsApi.clubsGetAllByPersonId(user.id, 0, 3)).data,
     });
 
     const pathname = usePathname();
@@ -122,7 +122,10 @@ export default function Profile({ user }: Props) {
                 <div className="flex flex-col gap-4">
                     <div className="flex flex-row justify-between">
                         <p className="font-geologica text-lg font-bold">Подписки</p>
-                        <Link href={`${AUTH_PAGE.PROFILE}/${user.id}${AUTH_PAGE.CLUBS}`} className="font-inter text-primary font-light">
+                        <Link
+                            href={`${AUTH_PAGE.PROFILE}/${user.id}${AUTH_PAGE.CLUBS}`}
+                            className="font-inter text-primary font-light"
+                        >
                             Показать все
                         </Link>
                     </div>
