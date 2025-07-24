@@ -1,4 +1,15 @@
-import { AuthApi, CommentsApi, EventsApi, InstitutesApi, PostsApi, UserApi, ClubsApi, ReactionsApi, FeedApi } from './axios-client/api';
+import {
+    AuthApi,
+    ClubsApi,
+    CommentsApi,
+    EventsApi,
+    FeedApi,
+    InstitutesApi,
+    PostsApi,
+    ReactionsApi,
+    UserApi,
+    UsersApi,
+} from './axios-client/api';
 import { BASE_API } from './base-axios-instance';
 
 export const postApi = new PostsApi(undefined, undefined, BASE_API);
@@ -10,4 +21,4 @@ export const feedApi = new FeedApi(undefined, undefined, BASE_API);
 export const instituteApi = new InstitutesApi(undefined, undefined, BASE_API);
 export const reactionApi = new ReactionsApi(undefined, undefined, BASE_API);
 export const userApi = new UserApi(undefined, undefined, BASE_API);
-
+export const usersApi = new UsersApi(undefined, undefined, BASE_API);
