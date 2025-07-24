@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     description: '',
 };
 
-export default async function Page({ params }: { params: { id: number } }) {
+export default async function Page({ params }: { params: Promise<{ id: number }> }) {
     const { id } = await params;
     const user: PersonDetailDTO = (await usersApi.usersGetById(id)).data;
     const currentUser: PersonDetailDTO = (await userApi.userGetPersonalDetails()).data;
