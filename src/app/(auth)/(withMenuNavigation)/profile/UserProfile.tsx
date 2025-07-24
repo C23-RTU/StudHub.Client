@@ -11,17 +11,14 @@ import { Avatar } from '@/components/ui/Avatar/Avatar';
 
 import { AUTH_PAGE } from '@/lib/config/routes.config';
 
+import { useProfile } from '@/hooks/useProfile';
+
 import { userApi } from '@/api/api';
-import type { PersonDetailDTO } from '@/api/axios-client/models';
 
 import { Header, HeaderTitle } from '@/hoc/Header/Header';
 import { MainContent } from '@/hoc/MainContent/MainContent';
 
-type Props = {
-    user: PersonDetailDTO;
-};
-
-export default function Profile({ user }: Props) {
+export default function UserProfile() {
     const {
         data: userClubs,
         isLoading,
@@ -30,6 +27,7 @@ export default function Profile({ user }: Props) {
         queryKey: ['fetch-profile-user-clubs'],
         queryFn: async () => (await userApi.userGetSubscribedClubs(0, 3)).data,
     });
+    const { data: user } = useProfile();
 
     return (
         <div className="page">

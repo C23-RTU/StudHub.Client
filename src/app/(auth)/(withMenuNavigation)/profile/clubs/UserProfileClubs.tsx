@@ -12,7 +12,7 @@ import { userApi } from '@/api/api';
 
 import { Header, HeaderTitle } from '@/hoc/Header/Header';
 
-export default function ProfileClubs() {
+export default function UserProfileClubs() {
     const {
         ref,
         infiniteQuery: { data: clubs, isLoading, isFetchingNextPage },
