@@ -13,6 +13,7 @@ class AuthPage {
     CLUB_SUBSCRIBERS = (clubId: number | string) => `${this.CLUBS}/${clubId}/subscribers`;
     EVENT = (id: number | string) => `${this.EVENTS}/${id}`;
     EVENTS_CALENDAR = () => `${this.EVENTS}/calendar`;
+    USER_PROFILE = (user_id: number | string) => `${this.PROFILE}/${user_id}`;
 }
 
 class PublicPage {

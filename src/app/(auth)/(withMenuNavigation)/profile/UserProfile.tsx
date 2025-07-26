@@ -11,17 +11,14 @@ import { Avatar } from '@/components/ui/Avatar/Avatar';
 
 import { AUTH_PAGE } from '@/lib/config/routes.config';
 
+import { useProfile } from '@/hooks/useProfile';
+
 import { userApi } from '@/api/api';
-import type { PersonDetailDTO } from '@/api/axios-client/models';
 
 import { Header, HeaderTitle } from '@/hoc/Header/Header';
 import { MainContent } from '@/hoc/MainContent/MainContent';
 
-type Props = {
-    user: PersonDetailDTO;
-};
-
-export default function Profile({ user }: Props) {
+export default function UserProfile() {
     const {
         data: userClubs,
         isLoading,
@@ -30,22 +27,22 @@ export default function Profile({ user }: Props) {
         queryKey: ['fetch-profile-user-clubs'],
         queryFn: async () => (await userApi.userGetSubscribedClubs(0, 3)).data,
     });
+    const { data: user } = useProfile();
 
     return (
         <div className="page">
             <Header>
                 <HeaderTitle>Профиль</HeaderTitle>
-        <Link href={AUTH_PAGE.PROFILE_SETTINGS}>
-
-                <SettingBadge />
-        </Link>
+                <Link href={AUTH_PAGE.PROFILE_SETTINGS}>
+                    <SettingBadge />
+                </Link>
             </Header>
 
             <MainContent>
                 <div className="flex flex-row gap-4">
                     <Avatar src={user?.imagePath} size={80} alt={'Изображение профиля'} />
-                    <div className="flex flex-col my-auto gap-0">
-                        <p className="text-xl font-bold font-geologica max-w-[250px] overflow-hidden whitespace-nowrap text-ellipsis">
+                    <div className="my-auto flex flex-col gap-0">
+                        <p className="font-geologica max-w-[250px] overflow-hidden text-xl font-bold text-ellipsis whitespace-nowrap">
                             {user?.firstName} {user?.lastName}
                         </p>
                         <p className="text-sm text-neutral-400">был недавно</p>
@@ -54,21 +51,21 @@ export default function Profile({ user }: Props) {
                 <div className="flex flex-col gap-4">
                     <div className="flex flex-row gap-2">
                         <MessageSquare size={20} />
-                        <p className="text-sm max-w-full overflow-hidden whitespace-nowrap text-ellipsis">
+                        <p className="max-w-full overflow-hidden text-sm text-ellipsis whitespace-nowrap">
                             {user?.about || '...'}
                         </p>
                     </div>
                     <div className="flex flex-row gap-2">
                         <IdCard size={20} />
-                        <p className="text-sm max-w-full overflow-hidden whitespace-nowrap text-ellipsis">
+                        <p className="max-w-full overflow-hidden text-sm text-ellipsis whitespace-nowrap">
                             {user?.institute?.name || 'Нет института'}
                         </p>
                     </div>
                 </div>
                 <div className="flex flex-col gap-4">
                     <div className="flex flex-row justify-between">
-                        <p className="font-geologica font-bold text-lg">Подписки</p>
-                        <Link href={AUTH_PAGE.PROFILE_CLUBS} className="font-inter font-light text-primary">
+                        <p className="font-geologica text-lg font-bold">Подписки</p>
+                        <Link href={AUTH_PAGE.PROFILE_CLUBS} className="font-inter text-primary font-light">
                             Показать все
                         </Link>
                     </div>
@@ -77,7 +74,7 @@ export default function Profile({ user }: Props) {
                         userClubs &&
                         userClubs.length > 0 &&
                         userClubs.map((club) => <ClubCard key={club.id} club={club} />)}
-                    {error && <p className="text-neutral-500 text-center">Не удалось загрузить ваши подписки</p>}
+                    {error && <p className="text-center text-neutral-500">Не удалось загрузить ваши подписки</p>}
                 </div>
             </MainContent>
         </div>

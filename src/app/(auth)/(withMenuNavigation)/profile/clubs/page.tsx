@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 
-import ProfileClubs from './ProfileClubs';
+import ProfileClubs from './UserProfileClubs';
 
 export const metadata: Metadata = {
-    title: 'Подписки',
+    title: 'Ваши подписки',
     description: '',
 };
 

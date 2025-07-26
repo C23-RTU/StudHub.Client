@@ -3,18 +3,20 @@
 import LoaderImage from '@/components/ImageLoader/ImageLoader';
 
 import { getStaticImg } from '@/lib/helpers/getStaticImg.helper';
+import { cn } from '@/lib/utils/utils';
 
 interface Props {
     src: string | null | undefined;
     loaderSize?: number;
     size?: number;
     alt?: string;
+    className?: string;
 }
 
-export function Avatar({ src, size = 40, alt, loaderSize }: Props) {
+export function Avatar({ src, size = 40, alt, loaderSize, className }: Props) {
     return (
         <div
-            className={`overflow-hidden rounded-full shrink-0`}
+            className={cn('shrink-0 overflow-hidden rounded-full', className)}
             style={{
                 height: `${size}px`,
                 width: `${size}px`,

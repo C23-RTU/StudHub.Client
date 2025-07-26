@@ -12,5 +12,5 @@ export const useProfile = () => {
         staleTime: 60 * 1000 * 5, // кешируем данные о пользователе на 5 минут
     });
 
-    return { ...profileData };
+    return profileData;
 };

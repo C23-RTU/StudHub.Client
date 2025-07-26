@@ -1,7 +1,10 @@
 'use client';
 
 import { ChevronRight } from 'lucide-react';
+import Link from 'next/link';
 import { type MouseEvent, useMemo } from 'react';
+
+import { AUTH_PAGE } from '@/lib/config/routes.config';
 
 import { useProfile } from '@/hooks/useProfile';
 
@@ -96,24 +99,30 @@ export function CommentItem({
                     'bg-secondary': commentForReply?.id === comment.id || highlightComment?.inReplyTo == comment.id,
                 })}
             >
-                <div className="shrink-0">
-                    <Avatar
-                        src={comment.personSummaryDTO?.imagePath}
-                        loaderSize={15}
-                        size={40}
-                        alt={comment.personSummaryDTO.lastName}
-                    />
-                </div>
-                <div className="flex flex-col gap-2 w-full overflow-hidden ">
-                    <div className="flex justify-between items-center">
-                        <p className="font-geologica font-medium text-sm">
-                            {comment.personSummaryDTO?.firstName} {comment.personSummaryDTO?.lastName}
-                        </p>
-                        <small className="text-xss opacity-50 font-inter font-normal">{createdCommentDate}</small>
+                <Link href={AUTH_PAGE.USER_PROFILE(comment.personSummaryDTO.id)}>
+                    <div className="shrink-0">
+                        <Avatar
+                            src={comment.personSummaryDTO?.imagePath}
+                            loaderSize={15}
+                            size={40}
+                            alt={comment.personSummaryDTO.lastName}
+                        />
                     </div>
+                </Link>
+
+                <div className="flex w-full flex-col gap-2 overflow-hidden">
+                    <div className="flex items-center justify-between">
+                        <Link href={AUTH_PAGE.USER_PROFILE(comment.personSummaryDTO.id)}>
+                            <p className="font-geologica text-sm font-medium">
+                                {comment.personSummaryDTO?.firstName} {comment.personSummaryDTO?.lastName}
+                            </p>
+                        </Link>
+                        <small className="text-xss font-inter font-normal opacity-50">{createdCommentDate}</small>
+                    </div>
+
                     <p
                         className={cn(
-                            'text-xs font-inter font-normal text-[#B8B8B8] leading-snug break-words whitespace-pre-line',
+                            'font-inter text-xs leading-snug font-normal break-words whitespace-pre-line text-[#B8B8B8]',
                             {
                                 'text-[#696868]': comment.deletedAt,
                             }
@@ -126,7 +135,7 @@ export function CommentItem({
                         <div className="flex gap-3">
                             <button
                                 type="button"
-                                className="text-xs text-gray-500 flex items-center"
+                                className="flex cursor-pointer items-center text-xs text-gray-500"
                                 onClick={setCommentForReplyHandler}
                             >
                                 Ответить
@@ -135,7 +144,7 @@ export function CommentItem({
                             {isMyComment && (
                                 <button
                                     type="button"
-                                    className="text-xs text-gray-500 flex items-center"
+                                    className="flex items-center text-xs text-gray-500"
                                     onClick={openCommentMoreSheetHandler}
                                 >
                                     Еще
@@ -144,7 +153,11 @@ export function CommentItem({
                             )}
 
                             {showRepliesBtn && (
-                                <button type="button" className="text-xs text-primary" onClick={openMoreRepliesHandler}>
+                                <button
+                                    type="button"
+                                    className="text-primary cursor-pointer text-xs"
+                                    onClick={openMoreRepliesHandler}
+                                >
                                     Показать ответы
                                 </button>
                             )}

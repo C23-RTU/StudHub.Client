@@ -2,16 +2,22 @@ import type { HTMLAttributes, PropsWithChildren } from 'react';
 
 import { cn } from '@/lib/utils/utils';
 
-interface Props extends PropsWithChildren, HTMLAttributes<HTMLDivElement> {}
+interface HeaderProps extends PropsWithChildren, HTMLAttributes<HTMLDivElement> {}
 
-export function Header({ children, className, ...props }: Props) {
+interface HeaderTitleProps extends PropsWithChildren, HTMLAttributes<HTMLHeadingElement> {}
+
+export function Header({ children, className, ...props }: HeaderProps) {
     return (
-        <header className={cn('flex items-center justify-between mb-4 min-h-[45px]', className)} {...props}>
+        <header className={cn('mb-4 flex min-h-[45px] items-center justify-between', className)} {...props}>
             {children}
         </header>
     );
 }
 
-export function HeaderTitle({ children }: PropsWithChildren) {
-    return <h1 className="text-xl font-semibold font-geologica">{children}</h1>;
+export function HeaderTitle({ children, className, ...props }: HeaderTitleProps) {
+    return (
+        <h1 className={cn('font-geologica text-xl font-semibold', className)} {...props}>
+            {children}
+        </h1>
+    );
 }

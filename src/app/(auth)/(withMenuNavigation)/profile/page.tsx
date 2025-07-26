@@ -1,15 +1,12 @@
 import type { Metadata } from 'next';
 
-import Profile from './Profile';
-import type { PersonDetailDTO } from '@/api/axios-client';
-import { userApi } from '@/api/api';
+import Profile from './UserProfile';
 
 export const metadata: Metadata = {
-    title: 'Профиль',
+    title: 'Ваш профиль',
     description: '',
 };
 
 export default async function Page() {
-    const user: PersonDetailDTO = (await userApi.userGetPersonalDetails()).data;
-    return <Profile user={user} />;
+    return <Profile />;
 }
