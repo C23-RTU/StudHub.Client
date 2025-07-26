@@ -99,7 +99,7 @@ export function CommentItem({
                     'bg-secondary': commentForReply?.id === comment.id || highlightComment?.inReplyTo == comment.id,
                 })}
             >
-                <Link href={`${AUTH_PAGE.PROFILE}/${comment.personSummaryDTO.id}`}>
+                <Link href={AUTH_PAGE.USER_PROFILE(comment.personSummaryDTO.id)}>
                     <div className="shrink-0">
                         <Avatar
                             src={comment.personSummaryDTO?.imagePath}
@@ -112,7 +112,7 @@ export function CommentItem({
 
                 <div className="flex w-full flex-col gap-2 overflow-hidden">
                     <div className="flex items-center justify-between">
-                        <Link href={`${AUTH_PAGE.PROFILE}/${comment.personSummaryDTO.id}`}>
+                        <Link href={AUTH_PAGE.USER_PROFILE(comment.personSummaryDTO.id)}>
                             <p className="font-geologica text-sm font-medium">
                                 {comment.personSummaryDTO?.firstName} {comment.personSummaryDTO?.lastName}
                             </p>

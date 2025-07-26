@@ -19,7 +19,7 @@ export function SubscriberCard({ firstName, lastName, avatar, userId }: Props) {
         <Link
             className="bg-secondary flex w-full rounded-lg px-2 py-2"
             role="listitem"
-            href={`${AUTH_PAGE.PROFILE}/${userId}`}
+            href={AUTH_PAGE.USER_PROFILE(userId)}
         >
             <div className="relative">
                 <Image
