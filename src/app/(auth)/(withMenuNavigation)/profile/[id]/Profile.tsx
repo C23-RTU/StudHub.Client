@@ -76,25 +76,25 @@ export default function Profile({ user }: Props) {
             </Header>
 
             <MainContent>
-                <div className="bg-secondary flex flex-col items-center gap-4 rounded-2xl p-10 text-center">
+                <div className="flex flex-col items-center gap-4 rounded-2xl text-center">
                     <div className="relative">
                         <m.div
                             className="bg-primary/40 absolute -inset-2 rounded-full blur-sm"
                             animate={{
                                 rotate: 360,
-                                x: [0, 2, 0, -2, 0],
+                                x: [0, 3, 0, -2, 0],
                                 y: [0, -2, 0, 2, 0],
                             }}
                             transition={{
-                                rotate: { duration: 7, repeat: Infinity, ease: 'linear' },
-                                x: { duration: 7, repeat: Infinity, ease: 'easeInOut', repeatType: 'mirror' },
+                                rotate: { duration: 6, repeat: Infinity, ease: 'linear' },
+                                x: { duration: 4, repeat: Infinity, ease: 'easeInOut', repeatType: 'mirror' },
                                 y: { duration: 6, repeat: Infinity, ease: 'easeInOut', repeatType: 'mirror' },
                             }}
                         />
 
                         <Avatar
                             src={user?.imagePath}
-                            size={160}
+                            size={130}
                             alt="Изображение профиля"
                             className="border-background relative z-10 h-[128px] w-[128px] rounded-full border-[5px]"
                         />
