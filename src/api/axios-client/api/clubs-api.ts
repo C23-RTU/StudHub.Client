@@ -74,60 +74,17 @@ export const ClubsApiAxiosParamCreator = function (configuration?: Configuration
         },
         /**
          * 
-         * @param {number} clubid 
+         * @param {number} clubId 
          * @param {number} [pageIndex] 
          * @param {number} [pageSize] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        clubsGetAllByClubId: async (clubid: number, pageIndex?: number, pageSize?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'clubid' is not null or undefined
-            assertParamExists('clubsGetAllByClubId', 'clubid', clubid)
-            const localVarPath = `/clubs/getPersonsByClubId/{clubid}`
-                .replace(`{${"clubid"}}`, encodeURIComponent(String(clubid)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            if (pageIndex !== undefined) {
-                localVarQueryParameter['PageIndex'] = pageIndex;
-            }
-
-            if (pageSize !== undefined) {
-                localVarQueryParameter['PageSize'] = pageSize;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {number} [pageIndex] 
-         * @param {number} [pageSize] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        clubsGetAllByPersonId: async (id: number, pageIndex?: number, pageSize?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('clubsGetAllByPersonId', 'id', id)
-            const localVarPath = `/clubs/getByPersonId/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+        clubsGetByClubId: async (clubId: number, pageIndex?: number, pageSize?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'clubId' is not null or undefined
+            assertParamExists('clubsGetByClubId', 'clubId', clubId)
+            const localVarPath = `/clubs/getSubscribers/{clubId}`
+                .replace(`{${"clubId"}}`, encodeURIComponent(String(clubId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -179,6 +136,49 @@ export const ClubsApiAxiosParamCreator = function (configuration?: Configuration
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {number} [pageIndex] 
+         * @param {number} [pageSize] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        clubsGetByPersonId: async (id: number, pageIndex?: number, pageSize?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('clubsGetByPersonId', 'id', id)
+            const localVarPath = `/clubs/getByPersonId/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (pageIndex !== undefined) {
+                localVarQueryParameter['PageIndex'] = pageIndex;
+            }
+
+            if (pageSize !== undefined) {
+                localVarQueryParameter['PageSize'] = pageSize;
+            }
 
 
     
@@ -293,30 +293,16 @@ export const ClubsApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {number} clubid 
+         * @param {number} clubId 
          * @param {number} [pageIndex] 
          * @param {number} [pageSize] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async clubsGetAllByClubId(clubid: number, pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<PersonSummaryDTO>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.clubsGetAllByClubId(clubid, pageIndex, pageSize, options);
+        async clubsGetByClubId(clubId: number, pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<PersonSummaryDTO>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.clubsGetByClubId(clubId, pageIndex, pageSize, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ClubsApi.clubsGetAllByClubId']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {number} [pageIndex] 
-         * @param {number} [pageSize] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async clubsGetAllByPersonId(id: number, pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ClubDetailDTO>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.clubsGetAllByPersonId(id, pageIndex, pageSize, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ClubsApi.clubsGetAllByPersonId']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['ClubsApi.clubsGetByClubId']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -329,6 +315,20 @@ export const ClubsApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.clubsGetById(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ClubsApi.clubsGetById']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {number} [pageIndex] 
+         * @param {number} [pageSize] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async clubsGetByPersonId(id: number, pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ClubDetailDTO>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.clubsGetByPersonId(id, pageIndex, pageSize, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ClubsApi.clubsGetByPersonId']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -379,25 +379,14 @@ export const ClubsApiFactory = function (configuration?: Configuration, basePath
         },
         /**
          * 
-         * @param {number} clubid 
+         * @param {number} clubId 
          * @param {number} [pageIndex] 
          * @param {number} [pageSize] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        clubsGetAllByClubId(clubid: number, pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<PersonSummaryDTO>> {
-            return localVarFp.clubsGetAllByClubId(clubid, pageIndex, pageSize, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {number} [pageIndex] 
-         * @param {number} [pageSize] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        clubsGetAllByPersonId(id: number, pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<ClubDetailDTO>> {
-            return localVarFp.clubsGetAllByPersonId(id, pageIndex, pageSize, options).then((request) => request(axios, basePath));
+        clubsGetByClubId(clubId: number, pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<PersonSummaryDTO>> {
+            return localVarFp.clubsGetByClubId(clubId, pageIndex, pageSize, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -407,6 +396,17 @@ export const ClubsApiFactory = function (configuration?: Configuration, basePath
          */
         clubsGetById(id: number, options?: RawAxiosRequestConfig): AxiosPromise<ClubDetailDTO> {
             return localVarFp.clubsGetById(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {number} [pageIndex] 
+         * @param {number} [pageSize] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        clubsGetByPersonId(id: number, pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<ClubDetailDTO>> {
+            return localVarFp.clubsGetByPersonId(id, pageIndex, pageSize, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -449,25 +449,14 @@ export interface ClubsApiInterface {
 
     /**
      * 
-     * @param {number} clubid 
+     * @param {number} clubId 
      * @param {number} [pageIndex] 
      * @param {number} [pageSize] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ClubsApiInterface
      */
-    clubsGetAllByClubId(clubid: number, pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<PersonSummaryDTO>>;
-
-    /**
-     * 
-     * @param {number} id 
-     * @param {number} [pageIndex] 
-     * @param {number} [pageSize] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ClubsApiInterface
-     */
-    clubsGetAllByPersonId(id: number, pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<ClubDetailDTO>>;
+    clubsGetByClubId(clubId: number, pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<PersonSummaryDTO>>;
 
     /**
      * 
@@ -477,6 +466,17 @@ export interface ClubsApiInterface {
      * @memberof ClubsApiInterface
      */
     clubsGetById(id: number, options?: RawAxiosRequestConfig): AxiosPromise<ClubDetailDTO>;
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {number} [pageIndex] 
+     * @param {number} [pageSize] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ClubsApiInterface
+     */
+    clubsGetByPersonId(id: number, pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<ClubDetailDTO>>;
 
     /**
      * 
@@ -521,28 +521,15 @@ export class ClubsApi extends BaseAPI implements ClubsApiInterface {
 
     /**
      * 
-     * @param {number} clubid 
+     * @param {number} clubId 
      * @param {number} [pageIndex] 
      * @param {number} [pageSize] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ClubsApi
      */
-    public clubsGetAllByClubId(clubid: number, pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig) {
-        return ClubsApiFp(this.configuration).clubsGetAllByClubId(clubid, pageIndex, pageSize, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {number} id 
-     * @param {number} [pageIndex] 
-     * @param {number} [pageSize] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ClubsApi
-     */
-    public clubsGetAllByPersonId(id: number, pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig) {
-        return ClubsApiFp(this.configuration).clubsGetAllByPersonId(id, pageIndex, pageSize, options).then((request) => request(this.axios, this.basePath));
+    public clubsGetByClubId(clubId: number, pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig) {
+        return ClubsApiFp(this.configuration).clubsGetByClubId(clubId, pageIndex, pageSize, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -554,6 +541,19 @@ export class ClubsApi extends BaseAPI implements ClubsApiInterface {
      */
     public clubsGetById(id: number, options?: RawAxiosRequestConfig) {
         return ClubsApiFp(this.configuration).clubsGetById(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {number} [pageIndex] 
+     * @param {number} [pageSize] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ClubsApi
+     */
+    public clubsGetByPersonId(id: number, pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig) {
+        return ClubsApiFp(this.configuration).clubsGetByPersonId(id, pageIndex, pageSize, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

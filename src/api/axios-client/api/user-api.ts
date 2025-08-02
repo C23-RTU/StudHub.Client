@@ -128,6 +128,44 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 
+         * @param {File | null} [file] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        userUploadUserImage: async (file?: File | null, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/user/uploadUserImage`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
+
+
+            if (file !== undefined) { 
+                localVarFormParams.append('file', file as any);
+            }
+    
+    
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = localVarFormParams;
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -173,6 +211,18 @@ export const UserApiFp = function(configuration?: Configuration) {
             const localVarOperationServerBasePath = operationServerMap['UserApi.userGetSubscribedClubs']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
+        /**
+         * 
+         * @param {File | null} [file] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async userUploadUserImage(file?: File | null, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.userUploadUserImage(file, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['UserApi.userUploadUserImage']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
     }
 };
 
@@ -209,6 +259,15 @@ export const UserApiFactory = function (configuration?: Configuration, basePath?
         userGetSubscribedClubs(pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<ClubDetailDTO>> {
             return localVarFp.userGetSubscribedClubs(pageIndex, pageSize, options).then((request) => request(axios, basePath));
         },
+        /**
+         * 
+         * @param {File | null} [file] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        userUploadUserImage(file?: File | null, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.userUploadUserImage(file, options).then((request) => request(axios, basePath));
+        },
     };
 };
 
@@ -243,6 +302,15 @@ export interface UserApiInterface {
      * @memberof UserApiInterface
      */
     userGetSubscribedClubs(pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<ClubDetailDTO>>;
+
+    /**
+     * 
+     * @param {File | null} [file] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserApiInterface
+     */
+    userUploadUserImage(file?: File | null, options?: RawAxiosRequestConfig): AxiosPromise<void>;
 
 }
 
@@ -283,6 +351,17 @@ export class UserApi extends BaseAPI implements UserApiInterface {
      */
     public userGetSubscribedClubs(pageIndex?: number, pageSize?: number, options?: RawAxiosRequestConfig) {
         return UserApiFp(this.configuration).userGetSubscribedClubs(pageIndex, pageSize, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {File | null} [file] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserApi
+     */
+    public userUploadUserImage(file?: File | null, options?: RawAxiosRequestConfig) {
+        return UserApiFp(this.configuration).userUploadUserImage(file, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

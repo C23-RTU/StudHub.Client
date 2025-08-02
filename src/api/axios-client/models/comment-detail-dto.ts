@@ -40,7 +40,7 @@ export interface CommentDetailDTO {
      * @type {PersonSummaryDTO}
      * @memberof CommentDetailDTO
      */
-    'personSummaryDTO': PersonSummaryDTO;
+    'personSummary': PersonSummaryDTO;
     /**
      * 
      * @type {number}
@@ -58,7 +58,7 @@ export interface CommentDetailDTO {
      * @type {number}
      * @memberof CommentDetailDTO
      */
-    'replyCount'?: number;
+    'replyCount': number;
     /**
      * 
      * @type {number}
