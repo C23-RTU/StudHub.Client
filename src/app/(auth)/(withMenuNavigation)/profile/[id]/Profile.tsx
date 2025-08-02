@@ -38,7 +38,7 @@ export default function Profile({ user }: Props) {
         error,
     } = useQuery({
         queryKey: [user.id, 'fetch-profile-user-clubs'],
-        queryFn: async () => (await clubsApi.clubsGetAllByPersonId(user.id, 0, 3)).data,
+        queryFn: async () => (await clubsApi.clubsGetByPersonId(user.id, 0, 3)).data,
     });
 
     const pathname = usePathname();

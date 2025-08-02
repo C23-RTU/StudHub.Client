@@ -20,7 +20,7 @@ export function Subscribers({ id }: { id: string }) {
         infiniteQuery: { data: subscribers, isLoading },
     } = useInfinityScroll({
         queryKey: ['fetch-subscribers', id],
-        queryFn: async ({ pageParam = 0 }) => (await clubsApi.clubsGetAllByClubId(Number(id), pageParam, 10)).data,
+        queryFn: async ({ pageParam = 0 }) => (await clubsApi.clubsGetByClubId(Number(id), pageParam, 10)).data,
         pageSize: 10,
     });
 

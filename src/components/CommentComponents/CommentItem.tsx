@@ -51,7 +51,7 @@ export function CommentItem({
     }, [isOpenMoreReplies, comment]);
 
     const isMyComment = useMemo(() => {
-        return comment.personSummaryDTO.id === user?.id;
+        return comment.personSummary.id === user?.id;
     }, [comment, user]);
 
     const setDefaultEvent = (event: MouseEvent) => {
@@ -99,22 +99,22 @@ export function CommentItem({
                     'bg-secondary': commentForReply?.id === comment.id || highlightComment?.inReplyTo == comment.id,
                 })}
             >
-                <Link href={AUTH_PAGE.USER_PROFILE(comment.personSummaryDTO.id)}>
+                <Link href={AUTH_PAGE.USER_PROFILE(comment.personSummary.id)}>
                     <div className="shrink-0">
                         <Avatar
-                            src={comment.personSummaryDTO?.imagePath}
+                            src={comment.personSummary?.imagePath}
                             loaderSize={15}
                             size={40}
-                            alt={comment.personSummaryDTO.lastName}
+                            alt={comment.personSummary.lastName}
                         />
                     </div>
                 </Link>
 
                 <div className="flex w-full flex-col gap-2 overflow-hidden">
                     <div className="flex items-center justify-between">
-                        <Link href={AUTH_PAGE.USER_PROFILE(comment.personSummaryDTO.id)}>
+                        <Link href={AUTH_PAGE.USER_PROFILE(comment.personSummary.id)}>
                             <p className="font-geologica text-sm font-medium">
-                                {comment.personSummaryDTO?.firstName} {comment.personSummaryDTO?.lastName}
+                                {comment.personSummary?.firstName} {comment.personSummary?.lastName}
                             </p>
                         </Link>
                         <small className="text-xss font-inter font-normal opacity-50">{createdCommentDate}</small>

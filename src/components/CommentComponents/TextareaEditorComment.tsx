@@ -38,23 +38,23 @@ export function TextareaEditorComment({ post, hasNextPage }: { post: PostDetailD
         if (!commentForReply) return;
 
         setValue('inReplyTo', commentForReply.id);
-        setValue('content', `${commentForReply.personSummaryDTO.firstName}, `);
+        setValue('content', `${commentForReply.personSummary.firstName}, `);
     }, [commentForReply, setValue]);
 
     return (
         <form
             onSubmit={handleSubmit(sendCommentHandler)}
-            className="fixed left-0 right-0 bottom-0 max-w-[1024px] w-full mx-auto bg-bg px-2 shadow-2xl shadow-black"
+            className="bg-bg fixed right-0 bottom-0 left-0 mx-auto w-full max-w-[1024px] px-2 shadow-2xl shadow-black"
         >
             {commentForReply && (
                 <m.div
                     initial={{ y: 10, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
-                    className="flex py-2 text-xs items-center px-3 gap-2"
+                    className="flex items-center gap-2 px-3 py-2 text-xs"
                 >
                     <div className="flex gap-1">
                         <p>ответ пользователю </p>
-                        <p className="text-primary font-medium">{commentForReply.personSummaryDTO.firstName}</p>
+                        <p className="text-primary font-medium">{commentForReply.personSummary.firstName}</p>
                     </div>
                     <button type="button" onClick={resetAllData}>
                         <CircleXIcon size={15} className="text-gray-400" />
@@ -62,14 +62,14 @@ export function TextareaEditorComment({ post, hasNextPage }: { post: PostDetailD
                 </m.div>
             )}
 
-            <div className="flex gap-1 items-center">
+            <div className="flex items-center gap-1">
                 <Textarea
                     rows={2}
-                    className="resize-none focus-visible:ring-inset focus-visible:ring-0 text-sm h-auto border-none shadow-none"
+                    className="h-auto resize-none border-none text-sm shadow-none focus-visible:ring-0 focus-visible:ring-inset"
                     placeholder="Комментарий"
                     {...register('content')}
                 />
-                <Button className="h-[40px] w-[40px] rounded " type="submit" disabled={!isValid} isLoading={isPending}>
+                <Button className="h-[40px] w-[40px] rounded" type="submit" disabled={!isValid} isLoading={isPending}>
                     <SendHorizonalIcon />
                 </Button>
             </div>

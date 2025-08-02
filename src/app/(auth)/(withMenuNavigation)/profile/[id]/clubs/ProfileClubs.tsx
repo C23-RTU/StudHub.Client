@@ -19,7 +19,7 @@ export default function ProfileClubs({ user }: { user: PersonDetailDTO }) {
         infiniteQuery: { data: clubs, isLoading, isFetchingNextPage },
     } = useInfinityScroll({
         queryKey: [user.id, 'fetch-user-clubs'],
-        queryFn: async (page) => (await clubsApi.clubsGetAllByPersonId(user.id, page.pageParam, 12)).data,
+        queryFn: async (page) => (await clubsApi.clubsGetByPersonId(user.id, page.pageParam, 12)).data,
         pageSize: 12,
     });
 
