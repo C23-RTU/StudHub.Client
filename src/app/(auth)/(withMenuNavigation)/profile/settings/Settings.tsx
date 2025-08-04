@@ -1,20 +1,26 @@
+'use client';
+
 import { ChevronRightIcon } from 'lucide-react';
 import Link from 'next/link';
 import { LuPlus } from 'react-icons/lu';
 
+import { ProfileAvatarUploader } from '@/components/ProfileComponents/ProfileAvatar/ProfileAvatarUploader';
 import SettingsClubSection from '@/components/ProfileComponents/SettingClubSection';
 import SettingsSection from '@/components/ProfileComponents/SettingSection';
 import { PROFILE_SETTING_SECTIONS } from '@/components/ProfileComponents/profile-section.config';
-import { Avatar } from '@/components/ui/Avatar/Avatar';
 
 import { AUTH_PAGE } from '@/lib/config/routes.config';
+
+import { useProfile } from '@/hooks/useProfile';
 
 import type { PersonDetailDTO } from '@/api/axios-client';
 
 import { Header, HeaderTitle } from '@/hoc/Header/Header';
 import { MainContent } from '@/hoc/MainContent/MainContent';
 
-export default function Settings({ user }: { user: PersonDetailDTO }) {
+export default function Settings({ initUser }: { initUser: PersonDetailDTO }) {
+    const { data: user } = useProfile(initUser);
+
     return (
         <div className="page">
             <Header>
@@ -22,7 +28,7 @@ export default function Settings({ user }: { user: PersonDetailDTO }) {
             </Header>
             <MainContent>
                 <div className="flex flex-row gap-4 rounded-md border border-neutral-800 bg-neutral-900 p-4 shadow-md">
-                    <Avatar src={user?.imagePath} size={64} alt={'Изображение профиля'} />
+                    <ProfileAvatarUploader avatarSrc={user?.imagePath} />
                     <div className="my-auto flex flex-col gap-0">
                         <p className="font-geologica max-w-[250px] overflow-hidden text-lg font-semibold text-ellipsis whitespace-nowrap">
                             {user?.firstName} {user?.lastName}
