@@ -217,7 +217,7 @@ export const UserApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async userUploadUserImage(file?: File | null, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async userUploadUserImage(file?: File | null, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.userUploadUserImage(file, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['UserApi.userUploadUserImage']?.[localVarOperationServerIndex]?.url;
@@ -265,7 +265,7 @@ export const UserApiFactory = function (configuration?: Configuration, basePath?
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        userUploadUserImage(file?: File | null, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+        userUploadUserImage(file?: File | null, options?: RawAxiosRequestConfig): AxiosPromise<string> {
             return localVarFp.userUploadUserImage(file, options).then((request) => request(axios, basePath));
         },
     };
@@ -310,7 +310,7 @@ export interface UserApiInterface {
      * @throws {RequiredError}
      * @memberof UserApiInterface
      */
-    userUploadUserImage(file?: File | null, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    userUploadUserImage(file?: File | null, options?: RawAxiosRequestConfig): AxiosPromise<string>;
 
 }
 

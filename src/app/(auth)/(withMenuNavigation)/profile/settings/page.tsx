@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
-import Settings from './Settings';
-import type { PersonDetailDTO } from '@/api/axios-client';
+
 import { userApi } from '@/api/api';
+import type { PersonDetailDTO } from '@/api/axios-client';
+
+import Settings from './Settings';
 
 export const metadata: Metadata = {
     title: 'Настройки профиля',
@@ -10,5 +12,5 @@ export const metadata: Metadata = {
 
 export default async function Page() {
     const user: PersonDetailDTO = (await userApi.userGetPersonalDetails()).data;
-  return <Settings user={user}/>
+    return <Settings initUser={user} />;
 }

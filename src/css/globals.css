@@ -65,11 +65,10 @@
 }
 
 @theme {
-    --font-inter: "Inter", sans-serif;
-    --font-geologica: "Geologica", sans-serif;
-    --font-unbounded: "Unbounded", sans-serif;
+    --font-inter: 'Inter', sans-serif;
+    --font-geologica: 'Geologica', sans-serif;
+    --font-unbounded: 'Unbounded', sans-serif;
     --text-xss: 10px;
-    --height-menuNavigation: 52px;
 }
 
 @theme inline {
@@ -118,7 +117,7 @@
     }
 
     .page {
-        @apply h-full w-full font-inter px-pageX py-pageY;
+        @apply font-inter px-pageX py-pageY h-full w-full;
     }
 
     .hidden-scroll {
@@ -132,5 +131,4 @@
             height: 0;
         }
     }
-
 }

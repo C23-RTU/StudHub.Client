@@ -25,6 +25,7 @@ export function Avatar({ src, size = 40, alt, loaderSize, className }: Props) {
             <LoaderImage
                 src={src ? getStaticImg(src) : '/img/default-user-avatar.png'}
                 loaderSize={loaderSize}
+                className="object-cover"
                 width={size}
                 height={size}
                 alt={alt || 'avatar'}
