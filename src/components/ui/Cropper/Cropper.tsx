@@ -22,10 +22,11 @@ export function BaseCropper({ src, toggleHandler, saveHandler }: Props) {
             const canvas = cropper.getCanvas();
             canvas?.toBlob(async (blob) => {
                 if (blob) {
-                    await saveHandler(blob);
+                    saveHandler(blob).finally(() => {
+                        toggleHandler(false);
+                        setIsLoading(false);
+                    });
                 }
-                toggleHandler(false);
-                setIsLoading(false);
             }, 'image/jpeg');
         }
     };
