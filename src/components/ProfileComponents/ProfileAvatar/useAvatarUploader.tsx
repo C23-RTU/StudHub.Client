@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
 import { userApi } from '@/api/api';
 import type { PersonDetailDTO } from '@/api/axios-client';
@@ -8,6 +8,9 @@ export const useAvatarUploader = () => {
     const queryClient = useQueryClient();
 
     const inputRef = useRef<HTMLInputElement>(null);
+
+    const [isOpenCropper, setOpenCropper] = useState(false);
+    const [newAvatarImageUrl, setNewAvatarImageUrl] = useState<string | null>(null);
 
     const { mutateAsync, isPending } = useMutation({
         mutationKey: ['upload-profile-avatar'],
@@ -18,9 +21,15 @@ export const useAvatarUploader = () => {
         const files = inputRef.current?.files;
 
         if (!files?.length) return;
-        const { toast } = await import('react-hot-toast');
 
-        await mutateAsync(files[0], {
+        setNewAvatarImageUrl(URL.createObjectURL(files[0]));
+        setOpenCropper(true);
+    };
+
+    const uploadAction = async (blob: Blob) => {
+        const { toast } = await import('react-hot-toast');
+        const file = new File([blob], `avatar-${Date.now()}.png`);
+        await mutateAsync(file, {
             onSuccess: async ({ data }) => {
                 toast.success('Фотография успешно изменена');
 
@@ -40,6 +49,10 @@ export const useAvatarUploader = () => {
     return {
         inputRef,
         uploadChange,
+        uploadAction,
+        newAvatarUrl: newAvatarImageUrl,
         isLoading: isPending,
+        isOpenCropper,
+        setOpenCropper,
     };
 };
