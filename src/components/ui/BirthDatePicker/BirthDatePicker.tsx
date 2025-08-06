@@ -50,19 +50,19 @@ export function BirthDatePicker({ value, onChange, error }: DatePickerProps) {
             <Popover open={isOpen} onOpenChange={setIsOpen}>
                 <PopoverTrigger asChild>
                     <Button
-                        className="w-full justify-start border text-left rounded-t-md bg-secondary hover:bg-secondary/80  transition duration-200 border-neutral-700"
+                        className="bg-secondary hover:bg-secondary/80 w-full justify-start rounded-t-md border border-neutral-700 text-left transition duration-200"
                         onClick={() => setIsOpen(true)}
                     >
                         <CalendarIcon className="mr-2 h-4 w-4" />
                         {value ? format(new Date(value), 'PPP', { locale: ru }) : <span>Дата рождения</span>}
                     </Button>
                 </PopoverTrigger>
-                <PopoverContent className="w-auto p-0 rounded-md mr-4 border-stroke bg-background shadow-md">
+                <PopoverContent className="border-stroke bg-background mr-4 w-auto rounded-md p-0 shadow-md">
                     <div className="p-4">
                         <div className="flex justify-between">
                             <div className="relative">
                                 <select
-                                    className="appearance-none border pl-2 pr-5 rounded bg-secondary"
+                                    className="bg-secondary appearance-none rounded border pr-5 pl-2"
                                     value={year}
                                     onChange={handleYearChange}
                                 >
@@ -76,11 +76,11 @@ export function BirthDatePicker({ value, onChange, error }: DatePickerProps) {
                                         );
                                     }).filter(Boolean)}
                                 </select>
-                                <ChevronsUpDown className="absolute size-4 right-1 top-[50%] translate-y-[-50%] pointer-events-none" />
+                                <ChevronsUpDown className="pointer-events-none absolute top-[50%] right-1 size-4 translate-y-[-50%]" />
                             </div>
                             <div className="relative">
                                 <select
-                                    className="appearance-none border pl-2 rounded bg-secondary"
+                                    className="bg-secondary appearance-none rounded border pr-5 pl-2"
                                     value={month}
                                     onChange={handleMonthChange}
                                 >
@@ -90,7 +90,7 @@ export function BirthDatePicker({ value, onChange, error }: DatePickerProps) {
                                         </option>
                                     ))}
                                 </select>
-                                <ChevronsUpDown className="absolute size-4 right-1 top-[50%] translate-y-[-50%] pointer-events-none" />
+                                <ChevronsUpDown className="pointer-events-none absolute top-[50%] right-1 size-4 translate-y-[-50%]" />
                             </div>
                         </div>
                         <Calendar
@@ -100,10 +100,11 @@ export function BirthDatePicker({ value, onChange, error }: DatePickerProps) {
                             month={currentMonth}
                             showOutsideDays={false}
                             locale={ru}
+                            hideNavigation
                         />
                         <div className="flex justify-center">
                             <button
-                                className="text-xs text-center bg-primary rounded-md py-2 w-full hover:bg-primary/80"
+                                className="bg-primary hover:bg-primary/80 w-full rounded-md py-2 text-center text-xs"
                                 onClick={() => setIsOpen(false)}
                             >
                                 Готово
@@ -112,7 +113,7 @@ export function BirthDatePicker({ value, onChange, error }: DatePickerProps) {
                     </div>
                 </PopoverContent>
             </Popover>
-            {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
+            {error && <p className="mt-2 text-sm text-red-500">{error}</p>}
         </div>
     );
 }

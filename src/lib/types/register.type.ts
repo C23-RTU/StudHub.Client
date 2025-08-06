@@ -19,7 +19,7 @@ export const RegisterDataSchema = z
             .max(25, 'Отчество не более 25 символов')
             .optional()
             .refine((value) => value === undefined || value.trim() === '' || /^[А-Я][а-я]+$/.test(value), {
-                message: 'Недопустимые символы',
+                message: 'Некорректное отчество',
             }),
         birthDate: z
             .string({

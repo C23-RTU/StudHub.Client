@@ -47,8 +47,8 @@ export default function Register() {
     const { submitHandler, isLoading } = useRegisterForm(reset, selectedInstitute);
 
     return (
-        <form className="flex flex-col gap-4 mb-5" onSubmit={handleSubmit(submitHandler)}>
-            <div className="grid col-span-2 gap-4">
+        <form className="mb-5 flex flex-col gap-4" onSubmit={handleSubmit(submitHandler)}>
+            <div className="col-span-2 grid gap-4">
                 <FormField
                     placeholder="Имя"
                     type="text"
@@ -94,11 +94,11 @@ export default function Register() {
             />
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                    <Button className="w-full bg-secondary border hover:bg-secondary/80 text-white border-neutral-700 truncate justify-start">
+                    <Button className="bg-secondary hover:bg-secondary/80 w-full justify-start truncate border border-neutral-700 text-white">
                         {selectedInstitute?.name || 'Выберите институт'}
                     </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent className="min-w-8 max-w-full">
+                <DropdownMenuContent className="max-w-full min-w-8">
                     <DropdownMenuLabel>Выберите институт</DropdownMenuLabel>
                     <DropdownMenuItem onClick={() => setSelectedInstitute(null)}>—</DropdownMenuItem>
                     {institutes?.map((institute) => (
