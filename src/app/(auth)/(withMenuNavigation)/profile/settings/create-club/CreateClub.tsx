@@ -57,7 +57,7 @@ export default function CreateClub() {
         resolver: zodResolver(clubSchema),
         defaultValues: {
             clubName: '',
-            description: '',
+            comment: '',
             about: '',
         }
     });
@@ -98,7 +98,7 @@ export default function CreateClub() {
                         src={currentAvatar} 
                         width={128} 
                         height={128} 
-                        className="bg-neutral-800 size-[128px] rounded-full absolute mt-28 md:mt-32 lg:mt-40 border-8 object-cover border-background" 
+                        className="bg-neutral-800 size-[128px] rounded-full absolute mt-28 md:mt-32 lg:mt-40 border-8 object-cover border-background cursor-pointer" 
                         alt="Предпросмотр аватара клуба"
                     />
 
@@ -159,8 +159,8 @@ export default function CreateClub() {
                     </div>
                     <div className="flex flex-col gap-2">
                         <h2 className="font-semibold  text-neutral-300">Описание клуба</h2>
-                        <Textarea placeholder="Был у нас один стажер..." className="text-sm" {...register('description')}/>
-                        {errors.description&& <p className="mt-2 text-sm text-red-500">{errors.description.message?.toString()}</p>}
+                        <Textarea placeholder="Был у нас один стажер..." className="text-sm" {...register('comment')}/>
+                        {errors.comment && <p className="mt-2 text-sm text-red-500">{errors.comment.message?.toString()}</p>}
                         <p className="text-xs text-neutral-500">Расскажите подробнее, о чем вы хотите рассказывать в этом клубе чтобы завлечь больше единомышленников.</p>
                     </div>
                     <div className="flex flex-col gap-2">

@@ -1,6 +1,9 @@
 import { z } from 'zod';
 
 const clubSchema = z.object({
+    clubName: z.string().min(1, 'Название клуба не может быть пустым').max(50, 'Макс. 50 символов'),
+    about: z.string().max(255, 'Макс. 255 символов').optional(),
+    comment: z.string().min(10, 'Комментарий слишком короткий').max(1000, 'Макс. 1000 символов'),
     banner: z
         .any()
         .optional()
@@ -13,13 +16,9 @@ const clubSchema = z.object({
         ),
     avatar: z
         .any()
-        .optional()
         .refine((files) => files instanceof FileList && files.length === 1 && files[0].type.startsWith('image/'), {
             message: 'Нужно загрузить один файл-изображение для аватара',
         }),
-    clubName: z.string().min(1, 'Название клуба не может быть пустым').max(100, 'Макс. 100 символов'),
-    description: z.string().min(10, 'Описание слишком короткое').max(1000, 'Описание слишком длинное'),
-    about: z.string().min(10, 'Расскажите о себе чуть больше').max(1000, 'Слишком много текста'),
 });
 type ClubFormValues = z.infer<typeof clubSchema>;
 
