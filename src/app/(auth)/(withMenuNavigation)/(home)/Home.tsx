@@ -21,7 +21,7 @@ const getTimeBasedGreeting = (): string => {
     } else if (currentHour >= 18 && currentHour < 23) {
         return 'Добрый вечер';
     } else {
-        return 'Доброй ночи';
+        return '+! Доброй ночи';
     }
 };
 
