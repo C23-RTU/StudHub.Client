@@ -1,4 +1,4 @@
-name: '[studHub.client] deploy client on server'
+name: '[studhub.client] deploy client on server'
 on:
     workflow_run:
       workflows: ['[studhub.client] test build project']
