@@ -1,4 +1,4 @@
-name: '[StudHub.Client] Test build project'
+name: '[studhub.client] test build project'
 on:
     push:
         branches: ['main']
