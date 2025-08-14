@@ -5,6 +5,7 @@ import { Copy, EllipsisVertical, OctagonAlert } from 'lucide-react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useMemo } from 'react';
 import toast from 'react-hot-toast';
 
 import {
@@ -42,11 +43,26 @@ export function ClubHeader({ initClubData }: { initClubData: ClubDetailDTO }) {
         enabled: !!initClubData,
     });
 
+    const displaySubscribers = useMemo(() => {
+        const subscribers = club?.subscriberCount || 0;
+
+        if (subscribers === 0) return 'Нет подписчиков';
+
+        const lastDigit = subscribers % 10;
+        const lastTwoDigits = subscribers % 100;
+
+        if (lastTwoDigits >= 11 && lastTwoDigits <= 19) return `подписчиков`;
+        if (lastDigit === 1) return `подписчик`;
+        if (lastDigit >= 2 && lastDigit <= 4) return ` подписчика`;
+
+        return `подписчиков`;
+    }, [club?.subscriberCount]);
+
     return (
-        <header className="border-border relative mx-auto flex w-full max-w-[600px] flex-col items-center border-x-0 bg-neutral-50 lg:border-x">
+        <header className="border-border relative mx-auto flex w-full max-w-[600px] flex-col items-center border-x-0 lg:border-x">
             <div className="fixed z-50 -mt-[1px] flex w-full max-w-[600px] flex-row justify-between bg-gradient-to-b from-neutral-900/80 to-neutral-900/0 p-4">
                 <div className="flex flex-row items-center">
-                    <BackButton />
+                    <BackButton variant={'outline'} className={'size-10'} />
                     {/* <p
                         className="text-lg ml-4 font-bold shadow-[0_2.8px_2.2px_rgba(0,0,0,0.034),0_6.7px_5.3px_rgba(0,0,0,0.048),0_12.5px_10px_rgba(0,0,0,0.06),0_22.3px_17.9px_rgba(0,0,0,0.072),0_41.8px_33.4px_rgba(0,0,0,0.086),0_100px_80px_rgba(0,0,0,0.12)] bg-secondary font-geologica rounded-lg leading-8 h-10 py-1 px-3 hover:cursor-pointer"
                         onClick={() => {
@@ -59,7 +75,7 @@ export function ClubHeader({ initClubData }: { initClubData: ClubDetailDTO }) {
                 </div>
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                        <Button size="icon">
+                        <Button size="icon" variant={'outline'} className="text-text size-10">
                             <EllipsisVertical />
                         </Button>
                     </DropdownMenuTrigger>
@@ -90,13 +106,13 @@ export function ClubHeader({ initClubData }: { initClubData: ClubDetailDTO }) {
                 />
             </div>
 
-            <div className="mt-[-40px] flex h-full w-full flex-row bg-neutral-50 px-4">
+            <div className="mt-[-40px] flex h-full w-full flex-row px-4">
                 <LoaderImage
                     src={club?.imageUrl ? getStaticImg(club.imageUrl) : '/img/default-club-avatar.png'}
                     height={128}
                     width={128}
                     alt={'avatar'}
-                    className="size-[100px] rounded-full border-[5px] border-neutral-50 p-0"
+                    className="border-background-light size-[100px] rounded-full border-[5px] p-0"
                 />
                 <SubscribeButtonDynamic
                     clubId={club?.id}
@@ -105,12 +121,12 @@ export function ClubHeader({ initClubData }: { initClubData: ClubDetailDTO }) {
                     subscribed={club?.isUserSubscribed}
                 />
             </div>
-            <div className="flex flex-col gap-2 bg-neutral-50 p-4 pt-2 pb-0">
-                <h1 className="font-geologica text-lg font-bold">{club?.name}</h1>
-                <p className="text-sm text-neutral-700">{club?.about}</p>
+            <div className="flex flex-col gap-2 p-4 pt-2 pb-0">
+                <h1 className="font-geologica text-text text-lg font-bold">{club?.name}</h1>
+                <p className="mb-1 text-sm text-neutral-700 dark:text-neutral-300">{club?.about}</p>
                 <Link href={`/clubs/${club.id}/subscribers`} className="text-sm text-neutral-500">
                     <span className="font-medium text-neutral-800 dark:text-neutral-200">{club?.subscriberCount}</span>{' '}
-                    подписчиков
+                    {displaySubscribers}
                 </Link>
             </div>
 

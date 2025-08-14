@@ -19,7 +19,7 @@ export function Events({ events }: { events: EventDetailDTO[] }) {
     const router = useRouter();
 
     return (
-        <Page className="bg-neutral-50">
+        <Page>
             <Header className="py-[12px]">
                 <HeaderTitle>События</HeaderTitle>
                 <Button size={'icon'} onClick={() => router.push(AUTH_PAGE.EVENTS_CALENDAR())}>

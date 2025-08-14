@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import type { VariantProps } from 'class-variance-authority';
 import { SquareCheck, SquarePlus } from 'lucide-react';
 import dynamic from 'next/dynamic';
 import { useState } from 'react';
@@ -18,12 +19,14 @@ export function SubscribeButton({
     clubId,
     isBig = true,
     subscribed = false,
+    size = 'default',
     className = '',
 }: {
     clubId?: number;
     isBig: boolean;
     subscribed: boolean | undefined;
     className?: string;
+    size?: VariantProps<typeof Button>['size'];
 }) {
     const queryClient = useQueryClient();
     const [unsubVisible, setUnsubVisible] = useState<boolean>(false);
@@ -58,8 +61,9 @@ export function SubscribeButton({
                 {subscribed ? (
                     <Button
                         onClick={() => setUnsubVisible(true)}
+                        size={size}
                         className={cn(
-                            `hover:bg-secondary font-geologica flex w-full justify-center ${isBig && 'p-3'}`,
+                            `font-geologica text-text flex w-full justify-center ${isBig && 'p-3'}`,
                             className
                         )}
                         variant={'outline'}
@@ -75,6 +79,7 @@ export function SubscribeButton({
                             const { toast } = await import('react-hot-toast');
                             toast.success('Вы подписались на клуб', { id: 'subscribe-toast' });
                         }}
+                        size={size}
                         className={cn(
                             `font-geologica hover:bg-primary flex w-full justify-center ${isBig && 'p-3'}`,
                             className

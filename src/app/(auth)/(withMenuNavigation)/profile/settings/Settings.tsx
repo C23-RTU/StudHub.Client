@@ -9,6 +9,7 @@ import { ProfileAvatarUploader } from '@/components/ProfileComponents/ProfileAva
 import SettingsClubSection from '@/components/ProfileComponents/SettingClubSection';
 import SettingsSection from '@/components/ProfileComponents/SettingSection';
 import { PROFILE_SETTING_SECTIONS } from '@/components/ProfileComponents/profile-section.config';
+import { BackButton } from '@/components/ui/BackButton/BackButton';
 
 import { AUTH_PAGE } from '@/lib/config/routes.config';
 
@@ -23,12 +24,13 @@ export default function Settings({ initUser }: { initUser: PersonDetailDTO }) {
     const { data: user } = useProfile(initUser);
 
     return (
-        <Page className="border-border min-h-screen border-x bg-neutral-50 p-0">
-            <Header className="border-border px-pageX py-pageY mb-0 flex flex-row items-center border-b">
+        <Page className="border-border min-h-screen border-x p-0">
+            <Header className="px-pageX justify-start gap-3 py-[16px]">
+                <BackButton variant={'ghost'} />
                 <HeaderTitle>Настройки</HeaderTitle>
             </Header>
             <MainContent>
-                <div className="m-[20px] mb-0 flex flex-row gap-4 rounded-md border border-neutral-300 bg-neutral-100 p-[20px]">
+                <div className="border-border m-[20px] mb-0 flex flex-row gap-4 rounded-md border p-[20px]">
                     <ProfileAvatarUploader avatarSrc={user?.imagePath} />
                     <div className="my-auto flex flex-col gap-0">
                         <p className="font-geologica max-w-[250px] overflow-hidden text-lg font-semibold text-ellipsis whitespace-nowrap">
@@ -39,7 +41,7 @@ export default function Settings({ initUser }: { initUser: PersonDetailDTO }) {
                 </div>
                 <div className="px-pageX flex flex-col gap-4">
                     <p className="font-semibold text-neutral-500">Аккаунт</p>
-                    <ul className="flex flex-col rounded-md border border-neutral-300 bg-neutral-100 dark:border-neutral-800 dark:bg-neutral-900">
+                    <ul className="border-border bg-background-light flex flex-col rounded-md border">
                         {PROFILE_SETTING_SECTIONS.sections.map((section, index) => (
                             <SettingsSection
                                 key={index}
@@ -50,7 +52,7 @@ export default function Settings({ initUser }: { initUser: PersonDetailDTO }) {
                         ))}
                     </ul>
                     <p className="font-semibold text-neutral-500">Ваши клубы</p>
-                    <ul className="flex flex-col rounded-md border border-neutral-300 bg-neutral-100 dark:border-neutral-800 dark:bg-neutral-900">
+                    <ul className="border-border bg-background-light flex flex-col rounded-md border">
                         {PROFILE_SETTING_SECTIONS.clubs.map((club, index) => (
                             <SettingsClubSection
                                 key={index}
@@ -62,7 +64,7 @@ export default function Settings({ initUser }: { initUser: PersonDetailDTO }) {
 
                         <Link
                             href={`${AUTH_PAGE.PROFILE_SETTINGS}/create-club`}
-                            className="flex flex-row items-center gap-4 border-b border-neutral-300 px-4 py-3 text-neutral-800 select-none last:border-none dark:border-neutral-800 dark:text-neutral-200"
+                            className="border-border flex flex-row items-center gap-4 border-b px-4 py-3 text-neutral-800 select-none last:border-none dark:text-neutral-200"
                         >
                             <LuPlus size={20} />
                             <p className="text-neutral-700 dark:text-neutral-300">Создать клуб</p>
@@ -70,7 +72,7 @@ export default function Settings({ initUser }: { initUser: PersonDetailDTO }) {
                         </Link>
                     </ul>
                     <p className="font-semibold text-neutral-500">Прочее</p>
-                    <ul className="flex flex-col rounded-md border border-neutral-300 bg-neutral-100 dark:border-neutral-800 dark:bg-neutral-900">
+                    <ul className="border-border bg-background-light flex flex-col rounded-md border">
                         {PROFILE_SETTING_SECTIONS.other.map((section, index) => (
                             <SettingsSection
                                 key={index}

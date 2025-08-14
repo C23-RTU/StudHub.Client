@@ -26,9 +26,9 @@ export default function UserProfileClubs() {
     const userClubs = useMemo(() => (clubs ? clubs.pages.flatMap((page) => page) : []), [clubs]);
 
     return (
-        <Page className="p-0">
-            <Header className="border-border justify-start gap-4 border-b px-[20px] py-[20px]">
-                <BackButton />
+        <Page>
+            <Header className="justify-start gap-3 px-[20px] py-[16px]">
+                <BackButton variant={'ghost'} />
                 <HeaderTitle>Подписки</HeaderTitle>
             </Header>
             <div className="space-y-4 p-[20px]">

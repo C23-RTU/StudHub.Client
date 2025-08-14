@@ -44,7 +44,7 @@ export function TextareaEditorComment({ post, hasNextPage }: { post: PostDetailD
     return (
         <form
             onSubmit={handleSubmit(sendCommentHandler)}
-            className="border-border fixed right-0 bottom-0 left-0 mx-auto w-full max-w-[600px] border-x border-t-1 bg-neutral-50 lg:px-0"
+            className="border-border bg-background-light fixed right-0 bottom-0 left-0 mx-auto w-full max-w-[600px] border-x border-t-1 lg:px-0"
         >
             {commentForReply && (
                 <m.div
@@ -62,7 +62,7 @@ export function TextareaEditorComment({ post, hasNextPage }: { post: PostDetailD
                 </m.div>
             )}
 
-            <div className="flex items-center gap-1 p-2">
+            <div className="flex items-center gap-2 p-2">
                 <Textarea
                     rows={2}
                     className="h-auto resize-none border-none text-sm shadow-none focus-visible:ring-0 focus-visible:ring-inset"

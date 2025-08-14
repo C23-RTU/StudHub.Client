@@ -26,10 +26,10 @@ export function PostCard({ className, post }: PostCardProps) {
     );
 
     return (
-        <article className={cn('border-border flex flex-col gap-3 border-b bg-neutral-50 p-[20px]', className)}>
+        <article className={cn('border-border flex flex-col gap-3 border-b p-[20px]', className)}>
             <PostHeader post={post} />
             <div>
-                <p className="my-1 text-xl font-bold text-neutral-950 dark:text-neutral-50">{post.title}</p>
+                <p className="text-text my-1 text-xl font-bold">{post.title}</p>
                 <p className="text-sm whitespace-pre-line text-neutral-700 dark:text-neutral-300">
                     {displayText}
                     {!showFull && isLong && '...'}

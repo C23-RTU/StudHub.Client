@@ -135,7 +135,7 @@ export function CommentItem({
                         <div className="flex gap-3">
                             <button
                                 type="button"
-                                className="flex cursor-pointer items-center text-xs text-gray-500"
+                                className="flex cursor-pointer items-center text-xs text-neutral-500"
                                 onClick={setCommentForReplyHandler}
                             >
                                 Ответить
@@ -144,7 +144,7 @@ export function CommentItem({
                             {isMyComment && (
                                 <button
                                     type="button"
-                                    className="flex items-center text-xs text-gray-500"
+                                    className="flex items-center text-xs text-neutral-500"
                                     onClick={openCommentMoreSheetHandler}
                                 >
                                     Еще

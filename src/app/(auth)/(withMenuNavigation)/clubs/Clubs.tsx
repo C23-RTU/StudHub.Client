@@ -56,7 +56,7 @@ export function Clubs() {
                                 key={club.id}
                                 initial={{ scale: 0.8, opacity: 0 }}
                                 animate={{ scale: 1, opacity: 1 }}
-                                transition={{ delay: (index + 2.5) * 0.05 }}
+                                transition={{ delay: (index + 2.5) * 0.05, duration: 0.3, ease: 'easeOut' }}
                             >
                                 <ClubCard club={club} showSubscribe />
                             </m.div>

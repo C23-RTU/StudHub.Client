@@ -41,7 +41,7 @@ export default function UserProfile() {
 
             <MainContent className="flex flex-col gap-0">
                 <div className="border-border mb-0 flex flex-col gap-0 border-b">
-                    <div className="px-pageX flex flex-row gap-4 bg-neutral-50">
+                    <div className="px-pageX flex flex-row gap-4">
                         <Avatar src={user?.imagePath} size={90} alt={'Изображение профиля'} />
                         <div className="my-auto flex flex-col gap-0">
                             <p className="font-geologica max-w-[250px] overflow-hidden text-xl font-bold text-ellipsis whitespace-nowrap">
@@ -50,7 +50,7 @@ export default function UserProfile() {
                             <p className="text-sm text-neutral-400">был недавно</p>
                         </div>
                     </div>
-                    <div className="px-pageX py-pageY flex flex-col gap-4 bg-neutral-50">
+                    <div className="px-pageX py-pageY flex flex-col gap-4">
                         <div className="flex flex-row items-center gap-2 antialiased">
                             <BiMessageSquare className="text-neutral-600" size={24} />
                             <p className="max-w-full overflow-hidden text-sm font-medium text-ellipsis whitespace-nowrap">
@@ -65,7 +65,7 @@ export default function UserProfile() {
                         </div>
                     </div>
                 </div>
-                <div className="px-pageX py-pageY flex flex-col gap-4 bg-neutral-50">
+                <div className="px-pageX py-pageY flex flex-col gap-4">
                     <div className="flex flex-row justify-between">
                         <p className="font-geologica text-xl font-bold">Подписки</p>
                         <Link href={AUTH_PAGE.PROFILE_CLUBS} className="text-primary">

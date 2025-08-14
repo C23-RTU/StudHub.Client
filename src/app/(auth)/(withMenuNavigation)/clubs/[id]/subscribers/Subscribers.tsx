@@ -26,10 +26,10 @@ export function Subscribers({ id }: { id: string }) {
     });
 
     return (
-        <Page className="p-0">
-            <Header className="border-border mb-0 justify-start gap-4 border-b p-[16px]">
+        <Page>
+            <Header className="justify-start gap-3 px-[20px] py-[16px]">
                 <Link href={AUTH_PAGE.CLUB_SUBSCRIBERS(id)}>
-                    <BackButton />
+                    <BackButton variant={'ghost'} />
                 </Link>
                 <HeaderTitle>Подписчики</HeaderTitle>
             </Header>

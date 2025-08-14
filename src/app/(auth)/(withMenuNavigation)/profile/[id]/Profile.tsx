@@ -1,10 +1,11 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-import { Copy, EllipsisVertical, IdCard, MessageSquare, OctagonAlert } from 'lucide-react';
+import { Copy, EllipsisVertical, OctagonAlert } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import toast from 'react-hot-toast';
+import { BiMessageSquare, BiSolidIdCard } from 'react-icons/bi';
 
 import { ClubCard } from '@/components/ClubComponents/ClubCard';
 import { Page } from '@/components/Page';
@@ -45,11 +46,11 @@ export default function Profile({ user }: Props) {
 
     return (
         <Page className="p-0">
-            <Header className="mb-0 p-[20px]">
-                <BackButton />
+            <Header className="border-0 p-[20px] py-[16px]">
+                <BackButton variant={'outline'} />
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                        <Button variant={'outline'} size="icon" className="bg-secondary h-10 w-10 rounded-lg">
+                        <Button variant={'outline'} size="icon">
                             <EllipsisVertical />
                         </Button>
                     </DropdownMenuTrigger>
@@ -73,8 +74,8 @@ export default function Profile({ user }: Props) {
 
             <MainContent className="gap-0">
                 <div className="border-border mb-0 flex flex-col gap-0 border-b">
-                    <div className="flex flex-row gap-4 bg-neutral-50 px-[20px]">
-                        <Avatar src={user?.imagePath} size={80} alt={'Изображение профиля'} />
+                    <div className="px-pageX flex flex-row gap-4">
+                        <Avatar src={user?.imagePath} size={90} alt={'Изображение профиля'} />
                         <div className="my-auto flex flex-col gap-0">
                             <p className="font-geologica max-w-[250px] overflow-hidden text-xl font-bold text-ellipsis whitespace-nowrap">
                                 {user?.firstName} {user?.lastName}
@@ -82,22 +83,22 @@ export default function Profile({ user }: Props) {
                             <p className="text-sm text-neutral-400">был недавно</p>
                         </div>
                     </div>
-                    <div className="flex flex-col gap-4 bg-neutral-50 p-[20px]">
-                        <div className="flex flex-row gap-2">
-                            <MessageSquare size={20} />
-                            <p className="max-w-full overflow-hidden text-sm text-ellipsis whitespace-nowrap">
+                    <div className="px-pageX py-pageY flex flex-col gap-4">
+                        <div className="flex flex-row items-center gap-2 antialiased">
+                            <BiMessageSquare className="text-neutral-600" size={24} />
+                            <p className="max-w-full overflow-hidden text-sm font-medium text-ellipsis whitespace-nowrap">
                                 {user?.about || '...'}
                             </p>
                         </div>
-                        <div className="flex flex-row gap-2">
-                            <IdCard size={20} />
-                            <p className="max-w-full overflow-hidden text-sm text-ellipsis whitespace-nowrap">
+                        <div className="flex flex-row items-center gap-2">
+                            <BiSolidIdCard size={24} className="text-neutral-600" />
+                            <p className="max-w-full overflow-hidden text-sm font-medium text-ellipsis whitespace-nowrap">
                                 {user?.institute?.name || 'Нет института'}
                             </p>
                         </div>
                     </div>
                 </div>
-                <div className="flex flex-col gap-4 bg-neutral-50 p-[20px]">
+                <div className="flex flex-col gap-4 p-[20px]">
                     <div className="flex flex-row justify-between">
                         <p className="font-geologica text-xl font-bold">Подписки</p>
                         <Link href={AUTH_PAGE.PROFILE_CLUBS} className="text-primary">
