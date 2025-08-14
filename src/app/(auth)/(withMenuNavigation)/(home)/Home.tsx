@@ -1,6 +1,10 @@
 'use client';
 
+import { LoaderCircle } from 'lucide-react';
+
 import { NotificationBadge } from '@/components/Badge/NotificationBadge/NotificationBadge';
+import { EventCard } from '@/components/EventCard/EventCard';
+import { Page } from '@/components/Page';
 import { PostCard } from '@/components/PostCard/PostCard';
 import { Skeleton } from '@/components/ui/skeleton';
 
@@ -36,27 +40,20 @@ export default function Home({ username }: { username: string }) {
     });
 
     return (
-        <div className="page">
-            <Header>
-                <HeaderTitle>
-                    {getTimeBasedGreeting()}, {username} 👋
-                </HeaderTitle>
+        <Page className="px-0 py-0">
+            <Header className="flex flex-row items-center px-[20px] py-[12px]">
+                <HeaderTitle>{getTimeBasedGreeting()}</HeaderTitle>
                 <NotificationBadge count={0} />
             </Header>
 
             <MainContent>
-                {/* <div className="flex justify-center">
-                    <EventCard />
-                </div> */}
-                {/* <p className="text-xl font-semibold">Лента</p> */}
-                <div className="flex flex-col gap-10">
-                    {isLoading &&
-                        Array(3)
-                            .fill(0)
-                            .map((_, index) => <Skeleton key={index} className="h-[320px] w-full" />)}
+                <div className="flex flex-col">
+                    {isLoading && <LoaderCircle size={32} className="mx-auto my-5 animate-spin" />}
                     {data && data.pages.flatMap((page) => page).map((post) => <PostCard key={post.id} post={post} />)}
-                    {isFetchingNextPage && <Skeleton className="h-[320px] w-full" />}
-                    {!hasNextPage && <p className="text-center text-neutral-500">Ваша лента закончилась</p>}
+                    {isFetchingNextPage && <LoaderCircle size={32} className="mx-auto my-5 animate-spin" />}
+                    {!hasNextPage && !isLoading && (
+                        <p className="p-4 pb-5 text-center text-neutral-500">Ваша лента закончилась</p>
+                    )}
                     {error && (
                         <p className="text-center text-neutral-500">
                             Не удалось выполнить загрузку постов. Пожалуйста, повторите позже.
@@ -65,6 +62,6 @@ export default function Home({ username }: { username: string }) {
                     <div ref={ref}></div>
                 </div>
             </MainContent>
-        </div>
+        </Page>
     );
 }

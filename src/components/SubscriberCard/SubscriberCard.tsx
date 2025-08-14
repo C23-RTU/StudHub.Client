@@ -17,7 +17,7 @@ interface Props {
 export function SubscriberCard({ firstName, lastName, avatar, userId }: Props) {
     return (
         <Link
-            className="bg-secondary flex w-full rounded-lg px-2 py-2"
+            className="flex w-full rounded-lg border border-neutral-300 bg-neutral-100 p-2"
             role="listitem"
             href={AUTH_PAGE.USER_PROFILE(userId)}
         >

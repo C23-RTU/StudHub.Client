@@ -12,7 +12,7 @@ const LoaderImage: React.FC<LoaderImageProps> = ({ src, alt, loaderSize = 30, ..
     const [loading, setLoading] = useState(true);
 
     return (
-        <div className="relative w-full h-full flex justify-center">
+        <div className="relative flex h-full w-full">
             {loading && (
                 <div className="absolute inset-0 flex items-center justify-center">
                     <LoaderCircle className="animate-spin" size={loaderSize} />

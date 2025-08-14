@@ -7,6 +7,7 @@ import { useMemo, useState } from 'react';
 
 import EventCalendar from '@/components/EventCalendar/EventCalendar';
 import { EventCard } from '@/components/EventCard/EventCard';
+import { Page } from '@/components/Page';
 import { BackButton } from '@/components/ui/BackButton/BackButton';
 
 import { useInfinityScroll } from '@/hooks/useInfinityScroll';
@@ -57,15 +58,15 @@ export function Calendar() {
     }, [eventsPages]);
 
     return (
-        <div className="page">
+        <Page>
             <Header className="justify-start gap-4">
                 <BackButton />
                 <HeaderTitle>Календарь событий</HeaderTitle>
             </Header>
-            <MainContent>
+            <MainContent className="gap-0">
                 <EventCalendar events={calendarEvents || {}} onDateChange={(date) => setSelectedDate(date)} />
 
-                <div className="flex gap-4 flex-col">
+                <div className="flex flex-col gap-4">
                     {hasEvents
                         ? eventsPages?.pages
                               .flatMap((page) => page)
@@ -75,18 +76,19 @@ export function Calendar() {
                                       initial={{ scale: 0.8, opacity: 0 }}
                                       animate={{ scale: 1, opacity: 1 }}
                                       transition={{ delay: index * 0.1 }}
+                                      className="border-border border-b"
                                   >
                                       <EventCard event={event} />
                                   </m.div>
                               ))
                         : !isLoading && (
-                              <div className="w-full flex justify-center items-center text-muted-foreground py-4">
+                              <div className="flex w-full items-center justify-center py-4 text-neutral-500">
                                   В выбранный день событий нет
                               </div>
                           )}
                 </div>
                 <div ref={ref}></div>
             </MainContent>
-        </div>
+        </Page>
     );
 }

@@ -80,14 +80,14 @@ const EventCalendar = ({ events = {}, onDateChange }: CalendarProps) => {
     return (
         <LayoutGroup>
             <motion.div
-                className="w-full bg-secondary mx-auto p-4 rounded-lg max-w-[1024px]"
+                className="bg-background-light border-border mx-auto w-full max-w-[1024px] border-b p-4"
                 layout
                 transition={{ duration: 0.2 }}
             >
                 <div className="flex items-center justify-between">
                     <motion.button
                         onClick={() => handleNavigation('prev')}
-                        className="p-2 bg-primary hover:bg-primary/80 rounded-lg"
+                        className="bg-primary hover:bg-primary/80 rounded-lg p-2 text-white"
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                     >
@@ -107,7 +107,7 @@ const EventCalendar = ({ events = {}, onDateChange }: CalendarProps) => {
 
                     <motion.button
                         onClick={() => handleNavigation('next')}
-                        className="p-2 bg-primary hover:bg-primary/80 rounded-lg"
+                        className="bg-primary hover:bg-primary/80 rounded-lg p-2 text-white"
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                     >
@@ -115,7 +115,7 @@ const EventCalendar = ({ events = {}, onDateChange }: CalendarProps) => {
                     </motion.button>
                 </div>
 
-                <div className="grid grid-cols-7 gap-1 mb-2 mt-4">
+                <div className="mt-4 mb-2 grid grid-cols-7 gap-1">
                     {['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'].map((day) => (
                         <div key={day} className="text-center text-sm font-medium">
                             {day}
@@ -137,18 +137,14 @@ const EventCalendar = ({ events = {}, onDateChange }: CalendarProps) => {
                                 exit={{ opacity: 0, scale: 0.8 }}
                                 transition={{ duration: 0.2 }}
                                 onClick={() => handleDateClick(day)}
-                                className={`
-                                    rounded-lg relative py-2 duration-150 transition
-                                    ${isSelected && 'bg-primary text-white hover:bg-primary'}
-                                    ${!isCurrentMonth ? 'text-muted-foreground' : 'hover:bg-primary/80'}
-                                `}
+                                className={`relative rounded-lg py-2 transition duration-150 ${isSelected && 'bg-primary hover:bg-primary text-white'} ${!isCurrentMonth ? 'text-muted-foreground' : 'hover:bg-primary/80'} `}
                                 disabled={!isCurrentMonth}
                                 whileHover={isCurrentMonth ? { scale: 1.05 } : undefined}
                                 whileTap={isCurrentMonth ? { scale: 0.95 } : undefined}
                             >
                                 {format(day, 'd')}
                                 {hasEvents(day) && (
-                                    <div className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-red-500 rounded-full" />
+                                    <div className="absolute bottom-1 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-red-500" />
                                 )}
                             </motion.button>
                         );

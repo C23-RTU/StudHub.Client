@@ -1,3 +1,6 @@
+import { BiBell, BiDoorOpen, BiExit } from 'react-icons/bi';
+import { FaPortrait } from 'react-icons/fa';
+import { IoMailOpen } from 'react-icons/io5';
 import { LuBell, LuDoorOpen, LuMail, LuUserPen } from 'react-icons/lu';
 
 import { AUTH_PAGE } from '@/lib/config/routes.config';
@@ -7,12 +10,12 @@ export const PROFILE_SETTING_SECTIONS = {
         {
             href: `${AUTH_PAGE.PROFILE_SETTINGS}/edit`,
             title: 'Изменить профиль',
-            Icon: LuUserPen,
+            Icon: FaPortrait,
         },
         {
             href: `${AUTH_PAGE.PROFILE_SETTINGS}/notifications`,
             title: 'Уведомления',
-            Icon: LuBell,
+            Icon: BiBell,
         },
     ],
     clubs: [
@@ -33,12 +36,12 @@ export const PROFILE_SETTING_SECTIONS = {
         {
             href: `${AUTH_PAGE.PROFILE_SETTINGS}/notifications`,
             title: 'Выйти из аккаунта',
-            Icon: LuDoorOpen,
+            Icon: BiExit,
         },
         {
             href: `${AUTH_PAGE.PROFILE_SETTINGS}/notifications`,
             title: 'Сообщить об ошибке',
-            Icon: LuMail,
+            Icon: IoMailOpen,
         },
     ],
 };

@@ -12,7 +12,7 @@ export function MenuNavigation() {
     const pathname = usePathname();
 
     return (
-        <div className="h-menuNavigation fixed bottom-0 left-1/2 z-50 flex w-full max-w-[1024px] -translate-x-1/2 items-center justify-between border-t border-neutral-800 bg-neutral-900 px-6">
+        <div className="h-menuNavigation border-border fixed bottom-0 left-1/2 z-50 flex w-full max-w-[1024px] -translate-x-1/2 items-center justify-between border-t bg-neutral-50/90 px-6 backdrop-blur-lg">
             {MENU_LINKS.map(({ Icon, link }, index) => (
                 <Link href={link} key={index}>
                     <Icon color={match(link)(pathname) ? COLORS.blue : COLORS.inactive} size={24} />

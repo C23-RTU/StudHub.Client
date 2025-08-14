@@ -1,6 +1,6 @@
 'use client';
 
-import { BellIcon } from 'lucide-react';
+import { FaBell } from 'react-icons/fa';
 
 import { BadgeWrapper } from '../BadgeWrapper';
 
@@ -11,9 +11,9 @@ type Props = {
 export function NotificationBadge({ count }: Props) {
     return (
         <BadgeWrapper onClick={() => console.log('Открываем уведомления')}>
-            <BellIcon size={28} />
+            <FaBell size={20} />
             {count > 0 && (
-                <span className="text-[8px] px-1 py-[0.1rem] rounded-full bg-primary absolute leading-none bottom-[6px] right-[5px] select-none">
+                <span className="bg-primary absolute right-[5px] bottom-[6px] rounded-full px-1 py-[0.1rem] text-[8px] leading-none select-none">
                     {count}
                 </span>
             )}

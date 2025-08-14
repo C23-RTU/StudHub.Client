@@ -32,7 +32,7 @@ export function BaseCropper({ src, toggleHandler, saveHandler }: Props) {
     };
 
     return (
-        <div className="fixed top-0 right-0 bottom-0 left-0 z-100 bg-black">
+        <div className="fixed top-0 right-0 bottom-0 left-0 z-100 w-full max-w-screen justify-center bg-black">
             <Cropper
                 stencilProps={{
                     grid: true,
@@ -43,16 +43,16 @@ export function BaseCropper({ src, toggleHandler, saveHandler }: Props) {
                 src={src}
                 ref={cropperRef}
             />
-            <div className="px-pageX pb-pageY flex gap-5">
+            <div className="relative mx-auto flex max-w-[46%] flex-row items-center justify-center gap-4">
                 <Button
                     className="w-full"
-                    variant={'secondary'}
+                    variant={'outline'}
                     onClick={() => toggleHandler(false)}
                     disabled={isLoading}
                 >
                     Отменить
                 </Button>
-                <Button className="w-full" onClick={() => onCrop()} isLoading={isLoading}>
+                <Button className="w-full" onClick={() => onCrop()}>
                     Сохранить
                 </Button>
             </div>

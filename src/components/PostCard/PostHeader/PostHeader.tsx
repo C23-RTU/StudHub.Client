@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 
 import { Avatar } from '@/components/ui/Avatar/Avatar';
@@ -20,7 +22,10 @@ export function PostHeader({ post }: Props) {
                     <Avatar src={post.club.imageUrl} />
                 </div>
                 <div className="ml-3 flex max-w-[250px] flex-col overflow-hidden">
-                    <p className="font-geologica truncate text-sm font-semibold" title={post.club?.name}>
+                    <p
+                        className="font-geologica truncate font-semibold text-neutral-950 dark:text-neutral-50"
+                        title={post.club?.name}
+                    >
                         {post.club?.name}
                     </p>
                 </div>

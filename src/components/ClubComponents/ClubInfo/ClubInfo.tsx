@@ -25,7 +25,6 @@ export function ClubInfo({ club }: { club?: ClubDetailDTO }) {
         if (lastTwoDigits >= 11 && lastTwoDigits <= 19) return `${subscribers} подписчиков`;
         if (lastDigit === 1) return `${subscribers} подписчик`;
         if (lastDigit >= 2 && lastDigit <= 4) return `${subscribers} подписчика`;
-
         return `${subscribers} подписчиков`;
     }, [club?.subscriberCount]);
 

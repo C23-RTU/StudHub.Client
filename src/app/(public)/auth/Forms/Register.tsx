@@ -47,7 +47,7 @@ export default function Register() {
     const { submitHandler, isLoading } = useRegisterForm(reset, selectedInstitute);
 
     return (
-        <form className="mb-5 flex flex-col gap-4" onSubmit={handleSubmit(submitHandler)}>
+        <form className="flex flex-col gap-4" onSubmit={handleSubmit(submitHandler)}>
             <div className="col-span-2 grid gap-4">
                 <FormField
                     placeholder="Имя"
@@ -94,7 +94,7 @@ export default function Register() {
             />
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                    <Button className="bg-secondary hover:bg-secondary/80 w-full justify-start truncate border border-neutral-700 text-white">
+                    <Button className="hover:bg-secondary/80 w-full cursor-pointer justify-start truncate border border-neutral-300 bg-neutral-100 px-3 text-sm font-normal text-neutral-600 dark:border-neutral-700">
                         {selectedInstitute?.name || 'Выберите институт'}
                     </Button>
                 </DropdownMenuTrigger>

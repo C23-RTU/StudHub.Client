@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { useDebounce } from 'use-debounce';
 
 import { ClubCard } from '@/components/ClubComponents/ClubCard';
+import { Page } from '@/components/Page';
 import { SkeletonList } from '@/components/Skeletons/SkeletonList';
 import { SearchInput } from '@/components/ui/SearchInput/SearchInput';
 
@@ -34,12 +35,12 @@ export function Clubs() {
     });
 
     return (
-        <div className="page">
-            <Header>
+        <Page className="p-0">
+            <Header className="border-border mb-0 border-b p-[20px]">
                 <HeaderTitle>Клубы</HeaderTitle>
             </Header>
 
-            <MainContent>
+            <MainContent className="p-[20px]">
                 <SearchInput
                     placeholder="Поиск по клубам..."
                     value={searchQuery}
@@ -63,6 +64,6 @@ export function Clubs() {
                     <div ref={ref}></div>
                 </div>
             </MainContent>
-        </div>
+        </Page>
     );
 }

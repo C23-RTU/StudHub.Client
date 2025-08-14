@@ -3,9 +3,13 @@
 import { useQuery } from '@tanstack/react-query';
 import { IdCard, MessageSquare } from 'lucide-react';
 import Link from 'next/link';
+import { BiMessageSquare, BiSolidIdCard } from 'react-icons/bi';
+import { IoIdCardSharp } from 'react-icons/io5';
+import { LuIdCard, LuMessageCircle } from 'react-icons/lu';
 
 import { SettingBadge } from '@/components/Badge/SettingBadge/SettingBadge';
 import { ClubCard } from '@/components/ClubComponents/ClubCard';
+import { Page } from '@/components/Page';
 import { SkeletonList } from '@/components/Skeletons/SkeletonList';
 import { Avatar } from '@/components/ui/Avatar/Avatar';
 
@@ -30,42 +34,44 @@ export default function UserProfile() {
     const { data: user } = useProfile();
 
     return (
-        <div className="page">
-            <Header>
+        <Page className="border-border min-h-screen gap-0 px-0 py-0 md:border-x">
+            <Header className="mb-0 border-0 py-[12px]">
                 <HeaderTitle>Профиль</HeaderTitle>
                 <Link href={AUTH_PAGE.PROFILE_SETTINGS}>
                     <SettingBadge />
                 </Link>
             </Header>
 
-            <MainContent>
-                <div className="flex flex-row gap-4">
-                    <Avatar src={user?.imagePath} size={80} alt={'Изображение профиля'} />
-                    <div className="my-auto flex flex-col gap-0">
-                        <p className="font-geologica max-w-[250px] overflow-hidden text-xl font-bold text-ellipsis whitespace-nowrap">
-                            {user?.firstName} {user?.lastName}
-                        </p>
-                        <p className="text-sm text-neutral-400">был недавно</p>
+            <MainContent className="flex flex-col gap-0">
+                <div className="border-border mb-0 flex flex-col gap-0 border-b">
+                    <div className="px-pageX flex flex-row gap-4 bg-neutral-50">
+                        <Avatar src={user?.imagePath} size={90} alt={'Изображение профиля'} />
+                        <div className="my-auto flex flex-col gap-0">
+                            <p className="font-geologica max-w-[250px] overflow-hidden text-xl font-bold text-ellipsis whitespace-nowrap">
+                                {user?.firstName} {user?.lastName}
+                            </p>
+                            <p className="text-sm text-neutral-400">был недавно</p>
+                        </div>
+                    </div>
+                    <div className="px-pageX py-pageY flex flex-col gap-4 bg-neutral-50">
+                        <div className="flex flex-row items-center gap-2 antialiased">
+                            <BiMessageSquare className="text-neutral-600" size={24} />
+                            <p className="max-w-full overflow-hidden text-sm font-medium text-ellipsis whitespace-nowrap">
+                                {user?.about || '...'}
+                            </p>
+                        </div>
+                        <div className="flex flex-row items-center gap-2">
+                            <BiSolidIdCard size={24} className="text-neutral-600" />
+                            <p className="max-w-full overflow-hidden text-sm font-medium text-ellipsis whitespace-nowrap">
+                                {user?.institute?.name || 'Нет института'}
+                            </p>
+                        </div>
                     </div>
                 </div>
-                <div className="flex flex-col gap-4">
-                    <div className="flex flex-row gap-2">
-                        <MessageSquare size={20} />
-                        <p className="max-w-full overflow-hidden text-sm text-ellipsis whitespace-nowrap">
-                            {user?.about || '...'}
-                        </p>
-                    </div>
-                    <div className="flex flex-row gap-2">
-                        <IdCard size={20} />
-                        <p className="max-w-full overflow-hidden text-sm text-ellipsis whitespace-nowrap">
-                            {user?.institute?.name || 'Нет института'}
-                        </p>
-                    </div>
-                </div>
-                <div className="flex flex-col gap-4">
+                <div className="px-pageX py-pageY flex flex-col gap-4 bg-neutral-50">
                     <div className="flex flex-row justify-between">
-                        <p className="font-geologica text-lg font-bold">Подписки</p>
-                        <Link href={AUTH_PAGE.PROFILE_CLUBS} className="font-inter text-primary font-light">
+                        <p className="font-geologica text-xl font-bold">Подписки</p>
+                        <Link href={AUTH_PAGE.PROFILE_CLUBS} className="text-primary">
                             Показать все
                         </Link>
                     </div>
@@ -77,6 +83,6 @@ export default function UserProfile() {
                     {error && <p className="text-center text-neutral-500">Не удалось загрузить ваши подписки</p>}
                 </div>
             </MainContent>
-        </div>
+        </Page>
     );
 }

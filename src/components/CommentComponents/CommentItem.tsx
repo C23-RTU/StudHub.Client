@@ -91,7 +91,7 @@ export function CommentItem({
     }, [comment.deletedAt]);
 
     return (
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-3 px-[20px] py-[5px]">
             <div
                 id={`comment-${comment.id}`}
                 onClick={setHighlightCommentHandler}
@@ -122,9 +122,9 @@ export function CommentItem({
 
                     <p
                         className={cn(
-                            'font-inter text-xs leading-snug font-normal break-words whitespace-pre-line text-[#B8B8B8]',
+                            'font-inter text-xs leading-snug font-normal break-words whitespace-pre-line text-neutral-700 dark:text-neutral-300',
                             {
-                                'text-[#696868]': comment.deletedAt,
+                                'text-neutral-400 dark:text-neutral-600': comment.deletedAt,
                             }
                         )}
                     >

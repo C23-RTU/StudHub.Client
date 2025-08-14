@@ -8,6 +8,7 @@ import { usePathname } from 'next/navigation';
 import toast from 'react-hot-toast';
 
 import { ClubCard } from '@/components/ClubComponents/ClubCard';
+import { Page } from '@/components/Page';
 import { SkeletonList } from '@/components/Skeletons/SkeletonList';
 import { Avatar } from '@/components/ui/Avatar/Avatar';
 import { BackButton } from '@/components/ui/BackButton/BackButton';
@@ -44,16 +45,12 @@ export default function Profile({ user }: Props) {
     const pathname = usePathname();
 
     return (
-        <div className="page">
-            <Header className="z-50 flex w-full max-w-[1020px] flex-row items-center justify-between">
+        <Page className="p-0">
+            <Header className="mb-0 p-[20px]">
                 <BackButton />
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                        <Button
-                            variant={'outline'}
-                            size="icon"
-                            className="bg-secondary h-10 w-10 rounded-lg shadow-[0_2.8px_2.2px_rgba(0,0,0,0.034),0_6.7px_5.3px_rgba(0,0,0,0.048),0_12.5px_10px_rgba(0,0,0,0.06),0_22.3px_17.9px_rgba(0,0,0,0.072),0_41.8px_33.4px_rgba(0,0,0,0.086),0_100px_80px_rgba(0,0,0,0.12)]"
-                        >
+                        <Button variant={'outline'} size="icon" className="bg-secondary h-10 w-10 rounded-lg">
                             <EllipsisVertical />
                         </Button>
                     </DropdownMenuTrigger>
@@ -75,57 +72,36 @@ export default function Profile({ user }: Props) {
                 </DropdownMenu>
             </Header>
 
-            <MainContent>
-                <div className="flex flex-col items-center gap-4 rounded-2xl text-center">
-                    <div className="relative">
-                        <m.div
-                            className="bg-primary/40 absolute -inset-2 rounded-full blur-sm"
-                            animate={{
-                                rotate: 360,
-                                x: [0, 3, 0, -2, 0],
-                                y: [0, -2, 0, 2, 0],
-                            }}
-                            transition={{
-                                rotate: { duration: 6, repeat: Infinity, ease: 'linear' },
-                                x: { duration: 4, repeat: Infinity, ease: 'easeInOut', repeatType: 'mirror' },
-                                y: { duration: 6, repeat: Infinity, ease: 'easeInOut', repeatType: 'mirror' },
-                            }}
-                        />
-
-                        <Avatar
-                            src={user?.imagePath}
-                            size={130}
-                            alt="Изображение профиля"
-                            className="border-background relative z-10 h-[128px] w-[128px] rounded-full border-[5px]"
-                        />
+            <MainContent className="gap-0">
+                <div className="border-border mb-0 flex flex-col gap-0 border-b">
+                    <div className="flex flex-row gap-4 bg-neutral-50 px-[20px]">
+                        <Avatar src={user?.imagePath} size={80} alt={'Изображение профиля'} />
+                        <div className="my-auto flex flex-col gap-0">
+                            <p className="font-geologica max-w-[250px] overflow-hidden text-xl font-bold text-ellipsis whitespace-nowrap">
+                                {user?.firstName} {user?.lastName}
+                            </p>
+                            <p className="text-sm text-neutral-400">был недавно</p>
+                        </div>
                     </div>
-
-                    <div className="flex flex-col gap-0">
-                        <p className="font-geologica max-w-[250px] overflow-hidden text-xl font-bold text-ellipsis">
-                            {user?.firstName} {user?.lastName}
-                        </p>
-                        <p className="text-sm text-neutral-400">был недавно</p>
+                    <div className="flex flex-col gap-4 bg-neutral-50 p-[20px]">
+                        <div className="flex flex-row gap-2">
+                            <MessageSquare size={20} />
+                            <p className="max-w-full overflow-hidden text-sm text-ellipsis whitespace-nowrap">
+                                {user?.about || '...'}
+                            </p>
+                        </div>
+                        <div className="flex flex-row gap-2">
+                            <IdCard size={20} />
+                            <p className="max-w-full overflow-hidden text-sm text-ellipsis whitespace-nowrap">
+                                {user?.institute?.name || 'Нет института'}
+                            </p>
+                        </div>
                     </div>
                 </div>
-                <div className="flex flex-col gap-4">
-                    <div className="flex flex-row gap-2">
-                        <MessageSquare size={20} />
-                        <p className="max-w-full overflow-hidden text-sm text-ellipsis">{user?.about || '...'}</p>
-                    </div>
-                    <div className="flex flex-row gap-2">
-                        <IdCard size={20} />
-                        <p className="max-w-full overflow-hidden text-sm text-ellipsis">
-                            {user?.institute?.name || 'Нет института'}
-                        </p>
-                    </div>
-                </div>
-                <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-4 bg-neutral-50 p-[20px]">
                     <div className="flex flex-row justify-between">
-                        <p className="font-geologica text-lg font-bold">Подписки</p>
-                        <Link
-                            href={`${AUTH_PAGE.PROFILE}/${user.id}${AUTH_PAGE.CLUBS}`}
-                            className="font-inter text-primary font-light"
-                        >
+                        <p className="font-geologica text-xl font-bold">Подписки</p>
+                        <Link href={AUTH_PAGE.PROFILE_CLUBS} className="text-primary">
                             Показать все
                         </Link>
                     </div>
@@ -133,19 +109,10 @@ export default function Profile({ user }: Props) {
                     {!isLoading &&
                         userClubs &&
                         userClubs.length > 0 &&
-                        userClubs.map((club, index) => (
-                            <m.div
-                                key={club.id}
-                                initial={{ scale: 0.8, opacity: 0 }}
-                                animate={{ scale: 1, opacity: 1 }}
-                                transition={{ delay: (index + 2.5) * 0.05 }}
-                            >
-                                <ClubCard club={club} />
-                            </m.div>
-                        ))}
-                    {error && <p className="text-center text-neutral-500">Не удалось загрузить подписки</p>}
+                        userClubs.map((club) => <ClubCard key={club.id} club={club} />)}
+                    {error && <p className="text-center text-neutral-500">Не удалось загрузить ваши подписки</p>}
                 </div>
             </MainContent>
-        </div>
+        </Page>
     );
 }

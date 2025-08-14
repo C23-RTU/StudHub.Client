@@ -8,6 +8,8 @@ import type { ClubDetailDTO } from '@/api/axios-client/models';
 
 import { Button } from '../../ui/button';
 
+import { cn } from '@/lib/utils/utils';
+
 const UnsubSheetDynamic = dynamic(() => import('./UnsubSheet').then((mod) => mod.UnsubSheet), {
     ssr: false,
 });
@@ -16,10 +18,12 @@ export function SubscribeButton({
     clubId,
     isBig = true,
     subscribed = false,
+    className = '',
 }: {
     clubId?: number;
     isBig: boolean;
     subscribed: boolean | undefined;
+    className?: string;
 }) {
     const queryClient = useQueryClient();
     const [unsubVisible, setUnsubVisible] = useState<boolean>(false);
@@ -54,7 +58,11 @@ export function SubscribeButton({
                 {subscribed ? (
                     <Button
                         onClick={() => setUnsubVisible(true)}
-                        className={`bg-background-light hover:bg-secondary font-geologica flex w-full justify-center ${isBig && 'p-3'}`}
+                        className={cn(
+                            `hover:bg-secondary font-geologica flex w-full justify-center ${isBig && 'p-3'}`,
+                            className
+                        )}
+                        variant={'outline'}
                         disabled={isSubscribePending}
                     >
                         {isBig && <span>Вы подписаны</span>}
@@ -67,7 +75,10 @@ export function SubscribeButton({
                             const { toast } = await import('react-hot-toast');
                             toast.success('Вы подписались на клуб', { id: 'subscribe-toast' });
                         }}
-                        className={`font-geologica hover:bg-primary flex w-full justify-center ${isBig && 'p-3'}`}
+                        className={cn(
+                            `font-geologica hover:bg-primary flex w-full justify-center ${isBig && 'p-3'}`,
+                            className
+                        )}
                         disabled={isSubscribePending}
                     >
                         {isBig && <span>Подписаться</span>}

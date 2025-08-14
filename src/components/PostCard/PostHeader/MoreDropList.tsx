@@ -1,6 +1,8 @@
 import { Copy, EllipsisIcon, ExternalLink, Share2, UserIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
+import { BiSolidMegaphone } from 'react-icons/bi';
+import { IoIosShare } from 'react-icons/io';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -24,21 +26,18 @@ export function MoreDropList({ post }: { post: PostDetailDTO }) {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon" className="size-10 shrink-0 grow-0 hover:bg-neutral-700">
+                <Button variant="ghost" size="icon" className="size-10 shrink-0 grow-0">
                     <EllipsisIcon />
                 </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="mr-4 border-neutral-700 bg-neutral-900">
-                <DropdownMenuItem
-                    className="font-inter flex gap-2 font-light"
-                    onClick={() => router.push(AUTH_PAGE.CLUB(post.club.id))}
-                >
-                    <UserIcon size={20} />
+            <DropdownMenuContent className="border-popover-border mr-4">
+                <DropdownMenuItem onClick={() => router.push(AUTH_PAGE.CLUB(post.club.id))}>
+                    {/* <BiSolidMegaphone size={20} className="text-neutral-900" /> */}
                     Перейти в клуб
                 </DropdownMenuItem>
                 <DropdownMenuSub>
-                    <DropdownMenuSubTrigger className="font-inter flex gap-2 font-light">
-                        <Share2 size={20} />
+                    <DropdownMenuSubTrigger>
+                        {/* <IoIosShare size={20} /> */}
                         Поделиться
                     </DropdownMenuSubTrigger>
                     <DropdownMenuPortal>
@@ -51,7 +50,8 @@ export function MoreDropList({ post }: { post: PostDetailDTO }) {
                                     toast.success('Ссылка скопирована');
                                 }}
                             >
-                                <Copy size={20} /> Скопировать ссылку
+                                {/* <Copy size={20} />  */}
+                                Скопировать ссылку
                             </DropdownMenuItem>
                             <DropdownMenuItem
                                 onClick={() => {
@@ -72,7 +72,8 @@ export function MoreDropList({ post }: { post: PostDetailDTO }) {
                                     }
                                 }}
                             >
-                                <ExternalLink size={20} /> Поделиться в...
+                                {/* <ExternalLink size={20} />  */}
+                                Поделиться в...
                             </DropdownMenuItem>
                         </DropdownMenuSubContent>
                     </DropdownMenuPortal>

@@ -8,6 +8,7 @@ import { CommentItem } from '@/components/CommentComponents/CommentItem';
 import { CommentMoreSheet } from '@/components/CommentComponents/CommentMoreSheet';
 import { TextareaEditorComment } from '@/components/CommentComponents/TextareaEditorComment';
 import { useCommentStore } from '@/components/CommentComponents/store/useComment.store';
+import { Page } from '@/components/Page';
 import { PostCard } from '@/components/PostCard/PostCard';
 import { SkeletonList } from '@/components/Skeletons/SkeletonList';
 import { BackButton } from '@/components/ui/BackButton/BackButton';
@@ -59,10 +60,10 @@ export function Comments({ serverPost }: { serverPost: PostDetailDTO }) {
     }, [highlightComment]);
 
     return (
-        <div className="page">
-            <Header className="flex flex-row justify-between items-center z-50 w-full max-w-[1020px]">
-                <div className='flex flex-row items-center gap-4'>
-                    <BackButton onClick={() => router.back()} />
+        <Page className="p-0">
+            <Header className="py-[12px]">
+                <div className="flex flex-row items-center gap-4">
+                    <BackButton variant={'ghost'} onClick={() => router.back()} />
                     <HeaderTitle>Комментарии</HeaderTitle>
                 </div>
                 <div></div>
@@ -78,7 +79,7 @@ export function Comments({ serverPost }: { serverPost: PostDetailDTO }) {
                             <Fragment key={pageIndex}>
                                 {page.map((item, itemIndex) => (
                                     <Fragment key={item.id}>
-                                        {itemIndex > 0 && <span className="h-px bg-secondary w-3/5 mx-auto" />}
+                                        {itemIndex > 0 && <span className="bg-secondary mx-auto h-px w-3/5" />}
                                         <CommentItem comment={item} />
                                     </Fragment>
                                 ))}
@@ -91,6 +92,6 @@ export function Comments({ serverPost }: { serverPost: PostDetailDTO }) {
                 </div>
                 <CommentMoreSheet />
             </MainContent>
-        </div>
+        </Page>
     );
 }

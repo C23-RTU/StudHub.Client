@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Geologica, Inter, Unbounded } from 'next/font/google';
+import { Geologica, Inter, Montserrat, Unbounded } from 'next/font/google';
 
 import ProviderLayout from '@/components/Provider/Provider';
 
@@ -13,6 +13,11 @@ const geologica = Geologica({
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
 const unbounded = Unbounded({ subsets: ['latin'], variable: '--font-unbounded' });
+
+const montserrat = Montserrat({
+    subsets: ['latin'],
+    variable: '--font-montserrat',
+});
 
 export const metadata: Metadata = {
     title: {
@@ -30,7 +35,7 @@ export default function RootLayout({
     return (
         <html lang="en" className="">
             <body
-                className={`${inter.variable} ${geologica.variable} ${unbounded.variable} antialiased dark font-inter`}
+                className={`${inter.variable} ${geologica.variable} ${unbounded.variable} ${montserrat.variable} font-inter bg-neutral-50 text-neutral-950 antialiased dark:bg-neutral-950 dark:text-neutral-50`}
             >
                 <ProviderLayout>{children}</ProviderLayout>
             </body>

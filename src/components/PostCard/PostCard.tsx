@@ -26,18 +26,18 @@ export function PostCard({ className, post }: PostCardProps) {
     );
 
     return (
-        <article className={cn('flex flex-col gap-3', className)}>
+        <article className={cn('border-border flex flex-col gap-3 border-b bg-neutral-50 p-[20px]', className)}>
             <PostHeader post={post} />
             <div>
-                <p className="text-xl font-bold my-1 text-neutral-50">{post.title}</p>
-                <p className="font-inter font-light text-neutral-400 whitespace-pre-line">
+                <p className="my-1 text-xl font-bold text-neutral-950 dark:text-neutral-50">{post.title}</p>
+                <p className="text-sm whitespace-pre-line text-neutral-700 dark:text-neutral-300">
                     {displayText}
                     {!showFull && isLong && '...'}
                 </p>
                 {((!showFull && isLong) || (showFull && isLong)) && (
                     <button
                         onClick={() => setShowFull(!showFull && isLong ? true : false)}
-                        className="text-background-foreground text-sm font-inter mt-1 focus:outline-none"
+                        className="text-primary mt-1 text-sm font-medium focus:outline-none"
                     >
                         {(!showFull && isLong) || (showFull && isLong)
                             ? showFull && isLong
@@ -48,7 +48,7 @@ export function PostCard({ className, post }: PostCardProps) {
                 )}
             </div>
             {post.postImages.length !== 0 && <PostImageWrapper images={post.postImages} />}
-            <div className="flex items-center justify-between font-inter">
+            <div className="flex items-center justify-between">
                 <div className="flex gap-4">
                     <ActionButton post={post} type={'like'} />
                     <ActionButton post={post} type={'comment'} />
