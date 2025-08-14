@@ -1,7 +1,6 @@
-import { BiBell, BiDoorOpen, BiExit } from 'react-icons/bi';
+import { BiBell, BiExit } from 'react-icons/bi';
 import { FaPortrait } from 'react-icons/fa';
 import { IoMailOpen } from 'react-icons/io5';
-import { LuBell, LuDoorOpen, LuMail, LuUserPen } from 'react-icons/lu';
 
 import { AUTH_PAGE } from '@/lib/config/routes.config';
 

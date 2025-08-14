@@ -22,7 +22,6 @@ import { BackButton } from '../ui/BackButton/BackButton';
 import { Button } from '../ui/button';
 import { Skeleton } from '../ui/skeleton';
 
-import { ClubInfo } from './ClubInfo/ClubInfo';
 import { getStaticImg } from '@/lib/helpers/getStaticImg.helper';
 
 const SubscribeButtonDynamic = dynamic(

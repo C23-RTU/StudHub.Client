@@ -1,7 +1,6 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-import { motion as m } from 'framer-motion';
 import { Copy, EllipsisVertical, IdCard, MessageSquare, OctagonAlert } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';

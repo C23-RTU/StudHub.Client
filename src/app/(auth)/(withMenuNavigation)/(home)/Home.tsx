@@ -3,10 +3,8 @@
 import { LoaderCircle } from 'lucide-react';
 
 import { NotificationBadge } from '@/components/Badge/NotificationBadge/NotificationBadge';
-import { EventCard } from '@/components/EventCard/EventCard';
 import { Page } from '@/components/Page';
 import { PostCard } from '@/components/PostCard/PostCard';
-import { Skeleton } from '@/components/ui/skeleton';
 
 import { useInfinityScroll } from '@/hooks/useInfinityScroll';
 
@@ -29,7 +27,7 @@ const getTimeBasedGreeting = (): string => {
     }
 };
 
-export default function Home({ username }: { username: string }) {
+export default function Home() {
     const {
         ref,
         infiniteQuery: { data, isLoading, isFetchingNextPage, hasNextPage, error },

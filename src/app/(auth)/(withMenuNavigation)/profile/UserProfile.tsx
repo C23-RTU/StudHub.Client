@@ -1,11 +1,8 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-import { IdCard, MessageSquare } from 'lucide-react';
 import Link from 'next/link';
 import { BiMessageSquare, BiSolidIdCard } from 'react-icons/bi';
-import { IoIdCardSharp } from 'react-icons/io5';
-import { LuIdCard, LuMessageCircle } from 'react-icons/lu';
 
 import { SettingBadge } from '@/components/Badge/SettingBadge/SettingBadge';
 import { ClubCard } from '@/components/ClubComponents/ClubCard';

@@ -1,8 +1,6 @@
-import { Copy, EllipsisIcon, ExternalLink, Share2, UserIcon } from 'lucide-react';
+import { EllipsisIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
-import { BiSolidMegaphone } from 'react-icons/bi';
-import { IoIosShare } from 'react-icons/io';
 
 import { Button } from '@/components/ui/button';
 import {
