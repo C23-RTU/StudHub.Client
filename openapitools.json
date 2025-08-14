@@ -4,10 +4,23 @@
     "generator-cli": {
         "version": "7.11.0",
         "generators": {
-            "v1.0": {
+            "api": {
                 "generatorName": "typescript-axios",
                 "output": "./src/api/axios-client",
                 "inputSpec": "https://api.setka-rtu.ru/openapi/v1.json",
+                "additionalProperties": {
+                    "supportsES6": true,
+                    "snapshot": true,
+                    "withInterfaces": true,
+                    "withSeparateModelsAndApi": true,
+                    "apiPackage": "api",
+                    "modelPackage": "models"
+                }
+            },
+            "admin-api": {
+                "generatorName": "typescript-axios",
+                "output": "./src/api/axios-admin",
+                "inputSpec": "https://api-admin.setka-rtu.ru/openapi/v1.json",
                 "additionalProperties": {
                     "supportsES6": true,
                     "snapshot": true,

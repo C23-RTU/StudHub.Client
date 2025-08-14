@@ -1,0 +1,14 @@
+.gitignore
+.npmignore
+.openapi-generator-ignore
+api.ts
+api/club-creation-requests-api.ts
+base.ts
+common.ts
+configuration.ts
+git_push.sh
+index.ts
+models/club-creation-request-details-dto.ts
+models/index.ts
+models/person-summary-dto.ts
+models/problem-details.ts
