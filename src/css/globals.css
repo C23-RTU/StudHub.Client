@@ -43,7 +43,6 @@
 .dark {
     --background: hsl(0, 0%, 5%);
     --background-light: hsl(0, 0%, 9%);
-    --background-dimmed: hsl(0, 0%, 15%);
     --foreground: hsl(210 40% 98%);
     --card: hsl(222.2 84% 4.9%);
     --card-foreground: hsl(210 40% 98%);

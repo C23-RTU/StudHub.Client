@@ -9,10 +9,7 @@ interface HeaderTitleProps extends PropsWithChildren, HTMLAttributes<HTMLHeading
 export function Header({ children, className, ...props }: HeaderProps) {
     return (
         <header
-            className={cn(
-                'border-border flex min-h-[45px] items-center justify-between border-b px-[20px] py-[18px]',
-                className
-            )}
+            className={cn('border-border flex min-h-[45px] items-center gap-2 border-b px-[20px] py-[18px]', className)}
             {...props}
         >
             {children}
@@ -22,7 +19,7 @@ export function Header({ children, className, ...props }: HeaderProps) {
 
 export function HeaderTitle({ children, className, ...props }: HeaderTitleProps) {
     return (
-        <h1 className={cn('font-montserrat text-xl font-bold', className)} {...props}>
+        <h1 className={cn('font-geologica text-xl font-bold', className)} {...props}>
             {children}
         </h1>
     );

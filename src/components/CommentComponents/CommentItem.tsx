@@ -91,7 +91,7 @@ export function CommentItem({
     }, [comment.deletedAt]);
 
     return (
-        <div className="flex flex-col gap-3 px-[20px] py-[5px]">
+        <div className="flex flex-col gap-3 px-[16px] py-[5px]">
             <div
                 id={`comment-${comment.id}`}
                 onClick={setHighlightCommentHandler}
@@ -117,7 +117,7 @@ export function CommentItem({
                                 {comment.personSummary?.firstName} {comment.personSummary?.lastName}
                             </p>
                         </Link>
-                        <small className="text-xss font-inter font-normal opacity-50">{createdCommentDate}</small>
+                        <small className="font-inter text-xs font-normal opacity-50">{createdCommentDate}</small>
                     </div>
 
                     <p
