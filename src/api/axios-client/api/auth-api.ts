@@ -27,8 +27,6 @@ import type { LoginDTO } from '../models';
 import type { ProblemDetails } from '../models';
 // @ts-ignore
 import type { RegisterDTO } from '../models';
-// @ts-ignore
-import type { TokenModel } from '../models';
 /**
  * AuthApi - axios parameter creator
  * @export
@@ -201,7 +199,7 @@ export const AuthApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async authRefreshTokens(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TokenModel>> {
+        async authRefreshTokens(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.authRefreshTokens(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['AuthApi.authRefreshTokens']?.[localVarOperationServerIndex]?.url;
@@ -251,7 +249,7 @@ export const AuthApiFactory = function (configuration?: Configuration, basePath?
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authRefreshTokens(options?: RawAxiosRequestConfig): AxiosPromise<TokenModel> {
+        authRefreshTokens(options?: RawAxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.authRefreshTokens(options).then((request) => request(axios, basePath));
         },
         /**
@@ -295,7 +293,7 @@ export interface AuthApiInterface {
      * @throws {RequiredError}
      * @memberof AuthApiInterface
      */
-    authRefreshTokens(options?: RawAxiosRequestConfig): AxiosPromise<TokenModel>;
+    authRefreshTokens(options?: RawAxiosRequestConfig): AxiosPromise<void>;
 
     /**
      * 

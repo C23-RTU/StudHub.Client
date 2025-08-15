@@ -33,4 +33,3 @@ models/problem-details.ts
 models/reaction-detail-dto.ts
 models/register-dto.ts
 models/sort-order.ts
-models/token-model.ts
