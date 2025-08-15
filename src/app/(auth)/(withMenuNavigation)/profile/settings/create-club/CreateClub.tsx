@@ -156,9 +156,7 @@ export default function CreateClub() {
                             )}
                         />
                     </div>
-                    <p className="mt-14 text-center text-neutral-400">
-                        Нажмите на аватар или баннер чтобы изменить его
-                    </p>
+                    <p className="mt-14 text-center">Нажмите на аватар или баннер чтобы изменить его</p>
                     {errors.banner && (
                         <p className="mt-2 text-center text-sm text-red-500">{errors.banner.message?.toString()}</p>
                     )}
@@ -167,18 +165,18 @@ export default function CreateClub() {
                     )}
                     <section className="flex flex-col gap-6">
                         <div className="flex flex-col gap-2">
-                            <h2 className="font-semibold text-neutral-300">Название клуба</h2>
+                            <h2 className="font-semibold">Название клуба</h2>
                             <Input placeholder="Любители поломанной HTML верстки..." {...register('clubName')} />
                             {errors.clubName && (
                                 <p className="mt-2 text-sm text-red-500">{errors.clubName.message?.toString()}</p>
                             )}
-                            <p className="text-xs text-neutral-500">
+                            <p className="text-xs">
                                 Название клуба отражает к какой тематике он относиться, или к какому отделу в РТУ МИРЭА
                                 оно относиться.
                             </p>
                         </div>
                         <div className="flex flex-col gap-2">
-                            <h2 className="font-semibold text-neutral-300">Описание клуба</h2>
+                            <h2 className="font-semibold">Описание клуба</h2>
                             <Textarea
                                 placeholder="Был у нас один стажер..."
                                 className="text-sm"
@@ -187,13 +185,13 @@ export default function CreateClub() {
                             {errors.description && (
                                 <p className="mt-2 text-sm text-red-500">{errors.description.message?.toString()}</p>
                             )}
-                            <p className="text-xs text-neutral-500">
+                            <p className="text-xs">
                                 Расскажите подробнее, о чем вы хотите рассказывать в этом клубе чтобы завлечь больше
                                 единомышленников.
                             </p>
                         </div>
                         <div className="flex flex-col gap-2">
-                            <h2 className="font-semibold text-neutral-300">Расскажите о себе</h2>
+                            <h2 className="font-semibold">Расскажите о себе</h2>
                             <Textarea
                                 placeholder="Расскажите о себе здесь..."
                                 className="text-sm"
@@ -202,9 +200,7 @@ export default function CreateClub() {
                             {errors.about && (
                                 <p className="mt-2 text-sm text-red-500">{errors.about.message?.toString()}</p>
                             )}
-                            <p className="text-xs text-neutral-500">
-                                Нам было бы интересно узнать, кто вы и зачем создаете этот клуб.
-                            </p>
+                            <p className="text-xs">Нам было бы интересно узнать, кто вы и зачем создаете этот клуб.</p>
                         </div>
                     </section>
                     <section className="flex flex-row gap-2">
@@ -216,7 +212,7 @@ export default function CreateClub() {
                             }}
                         />
                         <div className="flex flex-col gap-2">
-                            <label className="text-sm text-neutral-300">
+                            <label className="text-sm">
                                 Я согласен с правилами использования площадки СтудХаб и даю свое согласие на обработку
                                 персональных данных.
                             </label>
