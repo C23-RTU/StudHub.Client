@@ -10,7 +10,7 @@ export function Header({ children, className, ...props }: HeaderProps) {
     return (
         <header
             className={cn(
-                'border-border flex min-h-[45px] items-center justify-between border-b px-[20px] py-[18px]',
+                'border-border flex min-h-[45px] items-center justify-start gap-2 border-b px-[20px] py-[16px]',
                 className
             )}
             {...props}

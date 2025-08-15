@@ -1,6 +1,7 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
+import { LoaderCircle } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { Fragment, useEffect } from 'react';
 
@@ -10,7 +11,6 @@ import { TextareaEditorComment } from '@/components/CommentComponents/TextareaEd
 import { useCommentStore } from '@/components/CommentComponents/store/useComment.store';
 import { Page } from '@/components/Page';
 import { PostCard } from '@/components/PostCard/PostCard';
-import { SkeletonList } from '@/components/Skeletons/SkeletonList';
 import { BackButton } from '@/components/ui/BackButton/BackButton';
 
 import { useInfinityScroll } from '@/hooks/useInfinityScroll';
@@ -62,11 +62,8 @@ export function Comments({ serverPost }: { serverPost: PostDetailDTO }) {
     return (
         <Page className="p-0">
             <Header className="py-[12px]">
-                <div className="flex flex-row items-center gap-4">
-                    <BackButton variant={'ghost'} onClick={() => router.back()} />
-                    <HeaderTitle>Комментарии</HeaderTitle>
-                </div>
-                <div></div>
+                <BackButton variant={'ghost'} onClick={() => router.back()} />
+                <HeaderTitle>Комментарии</HeaderTitle>
             </Header>
 
             <MainContent>
@@ -85,7 +82,9 @@ export function Comments({ serverPost }: { serverPost: PostDetailDTO }) {
                                 ))}
                             </Fragment>
                         ))}
-                    {(isLoading || isFetchingNextPage) && <SkeletonList />}
+                    {(isLoading || isFetchingNextPage) && (
+                        <LoaderCircle className="mx-auto mt-10 size-10 animate-spin text-neutral-500" />
+                    )}
                     {!isFetchingNextPage && <div ref={ref} />}
 
                     <TextareaEditorComment post={post} hasNextPage={hasNextPage} />
