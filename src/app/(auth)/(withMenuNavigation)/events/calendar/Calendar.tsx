@@ -60,7 +60,7 @@ export function Calendar() {
     return (
         <Page>
             <Header className="justify-start gap-4">
-                <BackButton />
+                <BackButton variant={'ghost'} />
                 <HeaderTitle>Календарь событий</HeaderTitle>
             </Header>
             <MainContent className="gap-0">
