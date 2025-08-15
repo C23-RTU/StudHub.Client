@@ -16,7 +16,7 @@ import {
     subWeeks,
 } from 'date-fns';
 import { ru } from 'date-fns/locale';
-import { Calendar, ChevronLeft, ChevronRight, Expand, Minimize } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Expand, Minimize } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 import type { EventDetailDTO } from '@/api/axios-client';
@@ -33,7 +33,6 @@ const EventCalendar = ({ events = {}, onDateChange }: CalendarProps) => {
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [isExpanded, setIsExpanded] = useState(false);
 
-    // Utility function to convert to UTC (simplified version)
     const toUTCDate = (date: Date) => {
         return new Date(date.getFullYear(), date.getMonth(), date.getDate());
     };
@@ -85,7 +84,7 @@ const EventCalendar = ({ events = {}, onDateChange }: CalendarProps) => {
             {/* Header */}
             <div className="px-3 pt-[20px]">
                 <div className="mb-4 flex items-center gap-4">
-                    <Button variant={'ghost'} onClick={() => handleNavigation('prev')}>
+                    <Button variant={'ghost'} onClick={() => handleNavigation('prev')} size={'icon'}>
                         <ChevronLeft className="h-5 w-5" />
                     </Button>
 
@@ -93,16 +92,12 @@ const EventCalendar = ({ events = {}, onDateChange }: CalendarProps) => {
                         <h2 className="text-lg font-bold sm:text-xl">
                             {format(currentDate, 'LLLL yyyy', { locale: ru })}
                         </h2>
-                        <div className="mt-1 flex items-center justify-center gap-2 opacity-90">
-                            <Calendar className="h-4 w-4" />
-                            <span className="text-sm">{isExpanded ? 'Месяц' : 'Неделя'}</span>
-                        </div>
                     </div>
 
-                    <Button variant={'ghost'} onClick={() => handleNavigation('next')}>
+                    <Button variant={'ghost'} onClick={() => handleNavigation('next')} size={'icon'}>
                         <ChevronRight className="h-5 w-5" />
                     </Button>
-                    <Button variant={'ghost'} onClick={() => setIsExpanded(!isExpanded)}>
+                    <Button variant={'ghost'} onClick={() => setIsExpanded(!isExpanded)} size={'icon'}>
                         {isExpanded ? (
                             <>
                                 <Minimize className="h-4 w-4" />
@@ -120,7 +115,7 @@ const EventCalendar = ({ events = {}, onDateChange }: CalendarProps) => {
                     {['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'].map((day, index) => (
                         <div
                             key={day}
-                            className={`py-2 text-center text-xs font-medium sm:text-sm ${index >= 5 ? 'text-orange-700' : 'text-black/90'}`}
+                            className={`py-2 text-center text-xs font-medium sm:text-sm ${index >= 5 ? 'text-red-500' : 'text-text'}`}
                         >
                             {day}
                         </div>
@@ -146,12 +141,12 @@ const EventCalendar = ({ events = {}, onDateChange }: CalendarProps) => {
                                 disabled={!isCurrentMonth}
                                 className={`relative aspect-square rounded-xl text-sm font-medium transition-all duration-200 sm:text-base ${isCurrentMonth ? 'hover:scale-105 active:scale-95' : 'cursor-not-allowed opacity-30'} ${
                                     isSelected
-                                        ? 'bg-primary scale-105 text-white shadow-lg'
+                                        ? 'bg-primary scale-105 text-white'
                                         : isDayToday
                                           ? 'border-primary bg-primary/20 text-primary hover:bg-primary/60 border-2'
                                           : isCurrentMonth
-                                            ? `${isWeekend ? 'bg-red-50 text-red-600 hover:bg-red-100' : 'bg-gray-50 text-gray-700 hover:bg-gray-100'}`
-                                            : 'text-gray-300'
+                                            ? `${isWeekend ? 'bg-red-50 text-red-600 hover:bg-red-100 dark:bg-red-950/60 dark:hover:bg-red-900/70' : 'bg-neutral-50 text-neutral-700 hover:bg-neutral-100 dark:bg-neutral-800/50 dark:text-neutral-300 dark:hover:bg-neutral-700'}`
+                                            : 'text-neutral-300'
                                 } `}
                             >
                                 <span className="block">{format(day, 'd')}</span>

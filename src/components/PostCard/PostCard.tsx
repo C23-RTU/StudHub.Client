@@ -29,7 +29,7 @@ export function PostCard({ className, post }: PostCardProps) {
         <article className={cn('border-border flex flex-col gap-3 border-b p-[20px]', className)}>
             <PostHeader post={post} />
             <div>
-                <p className="text-text my-1 text-xl font-bold">{post.title}</p>
+                <p className="text-text my-1 text-xl font-semibold">{post.title}</p>
                 <p className="text-sm whitespace-pre-line text-neutral-700 dark:text-neutral-300">
                     {displayText}
                     {!showFull && isLong && '...'}

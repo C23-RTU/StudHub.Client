@@ -1,5 +1,7 @@
 'use client';
 
+import { format } from 'date-fns';
+import { ru } from 'date-fns/locale';
 import { LoaderCircle } from 'lucide-react';
 
 import { NotificationBadge } from '@/components/Badge/NotificationBadge/NotificationBadge';
@@ -38,10 +40,10 @@ export default function Home() {
     });
 
     return (
-        <Page className="px-0 py-0">
-            <Header className="flex flex-row items-center px-[20px] py-[12px]">
+        <Page>
+            <Header className="justify-between">
                 <HeaderTitle>{getTimeBasedGreeting()}</HeaderTitle>
-                <NotificationBadge count={0} />
+                <p className="font-medium text-neutral-500">{format(Date(), 'd MMMM', { locale: ru })}</p>
             </Header>
 
             <MainContent>

@@ -32,10 +32,10 @@ export function ActionButton({ type, post }: Props) {
                 return post.isUserReacted ? (
                     <FaHeart size={ICON_SIZE} />
                 ) : (
-                    <FaRegHeart className="text-neutral-400" size={ICON_SIZE} />
+                    <FaRegHeart className="text-neutral-500" size={ICON_SIZE} />
                 );
             case 'comment':
-                return <MdOutlineModeComment className="text-neutral-400" size={ICON_SIZE} />;
+                return <MdOutlineModeComment className="text-neutral-500" size={ICON_SIZE} />;
         }
     }, [type, post.isUserReacted]);
 

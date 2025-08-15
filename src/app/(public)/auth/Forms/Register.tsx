@@ -5,6 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import { format } from 'date-fns';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { FaGraduationCap } from 'react-icons/fa';
 
 import { BirthDatePicker } from '@/components/ui/BirthDatePicker/BirthDatePicker';
 import { FormField } from '@/components/ui/FormField/FormField';
@@ -94,7 +95,8 @@ export default function Register() {
             />
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                    <Button className="hover:bg-secondary/80 w-full cursor-pointer justify-start truncate border border-neutral-300 bg-neutral-100 px-3 text-sm font-normal text-neutral-600 dark:border-neutral-700">
+                    <Button variant={'outline'} className="justify-start">
+                        <FaGraduationCap className="mr-2 h-4 w-4" />
                         {selectedInstitute?.name || 'Выберите институт'}
                     </Button>
                 </DropdownMenuTrigger>

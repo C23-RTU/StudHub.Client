@@ -6,7 +6,7 @@ import type { ClubDetailDTO } from '@/api/axios-client/models/club-detail-dto';
 
 export function Club({ club }: { club: ClubDetailDTO }) {
     return (
-        <div className="border-border lg:border-x">
+        <div>
             <ClubHeader initClubData={club} />
             <Page className="p-0">
                 <ClubFeed />

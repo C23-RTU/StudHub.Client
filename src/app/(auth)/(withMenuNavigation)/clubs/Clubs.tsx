@@ -36,7 +36,7 @@ export function Clubs() {
 
     return (
         <Page className="p-0">
-            <Header className="border-border mb-0 border-b p-[20px]">
+            <Header className="border-border mb-0 border-b">
                 <HeaderTitle>Клубы</HeaderTitle>
             </Header>
 

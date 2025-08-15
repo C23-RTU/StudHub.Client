@@ -43,10 +43,11 @@
 .dark {
     --background: hsl(0, 0%, 5%);
     --background-light: hsl(0, 0%, 9%);
+    --background-dimmed: hsl(0, 0%, 20%);
     --foreground: hsl(210 40% 98%);
     --card: hsl(222.2 84% 4.9%);
     --card-foreground: hsl(210 40% 98%);
-    --popover: hsl(222.2 84% 4.9%);
+    --popover: hsl(0 0% 4.9%);
     --popover-foreground: hsl(210 40% 98%);
     --popover-border: hsl(0 0% 20%);
     --primary: hsl(222 100% 65%);

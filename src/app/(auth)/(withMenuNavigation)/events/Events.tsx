@@ -20,7 +20,7 @@ export function Events({ events }: { events: EventDetailDTO[] }) {
 
     return (
         <Page>
-            <Header className="py-[12px]">
+            <Header className="justify-between py-[14px]">
                 <HeaderTitle>События</HeaderTitle>
                 <Button size={'icon'} onClick={() => router.push(AUTH_PAGE.EVENTS_CALENDAR())}>
                     <CalendarClock size={35} />

@@ -32,7 +32,7 @@ export default function UserProfile() {
 
     return (
         <Page className="border-border min-h-screen gap-0 px-0 py-0 md:border-x">
-            <Header className="mb-0 border-0 py-[12px]">
+            <Header className="justify-between border-0 py-[12px]">
                 <HeaderTitle>Профиль</HeaderTitle>
                 <Link href={AUTH_PAGE.PROFILE_SETTINGS}>
                     <SettingBadge />
