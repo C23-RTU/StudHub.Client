@@ -17,13 +17,9 @@ export default function ProviderLayout({ children }: PropsWithChildren) {
                 position="bottom-center"
                 containerStyle={{ marginBottom: '42px' }}
                 toastOptions={{
+                    className: 'bg-[#262626] text-[#FFFFFF]',
                     duration: 2000,
                     removeDelay: 500,
-                    style: {
-                        background: '#262626',
-                        color: '#fff',
-                        width: '100%',
-                    },
                 }}
             />
         </>
