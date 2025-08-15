@@ -1,6 +1,6 @@
 'use client';
 
-import { PencilIcon } from 'lucide-react';
+import { LoaderCircle, PencilIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 
@@ -41,12 +41,11 @@ export function ClubFeed() {
             </div>
 
             <div className="flex flex-col gap-0">
-                {(isLoading || isFetchingNextPage) &&
-                    Array(3)
-                        .fill(0)
-                        .map((_, index) => <Skeleton key={index} className="h-[320px] w-full" />)}
+                {(isLoading || isFetchingNextPage) && (
+                    <LoaderCircle className="mx-auto mt-10 size-10 animate-spin text-neutral-500" />
+                )}
                 {data && data.pages.flatMap((page) => page).map((post) => <PostCard key={post.id} post={post} />)}
-                {!hasNextPage && (
+                {!hasNextPage && !isLoading && (
                     <p className="p-4 pb-[20px] text-center text-neutral-500">Посты этого клуба закончились</p>
                 )}
                 <div ref={ref}></div>
