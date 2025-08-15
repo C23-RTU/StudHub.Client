@@ -50,7 +50,6 @@ export function TextareaEditorComment({ post, hasNextPage }: { post: PostDetailD
                 <m.div
                     initial={{ y: 10, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
-                    exit={{ y: 10, opacity: 0 }}
                     className="ml-2 flex items-center gap-2 px-3 py-2 text-xs"
                 >
                     <div className="flex gap-1">
@@ -71,7 +70,7 @@ export function TextareaEditorComment({ post, hasNextPage }: { post: PostDetailD
                     {...register('content')}
                 />
                 <Button
-                    className="mb-auto size-10"
+                    className="mb-auto size-10 rounded"
                     size="icon"
                     type="submit"
                     disabled={!isValid || isPending}
