@@ -117,7 +117,7 @@ export function CommentItem({
                                 {comment.personSummary?.firstName} {comment.personSummary?.lastName}
                             </p>
                         </Link>
-                        <small className="font-inter text-xs font-normal opacity-50">{createdCommentDate}</small>
+                        <small className="text-xs text-neutral-500">{createdCommentDate}</small>
                     </div>
 
                     <p
