@@ -11,6 +11,7 @@
 :root {
     --background: hsl(0, 0%, 95%);
     --background-light: hsl(0, 0%, 98%);
+    --background-dimmed: hsl(0, 0%, 90%);
     --foreground: hsl(0 0% 98%);
     --card: hsl(222.2 84% 4.9%);
     --card-foreground: hsl(210 0% 98%);
@@ -42,6 +43,7 @@
 .dark {
     --background: hsl(0, 0%, 5%);
     --background-light: hsl(0, 0%, 9%);
+    --background-dimmed: hsl(0, 0%, 15%);
     --foreground: hsl(210 40% 98%);
     --card: hsl(222.2 84% 4.9%);
     --card-foreground: hsl(210 40% 98%);
@@ -81,6 +83,7 @@
 @theme inline {
     --color-background: var(--background);
     --color-background-light: var(--background-light);
+    --color-background-dimmed: var(--background-dimmed);
     --color-foreground: var(--foreground);
     --color-text: var(--text);
     --color-card: var(--card);
