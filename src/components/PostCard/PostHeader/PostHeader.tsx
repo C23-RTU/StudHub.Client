@@ -1,6 +1,5 @@
 'use client';
 
-import { format } from 'date-fns';
 import Link from 'next/link';
 
 import { Avatar } from '@/components/ui/Avatar/Avatar';

@@ -12,7 +12,6 @@ import { postApi } from '@/api/api';
 
 import { PostCard } from '../PostCard/PostCard';
 import { Button } from '../ui/button';
-import { Skeleton } from '../ui/skeleton';
 
 import { MainContent } from '@/hoc/MainContent/MainContent';
 

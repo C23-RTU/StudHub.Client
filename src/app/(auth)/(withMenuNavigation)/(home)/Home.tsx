@@ -4,7 +4,6 @@ import { format } from 'date-fns';
 import { ru } from 'date-fns/locale';
 import { LoaderCircle } from 'lucide-react';
 
-import { NotificationBadge } from '@/components/Badge/NotificationBadge/NotificationBadge';
 import { Page } from '@/components/Page';
 import { PostCard } from '@/components/PostCard/PostCard';
 
