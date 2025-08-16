@@ -1,7 +1,7 @@
-import { Copy, EllipsisIcon, ExternalLink } from 'lucide-react';
+import { EllipsisIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
-import { BiCopy, BiSolidMegaphone } from 'react-icons/bi';
+import { BiSolidMegaphone } from 'react-icons/bi';
 import { IoIosShare, IoMdShare } from 'react-icons/io';
 import { IoCopy } from 'react-icons/io5';
 
