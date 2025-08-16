@@ -1,8 +1,9 @@
 'use client';
 
-import { Copy, EllipsisVertical, OctagonAlert } from 'lucide-react';
+import { EllipsisVertical } from 'lucide-react';
 import Image from 'next/image';
 import { FaCalendar, FaCompass } from 'react-icons/fa';
+import { IoAlertCircle, IoCopy } from 'react-icons/io5';
 
 import { Page } from '@/components/Page';
 import { BackButton } from '@/components/ui/BackButton/BackButton';
@@ -22,7 +23,7 @@ import { parseLocalTime } from '@/lib/utils/time.util';
 export default function EventView({ event }: { event: EventDetailDTO }) {
     return (
         <Page>
-            <div className="fixed z-20 flex w-full max-w-[600px] flex-row items-center justify-between p-4">
+            <div className="fixed z-20 flex w-full max-w-[600px] flex-row items-center justify-between bg-gradient-to-b from-black/70 to-black/0 p-4">
                 <div className="flex flex-row items-center">
                     <BackButton variant={'outline'} className="size-10" />
                     {/* <p className="bg-secondary font-geologica ml-4 h-10 rounded-lg px-3 py-1 text-lg leading-8 font-medium shadow-[rgba(0,0,0,0.24)_0px_3px_8px] hover:cursor-pointer"> */}
@@ -43,11 +44,11 @@ export default function EventView({ event }: { event: EventDetailDTO }) {
                                 toast.success('Ссылка скопирована');
                             }}
                         >
-                            <Copy />
+                            <IoCopy className="text-text" />
                             Скопировать ссылку
                         </DropdownMenuItem>
-                        <DropdownMenuItem className="text-[#FF0000]">
-                            <OctagonAlert stroke="#FF0000" />
+                        <DropdownMenuItem className="text-red-400">
+                            <IoAlertCircle className="text-red-400" />
                             Пожаловаться
                         </DropdownMenuItem>
                     </DropdownMenuContent>
@@ -69,14 +70,14 @@ export default function EventView({ event }: { event: EventDetailDTO }) {
                 </div>
             </div>
             <div className="flex flex-col gap-4 p-[20px]">
-                <h1 className="font-geologica text-4xl font-semibold">{event.title}</h1>
-                <p className="text-lg font-medium text-neutral-500">{event.description}</p>
+                <h1 className="font-geologica text-3xl font-semibold">{event.title}</h1>
+                <p className="text-neutral-300">{event.description}</p>
                 <div className="flex flex-col gap-2">
-                    <div className="flex flex-row items-center gap-2">
+                    <div className="flex flex-row items-center gap-3">
                         <FaCompass className="h-4 w-4" />
                         <p>{event.location}</p>
                     </div>
-                    <div className="flex flex-row items-center gap-2">
+                    <div className="flex flex-row items-center gap-3">
                         <FaCalendar className="h-4 w-4" />
                         <time>{parseLocalTime(event.startTime)}</time>
                     </div>

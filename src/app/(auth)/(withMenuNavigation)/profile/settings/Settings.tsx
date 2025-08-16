@@ -25,7 +25,7 @@ export default function Settings({ initUser }: { initUser: PersonDetailDTO }) {
 
     return (
         <Page className="border-border min-h-screen border-x p-0">
-            <Header className="px-pageX justify-start gap-3 py-[16px]">
+            <Header className="py-[16px]">
                 <BackButton variant={'ghost'} />
                 <HeaderTitle>Настройки</HeaderTitle>
             </Header>

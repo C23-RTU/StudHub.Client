@@ -1,11 +1,11 @@
 'use client';
 
 import { m } from 'framer-motion';
-import { LoaderCircle } from 'lucide-react';
 import { useState } from 'react';
 import { useDebounce } from 'use-debounce';
 
 import { ClubCard } from '@/components/ClubComponents/ClubCard';
+import Loader from '@/components/Loader';
 import { Page } from '@/components/Page';
 import { SearchInput } from '@/components/ui/SearchInput/SearchInput';
 
@@ -49,7 +49,7 @@ export function Clubs() {
 
             <MainContent className="p-[20px]">
                 <div className="flex flex-col gap-4">
-                    {isLoading && <LoaderCircle className="mx-auto mt-10 animate-spin" size={40} />}
+                    {isLoading && <Loader className="mx-auto mt-10" />}
                     {clubs?.pages
                         .flatMap((page) => page)
                         .map((club, index) => (

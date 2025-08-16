@@ -2,8 +2,8 @@
 
 import Link from 'next/link';
 
+import Loader from '@/components/Loader';
 import { Page } from '@/components/Page';
-import { SkeletonList } from '@/components/Skeletons/SkeletonList';
 import { SubscriberCard } from '@/components/SubscriberCard/SubscriberCard';
 import { BackButton } from '@/components/ui/BackButton/BackButton';
 
@@ -34,7 +34,7 @@ export function Subscribers({ id }: { id: string }) {
                 <HeaderTitle>Подписчики</HeaderTitle>
             </Header>
             <div className="space-y-4 p-[20px]">
-                {isLoading && <SkeletonList amount={5} />}
+                {isLoading && <Loader />}
                 {subscribers?.pages.flatMap((page) =>
                     page.map((subscriber) => (
                         <SubscriberCard

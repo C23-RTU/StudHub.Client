@@ -2,8 +2,8 @@
 
 import { format } from 'date-fns';
 import { ru } from 'date-fns/locale';
-import { LoaderCircle } from 'lucide-react';
 
+import Loader from '@/components/Loader';
 import { Page } from '@/components/Page';
 import { PostCard } from '@/components/PostCard/PostCard';
 
@@ -47,9 +47,9 @@ export default function Home() {
 
             <MainContent>
                 <div className="flex flex-col">
-                    {isLoading && <LoaderCircle size={32} className="mx-auto my-5 animate-spin" />}
+                    {isLoading && <Loader className="mx-auto mt-10" />}
                     {data && data.pages.flatMap((page) => page).map((post) => <PostCard key={post.id} post={post} />)}
-                    {isFetchingNextPage && <LoaderCircle size={32} className="mx-auto my-5 animate-spin" />}
+                    {isFetchingNextPage && <Loader className="mx-auto mt-10" />}
                     {!hasNextPage && !isLoading && (
                         <p className="p-4 pb-5 text-center text-neutral-500">Ваша лента закончилась</p>
                     )}

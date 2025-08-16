@@ -31,9 +31,9 @@ export function EventCard({ event }: { event: EventDetailDTO }) {
             />
             <div className="absolute top-0 left-0 h-full w-full bg-linear-to-t from-black/90 via-black/50 to-transparent"></div>
             <div className="absolute z-10 flex h-full w-full flex-col items-start justify-end gap-1 p-4">
-                <time className="font-inter text-sm text-gray-200">{parseLocalTime(event.startTime)}</time>
+                <time className="font-inter text-sm text-neutral-200">{parseLocalTime(event.startTime)}</time>
                 <h3 className="font-geologica line-clamp-2 text-2xl font-semibold text-white">{event.title}</h3>
-                <p className="font-inter line-clamp-2 text-sm text-gray-200">{event.description}</p>
+                <p className="font-inter line-clamp-2 text-sm text-neutral-200">{event.description}</p>
             </div>
         </figure>
     );

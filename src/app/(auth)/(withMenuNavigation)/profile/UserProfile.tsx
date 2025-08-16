@@ -6,8 +6,8 @@ import { BiMessageSquare, BiSolidIdCard } from 'react-icons/bi';
 
 import { SettingBadge } from '@/components/Badge/SettingBadge/SettingBadge';
 import { ClubCard } from '@/components/ClubComponents/ClubCard';
+import Loader from '@/components/Loader';
 import { Page } from '@/components/Page';
-import { SkeletonList } from '@/components/Skeletons/SkeletonList';
 import { Avatar } from '@/components/ui/Avatar/Avatar';
 
 import { AUTH_PAGE } from '@/lib/config/routes.config';
@@ -72,7 +72,7 @@ export default function UserProfile() {
                             Показать все
                         </Link>
                     </div>
-                    {isLoading && <SkeletonList amount={3} />}
+                    {isLoading && <Loader />}
                     {!isLoading &&
                         userClubs &&
                         userClubs.length > 0 &&

@@ -1,21 +1,25 @@
-import { LoaderCircle } from 'lucide-react';
 import Image, { type ImageProps } from 'next/image';
 import { useState } from 'react';
+
+import Loader from '../Loader';
+
+import { cn } from '@/lib/utils/utils';
 
 interface LoaderImageProps extends ImageProps {
     src: string;
     loaderSize?: number;
+    loaderClassName?: string;
     alt: string;
 }
 
-const LoaderImage: React.FC<LoaderImageProps> = ({ src, alt, loaderSize = 30, ...props }) => {
+const LoaderImage: React.FC<LoaderImageProps> = ({ src, alt, loaderClassName = '', ...props }) => {
     const [loading, setLoading] = useState(true);
 
     return (
-        <div className="relative flex h-full w-full">
+        <div className={cn('relative flex h-full w-full', loaderClassName)}>
             {loading && (
                 <div className="absolute inset-0 flex items-center justify-center">
-                    <LoaderCircle className="animate-spin" size={loaderSize} />
+                    <Loader className="size-7" />
                 </div>
             )}
             <Image src={src} alt={alt} onLoad={() => setLoading(false)} {...props} />

@@ -8,8 +8,8 @@ import toast from 'react-hot-toast';
 import { BiMessageSquare, BiSolidIdCard } from 'react-icons/bi';
 
 import { ClubCard } from '@/components/ClubComponents/ClubCard';
+import Loader from '@/components/Loader';
 import { Page } from '@/components/Page';
-import { SkeletonList } from '@/components/Skeletons/SkeletonList';
 import { Avatar } from '@/components/ui/Avatar/Avatar';
 import { BackButton } from '@/components/ui/BackButton/BackButton';
 import { Button } from '@/components/ui/button';
@@ -105,7 +105,7 @@ export default function Profile({ user }: Props) {
                             Показать все
                         </Link>
                     </div>
-                    {isLoading && <SkeletonList amount={3} />}
+                    {isLoading && <Loader />}
                     {!isLoading &&
                         userClubs &&
                         userClubs.length > 0 &&

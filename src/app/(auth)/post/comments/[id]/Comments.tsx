@@ -1,7 +1,6 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-import { LoaderCircle } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { Fragment, useEffect } from 'react';
 
@@ -9,6 +8,7 @@ import { CommentItem } from '@/components/CommentComponents/CommentItem';
 import { CommentMoreSheet } from '@/components/CommentComponents/CommentMoreSheet';
 import { TextareaEditorComment } from '@/components/CommentComponents/TextareaEditorComment';
 import { useCommentStore } from '@/components/CommentComponents/store/useComment.store';
+import Loader from '@/components/Loader';
 import { Page } from '@/components/Page';
 import { PostCard } from '@/components/PostCard/PostCard';
 import { BackButton } from '@/components/ui/BackButton/BackButton';
@@ -82,9 +82,7 @@ export function Comments({ serverPost }: { serverPost: PostDetailDTO }) {
                                 ))}
                             </Fragment>
                         ))}
-                    {(isLoading || isFetchingNextPage) && (
-                        <LoaderCircle className="mx-auto mt-10 size-10 animate-spin text-neutral-500" />
-                    )}
+                    {(isLoading || isFetchingNextPage) && <Loader className="size-10" />}
                     {!isFetchingNextPage && <div ref={ref} />}
 
                     <TextareaEditorComment post={post} hasNextPage={hasNextPage} />

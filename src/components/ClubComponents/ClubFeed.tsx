@@ -1,6 +1,6 @@
 'use client';
 
-import { LoaderCircle, PencilIcon } from 'lucide-react';
+import { PencilIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 
@@ -10,6 +10,7 @@ import { useInfinityScroll } from '@/hooks/useInfinityScroll';
 
 import { postApi } from '@/api/api';
 
+import Loader from '../Loader';
 import { PostCard } from '../PostCard/PostCard';
 import { Button } from '../ui/button';
 
@@ -40,9 +41,7 @@ export function ClubFeed() {
             </div>
 
             <div className="flex flex-col gap-0">
-                {(isLoading || isFetchingNextPage) && (
-                    <LoaderCircle className="mx-auto mt-10 size-10 animate-spin text-neutral-500" />
-                )}
+                {(isLoading || isFetchingNextPage) && <Loader className="mx-auto mt-10 size-10" />}
                 {data && data.pages.flatMap((page) => page).map((post) => <PostCard key={post.id} post={post} />)}
                 {!hasNextPage && !isLoading && (
                     <p className="p-4 pb-[20px] text-center text-neutral-500">Посты этого клуба закончились</p>

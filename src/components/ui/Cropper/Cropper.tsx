@@ -52,7 +52,7 @@ export function BaseCropper({ src, toggleHandler, saveHandler }: Props) {
                 >
                     Отменить
                 </Button>
-                <Button className="w-full" onClick={() => onCrop()}>
+                <Button isLoading={isLoading} className="w-full" onClick={() => onCrop()}>
                     Сохранить
                 </Button>
             </div>

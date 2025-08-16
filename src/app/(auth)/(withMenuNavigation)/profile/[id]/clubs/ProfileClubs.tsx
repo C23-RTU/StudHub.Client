@@ -3,7 +3,7 @@
 import { useMemo } from 'react';
 
 import { ClubCard } from '@/components/ClubComponents/ClubCard';
-import { SkeletonList } from '@/components/Skeletons/SkeletonList';
+import Loader from '@/components/Loader';
 import { BackButton } from '@/components/ui/BackButton/BackButton';
 
 import { useInfinityScroll } from '@/hooks/useInfinityScroll';
@@ -34,7 +34,7 @@ export default function ProfileClubs({ user }: { user: PersonDetailDTO }) {
                 </HeaderTitle>
             </Header>
             <div className="space-y-4">
-                {(isFetchingNextPage || isLoading) && <SkeletonList />}
+                {(isFetchingNextPage || isLoading) && <Loader />}
                 {!isLoading && userClubs.length === 0 ? (
                     <p className="text-center text-neutral-400">Нет ни одной подписки</p>
                 ) : (

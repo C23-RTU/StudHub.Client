@@ -74,7 +74,7 @@ export function TextareaEditorComment({ post, hasNextPage }: { post: PostDetailD
                     size="icon"
                     type="submit"
                     disabled={!isValid || isPending}
-                    // isLoading={isPending}
+                    isLoading={isPending}
                 >
                     <SendHorizonalIcon />
                 </Button>
