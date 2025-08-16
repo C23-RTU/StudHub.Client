@@ -31,8 +31,8 @@ export default function UserProfile() {
     const { data: user } = useProfile();
 
     return (
-        <Page className="border-border min-h-screen gap-0 px-0 py-0 md:border-x">
-            <Header className="justify-between border-0 py-[12px]">
+        <Page>
+            <Header className="justify-between border-0 py-[12px] pr-[8px]">
                 <HeaderTitle>Профиль</HeaderTitle>
                 <Link href={AUTH_PAGE.PROFILE_SETTINGS}>
                     <SettingBadge />
@@ -67,7 +67,7 @@ export default function UserProfile() {
                 </div>
                 <div className="px-pageX py-pageY flex flex-col gap-4">
                     <div className="flex flex-row justify-between">
-                        <p className="font-geologica text-xl font-bold">Подписки</p>
+                        <p className="font-geologica text-xl font-medium">Подписки</p>
                         <Link href={AUTH_PAGE.PROFILE_CLUBS} className="text-primary">
                             Показать все
                         </Link>

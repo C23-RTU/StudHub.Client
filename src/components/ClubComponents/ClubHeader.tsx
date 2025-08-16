@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useMemo } from 'react';
 import toast from 'react-hot-toast';
+import { IoAlertCircle, IoCopy } from 'react-icons/io5';
 
 import {
     DropdownMenu,
@@ -86,11 +87,11 @@ export function ClubHeader({ initClubData }: { initClubData: ClubDetailDTO }) {
                                 toast.success('Ссылка скопирована');
                             }}
                         >
-                            <Copy />
+                            <IoCopy className="text-text" />
                             Скопировать ссылку
                         </DropdownMenuItem>
-                        <DropdownMenuItem className="text-[#FF0000]">
-                            <OctagonAlert stroke="#FF0000" />
+                        <DropdownMenuItem className="text-red-400">
+                            <IoAlertCircle className="text-red-400" />
                             Пожаловаться
                         </DropdownMenuItem>
                     </DropdownMenuContent>

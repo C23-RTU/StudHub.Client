@@ -1,12 +1,12 @@
 'use client';
 
 import { m } from 'framer-motion';
+import { LoaderCircle } from 'lucide-react';
 import { useState } from 'react';
 import { useDebounce } from 'use-debounce';
 
 import { ClubCard } from '@/components/ClubComponents/ClubCard';
 import { Page } from '@/components/Page';
-import { SkeletonList } from '@/components/Skeletons/SkeletonList';
 import { SearchInput } from '@/components/ui/SearchInput/SearchInput';
 
 import { useInfinityScroll } from '@/hooks/useInfinityScroll';
@@ -35,20 +35,21 @@ export function Clubs() {
     });
 
     return (
-        <Page className="p-0">
-            <Header className="border-border mb-0 border-b">
+        <Page>
+            <Header className="flex w-full max-w-full flex-col items-start">
                 <HeaderTitle>Клубы</HeaderTitle>
-            </Header>
 
-            <MainContent className="p-[20px]">
                 <SearchInput
                     placeholder="Поиск по клубам..."
                     value={searchQuery}
+                    className="w-full"
                     onChange={(e) => setSearchQuery(e.target.value)}
                 />
+            </Header>
 
+            <MainContent className="p-[20px]">
                 <div className="flex flex-col gap-4">
-                    {isLoading && <SkeletonList amount={5} />}
+                    {isLoading && <LoaderCircle className="mx-auto mt-10 animate-spin" size={40} />}
                     {clubs?.pages
                         .flatMap((page) => page)
                         .map((club, index) => (

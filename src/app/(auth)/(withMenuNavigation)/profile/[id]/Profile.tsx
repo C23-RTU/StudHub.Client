@@ -110,7 +110,9 @@ export default function Profile({ user }: Props) {
                         userClubs &&
                         userClubs.length > 0 &&
                         userClubs.map((club) => <ClubCard key={club.id} club={club} />)}
-                    {error && <p className="text-center text-neutral-500">Не удалось загрузить ваши подписки</p>}
+                    {error && (
+                        <p className="text-center text-neutral-500">Не удалось загрузить подписки пользователя</p>
+                    )}
                 </div>
             </MainContent>
         </Page>
