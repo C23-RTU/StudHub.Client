@@ -2,7 +2,8 @@
 
 import Link from 'next/link';
 
-import { SkeletonList } from '@/components/Skeletons/SkeletonList';
+import Loader from '@/components/Loader';
+import { Page } from '@/components/Page';
 import { SubscriberCard } from '@/components/SubscriberCard/SubscriberCard';
 import { BackButton } from '@/components/ui/BackButton/BackButton';
 
@@ -25,15 +26,15 @@ export function Subscribers({ id }: { id: string }) {
     });
 
     return (
-        <div className="page">
-            <Header className="justify-start gap-4">
+        <Page>
+            <Header className="justify-start gap-3 px-[20px] py-[16px]">
                 <Link href={AUTH_PAGE.CLUB_SUBSCRIBERS(id)}>
-                    <BackButton />
+                    <BackButton variant={'ghost'} />
                 </Link>
                 <HeaderTitle>Подписчики</HeaderTitle>
             </Header>
-            <div className="space-y-4">
-                {isLoading && <SkeletonList amount={5} />}
+            <div className="space-y-4 p-[20px]">
+                {isLoading && <Loader />}
                 {subscribers?.pages.flatMap((page) =>
                     page.map((subscriber) => (
                         <SubscriberCard
@@ -47,6 +48,6 @@ export function Subscribers({ id }: { id: string }) {
                 )}
                 <div ref={ref}></div>
             </div>
-        </div>
+        </Page>
     );
 }

@@ -46,7 +46,14 @@ export function ClubCard({ club, showSubscribe = false }: Props) {
                     {club.about}
                 </p>
             </div>
-            {showSubscribe && <SubscribeButton clubId={club.id} isBig={false} subscribed={club.isUserSubscribed} />}
+            {showSubscribe && (
+                <SubscribeButton
+                    className="size-10"
+                    clubId={club.id}
+                    isBig={false}
+                    subscribed={club.isUserSubscribed}
+                />
+            )}
         </figure>
     );
 }

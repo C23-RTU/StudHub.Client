@@ -1,10 +1,12 @@
-import { Home, Search, User, Zap } from 'lucide-react';
+import { Search, Zap } from 'lucide-react';
+import { AiOutlineUser } from 'react-icons/ai';
+import { RiHome9Line } from 'react-icons/ri';
 
 import { AUTH_PAGE } from '@/lib/config/routes.config';
 
 export const MENU_LINKS = [
     {
-        Icon: Home,
+        Icon: RiHome9Line,
         link: AUTH_PAGE.HOME,
     },
     {
@@ -16,7 +18,7 @@ export const MENU_LINKS = [
         link: AUTH_PAGE.CLUBS,
     },
     {
-        Icon: User,
+        Icon: AiOutlineUser,
         link: AUTH_PAGE.PROFILE,
     },
 ];

@@ -3,7 +3,8 @@
 import { useMemo } from 'react';
 
 import { ClubCard } from '@/components/ClubComponents/ClubCard';
-import { SkeletonList } from '@/components/Skeletons/SkeletonList';
+import Loader from '@/components/Loader';
+import { Page } from '@/components/Page';
 import { BackButton } from '@/components/ui/BackButton/BackButton';
 
 import { useInfinityScroll } from '@/hooks/useInfinityScroll';
@@ -25,13 +26,13 @@ export default function UserProfileClubs() {
     const userClubs = useMemo(() => (clubs ? clubs.pages.flatMap((page) => page) : []), [clubs]);
 
     return (
-        <div className="page">
-            <Header className="justify-start gap-4">
-                <BackButton />
+        <Page>
+            <Header className="justify-start gap-3 px-[20px] py-[16px]">
+                <BackButton variant={'ghost'} />
                 <HeaderTitle>Подписки</HeaderTitle>
             </Header>
-            <div className="space-y-4">
-                {(isFetchingNextPage || isLoading) && <SkeletonList />}
+            <div className="space-y-4 p-[20px]">
+                {(isFetchingNextPage || isLoading) && <Loader />}
                 {!isLoading && userClubs.length === 0 ? (
                     <p className="text-center text-neutral-400">Вы пока не подписаны ни на один клуб</p>
                 ) : (
@@ -39,6 +40,6 @@ export default function UserProfileClubs() {
                 )}
                 <div ref={ref}></div>
             </div>
-        </div>
+        </Page>
     );
 }

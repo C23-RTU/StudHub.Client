@@ -5,6 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import { format } from 'date-fns';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { FaGraduationCap } from 'react-icons/fa';
 
 import { BirthDatePicker } from '@/components/ui/BirthDatePicker/BirthDatePicker';
 import { FormField } from '@/components/ui/FormField/FormField';
@@ -47,7 +48,7 @@ export default function Register() {
     const { submitHandler, isLoading } = useRegisterForm(reset, selectedInstitute);
 
     return (
-        <form className="mb-5 flex flex-col gap-4" onSubmit={handleSubmit(submitHandler)}>
+        <form className="flex flex-col gap-4" onSubmit={handleSubmit(submitHandler)}>
             <div className="col-span-2 grid gap-4">
                 <FormField
                     placeholder="Имя"
@@ -94,7 +95,8 @@ export default function Register() {
             />
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                    <Button className="bg-secondary hover:bg-secondary/80 w-full justify-start truncate border border-neutral-700 text-white">
+                    <Button variant={'outline'} className="justify-start">
+                        <FaGraduationCap className="mr-2 h-4 w-4" />
                         {selectedInstitute?.name || 'Выберите институт'}
                     </Button>
                 </DropdownMenuTrigger>

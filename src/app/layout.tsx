@@ -16,10 +16,10 @@ const unbounded = Unbounded({ subsets: ['latin'], variable: '--font-unbounded' }
 
 export const metadata: Metadata = {
     title: {
-        absolute: 'СтудХаб РТУ МИРЭА',
-        template: `%s | СтудХаб РТУ МИРЭА`,
+        absolute: 'СтудХаб',
+        template: `%s | СтудХаб`,
     },
-    description: 'СтудХаб РТУ МИРЭА',
+    description: 'Твоя студенческая жизнь в РТУ МИРЭА —  все события и новости в одной сети.',
 };
 
 export default function RootLayout({
@@ -30,7 +30,7 @@ export default function RootLayout({
     return (
         <html lang="en" className="">
             <body
-                className={`${inter.variable} ${geologica.variable} ${unbounded.variable} antialiased dark font-inter`}
+                className={`${inter.variable} ${geologica.variable} ${unbounded.variable} dark font-inter bg-background-light text-text antialiased`}
             >
                 <ProviderLayout>{children}</ProviderLayout>
             </body>

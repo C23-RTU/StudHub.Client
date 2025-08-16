@@ -49,15 +49,12 @@ export function BirthDatePicker({ value, onChange, error }: DatePickerProps) {
         <div>
             <Popover open={isOpen} onOpenChange={setIsOpen}>
                 <PopoverTrigger asChild>
-                    <Button
-                        className="bg-secondary hover:bg-secondary/80 w-full justify-start rounded-t-md border border-neutral-700 text-left transition duration-200"
-                        onClick={() => setIsOpen(true)}
-                    >
+                    <Button variant={'outline'} className="w-full justify-start" onClick={() => setIsOpen(true)}>
                         <CalendarIcon className="mr-2 h-4 w-4" />
                         {value ? format(new Date(value), 'PPP', { locale: ru }) : <span>Дата рождения</span>}
                     </Button>
                 </PopoverTrigger>
-                <PopoverContent className="border-stroke bg-background mr-4 w-auto rounded-md p-0 shadow-md">
+                <PopoverContent className="border-border bg-background mr-4 w-auto rounded-md p-0 shadow-md">
                     <div className="p-4">
                         <div className="flex justify-between">
                             <div className="relative">

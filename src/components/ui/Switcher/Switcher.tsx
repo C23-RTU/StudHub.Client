@@ -16,8 +16,8 @@ export function Switcher({
     };
 
     return (
-        <div className="bg-white rounded-lg font-geologica select-none p-[2px] w-full">
-            <div className="flex justify-between w-full  h-[40px] relative box-border">
+        <div className="font-geologica w-full rounded-md border border-neutral-300 bg-neutral-100 p-[2px] select-none dark:border-neutral-800 dark:bg-neutral-900">
+            <div className="relative box-border flex h-[40px] w-full justify-between">
                 {tabs.map((name, index) => (
                     <Fragment key={index}>
                         <input
@@ -29,7 +29,7 @@ export function Switcher({
                             onChange={(event) => checkHandler(event, index)}
                         />
                         <label
-                            className="flex-1 flex items-center justify-center text-black z-10 cursor-pointer"
+                            className="roundede-md z-10 flex flex-1 cursor-pointer items-center justify-center text-black dark:text-white"
                             htmlFor={`radio-${index}`}
                         >
                             {name}
@@ -38,7 +38,7 @@ export function Switcher({
                 ))}
 
                 <div
-                    className="glider flex bg-primary h-full rounded-lg absolute transition-all box-border"
+                    className="glider bg-primary absolute box-border flex h-full rounded-md transition-all"
                     style={{ width: `calc(100% / ${2} )` }}
                 />
             </div>
