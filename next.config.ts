@@ -26,6 +26,10 @@ const nextConfig: NextConfig = {
                 source: '/api/:path*',
                 destination: `https://api.setka-rtu.ru/:path*`,
             },
+            {
+                source: '/admin-api/:path*',
+                destination: `https://api-admin.setka-rtu.ru/:path*`,
+            },
         ];
     },
 };

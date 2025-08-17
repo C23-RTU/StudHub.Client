@@ -14,4 +14,3 @@ export * from './problem-details';
 export * from './reaction-detail-dto';
 export * from './register-dto';
 export * from './sort-order';
-export * from './token-model';

@@ -1,37 +1,18 @@
 import axios from 'axios';
-import https from 'https';
 
-import { BASE_API_URL } from '@/lib/config/api.config';
+import { BASE_ADMIN_API_URL, BASE_API_URL } from '@/lib/config/api.config';
 
-import { isClientSideRender } from '@/lib/helpers/isClientSideRender.helper';
-import { getServerSideCookies } from '@/server-actions/getServerSideCookies';
+import { BASE_AXIOS_CONFIG, applyBaseInterceptors } from './axios.config';
 
 export const BASE_API = axios.create({
     baseURL: BASE_API_URL,
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    httpAgent: new https.Agent({
-        keepAlive: true,
-    }),
-    withCredentials: true,
+    ...BASE_AXIOS_CONFIG,
 });
 
-BASE_API.interceptors.request.use(async (config) => {
-    if (!isClientSideRender) {
-        const { Cookie } = await getServerSideCookies();
-        config.headers['Cookie'] = Cookie;
-    }
-
-    return config;
+export const BASE_ADMIN_API = axios.create({
+    baseURL: BASE_ADMIN_API_URL,
+    ...BASE_AXIOS_CONFIG,
 });
 
-BASE_API.interceptors.response.use(async (config) => {
-    const statusCode = config.status;
-
-    if (statusCode === 401) {
-        location.reload();
-    }
-
-    return config;
-});
+applyBaseInterceptors(BASE_API);
+applyBaseInterceptors(BASE_ADMIN_API);
