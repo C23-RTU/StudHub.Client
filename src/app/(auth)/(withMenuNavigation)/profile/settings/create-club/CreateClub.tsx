@@ -13,8 +13,6 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 
-import { AUTH_PAGE } from '@/lib/config/routes.config';
-
 import { clubCreationRequestsApi } from '@/api/api.admin';
 
 import { Header, HeaderTitle } from '@/hoc/Header/Header';
@@ -84,6 +82,7 @@ export default function CreateClub() {
                 data.banner?.[0] || null,
                 data.comment
             );
+            router.back();
             toast.success('Заявка на создание клуба отправлена!', {
                 duration: 5000,
                 style: {
@@ -91,7 +90,6 @@ export default function CreateClub() {
                     padding: '16px',
                 },
             });
-            router.push(AUTH_PAGE.PROFILE_SETTINGS);
         } catch (error) {
             toast.error('Ошибка при отправке заявки');
             console.error('Error submitting club creation request:', error);
