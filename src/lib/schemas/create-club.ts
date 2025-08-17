@@ -3,7 +3,7 @@ import { z } from 'zod';
 const clubSchema = z.object({
     clubName: z.string().min(1, 'Название клуба не может быть пустым').max(50, 'Макс. 50 символов'),
     about: z.string().max(255, 'Макс. 255 символов').optional(),
-    comment: z.string().min(10, 'Комментарий слишком короткий').max(1000, 'Макс. 1000 символов'),
+    comment: z.string().min(5, 'Комментарий слишком короткий').max(1000, 'Макс. 1000 символов'),
     banner: z
         .any()
         .optional()
