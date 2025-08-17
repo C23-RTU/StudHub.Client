@@ -1,10 +1,9 @@
 'use client';
 
-import { m } from 'framer-motion';
 import { usePathname, useRouter } from 'next/navigation';
 import { match } from 'path-to-regexp';
 import { useMemo } from 'react';
-import { IoMdHeart, IoMdHeartEmpty } from 'react-icons/io';
+import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import { MdOutlineModeComment } from 'react-icons/md';
 
 import { AUTH_PAGE } from '@/lib/config/routes.config';
@@ -19,7 +18,7 @@ interface Props {
     post: PostDetailDTO;
 }
 
-const ICON_SIZE = 21;
+const ICON_SIZE = 20;
 
 export function ActionButton({ type, post }: Props) {
     const router = useRouter();
@@ -30,9 +29,13 @@ export function ActionButton({ type, post }: Props) {
     const computedIcon = useMemo(() => {
         switch (type) {
             case 'like':
-                return post.isUserReacted ? <IoMdHeart size={ICON_SIZE} /> : <IoMdHeartEmpty size={ICON_SIZE} />;
+                return post.isUserReacted ? (
+                    <FaHeart size={ICON_SIZE} />
+                ) : (
+                    <FaRegHeart className="text-neutral-500" size={ICON_SIZE} />
+                );
             case 'comment':
-                return <MdOutlineModeComment size={ICON_SIZE} />;
+                return <MdOutlineModeComment className="text-neutral-500" size={ICON_SIZE} />;
         }
     }, [type, post.isUserReacted]);
 
@@ -46,17 +49,14 @@ export function ActionButton({ type, post }: Props) {
     };
 
     return (
-        <m.div
-            className={cn('flex cursor-pointer items-center gap-2 select-none', {
+        <div
+            className={cn('flex cursor-pointer items-center gap-2 rounded-md p-1 select-none', {
                 'text-blue': isCommentType ? !!match(AUTH_PAGE.POST_COMMENTS(post.id))(pathname) : false,
             })}
             onClick={clickHandler}
-            whileTap={{
-                scale: isCommentType ? 1 : 1.4,
-            }}
         >
             {computedIcon}
-            <p className="text-xs">{isCommentType ? post.commentCount : post.reactionCount}</p>
-        </m.div>
+            <p className="text-xs font-medium">{isCommentType ? post.commentCount : post.reactionCount}</p>
+        </div>
     );
 }

@@ -11,11 +11,7 @@ export const metadata: Metadata = {
 export default async function RegistrationPage() {
     return (
         <Suspense>
-            <main className="w-full h-screen flex justify-center page">
-                <div className="flex flex-col gap-4 w-full">
-                    <Auth />
-                </div>
-            </main>
+            <Auth />
         </Suspense>
     );
 }

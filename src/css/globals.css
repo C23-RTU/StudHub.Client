@@ -8,25 +8,29 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-    --background: hsl(0, 38%, 65%);
-    --foreground: hsl(210 40% 98%);
+    --background: hsl(0, 0%, 95%);
+    --background-light: hsl(0, 0%, 98%);
+    --background-dimmed: hsl(0, 0%, 90%);
+    --foreground: hsl(0 0% 98%);
     --card: hsl(222.2 84% 4.9%);
-    --card-foreground: hsl(210 40% 98%);
-    --popover: hsl(222.2 84% 4.9%);
-    --popover-foreground: hsl(210 40% 98%);
-    --primary: hsl(0, 0%, 0%);
-    --primary-foreground: hsl(222.2 47.4% 41.2%);
-    --secondary: hsl(217.2 32.6% 17.5%);
+    --card-foreground: hsl(210 0% 98%);
+    --popover: hsl(0 0% 95%);
+    --popover-foreground: hsl(0, 0%, 5%);
+    --popover-border: hsl(0 0% 60%);
+    --primary: hsl(222 100% 65%);
+    --primary-foreground: hsl(0 0% 100%);
+    --secondary: hsl(0 0% 80%);
     --secondary-foreground: hsl(210 40% 98%);
-    --muted: hsl(217.2 32.6% 17.5%);
-    --muted-foreground: hsl(215 20.2% 65.1%);
-    --accent: hsl(217.2 32.6% 17.5%);
+    --text: hsl(0 0% 3.9%);
+    --muted: hsl(0 0% 17.5%);
+    --muted-foreground: hsl(0 0% 65.1%);
+    --accent: hsl(222 100% 65%);
     --accent-foreground: hsl(210 40% 98%);
     --destructive: hsl(0 62.8% 30.6%);
     --destructive-foreground: hsl(210 40% 98%);
-    --border: hsl(217.2 32.6% 17.5%);
+    --border: hsl(0 0% 88%);
     --radius: 0.6rem;
-    --input: hsl(217.2 32.6% 17.5%);
+    --input: hsl(0 0% 17.5%);
     --ring: hsl(224.3 76.3% 48%);
     --chart-1: hsl(220 70% 50%);
     --chart-2: hsl(160 60% 45%);
@@ -37,25 +41,28 @@
 
 .dark {
     --background: hsl(0, 0%, 5%);
-    --background-light: hsl(0, 0%, 20%);
+    --background-light: hsl(0, 0%, 9%);
+    --background-dimmed: hsl(0, 0%, 20%);
     --foreground: hsl(210 40% 98%);
     --card: hsl(222.2 84% 4.9%);
     --card-foreground: hsl(210 40% 98%);
-    --popover: hsl(222.2 84% 4.9%);
+    --popover: hsl(0 0% 4.9%);
     --popover-foreground: hsl(210 40% 98%);
-    --primary: hsl(223 100% 61.8%);
+    --popover-border: hsl(0 0% 20%);
+    --primary: hsl(222 100% 65%);
     --primary-foreground: hsl(0, 0%, 100%);
     --secondary: hsl(0, 0%, 14%);
     --secondary-foreground: hsl(0, 0%, 10%);
-    --muted: hsl(217.2 32.6% 17.5%);
+    --text: hsl(0 0% 98%);
+    --muted: hsl(0 0% 17.5%);
     --muted-foreground: hsl(209 0% 38.1%);
     --accent: hsl(0, 0%, 12%);
     --radius: 0.6rem;
     --accent-foreground: hsl(210 40% 98%);
     --destructive: hsl(0 62.8% 30.6%);
     --destructive-foreground: hsl(210 40% 98%);
-    --border: hsl(0, 0%, 32%);
-    --input: hsl(217.2 32.6% 17.5%);
+    --border: hsl(0, 0%, 18%);
+    --input: hsl(0 0% 17.5%);
     --ring: hsl(224.3 76.3% 48%);
     --chart-1: hsl(220 70% 50%);
     --chart-2: hsl(160 60% 45%);
@@ -68,13 +75,16 @@
     --font-inter: 'Inter', sans-serif;
     --font-geologica: 'Geologica', sans-serif;
     --font-unbounded: 'Unbounded', sans-serif;
+    --font-montserrat: 'Montserrat', sans-serif;
     --text-xss: 10px;
 }
 
 @theme inline {
     --color-background: var(--background);
     --color-background-light: var(--background-light);
+    --color-background-dimmed: var(--background-dimmed);
     --color-foreground: var(--foreground);
+    --color-text: var(--text);
     --color-card: var(--card);
     --color-card-foreground: var(--card-foreground);
     --color-popover: var(--popover);
@@ -89,6 +99,7 @@
     --color-accent-foreground: var(--accent-foreground);
     --color-destructive: var(--destructive);
     --color-destructive-foreground: var(--destructive-foreground);
+    --color-popover-border: var(--popover-border);
     --color-border: var(--border);
     --color-input: var(--input);
     --color-ring: var(--ring);
@@ -105,22 +116,11 @@
     --text-xss: 10px;
     --padding-pageX: 18px;
     --padding-pageY: 20px;
+    --padding-page: 20px;
 }
 
 @layer base {
-    * {
-        @apply border-border;
-    }
-
     body {
-        @apply bg-background text-white;
-    }
-
-    .page {
-        @apply font-inter px-pageX py-pageY h-full w-full;
-    }
-
-    .hidden-scroll {
         overscroll-behavior: none;
 
         &::-webkit-scrollbar {

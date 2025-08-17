@@ -19,14 +19,14 @@ export function PostImageWrapper({ images }: Props) {
     }, [images]);
 
     return (
-        <div className="w-auto flex items-center justify-center overflow-hidden mx-[calc(theme(padding.pageX)*-1)]">
+        <div className="mx-[calc(theme(padding.pageX)*-1)] flex w-auto items-center justify-center overflow-hidden rounded-md">
             {isEmptyOrOne ? (
                 <LoaderImage
                     src={images.length ? getStaticImg(images[0]) : '/img/eventbanner.jpg'}
                     height={200}
                     width={600}
                     alt={'banner'}
-                    className="w-full h-auto"
+                    className="h-auto w-full"
                 />
             ) : (
                 <DynamicPostImageSwiper images={images} />

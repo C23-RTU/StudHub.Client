@@ -17,7 +17,7 @@ interface Props {
 export function SubscriberCard({ firstName, lastName, avatar, userId }: Props) {
     return (
         <Link
-            className="bg-secondary flex w-full rounded-lg px-2 py-2"
+            className="border-border bg-background-light flex w-full rounded-lg border p-2"
             role="listitem"
             href={AUTH_PAGE.USER_PROFILE(userId)}
         >
@@ -39,7 +39,7 @@ export function SubscriberCard({ firstName, lastName, avatar, userId }: Props) {
             </div>
 
             <div className="ml-3 flex flex-col justify-center overflow-hidden">
-                <p className="text-m font-geologica overflow-hidden font-semibold text-ellipsis whitespace-nowrap">
+                <p className="font-geologica overflow-hidden font-medium text-ellipsis whitespace-nowrap">
                     <span>{firstName} </span>
                     <span>{lastName}</span>
                 </p>

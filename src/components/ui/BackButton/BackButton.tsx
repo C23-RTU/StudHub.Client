@@ -1,23 +1,29 @@
 'use client';
 
-import { Undo2 } from 'lucide-react';
+import type { VariantProps } from 'class-variance-authority';
 import { useRouter } from 'next/navigation';
+import { FaArrowLeft } from 'react-icons/fa';
 
 import { Button } from '../button';
 
-interface BackButtonProps {
-    onClick?: () => void;
-}
+import { cn } from '@/lib/utils/utils';
 
-export function BackButton({ onClick }: BackButtonProps) {
+type BackButtonProps = {
+    onClick?: () => void;
+    variant?: VariantProps<typeof Button>['variant'];
+    className?: string;
+};
+
+export function BackButton({ onClick, variant = 'default', className = '' }: BackButtonProps) {
     const router = useRouter();
     return (
         <Button
-            className="rounded-lg w-10 h-10 shadow-[rgba(0,0,0,0.24)_0px_3px_8px] bg-secondary flex justify-center items-center hover:cursor-pointer"
+            className={cn('text-text m-0 flex items-center justify-center rounded-lg hover:cursor-pointer', className)}
+            size={'icon'}
+            variant={variant}
             onClick={onClick ? onClick : () => router.back()}
-            variant={'outline'}
         >
-            <Undo2 />
+            <FaArrowLeft />
         </Button>
     );
 }

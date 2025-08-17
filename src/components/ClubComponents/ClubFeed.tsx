@@ -10,9 +10,9 @@ import { useInfinityScroll } from '@/hooks/useInfinityScroll';
 
 import { postApi } from '@/api/api';
 
+import Loader from '../Loader';
 import { PostCard } from '../PostCard/PostCard';
 import { Button } from '../ui/button';
-import { Skeleton } from '../ui/skeleton';
 
 import { MainContent } from '@/hoc/MainContent/MainContent';
 
@@ -30,23 +30,22 @@ export function ClubFeed() {
     });
 
     return (
-        <MainContent>
-            <p className="font-geologica text-xl font-semibold">Посты клуба</p>
+        <MainContent className="flex flex-col gap-0">
+            <div className="border-border border-b p-4">
+                <Button variant={'default'} className="w-full" asChild>
+                    <Link href={AUTH_PAGE.POST_DRAFT}>
+                        <PencilIcon />
+                        Создать пост
+                    </Link>
+                </Button>
+            </div>
 
-            <Button variant={'default'} asChild>
-                <Link href={AUTH_PAGE.POST_DRAFT}>
-                    <PencilIcon />
-                    Создать пост
-                </Link>
-            </Button>
-
-            <div className="flex flex-col gap-10">
-                {(isLoading || isFetchingNextPage) &&
-                    Array(3)
-                        .fill(0)
-                        .map((_, index) => <Skeleton key={index} className="h-[320px] w-full" />)}
+            <div className="flex flex-col gap-0">
+                {(isLoading || isFetchingNextPage) && <Loader className="mx-auto mt-10 size-10" />}
                 {data && data.pages.flatMap((page) => page).map((post) => <PostCard key={post.id} post={post} />)}
-                {!hasNextPage && <p className="text-center text-neutral-400">Посты этого клуба закончились</p>}
+                {!hasNextPage && !isLoading && (
+                    <p className="p-4 pb-[20px] text-center text-neutral-500">Посты этого клуба закончились</p>
+                )}
                 <div ref={ref}></div>
             </div>
         </MainContent>

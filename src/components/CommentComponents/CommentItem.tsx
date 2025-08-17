@@ -91,7 +91,7 @@ export function CommentItem({
     }, [comment.deletedAt]);
 
     return (
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-3 px-[16px] py-[5px]">
             <div
                 id={`comment-${comment.id}`}
                 onClick={setHighlightCommentHandler}
@@ -117,14 +117,14 @@ export function CommentItem({
                                 {comment.personSummary?.firstName} {comment.personSummary?.lastName}
                             </p>
                         </Link>
-                        <small className="text-xss font-inter font-normal opacity-50">{createdCommentDate}</small>
+                        <small className="text-xs text-neutral-500">{createdCommentDate}</small>
                     </div>
 
                     <p
                         className={cn(
-                            'font-inter text-xs leading-snug font-normal break-words whitespace-pre-line text-[#B8B8B8]',
+                            'font-inter text-xs leading-snug font-normal break-words whitespace-pre-line text-neutral-700 dark:text-neutral-300',
                             {
-                                'text-[#696868]': comment.deletedAt,
+                                'text-neutral-400 dark:text-neutral-600': comment.deletedAt,
                             }
                         )}
                     >
@@ -135,7 +135,7 @@ export function CommentItem({
                         <div className="flex gap-3">
                             <button
                                 type="button"
-                                className="flex cursor-pointer items-center text-xs text-gray-500"
+                                className="flex cursor-pointer items-center text-xs text-neutral-500"
                                 onClick={setCommentForReplyHandler}
                             >
                                 Ответить
@@ -144,7 +144,7 @@ export function CommentItem({
                             {isMyComment && (
                                 <button
                                     type="button"
-                                    className="flex items-center text-xs text-gray-500"
+                                    className="flex items-center text-xs text-neutral-500"
                                     onClick={openCommentMoreSheetHandler}
                                 >
                                     Еще

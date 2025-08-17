@@ -7,10 +7,10 @@ type Props = ComponentProps<typeof Input>;
 
 export function SearchInput(props: Props) {
     return (
-        <div className="relative z-0">
-            <Input {...props} className="pr-8" onChange={props.onChange} />
+        <div className="relative w-full">
+            <Input {...props} className="w-full max-w-screen pr-8" onChange={props.onChange} />
             <div
-                className="absolute right-2 top-[50%] translate-y-[-50%] flex items-center justify-center cursor-pointer active:scale-90 transition-all select-none"
+                className="absolute top-[50%] right-2 flex translate-y-[-50%] cursor-pointer items-center justify-center transition-all select-none active:scale-90"
                 onClick={props.onClick}
             >
                 <SearchIcon size={21} />
