@@ -8,8 +8,9 @@ import { CommentItem } from '@/components/CommentComponents/CommentItem';
 import { CommentMoreSheet } from '@/components/CommentComponents/CommentMoreSheet';
 import { TextareaEditorComment } from '@/components/CommentComponents/TextareaEditorComment';
 import { useCommentStore } from '@/components/CommentComponents/store/useComment.store';
+import Loader from '@/components/Loader';
+import { Page } from '@/components/Page';
 import { PostCard } from '@/components/PostCard/PostCard';
-import { SkeletonList } from '@/components/Skeletons/SkeletonList';
 import { BackButton } from '@/components/ui/BackButton/BackButton';
 
 import { useInfinityScroll } from '@/hooks/useInfinityScroll';
@@ -59,13 +60,10 @@ export function Comments({ serverPost }: { serverPost: PostDetailDTO }) {
     }, [highlightComment]);
 
     return (
-        <div className="page">
-            <Header className="flex flex-row justify-between items-center z-50 w-full max-w-[1020px]">
-                <div className='flex flex-row items-center gap-4'>
-                    <BackButton onClick={() => router.back()} />
-                    <HeaderTitle>Комментарии</HeaderTitle>
-                </div>
-                <div></div>
+        <Page className="p-0">
+            <Header className="py-[12px]">
+                <BackButton variant={'ghost'} onClick={() => router.back()} />
+                <HeaderTitle>Комментарии</HeaderTitle>
             </Header>
 
             <MainContent>
@@ -78,19 +76,19 @@ export function Comments({ serverPost }: { serverPost: PostDetailDTO }) {
                             <Fragment key={pageIndex}>
                                 {page.map((item, itemIndex) => (
                                     <Fragment key={item.id}>
-                                        {itemIndex > 0 && <span className="h-px bg-secondary w-3/5 mx-auto" />}
+                                        {itemIndex > 0 && <span className="bg-border h-px w-full" />}
                                         <CommentItem comment={item} />
                                     </Fragment>
                                 ))}
                             </Fragment>
                         ))}
-                    {(isLoading || isFetchingNextPage) && <SkeletonList />}
+                    {(isLoading || isFetchingNextPage) && <Loader className="size-10" />}
                     {!isFetchingNextPage && <div ref={ref} />}
 
                     <TextareaEditorComment post={post} hasNextPage={hasNextPage} />
                 </div>
                 <CommentMoreSheet />
             </MainContent>
-        </div>
+        </Page>
     );
 }

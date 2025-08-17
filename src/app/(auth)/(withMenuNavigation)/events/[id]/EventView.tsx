@@ -1,9 +1,11 @@
 'use client';
 
-import { Copy, EllipsisVertical, OctagonAlert } from 'lucide-react';
+import { EllipsisVertical } from 'lucide-react';
 import Image from 'next/image';
 import { FaCalendar, FaCompass } from 'react-icons/fa';
+import { IoAlertCircle, IoCopy } from 'react-icons/io5';
 
+import { Page } from '@/components/Page';
 import { BackButton } from '@/components/ui/BackButton/BackButton';
 import { Button } from '@/components/ui/button';
 import {
@@ -20,21 +22,17 @@ import { parseLocalTime } from '@/lib/utils/time.util';
 
 export default function EventView({ event }: { event: EventDetailDTO }) {
     return (
-        <article>
-            <div className="fixed flex flex-row justify-between items-center p-4 z-20 w-full max-w-[1024px]">
+        <Page>
+            <div className="fixed z-20 flex w-full max-w-[600px] flex-row items-center justify-between bg-gradient-to-b from-black/70 to-black/0 p-4">
                 <div className="flex flex-row items-center">
-                    <BackButton />
-                    <p className="text-lg ml-4 font-bold shadow-[rgba(0,0,0,0.24)_0px_3px_8px] bg-secondary font-geologica rounded-lg leading-8 h-10 py-1 px-3 hover:cursor-pointer">
-                        Подробности
-                    </p>
+                    <BackButton variant={'outline'} className="size-10" />
+                    {/* <p className="bg-secondary font-geologica ml-4 h-10 rounded-lg px-3 py-1 text-lg leading-8 font-medium shadow-[rgba(0,0,0,0.24)_0px_3px_8px] hover:cursor-pointer"> */}
+                    {/*     Подробности */}
+                    {/* </p> */}
                 </div>
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                        <Button
-                            variant="outline"
-                            size="icon"
-                            className="rounded-lg w-10 h-10 shadow-[rgba(0,0,0,0.24)_0px_3px_8px] bg-secondary"
-                        >
+                        <Button variant="outline" size="icon" className="h-10 w-10">
                             <EllipsisVertical />
                         </Button>
                     </DropdownMenuTrigger>
@@ -46,44 +44,45 @@ export default function EventView({ event }: { event: EventDetailDTO }) {
                                 toast.success('Ссылка скопирована');
                             }}
                         >
-                            <Copy />
+                            <IoCopy className="text-text" />
                             Скопировать ссылку
                         </DropdownMenuItem>
-                        <DropdownMenuItem className="text-[#FF0000]">
-                            <OctagonAlert stroke="#FF0000" />
+                        <DropdownMenuItem className="text-red-400">
+                            <IoAlertCircle className="text-red-400" />
                             Пожаловаться
                         </DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>
             </div>
-            <div className="relative flex w-full h-[400px]">
+            <div className="border-border relative flex h-[300px] w-full border-b">
                 <Image
-                    src={(event.eventImages.length > 0 && getStaticImg(event.eventImages[0])) || '/img/default-club-banner.jpg'}
+                    src={
+                        (event.eventImages.length > 0 && getStaticImg(event.eventImages[0])) ||
+                        '/img/default-club-banner.jpg'
+                    }
                     fill
                     alt={event.title || 'Event banner'}
                     className="object-cover"
                     priority
                 />
-                <div className="absolute top-0 left-0 w-full h-full bg-linear-to-t from-black/90 via-black/50 to-transparent"></div>
                 <div className="container mx-auto">
-                    <div className="flex absolute z-10 flex-col items-start px-4 h-full w-full justify-end gap-3 pb-4">
-                        <h1 className="font-geologica text-4xl font-semibold text-white">{event.title}</h1>
-                    </div>
+                    <div className="absolute z-10 flex h-full w-full flex-col items-start justify-end gap-3 px-4 pb-4"></div>
                 </div>
             </div>
-            <div className="page flex flex-col gap-4">
-                <p className="font-inter font-light text-lg text-gray-200">{event.description}</p>
+            <div className="flex flex-col gap-4 p-[20px]">
+                <h1 className="font-geologica text-3xl font-semibold">{event.title}</h1>
+                <p className="text-neutral-300">{event.description}</p>
                 <div className="flex flex-col gap-2">
-                    <div className="flex flex-row gap-2 items-center">
-                        <FaCompass className="w-4 h-4" />
-                        <p className="font-inter text-md text-gray-white">{event.location}</p>
+                    <div className="flex flex-row items-center gap-3">
+                        <FaCompass className="h-4 w-4" />
+                        <p>{event.location}</p>
                     </div>
-                    <div className="flex flex-row gap-2 items-center">
-                        <FaCalendar className="w-4 h-4" />
-                        <time className="font-inter text-md text-gray-white">{parseLocalTime(event.startTime)}</time>
+                    <div className="flex flex-row items-center gap-3">
+                        <FaCalendar className="h-4 w-4" />
+                        <time>{parseLocalTime(event.startTime)}</time>
                     </div>
                 </div>
             </div>
-        </article>
+        </Page>
     );
 }

@@ -1,8 +1,11 @@
 'use client';
 
-import { NotificationBadge } from '@/components/Badge/NotificationBadge/NotificationBadge';
+import { format } from 'date-fns';
+import { ru } from 'date-fns/locale';
+
+import Loader from '@/components/Loader';
+import { Page } from '@/components/Page';
 import { PostCard } from '@/components/PostCard/PostCard';
-import { Skeleton } from '@/components/ui/skeleton';
 
 import { useInfinityScroll } from '@/hooks/useInfinityScroll';
 
@@ -25,7 +28,7 @@ const getTimeBasedGreeting = (): string => {
     }
 };
 
-export default function Home({ username }: { username: string }) {
+export default function Home() {
     const {
         ref,
         infiniteQuery: { data, isLoading, isFetchingNextPage, hasNextPage, error },
@@ -36,27 +39,20 @@ export default function Home({ username }: { username: string }) {
     });
 
     return (
-        <div className="page">
-            <Header>
-                <HeaderTitle>
-                    {getTimeBasedGreeting()}, {username} 👋
-                </HeaderTitle>
-                <NotificationBadge count={0} />
+        <Page>
+            <Header className="justify-between">
+                <HeaderTitle>{getTimeBasedGreeting()}</HeaderTitle>
+                <p className="font-medium text-neutral-500">{format(Date(), 'd MMMM', { locale: ru })}</p>
             </Header>
 
             <MainContent>
-                {/* <div className="flex justify-center">
-                    <EventCard />
-                </div> */}
-                {/* <p className="text-xl font-semibold">Лента</p> */}
-                <div className="flex flex-col gap-10">
-                    {isLoading &&
-                        Array(3)
-                            .fill(0)
-                            .map((_, index) => <Skeleton key={index} className="h-[320px] w-full" />)}
+                <div className="flex flex-col">
+                    {isLoading && <Loader className="mx-auto mt-10" />}
                     {data && data.pages.flatMap((page) => page).map((post) => <PostCard key={post.id} post={post} />)}
-                    {isFetchingNextPage && <Skeleton className="h-[320px] w-full" />}
-                    {!hasNextPage && <p className="text-center text-neutral-500">Ваша лента закончилась</p>}
+                    {isFetchingNextPage && <Loader className="mx-auto mt-10" />}
+                    {!hasNextPage && !isLoading && (
+                        <p className="p-4 pb-5 text-center text-neutral-500">Ваша лента закончилась</p>
+                    )}
                     {error && (
                         <p className="text-center text-neutral-500">
                             Не удалось выполнить загрузку постов. Пожалуйста, повторите позже.
@@ -65,6 +61,6 @@ export default function Home({ username }: { username: string }) {
                     <div ref={ref}></div>
                 </div>
             </MainContent>
-        </div>
+        </Page>
     );
 }
