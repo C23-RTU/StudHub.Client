@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Geologica&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Geologica:wght@100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Unbounded&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
@@ -20,7 +20,7 @@
     --popover-border: hsl(0 0% 60%);
     --primary: hsl(222 100% 65%);
     --primary-foreground: hsl(0 0% 100%);
-    --secondary: hsl(0 0% 80%);
+    --secondary: hsl(0 0% 70%);
     --secondary-foreground: hsl(210 40% 98%);
     --text: hsl(0 0% 3.9%);
     --muted: hsl(0 0% 17.5%);
@@ -52,7 +52,7 @@
     --popover-border: hsl(0 0% 20%);
     --primary: hsl(222 100% 65%);
     --primary-foreground: hsl(0, 0%, 100%);
-    --secondary: hsl(0, 0%, 14%);
+    --secondary: hsl(0, 0%, 30%);
     --secondary-foreground: hsl(0, 0%, 10%);
     --text: hsl(0 0% 98%);
     --muted: hsl(0 0% 17.5%);
