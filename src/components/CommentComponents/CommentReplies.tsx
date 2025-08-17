@@ -3,8 +3,6 @@ import { CornerRightDown } from 'lucide-react';
 
 import type { CommentDetailDTO } from '@/api/axios-client/models';
 
-import { SkeletonList } from '../Skeletons/SkeletonList';
-
 import { CommentItem } from './CommentItem';
 
 export function CommentReplies({
