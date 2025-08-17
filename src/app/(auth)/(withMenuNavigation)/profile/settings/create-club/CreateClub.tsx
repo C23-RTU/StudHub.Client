@@ -24,8 +24,6 @@ type ImageType = 'banner' | 'avatar';
 export default function CreateClub() {
     const [currentBanner, setCurrentBanner] = useState<string>('/img/default-club-banner.jpg');
     const [currentAvatar, setCurrentAvatar] = useState<string>('/img/default-club-avatar.png');
-    const [currentBanner, setCurrentBanner] = useState<string>('/img/default-club-banner.jpg');
-    const [currentAvatar, setCurrentAvatar] = useState<string>('/img/default-club-avatar.png');
     const [acceptTerms, setAcceptTerms] = useState<boolean>(false);
 
     const router = useRouter();
@@ -68,12 +66,10 @@ export default function CreateClub() {
             comment: '',
             about: '',
         },
-        },
     });
 
     const onSubmit = async (data: ClubFormValues) => {
         if (!acceptTerms) {
-            toast.error('Вы должны принять условия.');
             toast.error('Вы должны принять условия.');
             return;
         }
