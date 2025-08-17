@@ -40,6 +40,8 @@ export function applySetCookie(req: NextRequest, response: NextResponse, respons
                 case 'samesite':
                     cookieOptions.sameSite = (optValue || '').toLowerCase();
                     break;
+                case 'domain':
+                    if(optValue) cookieOptions.domain = optValue
                 default:
                     break;
             }
