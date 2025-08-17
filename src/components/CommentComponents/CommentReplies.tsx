@@ -3,7 +3,7 @@ import { CornerRightDown } from 'lucide-react';
 
 import type { CommentDetailDTO } from '@/api/axios-client/models';
 
-import { Loader } from "../Loader";
+import Loader from "../Loader";
 
 import { CommentItem } from './CommentItem';
 
