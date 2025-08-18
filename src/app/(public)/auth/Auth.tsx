@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useMemo } from 'react';
 import { FaGraduationCap } from 'react-icons/fa';
 
 import { Switcher } from '@/components/ui/Switcher/Switcher';
