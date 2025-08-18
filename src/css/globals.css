@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Geologica:wght@100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Unbounded&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
 @import 'tailwindcss';
 @plugin "tailwindcss-animate";
@@ -76,7 +75,6 @@
     --font-inter: 'Inter', sans-serif;
     --font-geologica: 'Geologica', sans-serif;
     --font-unbounded: 'Unbounded', sans-serif;
-    --font-montserrat: 'Montserrat', sans-serif;
     --text-xss: 10px;
 }
 
