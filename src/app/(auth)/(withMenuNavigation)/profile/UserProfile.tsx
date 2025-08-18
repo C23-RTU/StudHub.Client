@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import Link from 'next/link';
 import { BiMessageSquare, BiSolidIdCard } from 'react-icons/bi';
 
-import { SettingBadge } from '@/components/Badge/SettingBadge/SettingBadge';
+import { SettingBadge } from '@/components/Badges';
 import { ClubCard } from '@/components/ClubComponents/ClubCard';
 import { Page } from '@/components/Page';
 import { Avatar } from '@/components/ui/Avatar/Avatar';
