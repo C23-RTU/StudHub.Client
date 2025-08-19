@@ -7,7 +7,6 @@ import { cn } from '@/lib/utils/utils';
 
 interface LoaderImageProps extends ImageProps {
     src: string;
-    loaderSize?: number;
     loaderClassName?: string;
     alt: string;
 }

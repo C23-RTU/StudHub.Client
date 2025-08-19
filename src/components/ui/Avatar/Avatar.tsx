@@ -7,13 +7,12 @@ import { cn } from '@/lib/utils/utils';
 
 interface Props {
     src: string | null | undefined;
-    loaderSize?: number;
     size?: number;
     alt?: string;
     className?: string;
 }
 
-export function Avatar({ src, size = 40, alt, loaderSize, className }: Props) {
+export function Avatar({ src, size = 40, alt, className }: Props) {
     return (
         <div
             className={cn('shrink-0 overflow-hidden rounded-full', className)}
@@ -24,7 +23,6 @@ export function Avatar({ src, size = 40, alt, loaderSize, className }: Props) {
         >
             <LoaderImage
                 src={src ? getStaticImg(src) : '/img/default-user-avatar.png'}
-                loaderSize={loaderSize}
                 className="object-cover"
                 width={size}
                 height={size}

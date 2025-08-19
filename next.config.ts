@@ -1,3 +1,4 @@
+import { isProduction } from './src/lib/helpers/isProduction.helper';
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
@@ -30,7 +31,7 @@ const nextConfig: NextConfig = {
         return [
             {
                 source: '/api/:path*',
-                destination: `https://api.setka-rtu.ru/:path*`,
+                destination: isProduction ? `https://api.setka-rtu.ru/:path*` : `https://dev-api.setka-rtu.ru/:path*`,
             },
             {
                 source: '/admin-api/:path*',
