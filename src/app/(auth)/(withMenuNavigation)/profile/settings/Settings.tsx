@@ -45,7 +45,7 @@ export default function Settings({ initUser }: { initUser: PersonDetailDTO }) {
                     </Menu>
                     <p className="font-semibold text-neutral-500">Ваши клубы</p>
                     <Menu>
-                        <MenuLink href={AUTH_PAGE.PROFILE_SETTINGS} title="Создать клуб" Icon={LuPlus} />
+                        <MenuLink href={AUTH_PAGE.PROFILE_CREATE_CLUB} title="Создать клуб" Icon={LuPlus} />
                     </Menu>
                     <p className="font-semibold text-neutral-500">Прочее</p>
                     <Menu className="mb-8">
