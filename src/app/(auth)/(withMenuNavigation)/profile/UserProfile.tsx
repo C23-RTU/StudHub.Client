@@ -7,7 +7,7 @@ import { BiMessageSquare, BiSolidIdCard } from 'react-icons/bi';
 import { SettingBadge } from '@/components/Badges';
 import { ClubCard } from '@/components/ClubComponents/ClubCard';
 import { Page } from '@/components/Page';
-import { Avatar } from '@/components/ui/Avatar/Avatar';
+import { Avatar } from '@/components/ui/Avatar';
 import { SkeletonList } from '@/components/ui/skeleton';
 
 import { AUTH_PAGE } from '@/lib/config/routes.config';

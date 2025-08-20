@@ -20,7 +20,7 @@ import { clubsApi } from '@/api/api';
 import type { ClubDetailDTO } from '@/api/axios-client';
 
 import LoaderImage from '../ImageLoader/ImageLoader';
-import { BackButton } from '../ui/BackButton/BackButton';
+import { BackButton } from '../ui/BackButton';
 import { Button } from '../ui/button';
 import { Skeleton } from '../ui/skeleton';
 

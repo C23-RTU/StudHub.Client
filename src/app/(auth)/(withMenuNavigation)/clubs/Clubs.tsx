@@ -7,7 +7,7 @@ import { useDebounce } from 'use-debounce';
 import { ClubCard } from '@/components/ClubComponents/ClubCard';
 import Loader from '@/components/Loader';
 import { Page } from '@/components/Page';
-import { SearchInput } from '@/components/ui/SearchInput/SearchInput';
+import { SearchInput } from '@/components/ui/SearchInput';
 
 import { useInfinityScroll } from '@/hooks/useInfinityScroll';
 

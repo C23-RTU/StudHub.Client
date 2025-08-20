@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import { CircleStencil, Cropper, type CropperRef } from 'react-mobile-cropper';
 import 'react-mobile-cropper/dist/style.css';
 
-import { Button } from '../button';
+import { Button } from './button';
 
 type Props = {
     src: string;

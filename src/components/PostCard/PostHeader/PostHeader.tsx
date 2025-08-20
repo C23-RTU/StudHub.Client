@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 
-import { Avatar } from '@/components/ui/Avatar/Avatar';
+import { Avatar } from '@/components/ui/Avatar';
 
 import { AUTH_PAGE } from '@/lib/config/routes.config';
 

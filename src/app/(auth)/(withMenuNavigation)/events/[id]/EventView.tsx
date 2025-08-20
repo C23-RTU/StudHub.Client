@@ -6,7 +6,7 @@ import { FaCalendar, FaCompass } from 'react-icons/fa';
 import { IoAlertCircle, IoCopy } from 'react-icons/io5';
 
 import { Page } from '@/components/Page';
-import { BackButton } from '@/components/ui/BackButton/BackButton';
+import { BackButton } from '@/components/ui/BackButton';
 import { Button } from '@/components/ui/button';
 import {
     DropdownMenu,

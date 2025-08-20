@@ -1,7 +1,7 @@
 import type { ComponentProps } from 'react';
 import type { UseFormRegisterReturn } from 'react-hook-form';
 
-import { Input } from '../input';
+import { Input } from './input';
 
 type Props = ComponentProps<typeof Input>;
 
@@ -15,7 +15,7 @@ export function FormField({ error, registration, ...props }: IFormField) {
         <div className="flex flex-col gap-1">
             <Input {...props} {...registration} />
 
-            {error && <p className="text-red-500 text-xss">{error}</p>}
+            {error && <p className="text-xss text-red-500">{error}</p>}
         </div>
     );
 }

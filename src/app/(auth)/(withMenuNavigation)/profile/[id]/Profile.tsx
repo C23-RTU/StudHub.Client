@@ -9,8 +9,8 @@ import { BiMessageSquare, BiSolidIdCard } from 'react-icons/bi';
 
 import { ClubCard } from '@/components/ClubComponents/ClubCard';
 import { Page } from '@/components/Page';
-import { Avatar } from '@/components/ui/Avatar/Avatar';
-import { BackButton } from '@/components/ui/BackButton/BackButton';
+import { Avatar } from '@/components/ui/Avatar';
+import { BackButton } from '@/components/ui/BackButton';
 import { Button } from '@/components/ui/button';
 import {
     DropdownMenu,

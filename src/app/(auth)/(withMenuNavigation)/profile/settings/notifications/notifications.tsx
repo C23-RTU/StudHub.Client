@@ -1,5 +1,5 @@
 import { Page } from '@/components/Page';
-import { BackButton } from '@/components/ui/BackButton/BackButton';
+import { BackButton } from '@/components/ui/BackButton';
 
 import { Header, HeaderTitle } from '@/hoc/Header/Header';
 import { MainContent } from '@/hoc/MainContent/MainContent';

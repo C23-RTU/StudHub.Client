@@ -4,7 +4,7 @@ import type { VariantProps } from 'class-variance-authority';
 import { useRouter } from 'next/navigation';
 import { FaArrowLeft } from 'react-icons/fa';
 
-import { Button } from '../button';
+import { Button } from '@/components/ui/button';
 
 import { cn } from '@/lib/utils/utils';
 

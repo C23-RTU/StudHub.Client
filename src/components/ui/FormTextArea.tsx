@@ -1,8 +1,8 @@
 import React, { type ComponentProps } from 'react';
 import { type UseFormRegisterReturn } from 'react-hook-form';
 
-import { Input } from '../input';
-import { Textarea } from '../textarea';
+import { Input } from './input';
+import { Textarea } from './textarea';
 
 type Props = ComponentProps<typeof Input>;
 

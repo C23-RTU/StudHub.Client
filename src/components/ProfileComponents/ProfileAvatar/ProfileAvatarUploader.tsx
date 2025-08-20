@@ -4,11 +4,11 @@ import { PencilIcon } from 'lucide-react';
 import dynamic from 'next/dynamic';
 import { useId } from 'react';
 
-import { Avatar } from '@/components/ui/Avatar/Avatar';
+import { Avatar } from '@/components/ui/Avatar';
 
 import { useAvatarUploader } from './useAvatarUploader';
 
-const BaseCropperDynamic = dynamic(() => import('@/components/ui/Cropper/Cropper').then((mod) => mod.BaseCropper));
+const BaseCropperDynamic = dynamic(() => import('@/components/ui/Cropper').then((mod) => mod.BaseCropper));
 
 export function ProfileAvatarUploader({ avatarSrc }: { avatarSrc?: string | null }) {
     const id = useId();

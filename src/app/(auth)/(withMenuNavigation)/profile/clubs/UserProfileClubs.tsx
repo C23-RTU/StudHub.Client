@@ -4,7 +4,7 @@ import { useMemo } from 'react';
 
 import { ClubCard } from '@/components/ClubComponents/ClubCard';
 import { Page } from '@/components/Page';
-import { BackButton } from '@/components/ui/BackButton/BackButton';
+import { BackButton } from '@/components/ui/BackButton';
 import { SkeletonList } from '@/components/ui/skeleton';
 
 import { useInfinityScroll } from '@/hooks/useInfinityScroll';

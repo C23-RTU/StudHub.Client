@@ -1,7 +1,7 @@
 import { SearchIcon } from 'lucide-react';
 import React, { type ComponentProps } from 'react';
 
-import { Input } from '../input';
+import { Input } from './input';
 
 type Props = ComponentProps<typeof Input>;
 

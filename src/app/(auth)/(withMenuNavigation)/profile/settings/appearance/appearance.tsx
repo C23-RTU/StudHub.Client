@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { IoMoon, IoSettingsSharp, IoSunny } from 'react-icons/io5';
 
 import { Page } from '@/components/Page';
-import { BackButton } from '@/components/ui/BackButton/BackButton';
+import { BackButton } from '@/components/ui/BackButton';
 import { Menu, MenuRadio } from '@/components/ui/menu';
 
 import { Header, HeaderTitle } from '@/hoc/Header/Header';
