@@ -1,6 +1,7 @@
 import { BiBell, BiExit } from 'react-icons/bi';
 import { FaGraduationCap, FaPortrait } from 'react-icons/fa';
 import { IoMailOpen } from 'react-icons/io5';
+import { RiPaintFill } from 'react-icons/ri';
 
 import { AUTH_PAGE } from '@/lib/config/routes.config';
 
@@ -12,23 +13,14 @@ export const PROFILE_SETTING_SECTIONS = {
             Icon: FaPortrait,
         },
         {
+            href: `${AUTH_PAGE.PROFILE_SETTINGS}/appearance`,
+            title: 'Внешний вид',
+            Icon: RiPaintFill,
+        },
+        {
             href: `${AUTH_PAGE.PROFILE_SETTINGS}/notifications`,
             title: 'Уведомления',
             Icon: BiBell,
-        },
-    ],
-    clubs: [
-        {
-            href: AUTH_PAGE.PROFILE_SETTINGS,
-            title: 'Клуб 1',
-            imageUrl:
-                'https://gravatar.com/avatar/d99cc6ace66fc8bd197c30c876b7224007211f4572ef6d8444693f67b4c33ab1?size=256',
-        },
-        {
-            href: AUTH_PAGE.PROFILE_SETTINGS,
-            title: 'Клуб 2',
-            imageUrl:
-                'https://gravatar.com/avatar/d99cc6ace66fc8bd197c30c876b7224007211f4572ef6d8444693f67b4c33ab1?size=256',
         },
     ],
     other: [

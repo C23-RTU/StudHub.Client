@@ -7,9 +7,9 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FaGraduationCap } from 'react-icons/fa';
 
-import { BirthDatePicker } from '@/components/ui/BirthDatePicker/BirthDatePicker';
-import { FormField } from '@/components/ui/FormField/FormField';
-import { FormTextArea } from '@/components/ui/FormTextArea/FormTextArea';
+import { BirthDatePicker } from '@/components/ui/BirthDatePicker';
+import { FormField } from '@/components/ui/FormField';
+import { FormTextArea } from '@/components/ui/FormTextArea';
 import { Button } from '@/components/ui/button';
 import {
     DropdownMenu,

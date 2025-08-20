@@ -11,7 +11,7 @@ import { useCommentStore } from '@/components/CommentComponents/store/useComment
 import Loader from '@/components/Loader';
 import { Page } from '@/components/Page';
 import { PostCard } from '@/components/PostCard/PostCard';
-import { BackButton } from '@/components/ui/BackButton/BackButton';
+import { BackButton } from '@/components/ui/BackButton';
 
 import { useInfinityScroll } from '@/hooks/useInfinityScroll';
 

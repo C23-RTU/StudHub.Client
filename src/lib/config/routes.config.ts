@@ -7,6 +7,7 @@ class AuthPage {
     FINDER = '/finder';
     PROFILE_CLUBS = '/profile/clubs';
     POST_DRAFT = '/post/draft';
+    PROFILE_CREATE_CLUB = `${this.PROFILE_SETTINGS}/create-club`;
 
     POST_COMMENTS = (id: number | string) => `/post/comments/${id}`;
     CLUB = (clubId: number | string) => `${this.CLUBS}/${clubId}`;

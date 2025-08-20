@@ -16,7 +16,7 @@ export function Switcher({
     };
 
     return (
-        <div className="font-geologica w-full rounded-md border border-neutral-300 bg-neutral-100 p-[2px] select-none dark:border-neutral-800 dark:bg-neutral-900">
+        <div className="font-geologica bg-background-light border-border w-full rounded-md border p-[2px] select-none">
             <div className="relative box-border flex h-[40px] w-full justify-between">
                 {tabs.map((name, index) => (
                     <Fragment key={index}>

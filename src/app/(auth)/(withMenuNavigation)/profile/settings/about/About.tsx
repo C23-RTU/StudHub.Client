@@ -5,7 +5,7 @@ import { FaGithub, FaGraduationCap } from 'react-icons/fa';
 import LoaderImage from '@/components/ImageLoader/ImageLoader';
 import { Page } from '@/components/Page';
 import SettingsSection from '@/components/ProfileComponents/SettingSection';
-import { BackButton } from '@/components/ui/BackButton/BackButton';
+import { BackButton } from '@/components/ui/BackButton';
 
 import { Header, HeaderTitle } from '@/hoc/Header/Header';
 import { MainContent } from '@/hoc/MainContent/MainContent';

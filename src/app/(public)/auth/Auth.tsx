@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useCallback, useMemo } from 'react';
 import { FaGraduationCap } from 'react-icons/fa';
 
 import { Switcher } from '@/components/ui/Switcher/Switcher';
@@ -15,20 +15,23 @@ enum Tabs {
 }
 
 export default function Auth() {
-    const [formType, setFormType] = useState<Tabs>(Tabs.LOGIN);
-
     const searchParams = useSearchParams();
     const router = useRouter();
 
-    useEffect(() => {
-        const type = searchParams.get('type');
-        return type === 'register' ? setFormType(Tabs.REGISTRATION) : setFormType(Tabs.LOGIN);
-    }, [searchParams]);
+    const formType = useMemo(
+        () => (searchParams.get('type') === 'register' ? Tabs.REGISTRATION : Tabs.LOGIN),
+        [searchParams]
+    );
 
-    const handleChange = (index: Tabs) => {
-        setFormType(index);
-        router.push(`/auth?type=${index === Tabs.REGISTRATION ? 'register' : 'login'}`);
-    };
+    const handleChange = useCallback(
+        (index: Tabs) => {
+            const nextType = index === Tabs.REGISTRATION ? 'register' : 'login';
+            if (searchParams.get('type') !== nextType) {
+                router.replace(`/auth?type=${nextType}`);
+            }
+        },
+        [router, searchParams]
+    );
 
     return (
         <div className="px-pageX flex min-h-screen w-full items-center justify-center bg-neutral-50 dark:bg-neutral-900">

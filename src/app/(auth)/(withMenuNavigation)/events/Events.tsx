@@ -1,12 +1,11 @@
 'use client';
 
 import { m } from 'framer-motion';
-import { CalendarClock } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
+import { CalendarBadge } from '@/components/Badges';
 import { EventCard } from '@/components/EventCard/EventCard';
 import { Page } from '@/components/Page';
-import { Button } from '@/components/ui/button';
 
 import { AUTH_PAGE } from '@/lib/config/routes.config';
 
@@ -20,11 +19,9 @@ export function Events({ events }: { events: EventDetailDTO[] }) {
 
     return (
         <Page>
-            <Header className="justify-between py-[14px]">
+            <Header className="justify-between py-[14px] pr-[12px]">
                 <HeaderTitle>События</HeaderTitle>
-                <Button size={'icon'} onClick={() => router.push(AUTH_PAGE.EVENTS_CALENDAR())}>
-                    <CalendarClock size={35} />
-                </Button>
+                <CalendarBadge onClick={() => router.push(AUTH_PAGE.EVENTS_CALENDAR())} />
             </Header>
             <MainContent className="flex flex-col gap-0">
                 {events &&

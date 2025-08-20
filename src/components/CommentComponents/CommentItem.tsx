@@ -10,7 +10,7 @@ import { useProfile } from '@/hooks/useProfile';
 
 import type { CommentDetailDTO } from '@/api/axios-client';
 
-import { Avatar } from '../ui/Avatar/Avatar';
+import { Avatar } from '../ui/Avatar';
 
 import { CommentReplies } from './CommentReplies';
 import { useCommentReplies } from './hooks/useCommentReplies';

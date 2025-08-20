@@ -8,10 +8,9 @@ import toast from 'react-hot-toast';
 import { BiMessageSquare, BiSolidIdCard } from 'react-icons/bi';
 
 import { ClubCard } from '@/components/ClubComponents/ClubCard';
-import Loader from '@/components/Loader';
 import { Page } from '@/components/Page';
-import { Avatar } from '@/components/ui/Avatar/Avatar';
-import { BackButton } from '@/components/ui/BackButton/BackButton';
+import { Avatar } from '@/components/ui/Avatar';
+import { BackButton } from '@/components/ui/BackButton';
 import { Button } from '@/components/ui/button';
 import {
     DropdownMenu,
@@ -19,6 +18,7 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { SkeletonList } from '@/components/ui/skeleton';
 
 import { AUTH_PAGE } from '@/lib/config/routes.config';
 
@@ -45,8 +45,8 @@ export default function Profile({ user }: Props) {
     const pathname = usePathname();
 
     return (
-        <Page className="p-0">
-            <Header className="border-0 p-[20px] py-[16px]">
+        <Page>
+            <Header className="justify-between border-0 p-[20px] py-[16px]">
                 <BackButton variant={'outline'} />
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
@@ -105,7 +105,7 @@ export default function Profile({ user }: Props) {
                             Показать все
                         </Link>
                     </div>
-                    {isLoading && <Loader />}
+                    {isLoading && <SkeletonList />}
                     {!isLoading &&
                         userClubs &&
                         userClubs.length > 0 &&

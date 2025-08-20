@@ -28,9 +28,9 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en" className="">
+        <html lang="en" suppressHydrationWarning>
             <body
-                className={`${inter.variable} ${geologica.variable} ${unbounded.variable} dark font-inter bg-background-light text-text antialiased`}
+                className={`${inter.variable} ${geologica.variable} ${unbounded.variable} font-inter bg-background-light text-text antialiased`}
             >
                 <ProviderLayout>{children}</ProviderLayout>
             </body>

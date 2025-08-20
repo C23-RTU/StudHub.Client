@@ -4,11 +4,11 @@ import { useQuery } from '@tanstack/react-query';
 import Link from 'next/link';
 import { BiMessageSquare, BiSolidIdCard } from 'react-icons/bi';
 
-import { SettingBadge } from '@/components/Badge/SettingBadge/SettingBadge';
+import { SettingBadge } from '@/components/Badges';
 import { ClubCard } from '@/components/ClubComponents/ClubCard';
-import Loader from '@/components/Loader';
 import { Page } from '@/components/Page';
-import { Avatar } from '@/components/ui/Avatar/Avatar';
+import { Avatar } from '@/components/ui/Avatar';
+import { SkeletonList } from '@/components/ui/skeleton';
 
 import { AUTH_PAGE } from '@/lib/config/routes.config';
 
@@ -32,7 +32,7 @@ export default function UserProfile() {
 
     return (
         <Page>
-            <Header className="justify-between border-0 py-[12px] pr-[8px]">
+            <Header className="justify-between border-0 py-[12px] pr-[12px]">
                 <HeaderTitle>Профиль</HeaderTitle>
                 <Link href={AUTH_PAGE.PROFILE_SETTINGS}>
                     <SettingBadge />
@@ -72,7 +72,7 @@ export default function UserProfile() {
                             Показать все
                         </Link>
                     </div>
-                    {isLoading && <Loader />}
+                    {isLoading && <SkeletonList />}
                     {!isLoading &&
                         userClubs &&
                         userClubs.length > 0 &&

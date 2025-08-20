@@ -8,7 +8,7 @@ import { useMemo, useState } from 'react';
 import EventCalendar from '@/components/EventCalendar/EventCalendar';
 import { EventCard } from '@/components/EventCard/EventCard';
 import { Page } from '@/components/Page';
-import { BackButton } from '@/components/ui/BackButton/BackButton';
+import { BackButton } from '@/components/ui/BackButton';
 
 import { useInfinityScroll } from '@/hooks/useInfinityScroll';
 

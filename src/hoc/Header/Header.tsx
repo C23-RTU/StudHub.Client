@@ -16,10 +16,9 @@ export function Header({ children, className, ...props }: HeaderProps) {
         </header>
     );
 }
-
 export function HeaderTitle({ children, className, ...props }: HeaderTitleProps) {
     return (
-        <h1 className={cn('font-geologica text-xl font-bold', className)} {...props}>
+        <h1 className={cn('font-geologica text-xl font-semibold', className)} {...props}>
             {children}
         </h1>
     );

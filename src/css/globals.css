@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Geologica&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Geologica:wght@100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Unbounded&display=swap');
 
 @import 'tailwindcss';
-@plugin "tailwindcss-animate";
+@import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -19,7 +19,7 @@
     --popover-border: hsl(0 0% 60%);
     --primary: hsl(222 100% 65%);
     --primary-foreground: hsl(0 0% 100%);
-    --secondary: hsl(0 0% 80%);
+    --secondary: hsl(0 0% 70%);
     --secondary-foreground: hsl(210 40% 98%);
     --text: hsl(0 0% 3.9%);
     --muted: hsl(0 0% 17.5%);
@@ -31,12 +31,6 @@
     --border: hsl(0 0% 88%);
     --radius: 0.6rem;
     --input: hsl(0 0% 17.5%);
-    --ring: hsl(224.3 76.3% 48%);
-    --chart-1: hsl(220 70% 50%);
-    --chart-2: hsl(160 60% 45%);
-    --chart-3: hsl(30 80% 55%);
-    --chart-4: hsl(280 65% 60%);
-    --chart-5: hsl(340 75% 55%);
 }
 
 .dark {
@@ -51,7 +45,7 @@
     --popover-border: hsl(0 0% 20%);
     --primary: hsl(222 100% 65%);
     --primary-foreground: hsl(0, 0%, 100%);
-    --secondary: hsl(0, 0%, 14%);
+    --secondary: hsl(0, 0%, 30%);
     --secondary-foreground: hsl(0, 0%, 10%);
     --text: hsl(0 0% 98%);
     --muted: hsl(0 0% 17.5%);
@@ -64,18 +58,12 @@
     --border: hsl(0, 0%, 18%);
     --input: hsl(0 0% 17.5%);
     --ring: hsl(224.3 76.3% 48%);
-    --chart-1: hsl(220 70% 50%);
-    --chart-2: hsl(160 60% 45%);
-    --chart-3: hsl(30 80% 55%);
-    --chart-4: hsl(280 65% 60%);
-    --chart-5: hsl(340 75% 55%);
 }
 
 @theme {
     --font-inter: 'Inter', sans-serif;
     --font-geologica: 'Geologica', sans-serif;
     --font-unbounded: 'Unbounded', sans-serif;
-    --font-montserrat: 'Montserrat', sans-serif;
     --text-xss: 10px;
 }
 
@@ -103,11 +91,6 @@
     --color-border: var(--border);
     --color-input: var(--input);
     --color-ring: var(--ring);
-    --color-chart-1: var(--chart-1);
-    --color-chart-2: var(--chart-2);
-    --color-chart-3: var(--chart-3);
-    --color-chart-4: var(--chart-4);
-    --color-chart-5: var(--chart-5);
     --radius-sm: calc(var(--radius) - 4px);
     --radius-md: calc(var(--radius) - 2px);
     --radius-lg: var(--radius);

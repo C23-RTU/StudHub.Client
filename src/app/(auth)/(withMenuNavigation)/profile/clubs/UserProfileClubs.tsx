@@ -3,9 +3,9 @@
 import { useMemo } from 'react';
 
 import { ClubCard } from '@/components/ClubComponents/ClubCard';
-import Loader from '@/components/Loader';
 import { Page } from '@/components/Page';
-import { BackButton } from '@/components/ui/BackButton/BackButton';
+import { BackButton } from '@/components/ui/BackButton';
+import { SkeletonList } from '@/components/ui/skeleton';
 
 import { useInfinityScroll } from '@/hooks/useInfinityScroll';
 
@@ -32,7 +32,7 @@ export default function UserProfileClubs() {
                 <HeaderTitle>Подписки</HeaderTitle>
             </Header>
             <div className="space-y-4 p-[20px]">
-                {(isFetchingNextPage || isLoading) && <Loader />}
+                {(isFetchingNextPage || isLoading) && <SkeletonList />}
                 {!isLoading && userClubs.length === 0 ? (
                     <p className="text-center text-neutral-400">Вы пока не подписаны ни на один клуб</p>
                 ) : (
