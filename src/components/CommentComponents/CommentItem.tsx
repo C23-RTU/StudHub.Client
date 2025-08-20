@@ -101,12 +101,7 @@ export function CommentItem({
             >
                 <Link href={AUTH_PAGE.USER_PROFILE(comment.personSummary.id)}>
                     <div className="shrink-0">
-                        <Avatar
-                            src={comment.personSummary?.imagePath}
-                            loaderSize={15}
-                            size={40}
-                            alt={comment.personSummary.lastName}
-                        />
+                        <Avatar src={comment.personSummary?.imagePath} size={40} alt={comment.personSummary.lastName} />
                     </div>
                 </Link>
 
