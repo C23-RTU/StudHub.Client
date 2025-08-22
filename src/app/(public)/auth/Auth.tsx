@@ -1,13 +1,19 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useCallback, useMemo } from 'react';
 import { FaGraduationCap } from 'react-icons/fa';
 
 import { Switcher } from '@/components/ui/Switcher/Switcher';
+import { SkeletonList } from '@/components/ui/skeleton';
 
-import Login from './Forms/Login';
-import Register from './Forms/Register';
+const LoginDynamic = dynamic(() => import('./Forms/Login'), {
+    loading: () => <SkeletonList classNameSkeletonItem="h-[38px]" count={3} />,
+});
+const RegisterDynamic = dynamic(() => import('./Forms/Register'), {
+    loading: () => <SkeletonList classNameSkeletonItem="h-[38px]" count={9} />,
+});
 
 enum Tabs {
     LOGIN = 0,
@@ -47,8 +53,8 @@ export default function Auth() {
                 </p>
                 <Switcher tabs={['Вход', 'Регистрация']} activeTabIndex={formType} onChange={handleChange} />
                 <div className="w-full">
-                    {formType === Tabs.LOGIN && <Login />}
-                    {formType === Tabs.REGISTRATION && <Register />}
+                    {formType === Tabs.LOGIN && <LoginDynamic />}
+                    {formType === Tabs.REGISTRATION && <RegisterDynamic />}
                 </div>
                 <small className="text-center text-xs text-neutral-400 dark:text-neutral-600">
                     © C23-RTU, 2025. СтудХаб является неофициальным студенческим проектом в рамках университета РТУ

@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 
 import type { PostDetailDTO } from '@/api/axios-client';
 
@@ -19,11 +19,8 @@ type PostCardProps = {
 export function PostCard({ className, post }: PostCardProps) {
     const [showFull, setShowFull] = useState(false);
 
-    const isLong = useMemo(() => post.content.length > 356, [post]);
-    const displayText = useMemo(
-        () => (!showFull && isLong ? truncateText(post.content, 200) : post.content),
-        [post, isLong, showFull]
-    );
+    const isLong = post.content.length > 356;
+    const displayText = !showFull && isLong ? truncateText(post.content, 200) : post.content;
 
     return (
         <article className={cn('border-border flex flex-col gap-3 border-b p-[20px]', className)}>

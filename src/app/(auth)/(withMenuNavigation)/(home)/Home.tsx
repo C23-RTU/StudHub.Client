@@ -1,11 +1,10 @@
 'use client';
 
-import { format } from 'date-fns';
-import { ru } from 'date-fns/locale';
+import dynamic from 'next/dynamic';
 
 import Loader from '@/components/Loader';
 import { Page } from '@/components/Page';
-import { PostCard } from '@/components/PostCard/PostCard';
+import { Skeleton } from '@/components/ui/skeleton';
 
 import { useInfinityScroll } from '@/hooks/useInfinityScroll';
 
@@ -13,22 +12,13 @@ import { feedApi } from '@/api/api';
 
 import { Header, HeaderTitle } from '@/hoc/Header/Header';
 import { MainContent } from '@/hoc/MainContent/MainContent';
+import { parseLocalTime } from '@/lib/utils/time.util';
 
-const getTimeBasedGreeting = (): string => {
-    const currentHour = new Date().getHours();
+const PostCardDynamic = dynamic(() => import('@/components/PostCard/PostCard').then((mod) => mod.PostCard), {
+    loading: () => <Skeleton className="my-2 h-[400px]" />,
+});
 
-    if (currentHour >= 5 && currentHour < 12) {
-        return 'Доброе утро';
-    } else if (currentHour >= 12 && currentHour < 18) {
-        return 'Добрый день';
-    } else if (currentHour >= 18 && currentHour < 23) {
-        return 'Добрый вечер';
-    } else {
-        return 'Доброй ночи';
-    }
-};
-
-export default function Home() {
+export default function Home({ timeBasedGreeting }: { timeBasedGreeting: string }) {
     const {
         ref,
         infiniteQuery: { data, isLoading, isFetchingNextPage, hasNextPage, error },
@@ -41,15 +31,17 @@ export default function Home() {
     return (
         <Page>
             <Header className="justify-between">
-                <HeaderTitle>{getTimeBasedGreeting()}</HeaderTitle>
-                <p className="font-medium text-neutral-500">{format(Date(), 'd MMMM', { locale: ru })}</p>
+                <HeaderTitle>{timeBasedGreeting}</HeaderTitle>
+                <p className="font-medium text-neutral-500">
+                    {parseLocalTime(Date(), { day: 'numeric', month: 'short' })}
+                </p>
             </Header>
 
             <MainContent>
                 <div className="flex flex-col">
-                    {isLoading && <Loader className="mx-auto mt-10" />}
-                    {data && data.pages.flatMap((page) => page).map((post) => <PostCard key={post.id} post={post} />)}
-                    {isFetchingNextPage && <Loader className="mx-auto mt-10" />}
+                    {data &&
+                        data.pages.flatMap((page) => page).map((post) => <PostCardDynamic key={post.id} post={post} />)}
+                    {(isFetchingNextPage || isLoading) && <Loader className="mx-auto mt-10" />}
                     {!hasNextPage && !isLoading && (
                         <p className="p-4 pb-5 text-center text-neutral-500">Ваша лента закончилась</p>
                     )}
