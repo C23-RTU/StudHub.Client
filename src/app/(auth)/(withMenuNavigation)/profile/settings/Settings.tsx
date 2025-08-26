@@ -7,18 +7,22 @@ import { ProfileAvatarUploader } from '@/components/ProfileComponents/ProfileAva
 import { PROFILE_SETTING_SECTIONS } from '@/components/ProfileComponents/profile-section.config';
 import { BackButton } from '@/components/ui/BackButton';
 import { Menu, MenuLink } from '@/components/ui/menu';
+import { SkeletonList } from '@/components/ui/skeleton';
 
 import { AUTH_PAGE } from '@/lib/config/routes.config';
 
 import { useProfile } from '@/hooks/useProfile';
 
-import type { PersonDetailDTO } from '@/api/axios-client';
+import { type PersonDetailDTO } from '@/api/axios-client';
 
+import { useOwnedClubs } from './useOwnedClubs';
 import { Header, HeaderTitle } from '@/hoc/Header/Header';
 import { MainContent } from '@/hoc/MainContent/MainContent';
+import { getStaticImg } from '@/lib/helpers/getStaticImg.helper';
 
 export default function Settings({ initUser }: { initUser: PersonDetailDTO }) {
     const { data: user } = useProfile(initUser);
+    const { data: ownedClubs, isLoading } = useOwnedClubs();
 
     return (
         <Page>
@@ -44,7 +48,24 @@ export default function Settings({ initUser }: { initUser: PersonDetailDTO }) {
                         ))}
                     </Menu>
                     <p className="font-semibold text-neutral-500">Ваши клубы</p>
-                    <Menu>
+                    <Menu className="overflow-hidden">
+                        {isLoading && (
+                            <SkeletonList
+                                className="gap-[2px]"
+                                count={2}
+                                classNameSkeletonItem="rounded-none h-[48px]"
+                            />
+                        )}
+                        {!isLoading &&
+                            ownedClubs?.map((club) => (
+                                <MenuLink
+                                    key={club.id}
+                                    title={club.name}
+                                    href={AUTH_PAGE.CLUB(club.id)}
+                                    imageSrc={getStaticImg(club.bannerUrl ?? '')}
+                                    imageAlt={club.name}
+                                />
+                            ))}
                         <MenuLink href={AUTH_PAGE.PROFILE_CREATE_CLUB} title="Создать клуб" Icon={LuPlus} />
                     </Menu>
                     <p className="font-semibold text-neutral-500">Прочее</p>
