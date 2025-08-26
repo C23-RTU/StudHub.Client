@@ -1,7 +1,8 @@
 import type { Dispatch, SetStateAction } from 'react';
 
+import { ResponsiveDialog } from '@/components/ui/responsive-dialog';
+
 import { Button } from '../../ui/button';
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from '../../ui/sheet';
 
 type Props = {
     unsubVisible: boolean;
@@ -11,19 +12,19 @@ type Props = {
 
 export function UnsubSheet({ unsubVisible = false, setUnsubVisible, onClick }: Props) {
     return (
-        <Sheet open={unsubVisible} onOpenChange={setUnsubVisible}>
-            <SheetContent side="bottom">
-                <SheetHeader>
-                    <SheetTitle className="text-center">
-                        <SheetDescription className="text-lg text-neutral-50">
-                            Вы хотите отписаться от клуба?
-                        </SheetDescription>
-                    </SheetTitle>
-                </SheetHeader>
-                <Button className="mx-auto mt-3 w-full justify-center" onClick={onClick}>
-                    Отписаться
+        <ResponsiveDialog open={unsubVisible} onOpenChange={setUnsubVisible}>
+            <ResponsiveDialog.Header>
+                <ResponsiveDialog.Title>Вы хотите отписаться от клуба?</ResponsiveDialog.Title>
+                <ResponsiveDialog.Description className="text-md text-neutral-500">
+                    Посты этого клуба больше не будут появлятся на вашей главной странице.
+                </ResponsiveDialog.Description>
+            </ResponsiveDialog.Header>
+            <ResponsiveDialog.Footer className="">
+                <Button onClick={onClick}>Отписаться</Button>
+                <Button variant="outline" onClick={() => setUnsubVisible(false)}>
+                    Отменить
                 </Button>
-            </SheetContent>
-        </Sheet>
+            </ResponsiveDialog.Footer>
+        </ResponsiveDialog>
     );
 }

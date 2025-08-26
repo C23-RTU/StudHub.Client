@@ -34,7 +34,7 @@ export function Subscribers({ id }: { id: string }) {
                 <HeaderTitle>Подписчики</HeaderTitle>
             </Header>
             <div className="space-y-4 p-[20px]">
-                {isLoading && <Loader />}
+                {isLoading && <Loader className="mx-auto" />}
                 {subscribers?.pages.flatMap((page) =>
                     page.map((subscriber) => (
                         <SubscriberCard
