@@ -1,5 +1,5 @@
 import { Button } from '../ui/button';
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from '../ui/sheet';
+import { Drawer, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerTitle } from '../ui/drawer';
 
 import { CommentItem } from './CommentItem';
 import { useRemoveComment } from './hooks/useRemoveComment';
@@ -12,33 +12,22 @@ export function CommentMoreSheet() {
     const { isPending, mutate } = useRemoveComment();
 
     return (
-        <Sheet open={!!commentMoreSheet} onOpenChange={closeCommentMoreSheet}>
-            <SheetContent side="bottom">
-                <SheetHeader>
-                    <SheetTitle className="text-left">
-                        {commentMoreSheet && <CommentItem comment={commentMoreSheet} showMinimumComponent={true} />}
-                    </SheetTitle>
-                    <SheetDescription>
-                        {commentMoreSheet && !commentMoreSheet?.deletedAt && (
-                            <Button
-                                className="w-full justify-center mx-auto mt-3"
-                                variant={'red'}
-                                onClick={() => mutate()}
-                                isLoading={isPending}
-                            >
-                                Удалить комментарий
-                            </Button>
-                        )}
-                    </SheetDescription>
-                </SheetHeader>
-                <Button
-                    className="w-full justify-center mx-auto mt-3"
-                    variant={'secondary'}
-                    onClick={closeCommentMoreSheet}
-                >
-                    Отмена
-                </Button>
-            </SheetContent>
-        </Sheet>
+        <Drawer open={!!commentMoreSheet} onOpenChange={closeCommentMoreSheet}>
+            <DrawerContent>
+                <DrawerHeader>
+                    {commentMoreSheet && <CommentItem comment={commentMoreSheet} showMinimumComponent={true} />}
+                </DrawerHeader>
+                <DrawerFooter>
+                    {commentMoreSheet && !commentMoreSheet?.deletedAt && (
+                        <Button variant={'red'} onClick={() => mutate()} isLoading={isPending}>
+                            Удалить комментарий
+                        </Button>
+                    )}
+                    <Button variant={'outline'} onClick={closeCommentMoreSheet}>
+                        Отмена
+                    </Button>
+                </DrawerFooter>
+            </DrawerContent>
+        </Drawer>
     );
 }

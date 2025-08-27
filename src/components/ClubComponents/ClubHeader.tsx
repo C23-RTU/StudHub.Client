@@ -47,8 +47,6 @@ export function ClubHeader({ initClubData }: { initClubData: ClubDetailDTO }) {
     const displaySubscribers = useMemo(() => {
         const subscribers = club?.subscriberCount || 0;
 
-        if (subscribers === 0) return 'Нет подписчиков';
-
         const lastDigit = subscribers % 10;
         const lastTwoDigits = subscribers % 100;
 
@@ -122,7 +120,7 @@ export function ClubHeader({ initClubData }: { initClubData: ClubDetailDTO }) {
                     subscribed={club?.isUserSubscribed}
                 />
             </div>
-            <div className="flex flex-col gap-2 p-4 pt-2 pb-0">
+            <div className="flex w-full flex-col gap-2 p-4 pt-2 pb-0">
                 <h1 className="font-geologica text-text text-lg font-bold">{club?.name}</h1>
                 <p className="mb-1 text-sm text-neutral-700 dark:text-neutral-300">{club?.about}</p>
                 <Link href={`/clubs/${club.id}/subscribers`} className="text-sm text-neutral-500">
