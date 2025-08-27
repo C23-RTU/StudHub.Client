@@ -25,10 +25,7 @@ function DrawerOverlay({ className, ...props }: React.ComponentProps<typeof Draw
     return (
         <DrawerPrimitive.Overlay
             data-slot="drawer-overlay"
-            className={cn(
-                'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/50',
-                className
-            )}
+            className={cn('fixed inset-0 z-50 bg-black/50', className)}
             {...props}
         />
     );
@@ -40,6 +37,10 @@ function DrawerContent({ className, children, ...props }: React.ComponentProps<t
             <DrawerOverlay />
             <DrawerPrimitive.Content
                 data-slot="drawer-content"
+                onCloseAutoFocus={(event) => {
+                    event.preventDefault();
+                    document.body.style.pointerEvents = '';
+                }}
                 className={cn(
                     'group/drawer-content bg-background border-border fixed z-50 flex h-auto flex-col',
                     'data-[vaul-drawer-direction=top]:inset-x-0 data-[vaul-drawer-direction=top]:top-0 data-[vaul-drawer-direction=top]:mb-24 data-[vaul-drawer-direction=top]:max-h-[80vh] data-[vaul-drawer-direction=top]:rounded-b-lg data-[vaul-drawer-direction=top]:border-b',
@@ -78,7 +79,7 @@ function DrawerTitle({ className, ...props }: React.ComponentProps<typeof Drawer
     return (
         <DrawerPrimitive.Title
             data-slot="drawer-title"
-            className={cn('text-foreground font-semibold', className)}
+            className={cn('text-text font-semibold', className)}
             {...props}
         />
     );

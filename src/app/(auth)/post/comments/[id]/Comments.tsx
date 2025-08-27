@@ -2,7 +2,7 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
-import { Fragment, useEffect } from 'react';
+import { Fragment, useEffect, useMemo } from 'react';
 
 import { CommentItem } from '@/components/CommentComponents/CommentItem';
 import { CommentMoreSheet } from '@/components/CommentComponents/CommentMoreSheet';
@@ -21,6 +21,8 @@ import type { PostDetailDTO } from '@/api/axios-client/models';
 import { Header, HeaderTitle } from '@/hoc/Header/Header';
 import { MainContent } from '@/hoc/MainContent/MainContent';
 
+const COMMENTS_PAGE_SIZE = 100;
+
 export function Comments({ serverPost }: { serverPost: PostDetailDTO }) {
     const router = useRouter();
 
@@ -31,6 +33,9 @@ export function Comments({ serverPost }: { serverPost: PostDetailDTO }) {
         queryKey: ['fetch-post', serverPost.id],
         queryFn: async () => (await postApi.postsGetById(serverPost.id)).data,
         initialData: serverPost,
+        staleTime: 30_000,
+        gcTime: 60_000 * 5,
+        refetchOnWindowFocus: false,
     });
 
     const {
@@ -39,25 +44,22 @@ export function Comments({ serverPost }: { serverPost: PostDetailDTO }) {
     } = useInfinityScroll({
         queryKey: ['fetch-post-comments', serverPost.id],
         queryFn: async ({ pageParam }) => (await commentApi.commentsGetByPostId(serverPost.id, 0, pageParam, 100)).data,
-        pageSize: 100,
+        pageSize: COMMENTS_PAGE_SIZE,
     });
+
+    const comments = useMemo(() => data?.pages.flatMap((p) => p) ?? [], [data]);
 
     useEffect(() => {
         if (!highlightComment) return;
-
-        document
-            .getElementById(`comment-${highlightComment.inReplyTo}`)
-            ?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-        const timerId = setTimeout(() => {
-            resetHighlightComment();
-        }, 1000);
-
-        return () => {
-            clearTimeout(timerId);
+        const run = () => {
+            const el = document.getElementById(`comment-${highlightComment.inReplyTo}`);
+            el?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            const t = window.setTimeout(() => resetHighlightComment(), 1000);
+            return () => window.clearTimeout(t);
         };
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [highlightComment]);
+        const r = requestAnimationFrame(() => run());
+        return () => cancelAnimationFrame(r);
+    }, [highlightComment, resetHighlightComment]);
 
     return (
         <Page className="p-0">
@@ -82,7 +84,7 @@ export function Comments({ serverPost }: { serverPost: PostDetailDTO }) {
                                 ))}
                             </Fragment>
                         ))}
-                    {(isLoading || isFetchingNextPage) && <Loader className="size-10" />}
+                    {(isLoading || isFetchingNextPage) && <Loader className="mx-auto size-10" />}
                     {!isFetchingNextPage && <div ref={ref} />}
 
                     <TextareaEditorComment post={post} hasNextPage={hasNextPage} />

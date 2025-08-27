@@ -20,6 +20,8 @@ import {
     DrawerTitle as RDrawerTitle,
 } from '@/components/ui/drawer';
 
+import { cn } from '@/lib/utils/utils';
+
 type ResponsiveDialogContextValue = {
     isDesktop: boolean;
 };
@@ -36,16 +38,17 @@ type RootProps = {
     open: boolean;
     onOpenChange: (open: boolean) => void;
     contentClassName?: string;
+    modal?: boolean;
     children: React.ReactNode;
 };
 
-function ResponsiveDialogRoot({ open, onOpenChange, contentClassName, children }: RootProps) {
+function ResponsiveDialogRoot({ open = false, modal = true, onOpenChange, contentClassName, children }: RootProps) {
     const isDesktop = useMediaQuery('(min-width: 768px)') ?? true;
 
     if (isDesktop) {
         return (
             <ResponsiveDialogContext.Provider value={{ isDesktop }}>
-                <Dialog open={open} onOpenChange={onOpenChange}>
+                <Dialog modal={modal} open={open} onOpenChange={onOpenChange}>
                     <DialogContent className={contentClassName}>{children}</DialogContent>
                 </Dialog>
             </ResponsiveDialogContext.Provider>
@@ -54,7 +57,7 @@ function ResponsiveDialogRoot({ open, onOpenChange, contentClassName, children }
 
     return (
         <ResponsiveDialogContext.Provider value={{ isDesktop }}>
-            <Drawer open={open} onOpenChange={onOpenChange}>
+            <Drawer open={open} modal={modal} onOpenChange={onOpenChange}>
                 <DrawerContent className={contentClassName}>{children}</DrawerContent>
             </Drawer>
         </ResponsiveDialogContext.Provider>
@@ -107,10 +110,20 @@ function Body({ children, className }: SubComponentProps) {
     return <div className={isDesktop ? className : ['p-5', className].filter(Boolean).join(' ')}>{children}</div>;
 }
 
+function Inherited({ children, className }: SubComponentProps) {
+    const { isDesktop } = useResponsiveCtx();
+    return isDesktop ? (
+        <div className={className}>{children}</div>
+    ) : (
+        <div className={cn('p-[20px]', className)}>{children}</div>
+    );
+}
+
 export const ResponsiveDialog = Object.assign(ResponsiveDialogRoot, {
     Header,
     Title,
     Description,
     Footer,
+    Inherited,
     Body,
 });
