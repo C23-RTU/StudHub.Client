@@ -5,18 +5,17 @@ import { EllipsisVertical } from 'lucide-react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import toast from 'react-hot-toast';
 import { IoAlertCircle, IoCopy } from 'react-icons/io5';
 
+import { useClubReportDialogStore } from '@/components/ClubComponents/store/clubReportDialog';
 import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-
-import { useClubReportDialogStore } from '@/store/clubReportDialog';
 
 import { clubsApi } from '@/api/api';
 import type { ClubDetailDTO } from '@/api/axios-client';

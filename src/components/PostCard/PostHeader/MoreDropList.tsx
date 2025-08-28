@@ -48,9 +48,7 @@ export function MoreDropList({ post }: { post: PostDetailDTO }) {
                 >
                     Поделиться
                 </DropdownMenuItem>
-                <DropdownMenuItem variant="destructive" className="text-red-400">
-                    Пожаловаться
-                </DropdownMenuItem>
+                <DropdownMenuItem variant="destructive">Пожаловаться</DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>
     );

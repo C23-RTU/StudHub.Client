@@ -1,21 +1,20 @@
 'use client';
 
-import { useClubReportDialogStore } from '@/components/ClubComponents/store/clubReportDialog';
+import { usePostReportDialogStore } from '@/components/PostCard/store/useReportPostStore';
+import { Button } from '@/components/ui/button';
+import { ResponsiveDialog } from '@/components/ui/responsive-dialog';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Textarea } from '@/components/ui/textarea';
 
-import { Button } from '../ui/button';
-import { ResponsiveDialog } from '../ui/responsive-dialog';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
-import { Textarea } from '../ui/textarea';
-
-export default function ClubReportDialog() {
-    const reportDialogOpen = useClubReportDialogStore((store) => store.open);
-    const reportDialogOnOpenChange = useClubReportDialogStore((store) => store.onOpenChange);
+export default function PostReportDialog() {
+    const postDialogOpen = usePostReportDialogStore((store) => store.open);
+    const postDialogOnOpenChange = usePostReportDialogStore((store) => store.onOpenChange);
     return (
-        <ResponsiveDialog open={reportDialogOpen} onOpenChange={reportDialogOnOpenChange}>
+        <ResponsiveDialog open={postDialogOpen} onOpenChange={postDialogOnOpenChange}>
             <ResponsiveDialog.Header>
-                <ResponsiveDialog.Title>Пожаловаться на клуб</ResponsiveDialog.Title>
+                <ResponsiveDialog.Title>Пожаловаться на пост</ResponsiveDialog.Title>
                 <ResponsiveDialog.Description>
-                    Выберите причину жалобы на клуб и добавьте комментарий (необязательно).
+                    Выберите причину жалобы на пост и добавьте комментарий (необязательно).
                 </ResponsiveDialog.Description>
             </ResponsiveDialog.Header>
             <ResponsiveDialog.Inherited>
