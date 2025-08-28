@@ -61,7 +61,7 @@ export default function Settings({ initUser }: { initUser: PersonDetailDTO }) {
                                 <MenuLink
                                     key={club.id}
                                     title={club.name}
-                                    href={AUTH_PAGE.CLUB(club.id)}
+                                    href={AUTH_PAGE.SETTING_CLUB(club.id)}
                                     imageSrc={getStaticImg(club.bannerUrl ?? '')}
                                     imageAlt={club.name}
                                 />
