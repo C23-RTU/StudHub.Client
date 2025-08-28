@@ -33,7 +33,7 @@ export default function ClubReportDialog() {
                         </SelectContent>
                     </Select>
                     <p className="font-semibold">Комментарий</p>
-                    <Textarea placeholder="Комментарий (необязательно)" />
+                    <Textarea placeholder="Комментарий (необязательно)" className="text-sm" />
                 </div>
             </ResponsiveDialog.Inherited>
             <ResponsiveDialog.Footer>

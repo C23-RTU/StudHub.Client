@@ -14,7 +14,7 @@ function BadgeWrapper({ children, ...props }: TBadgeWrapper) {
 function SettingBadge({ ...props }: HTMLAttributes<HTMLDivElement>) {
     return (
         <BadgeWrapper {...props}>
-            <IoSettingsSharp size={28} />
+            <IoSettingsSharp size={24} />
         </BadgeWrapper>
     );
 }
@@ -22,7 +22,7 @@ function SettingBadge({ ...props }: HTMLAttributes<HTMLDivElement>) {
 function CalendarBadge({ ...props }: HTMLAttributes<HTMLDivElement>) {
     return (
         <BadgeWrapper {...props}>
-            <IoCalendar size={28} />
+            <IoCalendar size={24} />
         </BadgeWrapper>
     );
 }
