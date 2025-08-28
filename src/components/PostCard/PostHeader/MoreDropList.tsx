@@ -14,8 +14,11 @@ import { AUTH_PAGE } from '@/lib/config/routes.config';
 
 import type { PostDetailDTO } from '@/api/axios-client/models';
 
+import { usePostReportDialogStore } from '../store/useReportPostStore';
+
 export function MoreDropList({ post }: { post: PostDetailDTO }) {
     const router = useRouter();
+    const postReportOpen = usePostReportDialogStore((store) => store.openDialog);
 
     return (
         <DropdownMenu>
@@ -48,7 +51,10 @@ export function MoreDropList({ post }: { post: PostDetailDTO }) {
                 >
                     Поделиться
                 </DropdownMenuItem>
-                <DropdownMenuItem variant="destructive">Пожаловаться</DropdownMenuItem>
+                {/* TODO свзяать с постом */}
+                <DropdownMenuItem variant="destructive" onClick={() => postReportOpen(0)}>
+                    Пожаловаться
+                </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>
     );
