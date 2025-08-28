@@ -93,11 +93,8 @@ export function ClubHeader({ initClubData }: { initClubData: ClubDetailDTO }) {
                                 <IoCopy className="text-neutral-400" />
                                 Скопировать ссылку
                             </DropdownMenuItem>
-                            <DropdownMenuItem
-                                className="text-red-400 hover:text-red-400"
-                                onClick={() => reportOpen(club.id)}
-                            >
-                                <IoAlertCircle className="text-red-400" />
+                            <DropdownMenuItem variant="destructive" onClick={() => reportOpen(club.id)}>
+                                <IoAlertCircle />
                                 Пожаловаться
                             </DropdownMenuItem>
                         </DropdownMenuContent>

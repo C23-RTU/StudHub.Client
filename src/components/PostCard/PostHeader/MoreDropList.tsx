@@ -1,19 +1,12 @@
 import { EllipsisIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
-import { BiSolidMegaphone } from 'react-icons/bi';
-import { IoIosShare, IoMdShare } from 'react-icons/io';
-import { IoCopy, IoShare } from 'react-icons/io5';
 
 import { Button } from '@/components/ui/button';
 import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
-    DropdownMenuPortal,
-    DropdownMenuSub,
-    DropdownMenuSubContent,
-    DropdownMenuSubTrigger,
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
@@ -54,6 +47,9 @@ export function MoreDropList({ post }: { post: PostDetailDTO }) {
                     }}
                 >
                     Поделиться
+                </DropdownMenuItem>
+                <DropdownMenuItem variant="destructive" className="text-red-400">
+                    Пожаловаться
                 </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>

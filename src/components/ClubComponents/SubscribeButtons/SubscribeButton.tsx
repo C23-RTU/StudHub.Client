@@ -22,7 +22,7 @@ export function SubscribeButton({
     size = 'default',
     className = '',
 }: {
-    clubId?: number;
+    clubId: number;
     isBig: boolean;
     subscribed: boolean | undefined;
     className?: string;
