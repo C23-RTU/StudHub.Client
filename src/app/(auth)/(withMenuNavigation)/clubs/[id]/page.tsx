@@ -9,9 +9,9 @@ const getClubsGetByIdMemo = cache(async (id: string) => {
     return (await clubsApi.clubsGetById(Number(id))).data;
 });
 
-export async function generateMetadata({ params }: { params: { id: string } }) {
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
     try {
-        const id = params.id;
+        const id = (await params).id;
         const club = await getClubsGetByIdMemo(id);
         return {
             title: `${club.name} - Клуб`,
@@ -25,8 +25,8 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
     }
 }
 
-export default async function Page(props: { params: { id: string } }) {
-    const id = props.params.id;
+export default async function Page(props: { params: Promise<{ id: string }> }) {
+    const id = (await props.params).id;
 
     try {
         const club = await getClubsGetByIdMemo(id);

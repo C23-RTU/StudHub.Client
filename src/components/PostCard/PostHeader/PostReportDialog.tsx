@@ -26,8 +26,8 @@ export default function PostReportDialog() {
                         </SelectTrigger>
                         <SelectContent>
                             <SelectItem value="spam">Спам</SelectItem>
-                            <SelectItem value="personalization">Аватар или баннер</SelectItem>
-                            <SelectItem value="description">Описание</SelectItem>
+                            <SelectItem value="personalization">Введение в заблуждение</SelectItem>
+                            <SelectItem value="description">Разжигание неновести</SelectItem>
                             <SelectItem value="other">Другое</SelectItem>
                         </SelectContent>
                     </Select>

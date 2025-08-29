@@ -9,7 +9,6 @@ import { ActionButton } from '../ui/PostActionButton/PostActionButton';
 import { PostHeader } from './PostHeader/PostHeader';
 import PostReportDialog from './PostHeader/PostReportDialog';
 import { PostImageWrapper } from './PostImageSwiper/PostImageWrapper';
-import { usePostReportDialogStore } from './store/useReportPostStore';
 import { truncateText } from '@/lib/utils/text.util';
 import { cn } from '@/lib/utils/utils';
 
