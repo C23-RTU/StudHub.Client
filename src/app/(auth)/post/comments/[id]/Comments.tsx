@@ -33,9 +33,6 @@ export function Comments({ serverPost }: { serverPost: PostDetailDTO }) {
         queryKey: ['fetch-post', serverPost.id],
         queryFn: async () => (await postApi.postsGetById(serverPost.id)).data,
         initialData: serverPost,
-        staleTime: 30_000,
-        gcTime: 60_000 * 5,
-        refetchOnWindowFocus: false,
     });
 
     const {

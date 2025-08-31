@@ -1,5 +1,6 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import { useMemo, useState } from 'react';
 
 import type { PostDetailDTO } from '@/api/axios-client';
@@ -7,7 +8,6 @@ import type { PostDetailDTO } from '@/api/axios-client';
 import { ActionButton } from '../ui/PostActionButton/PostActionButton';
 
 import { PostHeader } from './PostHeader/PostHeader';
-import PostReportDialog from './PostHeader/PostReportDialog';
 import { PostImageWrapper } from './PostImageSwiper/PostImageWrapper';
 import { truncateText } from '@/lib/utils/text.util';
 import { cn } from '@/lib/utils/utils';
@@ -16,6 +16,8 @@ type PostCardProps = {
     className?: string;
     post: PostDetailDTO;
 };
+
+const PostReportDialog = dynamic(() => import('./PostHeader/PostReportDialog').then((mod) => mod.default));
 
 export function PostCard({ className, post }: PostCardProps) {
     const [showFull, setShowFull] = useState(false);
