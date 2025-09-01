@@ -22,11 +22,8 @@ const PostReportDialog = dynamic(() => import('./PostHeader/PostReportDialog').t
 export function PostCard({ className, post }: PostCardProps) {
     const [showFull, setShowFull] = useState(false);
 
-    const isLong = useMemo(() => post.content.length > 356, [post]);
-    const displayText = useMemo(
-        () => (!showFull && isLong ? truncateText(post.content, 200) : post.content),
-        [post, isLong, showFull]
-    );
+    const isLong = post.content.length > 356;
+    const displayText = !showFull && isLong ? truncateText(post.content, 200) : post.content;
 
     return (
         <>

@@ -1,38 +1,56 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
 import { Fragment, useEffect, useMemo } from 'react';
 
-import { CommentItem } from '@/components/CommentComponents/CommentItem';
-import { CommentMoreSheet } from '@/components/CommentComponents/CommentMoreSheet';
-import { TextareaEditorComment } from '@/components/CommentComponents/TextareaEditorComment';
 import { useCommentStore } from '@/components/CommentComponents/store/useComment.store';
 import Loader from '@/components/Loader';
 import { Page } from '@/components/Page';
-import { PostCard } from '@/components/PostCard/PostCard';
 import { BackButton } from '@/components/ui/BackButton';
+import { Skeleton } from '@/components/ui/skeleton';
 
 import { useInfinityScroll } from '@/hooks/useInfinityScroll';
 
 import { commentApi, postApi } from '@/api/api';
-import type { PostDetailDTO } from '@/api/axios-client/models';
 
 import { Header, HeaderTitle } from '@/hoc/Header/Header';
 import { MainContent } from '@/hoc/MainContent/MainContent';
 
 const COMMENTS_PAGE_SIZE = 100;
 
-export function Comments({ serverPost }: { serverPost: PostDetailDTO }) {
+const PostCardDynamic = dynamic(() => import('@/components/PostCard/PostCard').then((mod) => mod.PostCard), {
+    loading: () => <Skeleton className="h-[505px] rounded-none" />,
+});
+const CommentItemDynamic = dynamic(
+    () => import('@/components/CommentComponents/CommentItem').then((mod) => mod.CommentItem),
+    {
+        loading: () => <Skeleton className="h-[85px]" />,
+    }
+);
+const CommentMoreSheetDynamic = dynamic(
+    () => import('@/components/CommentComponents/CommentMoreSheet').then((mod) => mod.CommentMoreSheet),
+    {
+        loading: () => <></>,
+    }
+);
+const TextareaEditorCommentDynamic = dynamic(
+    () => import('@/components/CommentComponents/TextareaEditorComment').then((mod) => mod.TextareaEditorComment),
+    {
+        loading: () => <></>,
+    }
+);
+
+export function Comments({ postId }: { postId: number }) {
     const router = useRouter();
 
     const highlightComment = useCommentStore((store) => store.highlightComment);
     const resetHighlightComment = useCommentStore((store) => store.resetHighlightComment);
 
-    const { data: post } = useQuery({
-        queryKey: ['fetch-post', serverPost.id],
-        queryFn: async () => (await postApi.postsGetById(serverPost.id)).data,
-        initialData: serverPost,
+    const { data: post, isLoading: isLoadingPost } = useQuery({
+        queryKey: ['fetch-post', postId],
+        queryFn: async () => (await postApi.postsGetById(postId)).data,
     });
 
     const {
@@ -66,7 +84,8 @@ export function Comments({ serverPost }: { serverPost: PostDetailDTO }) {
             </Header>
 
             <MainContent>
-                <PostCard post={post} />
+                {isLoading && <Skeleton className="h-[505px] rounded-none" />}
+                {!isLoadingPost && post && <PostCardDynamic post={post} />}
                 <div className="flex flex-col gap-4 pb-[56px]">
                     {data?.pages && data?.pages.length === 0 && <p className="m-auto">Комментариев нет</p>}
 
@@ -76,7 +95,7 @@ export function Comments({ serverPost }: { serverPost: PostDetailDTO }) {
                                 {page.map((item, itemIndex) => (
                                     <Fragment key={item.id}>
                                         {itemIndex > 0 && <span className="bg-border h-px w-full" />}
-                                        <CommentItem comment={item} />
+                                        <CommentItemDynamic comment={item} />
                                     </Fragment>
                                 ))}
                             </Fragment>
@@ -84,9 +103,9 @@ export function Comments({ serverPost }: { serverPost: PostDetailDTO }) {
                     {(isLoading || isFetchingNextPage) && <Loader className="mx-auto size-10" />}
                     {!isFetchingNextPage && <div ref={ref} />}
 
-                    <TextareaEditorComment post={post} hasNextPage={hasNextPage} />
+                    {post && <TextareaEditorCommentDynamic post={post} hasNextPage={hasNextPage} />}
                 </div>
-                <CommentMoreSheet />
+                <CommentMoreSheetDynamic />
             </MainContent>
         </Page>
     );
