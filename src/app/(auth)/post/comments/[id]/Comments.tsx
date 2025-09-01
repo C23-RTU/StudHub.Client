@@ -57,8 +57,8 @@ export function Comments({ postId }: { postId: number }) {
         ref,
         infiniteQuery: { data, isLoading, isFetchingNextPage, hasNextPage },
     } = useInfinityScroll({
-        queryKey: ['fetch-post-comments', serverPost.id],
-        queryFn: async ({ pageParam }) => (await commentApi.commentsGetByPostId(serverPost.id, 0, pageParam, 100)).data,
+        queryKey: ['fetch-post-comments', postId],
+        queryFn: async ({ pageParam }) => (await commentApi.commentsGetByPostId(postId, 0, pageParam, 100)).data,
         pageSize: COMMENTS_PAGE_SIZE,
     });
 
@@ -87,7 +87,7 @@ export function Comments({ postId }: { postId: number }) {
                 {isLoading && <Skeleton className="h-[505px] rounded-none" />}
                 {!isLoadingPost && post && <PostCardDynamic post={post} />}
                 <div className="flex flex-col gap-4 pb-[56px]">
-                    {data?.pages && data?.pages.length === 0 && <p className="m-auto">Комментариев нет</p>}
+                    {comments && comments.length === 0 && <p className="m-auto">Комментариев нет</p>}
 
                     {!isLoading &&
                         data?.pages?.map((page, pageIndex) => (
