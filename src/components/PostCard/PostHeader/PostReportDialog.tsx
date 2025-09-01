@@ -27,7 +27,7 @@ export default function PostReportDialog() {
                         <SelectContent>
                             <SelectItem value="spam">Спам</SelectItem>
                             <SelectItem value="personalization">Введение в заблуждение</SelectItem>
-                            <SelectItem value="description">Разжигание неновести</SelectItem>
+                            <SelectItem value="description">Разжигание ненaвести</SelectItem>
                             <SelectItem value="other">Другое</SelectItem>
                         </SelectContent>
                     </Select>
