@@ -11,16 +11,13 @@ export default function ClubReportDialog() {
     const reportDialogOpen = useClubReportDialogStore((store) => store.open);
     const reportDialogOnOpenChange = useClubReportDialogStore((store) => store.onOpenChange);
     return (
-        // Основа диалога
         <ResponsiveDialog open={reportDialogOpen} onOpenChange={reportDialogOnOpenChange}>
-            {/* Шапка диалога */}
             <ResponsiveDialog.Header>
                 <ResponsiveDialog.Title>Пожаловаться на клуб</ResponsiveDialog.Title>
                 <ResponsiveDialog.Description>
                     Выберите причину жалобы на клуб и добавьте комментарий (необязательно).
                 </ResponsiveDialog.Description>
             </ResponsiveDialog.Header>
-            {/* Контент внутри диалога*/}
             <ResponsiveDialog.Inherited>
                 <div className="flex flex-col gap-2">
                     <p className="font-semibold">Причина</p>
