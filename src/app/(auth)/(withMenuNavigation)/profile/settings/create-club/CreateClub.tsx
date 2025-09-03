@@ -9,6 +9,7 @@ import toast from 'react-hot-toast';
 import { LuPencil } from 'react-icons/lu';
 
 import { Page } from '@/components/Page';
+import { BackButton } from '@/components/ui/BackButton';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
@@ -99,11 +100,12 @@ export default function CreateClub() {
 
     return (
         <Page>
-            <form onSubmit={handleSubmit(onSubmit)} className="p-[20px]">
-                <Header>
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <Header className="py-[16px]">
+                    <BackButton variant={'ghost'} />
                     <HeaderTitle>Создание клуба</HeaderTitle>
                 </Header>
-                <MainContent className="flex w-full flex-col gap-6">
+                <MainContent className="flex w-full flex-col gap-6 p-[20px]">
                     <div className="relative flex flex-col items-center">
                         {/* Выбор баннера */}
                         <div

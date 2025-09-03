@@ -3,7 +3,7 @@
 import { useQuery } from '@tanstack/react-query';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
-import { Fragment, useEffect } from 'react';
+import { Fragment, useEffect, useMemo } from 'react';
 
 import { useCommentStore } from '@/components/CommentComponents/store/useComment.store';
 import Loader from '@/components/Loader';
@@ -17,6 +17,8 @@ import { commentApi, postApi } from '@/api/api';
 
 import { Header, HeaderTitle } from '@/hoc/Header/Header';
 import { MainContent } from '@/hoc/MainContent/MainContent';
+
+const COMMENTS_PAGE_SIZE = 100;
 
 const PostCardDynamic = dynamic(() => import('@/components/PostCard/PostCard').then((mod) => mod.PostCard), {
     loading: () => <Skeleton className="h-[505px] rounded-none" />,
@@ -57,25 +59,22 @@ export function Comments({ postId }: { postId: number }) {
     } = useInfinityScroll({
         queryKey: ['fetch-post-comments', postId],
         queryFn: async ({ pageParam }) => (await commentApi.commentsGetByPostId(postId, 0, pageParam, 100)).data,
-        pageSize: 100,
+        pageSize: COMMENTS_PAGE_SIZE,
     });
+
+    const comments = useMemo(() => data?.pages.flatMap((p) => p) ?? [], [data]);
 
     useEffect(() => {
         if (!highlightComment) return;
-
-        document
-            .getElementById(`comment-${highlightComment.inReplyTo}`)
-            ?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-        const timerId = setTimeout(() => {
-            resetHighlightComment();
-        }, 1000);
-
-        return () => {
-            clearTimeout(timerId);
+        const run = () => {
+            const el = document.getElementById(`comment-${highlightComment.inReplyTo}`);
+            el?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            const t = window.setTimeout(() => resetHighlightComment(), 1000);
+            return () => window.clearTimeout(t);
         };
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [highlightComment]);
+        const r = requestAnimationFrame(() => run());
+        return () => cancelAnimationFrame(r);
+    }, [highlightComment, resetHighlightComment]);
 
     return (
         <Page className="p-0">
@@ -88,7 +87,7 @@ export function Comments({ postId }: { postId: number }) {
                 {isLoading && <Skeleton className="h-[505px] rounded-none" />}
                 {!isLoadingPost && post && <PostCardDynamic post={post} />}
                 <div className="flex flex-col gap-4 pb-[56px]">
-                    {data?.pages && data?.pages.length === 0 && <p className="m-auto">Комментариев нет</p>}
+                    {comments && comments.length === 0 && <p className="m-auto">Комментариев нет</p>}
 
                     {!isLoading &&
                         data?.pages?.map((page, pageIndex) => (
@@ -101,7 +100,7 @@ export function Comments({ postId }: { postId: number }) {
                                 ))}
                             </Fragment>
                         ))}
-                    {(isLoading || isFetchingNextPage) && <Loader className="size-10" />}
+                    {(isLoading || isFetchingNextPage) && <Loader className="mx-auto size-10" />}
                     {!isFetchingNextPage && <div ref={ref} />}
 
                     {post && <TextareaEditorCommentDynamic post={post} hasNextPage={hasNextPage} />}

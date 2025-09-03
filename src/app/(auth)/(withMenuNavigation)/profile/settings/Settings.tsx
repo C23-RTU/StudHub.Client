@@ -1,5 +1,6 @@
 'use client';
 
+import { BiExit } from 'react-icons/bi';
 import { LuPlus } from 'react-icons/lu';
 
 import { Page } from '@/components/Page';
@@ -70,6 +71,7 @@ export default function Settings({ initUser }: { initUser: PersonDetailDTO }) {
                     </Menu>
                     <p className="font-semibold text-neutral-500">Прочее</p>
                     <Menu className="mb-8">
+                        <MenuItem title={'Выйти из аккаунта'} Icon={BiExit} hideChevron />
                         {PROFILE_SETTING_SECTIONS.other.map((section, index) => (
                             <MenuLink
                                 key={index}
