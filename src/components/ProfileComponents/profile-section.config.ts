@@ -1,4 +1,4 @@
-import { BiBell, BiExit } from 'react-icons/bi';
+import { BiBell } from 'react-icons/bi';
 import { FaGraduationCap, FaPortrait } from 'react-icons/fa';
 import { IoMailOpen } from 'react-icons/io5';
 import { RiPaintFill } from 'react-icons/ri';
@@ -25,18 +25,12 @@ export const PROFILE_SETTING_SECTIONS = {
     ],
     other: [
         {
-            href: `${AUTH_PAGE.PROFILE_SETTINGS}/notifications`,
-            title: 'Выйти из аккаунта',
-            Icon: BiExit,
-        },
-
-        {
             href: `${AUTH_PAGE.PROFILE_SETTINGS}/about`,
             title: 'О приложении',
             Icon: FaGraduationCap,
         },
         {
-            href: `${AUTH_PAGE.PROFILE_SETTINGS}/notifications`,
+            href: `${AUTH_PAGE.PROFILE_SETTINGS}/feedback`,
             title: 'Сообщить об ошибке',
             Icon: IoMailOpen,
         },

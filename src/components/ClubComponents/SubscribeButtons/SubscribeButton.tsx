@@ -2,7 +2,8 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import type { VariantProps } from 'class-variance-authority';
 import { SquareCheck, SquarePlus } from 'lucide-react';
 import dynamic from 'next/dynamic';
-import { useState } from 'react';
+import { Fragment, useCallback, useMemo, useState } from 'react';
+import toast from 'react-hot-toast';
 
 import { clubsApi } from '@/api/api';
 import type { ClubDetailDTO } from '@/api/axios-client/models';
@@ -22,7 +23,7 @@ export function SubscribeButton({
     size = 'default',
     className = '',
 }: {
-    clubId?: number;
+    clubId: number;
     isBig: boolean;
     subscribed: boolean | undefined;
     className?: string;
@@ -48,54 +49,45 @@ export function SubscribeButton({
         },
     });
 
-    const unsubSheetHandler = async () => {
+    const handleSubscribe = useCallback(async () => {
+        await toggleSubscription();
+        toast.success('Вы подписались на клуб', { id: 'subscribe-toast' });
+    }, [toggleSubscription]);
+
+    const buttonClass = useMemo(
+        () => cn('font-geologica text-text flex w-fit justify-center', isBig && 'p-3', className),
+        [isBig, className]
+    );
+
+    const unsubSheetHandler = useCallback(async () => {
         await toggleSubscription();
         setUnsubVisible(false);
-        const { toast } = await import('react-hot-toast');
         toast.success('Вы отписались от клуба', { id: 'unsubscribe-toast' });
-    };
+    }, [toggleSubscription]);
+
+    const Icon = subscribed ? SquareCheck : SquarePlus;
+    const label = subscribed ? 'Вы подписаны' : 'Подписаться';
 
     return (
-        <figure>
-            <div className="flex justify-center">
-                {subscribed ? (
-                    <Button
-                        onClick={() => setUnsubVisible(true)}
-                        size={size}
-                        className={cn(
-                            `font-geologica text-text flex w-full justify-center ${isBig && 'p-3'}`,
-                            className
-                        )}
-                        variant={'outline'}
-                        disabled={isSubscribePending}
-                    >
-                        {isBig && <span>Вы подписаны</span>}
-                        <SquareCheck />
-                    </Button>
-                ) : (
-                    <Button
-                        onClick={async () => {
-                            await toggleSubscription();
-                            const { toast } = await import('react-hot-toast');
-                            toast.success('Вы подписались на клуб', { id: 'subscribe-toast' });
-                        }}
-                        size={size}
-                        className={cn(
-                            `font-geologica hover:bg-primary flex w-full justify-center ${isBig && 'p-3'}`,
-                            className
-                        )}
-                        disabled={isSubscribePending}
-                    >
-                        {isBig && <span>Подписаться</span>}
-                        <SquarePlus />
-                    </Button>
-                )}
-            </div>
+        <Fragment>
+            <Button
+                onClick={subscribed ? () => setUnsubVisible(true) : handleSubscribe}
+                size={size}
+                variant={subscribed ? 'outline' : 'default'}
+                className={cn(buttonClass, subscribed ? '' : 'hover:bg-primary')}
+                aria-busy={isSubscribePending}
+                aria-pressed={isSubscribePending}
+                disabled={isSubscribePending}
+                title={label}
+            >
+                {isBig && <span>{label}</span>}
+                <Icon />
+            </Button>
             <UnsubSheetDynamic
                 unsubVisible={unsubVisible}
                 setUnsubVisible={setUnsubVisible}
                 onClick={unsubSheetHandler}
             />
-        </figure>
+        </Fragment>
     );
 }

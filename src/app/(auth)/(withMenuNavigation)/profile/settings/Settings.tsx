@@ -1,12 +1,13 @@
 'use client';
 
+import { BiExit } from 'react-icons/bi';
 import { LuPlus } from 'react-icons/lu';
 
 import { Page } from '@/components/Page';
 import { ProfileAvatarUploader } from '@/components/ProfileComponents/ProfileAvatar/ProfileAvatarUploader';
 import { PROFILE_SETTING_SECTIONS } from '@/components/ProfileComponents/profile-section.config';
 import { BackButton } from '@/components/ui/BackButton';
-import { Menu, MenuLink } from '@/components/ui/menu';
+import { Menu, MenuItem, MenuLink } from '@/components/ui/menu';
 
 import { AUTH_PAGE } from '@/lib/config/routes.config';
 
@@ -49,6 +50,7 @@ export default function Settings({ initUser }: { initUser: PersonDetailDTO }) {
                     </Menu>
                     <p className="font-semibold text-neutral-500">Прочее</p>
                     <Menu className="mb-8">
+                        <MenuItem title={'Выйти из аккаунта'} Icon={BiExit} hideChevron />
                         {PROFILE_SETTING_SECTIONS.other.map((section, index) => (
                             <MenuLink
                                 key={index}
