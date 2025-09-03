@@ -1,5 +1,8 @@
 import { XIcon } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
+
+import { AUTH_PAGE } from '@/lib/config/routes.config';
 
 import type { PersonSummaryDTO } from '@/api/axios-client/models';
 
@@ -9,7 +12,7 @@ import { getStaticImg } from '@/lib/helpers/getStaticImg.helper';
 
 export function ManageUser({ user }: { user: PersonSummaryDTO }) {
     return (
-        <div className="flex w-full items-center gap-4">
+        <Link href={AUTH_PAGE.USER_PROFILE(user.id)} className="flex w-full items-center gap-4">
             <Image
                 src={user.imagePath ? getStaticImg(user.imagePath) : '/img/default-club-avatar.png'}
                 width={48}
@@ -26,10 +29,16 @@ export function ManageUser({ user }: { user: PersonSummaryDTO }) {
             </p>
 
             <div>
-                <Button variant={'destructive'} className="h-10 w-10">
+                <Button
+                    variant={'destructive'}
+                    className="h-10 w-10"
+                    onClick={(e) => {
+                        e.preventDefault();
+                    }}
+                >
                     <XIcon />
                 </Button>
             </div>
-        </div>
+        </Link>
     );
 }
