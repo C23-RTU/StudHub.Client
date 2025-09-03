@@ -7,7 +7,7 @@ import { Page } from '@/components/Page';
 import { ProfileAvatarUploader } from '@/components/ProfileComponents/ProfileAvatar/ProfileAvatarUploader';
 import { PROFILE_SETTING_SECTIONS } from '@/components/ProfileComponents/profile-section.config';
 import { BackButton } from '@/components/ui/BackButton';
-import { Menu, MenuLink } from '@/components/ui/menu';
+import { Menu, MenuItem, MenuLink } from '@/components/ui/menu';
 import { SkeletonList } from '@/components/ui/skeleton';
 
 import { AUTH_PAGE } from '@/lib/config/routes.config';
