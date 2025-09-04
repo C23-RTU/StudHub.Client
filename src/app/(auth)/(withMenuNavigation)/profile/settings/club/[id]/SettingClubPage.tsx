@@ -56,7 +56,7 @@ export function SettingClubPage({ baseClubInfo }: { baseClubInfo: ClubDetailDTO 
                 </h3>
                 {isLoading && <SkeletonList count={1} classNameSkeletonItem="h-[48px]" />}
                 {clubAdmins?.map((admin) => (
-                    <ManageUser user={admin} key={admin.id} clubId={baseClubInfo.id} />
+                    <ManageUser user={admin} key={admin.id} />
                 ))}
                 <Button
                     variant={'default'}

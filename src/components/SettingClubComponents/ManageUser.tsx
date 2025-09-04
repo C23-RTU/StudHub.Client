@@ -11,7 +11,7 @@ import { Button } from '../ui/button';
 import { useSettingClubStore } from './store/useSettingClubStore';
 import { getStaticImg } from '@/lib/helpers/getStaticImg.helper';
 
-export function ManageUser({ user, clubId }: { user: PersonSummaryDTO; clubId: number }) {
+export function ManageUser({ user }: { user: PersonSummaryDTO }) {
     const setUserToRemove = useSettingClubStore((store) => store.setUserToRemove);
 
     return (
