@@ -1,4 +1,4 @@
-import { XIcon } from 'lucide-react';
+import { Trash2Icon } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -8,9 +8,12 @@ import type { PersonSummaryDTO } from '@/api/axios-client/models';
 
 import { Button } from '../ui/button';
 
+import { useSettingClubStore } from './store/useSettingClubStore';
 import { getStaticImg } from '@/lib/helpers/getStaticImg.helper';
 
-export function ManageUser({ user }: { user: PersonSummaryDTO }) {
+export function ManageUser({ user, clubId }: { user: PersonSummaryDTO; clubId: number }) {
+    const setUserToRemove = useSettingClubStore((store) => store.setUserToRemove);
+
     return (
         <Link href={AUTH_PAGE.USER_PROFILE(user.id)} className="flex w-full items-center gap-4">
             <Image
@@ -32,11 +35,12 @@ export function ManageUser({ user }: { user: PersonSummaryDTO }) {
                 <Button
                     variant={'destructive'}
                     className="h-10 w-10"
-                    onClick={(e) => {
+                    onClick={async (e) => {
                         e.preventDefault();
+                        setUserToRemove(user);
                     }}
                 >
-                    <XIcon />
+                    <Trash2Icon />
                 </Button>
             </div>
         </Link>

@@ -1,11 +1,12 @@
 'use client';
 
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { PlusIcon } from 'lucide-react';
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
 
-import { ManageUser } from '@/components/ManageUser/ManageUser';
 import { Page } from '@/components/Page';
+import { ManageUser } from '@/components/SettingClubComponents/ManageUser';
 import { BackButton } from '@/components/ui/BackButton';
 import { Button } from '@/components/ui/button';
 import { SkeletonList } from '@/components/ui/skeleton';
@@ -15,20 +16,24 @@ import { AUTH_PAGE } from '@/lib/config/routes.config';
 import { clubsApi } from '@/api/api';
 import type { ClubDetailDTO } from '@/api/axios-client';
 
+import { useManageClub } from '../../../../../../../components/SettingClubComponents/hooks/useManageClub';
+
 import { Header, HeaderTitle } from '@/hoc/Header/Header';
 import { MainContent } from '@/hoc/MainContent/MainContent';
 
+const RemovePopupDynamic = dynamic(
+    () => import('@/components/SettingClubComponents/RemovePopup').then((mod) => mod.RemovePopup),
+    {
+        ssr: false,
+    }
+);
+
 export function SettingClubPage({ baseClubInfo }: { baseClubInfo: ClubDetailDTO }) {
-    const queryClient = useQueryClient();
+    const { grantRightsMutation, grantAdminRights } = useManageClub(baseClubInfo.id);
 
     const { data: clubAdmins, isLoading } = useQuery({
         queryKey: ['get-club-admins', baseClubInfo.id],
         queryFn: async () => (await clubsApi.clubsGetAdminsByClubId(baseClubInfo.id)).data,
-    });
-
-    const { mutateAsync, isPending } = useMutation({
-        mutationKey: ['test'],
-        mutationFn: async ({}: never) => await clubsApi.clubsGrantAdminRights(45, baseClubInfo.id),
     });
 
     return (
@@ -51,21 +56,18 @@ export function SettingClubPage({ baseClubInfo }: { baseClubInfo: ClubDetailDTO 
                 </h3>
                 {isLoading && <SkeletonList count={1} classNameSkeletonItem="h-[48px]" />}
                 {clubAdmins?.map((admin) => (
-                    <ManageUser user={admin} key={admin.id} />
+                    <ManageUser user={admin} key={admin.id} clubId={baseClubInfo.id} />
                 ))}
                 <Button
                     variant={'default'}
-                    isLoading={isPending}
-                    onClick={async () =>
-                        await mutateAsync({} as never, {
-                            onSuccess: () => queryClient.invalidateQueries({ queryKey: ['get-club-admins'] }),
-                        })
-                    }
+                    isLoading={grantRightsMutation.isPending}
+                    onClick={() => grantAdminRights(45)}
                 >
                     <PlusIcon />
                     Добавить
                 </Button>
             </MainContent>
+            <RemovePopupDynamic clubId={baseClubInfo.id} />
         </Page>
     );
 }
