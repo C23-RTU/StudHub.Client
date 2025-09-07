@@ -18,6 +18,9 @@ jobs:
             - name: git-checkout
               uses: actions/checkout@v4
 
+            - name: pnpm-setup
+              uses: pnpm/action-setup@v2
+
             - name: Generate OpenAPI client [production-api]
               run: pnpm run api:code-gen
 
