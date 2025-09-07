@@ -1,32 +1,45 @@
 name: 'Deploy client on server'
 on:
     workflow_run:
-      workflows:
-        - 'Test build'
-      types:
-        - completed
+        workflows:
+            - 'Test build'
+        types:
+            - completed
 
 jobs:
     deploy:
         if: >-
-          ${{
-            github.event.workflow_run.conclusion == 'success' &&
-            github.event.workflow_run.head_branch == 'main'
-          }}
+            ${{
+              github.event.workflow_run.conclusion == 'success' &&
+              github.event.workflow_run.head_branch == 'main'
+            }}
         runs-on: ubuntu-latest
-
         steps:
             - name: git-checkout
               uses: actions/checkout@v4
 
+            - name: pnpm-setup
+              uses: pnpm/action-setup@v2
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 22
+
+            - name: Install dependencies
+              run: pnpm install --no-frozen-lockfile
+
+            - name: Generate OpenAPI client [production-api]
+              run: pnpm run api:code-gen
+
             - name: Deploy SSH
               uses: appleboy/ssh-action@v0.1.6
               with:
-                host: ${{ secrets.VPS_HOST }}
-                username: ${{ secrets.VPS_USER }}
-                key: ${{ secrets.VPS_KEY }}
-                script: |
-                  cd ${{ secrets.CLIENT_PATH }}
-                  git pull origin main
-                  cd ${{ secrets.CONF_PATH }}
-                  docker compose up --build -d --force-recreate frontend
+                  host: ${{ secrets.VPS_HOST }}
+                  username: ${{ secrets.VPS_USER }}
+                  key: ${{ secrets.VPS_KEY }}
+                  script: |
+                      cd ${{ secrets.CLIENT_PATH }}
+                      git pull origin main
+                      cd ${{ secrets.CONF_PATH }}
+                      docker compose up --build -d --force-recreate frontend
