@@ -29,6 +29,19 @@
                     "apiPackage": "api",
                     "modelPackage": "models"
                 }
+            },
+            "api-dev": {
+                "generatorName": "typescript-axios",
+                "output": "./src/api/axios-client",
+                "inputSpec": "https://dev-api.setka-rtu.ru/openapi/v1.json",
+                "additionalProperties": {
+                    "supportsES6": true,
+                    "snapshot": true,
+                    "withInterfaces": true,
+                    "withSeparateModelsAndApi": true,
+                    "apiPackage": "api",
+                    "modelPackage": "models"
+                }
             }
         }
     }

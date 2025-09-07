@@ -33,7 +33,7 @@ export const useRemoveComment = () => {
 
             return updateData;
         },
-        [],
+        []
     );
 
     const { mutate, isPending } = useMutation({
@@ -52,7 +52,7 @@ export const useRemoveComment = () => {
                             oldData,
                             ...updateData,
                         };
-                    },
+                    }
                 );
             }
 
@@ -68,7 +68,7 @@ export const useRemoveComment = () => {
                             oldData,
                             ...updateData,
                         };
-                    },
+                    }
                 );
             }
 

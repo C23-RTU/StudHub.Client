@@ -1,22 +1,21 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-import { PlusIcon } from 'lucide-react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
+import { useMemo } from 'react';
 
 import { Page } from '@/components/Page';
 import { ManageUser } from '@/components/SettingClubComponents/ManageUser';
+import { useSearchClubUsers } from '@/components/SettingClubComponents/hooks/useSearchClubUsers';
 import { BackButton } from '@/components/ui/BackButton';
-import { Button } from '@/components/ui/button';
+import { SearchInput } from '@/components/ui/SearchInput';
 import { SkeletonList } from '@/components/ui/skeleton';
 
 import { AUTH_PAGE } from '@/lib/config/routes.config';
 
 import { clubsApi } from '@/api/api';
-import type { ClubDetailDTO } from '@/api/axios-client';
-
-import { useManageClub } from '../../../../../../../components/SettingClubComponents/hooks/useManageClub';
+import type { ClubDetailDTO, PersonDetailDTO } from '@/api/axios-client';
 
 import { Header, HeaderTitle } from '@/hoc/Header/Header';
 import { MainContent } from '@/hoc/MainContent/MainContent';
@@ -29,12 +28,18 @@ const RemovePopupDynamic = dynamic(
 );
 
 export function SettingClubPage({ baseClubInfo }: { baseClubInfo: ClubDetailDTO }) {
-    const { grantRightsMutation, grantAdminRights } = useManageClub(baseClubInfo.id);
+    const {
+        query: { data: searchResult, isLoading: isLoadingSearchResult },
+        searchQuery,
+        setSearchQuery,
+    } = useSearchClubUsers(baseClubInfo.id);
 
     const { data: clubAdmins, isLoading } = useQuery({
         queryKey: ['get-club-admins', baseClubInfo.id],
         queryFn: async () => (await clubsApi.clubsGetAdminsByClubId(baseClubInfo.id)).data,
     });
+
+    const clubAdminsIds = useMemo(() => clubAdmins?.map((a) => a.id) || [], [clubAdmins]);
 
     return (
         <Page>
@@ -54,18 +59,29 @@ export function SettingClubPage({ baseClubInfo }: { baseClubInfo: ClubDetailDTO 
                         <span className="bg-secondary rounded px-2 py-1 text-sm text-white">{clubAdmins?.length}</span>
                     )}
                 </h3>
-                {isLoading && <SkeletonList count={1} classNameSkeletonItem="h-[48px]" />}
-                {clubAdmins?.map((admin) => (
-                    <ManageUser user={admin} key={admin.id} />
-                ))}
-                <Button
-                    variant={'default'}
-                    isLoading={grantRightsMutation.isPending}
-                    onClick={() => grantAdminRights(45)}
-                >
-                    <PlusIcon />
-                    Добавить
-                </Button>
+                <SearchInput
+                    placeholder="Введите ФИО пользователя"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                />
+
+                {(isLoading || isLoadingSearchResult) && <SkeletonList count={3} classNameSkeletonItem="h-[48px]" />}
+
+                {searchResult &&
+                    !isLoadingSearchResult &&
+                    searchResult.pages
+                        ?.flatMap((page) => page)
+                        .map((admin) => (
+                            <ManageUser
+                                useAddControl={!clubAdminsIds.includes(admin.id)}
+                                clubId={baseClubInfo.id}
+                                user={admin as PersonDetailDTO}
+                                key={admin?.id || Date.now()}
+                            />
+                        ))}
+
+                {!searchResult &&
+                    clubAdmins?.map((admin) => <ManageUser clubId={baseClubInfo.id} user={admin} key={admin.id} />)}
             </MainContent>
             <RemovePopupDynamic clubId={baseClubInfo.id} />
         </Page>

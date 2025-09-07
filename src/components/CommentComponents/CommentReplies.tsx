@@ -3,7 +3,7 @@ import { CornerRightDown } from 'lucide-react';
 
 import type { CommentDetailDTO } from '@/api/axios-client/models';
 
-import Loader from "../Loader";
+import Loader from '../Loader';
 
 import { CommentItem } from './CommentItem';
 
@@ -17,7 +17,7 @@ export function CommentReplies({
     isLoading: boolean;
     hasNextPage: boolean;
     fetchNextPage: (
-        options?: FetchNextPageOptions,
+        options?: FetchNextPageOptions
     ) => Promise<InfiniteQueryObserverResult<InfiniteData<CommentDetailDTO[], unknown>, Error>>;
 }) {
     if (isLoading) return <Loader />;
@@ -26,13 +26,13 @@ export function CommentReplies({
         <>
             {replies.length > 0 &&
                 replies.map((page) =>
-                    page.map((reply) => <CommentItem className="ml-[40px]" key={reply.id} comment={reply} />),
+                    page.map((reply) => <CommentItem className="ml-[40px]" key={reply.id} comment={reply} />)
                 )}
 
             {replies && replies.length > 0 && hasNextPage && (
                 <button
                     type="button"
-                    className="text-xs text-primary text-center flex justify-center gap-1 items-center"
+                    className="text-primary flex items-center justify-center gap-1 text-center text-xs"
                     onClick={() => fetchNextPage()}
                 >
                     Показать еще

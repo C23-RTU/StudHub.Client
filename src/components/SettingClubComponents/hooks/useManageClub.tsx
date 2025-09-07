@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { isAxiosError } from 'axios';
 
 import { clubsApi } from '@/api/api';
 
@@ -18,9 +19,13 @@ export const useManageClub = (clubId: number) => {
     const grantAdminRights = async (userId: number) => {
         await grantRightsMutation.mutateAsync(userId, {
             onSuccess: () => queryClient.invalidateQueries({ queryKey: ['get-club-admins'] }),
-            onError: async () => {
+            onError: async (error) => {
                 const { toast } = await import('react-hot-toast');
-                toast.error('Ошибка при добавлении', {
+                let msg = 'Ошибка при добавлении';
+                if (isAxiosError(error)) {
+                    msg = error.response?.data.detail;
+                }
+                toast.error(msg, {
                     position: 'top-center',
                 });
             },
@@ -30,9 +35,13 @@ export const useManageClub = (clubId: number) => {
     const revokeAdminRights = async (userId: number) => {
         await revokeRightsMutation.mutateAsync(userId, {
             onSuccess: () => queryClient.invalidateQueries({ queryKey: ['get-club-admins'] }),
-            onError: async () => {
+            onError: async (error) => {
                 const { toast } = await import('react-hot-toast');
-                toast.error('Ошибка при удалении', {
+                let msg = 'Ошибка при удалении';
+                if (isAxiosError(error)) {
+                    msg = error.response?.data.detail;
+                }
+                toast.error(msg, {
                     position: 'top-center',
                 });
             },

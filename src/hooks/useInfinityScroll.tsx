@@ -16,7 +16,7 @@ export function useInfinityScroll<T>({ queryKey, queryFn, pageSize }: InfiniteQu
         queryFn,
         initialPageParam: 0,
         getNextPageParam: (lastPage, __, lastPageParam) => {
-            if (!(lastPage as []).length || (lastPage as []).length < pageSize) return null;
+            if (!(lastPage as [])?.length || (lastPage as []).length < pageSize) return null;
             return lastPageParam + 1;
         },
         getPreviousPageParam: (_, __, firstPageParam) => firstPageParam,
