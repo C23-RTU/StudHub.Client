@@ -49,7 +49,7 @@ function MenuLink({ className = '', title, hideChevron = false, Icon, href, imag
                 <Icon size={20} />
             ) : (
                 <div className="relative h-5 w-5 shrink-0">
-                    <Image src={imageSrc!} alt={imageAlt!} fill sizes="20px" className="rounded-full object-contain" />
+                    <Image src={imageSrc!} alt={imageAlt!} fill sizes="20px" className="rounded-full object-cover" />
                 </div>
             )}
             <p className="text-neutral-700 dark:text-neutral-300">{title}</p>

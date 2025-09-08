@@ -6,7 +6,7 @@ import { usersApi } from '@/api/api';
 
 export const useSearchClubUsers = (clubId: number, pageSize: number = 10) => {
     const [searchQuery, setSearchQuery] = useState('');
-    const [debouncedQuery] = useDebounce(searchQuery, 700);
+    const [debouncedQuery] = useDebounce(searchQuery, 500);
 
     const query = useInfiniteQuery({
         queryKey: ['search-user-club', clubId, debouncedQuery, pageSize],
