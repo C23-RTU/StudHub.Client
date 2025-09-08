@@ -53,7 +53,7 @@ function MenuLink({ className = '', title, hideChevron = false, Icon, href, imag
                 </div>
             )}
             <p className="text-neutral-700 dark:text-neutral-300">{title}</p>
-            {!hideChevron && <LuChevronRight size={20} className="ml-auto" />}
+            {!hideChevron && <LuChevronRight size={20} className="ml-auto shrink-0" />}
         </Link>
     );
 }
@@ -101,7 +101,7 @@ function MenuItem({
                 </div>
             )}
             <p className="text-neutral-700 dark:text-neutral-300">{title}</p>
-            {!hideChevron && <LuChevronRight size={20} className="ml-auto" />}
+            {!hideChevron && <LuChevronRight size={20} className="ml-auto shrink-0" />}
         </div>
     );
 }
