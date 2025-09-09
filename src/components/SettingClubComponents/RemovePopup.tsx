@@ -15,10 +15,8 @@ export function RemovePopup({ clubId }: { clubId: number }) {
     return (
         <ResponsiveDialog open={!!userToRemove} onOpenChange={closeHandler}>
             <ResponsiveDialog.Header>
-                <ResponsiveDialog.Title className="mb-3 text-center text-xl uppercase">
-                    Подтвердите удаление?
-                </ResponsiveDialog.Title>
-                <ResponsiveDialog.Description className="text-center text-neutral-500">
+                <ResponsiveDialog.Title>Подтвердите удаление?</ResponsiveDialog.Title>
+                <ResponsiveDialog.Description>
                     Вы уверены, что хотите удалить пользователя{' '}
                     <b className="text-white italic">
                         {userToRemove?.lastName} {userToRemove?.firstName}
@@ -28,7 +26,6 @@ export function RemovePopup({ clubId }: { clubId: number }) {
             </ResponsiveDialog.Header>
             <ResponsiveDialog.Footer className="flex">
                 <Button
-                    className="flex-1"
                     isLoading={revokeRightsMutation.isPending}
                     onClick={async () => {
                         if (!userToRemove) return;
@@ -39,7 +36,7 @@ export function RemovePopup({ clubId }: { clubId: number }) {
                 >
                     Да, удалить
                 </Button>
-                <Button variant="outline" className="flex-[0.5]" onClick={closeHandler}>
+                <Button variant="outline" onClick={closeHandler}>
                     Отменить
                 </Button>
             </ResponsiveDialog.Footer>

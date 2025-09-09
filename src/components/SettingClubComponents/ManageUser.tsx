@@ -42,7 +42,7 @@ export function ManageUser({
                 src={user.imagePath ? getStaticImg(user.imagePath) : '/img/default-club-avatar.png'}
                 width={48}
                 height={48}
-                className="shrink-0 rounded-lg"
+                className="h-[48px] w-[48px] shrink-0 rounded-lg object-contain"
                 alt={user.lastName}
             />
 
