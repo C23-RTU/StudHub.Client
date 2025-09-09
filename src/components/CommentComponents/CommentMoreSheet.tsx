@@ -1,5 +1,5 @@
 import { Button } from '../ui/button';
-import { Drawer, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerTitle } from '../ui/drawer';
+import { Drawer, DrawerContent, DrawerFooter, DrawerHeader } from '../ui/drawer';
 
 import { CommentItem } from './CommentItem';
 import { useRemoveComment } from './hooks/useRemoveComment';

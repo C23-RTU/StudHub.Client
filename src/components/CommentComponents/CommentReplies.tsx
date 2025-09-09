@@ -3,7 +3,7 @@ import { CornerRightDown } from 'lucide-react';
 
 import type { CommentDetailDTO } from '@/api/axios-client/models';
 
-import Loader from '../Loader';
+import { SkeletonList } from '../ui/skeleton';
 
 import { CommentItem } from './CommentItem';
 
@@ -20,7 +20,7 @@ export function CommentReplies({
         options?: FetchNextPageOptions
     ) => Promise<InfiniteQueryObserverResult<InfiniteData<CommentDetailDTO[], unknown>, Error>>;
 }) {
-    if (isLoading) return <Loader />;
+    if (isLoading) return <SkeletonList count={1} />;
 
     return (
         <>

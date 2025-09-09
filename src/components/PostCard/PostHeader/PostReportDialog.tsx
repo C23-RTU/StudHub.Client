@@ -9,6 +9,7 @@ import { Textarea } from '@/components/ui/textarea';
 export default function PostReportDialog() {
     const postDialogOpen = usePostReportDialogStore((store) => store.open);
     const postDialogOnOpenChange = usePostReportDialogStore((store) => store.onOpenChange);
+
     return (
         <ResponsiveDialog open={postDialogOpen} onOpenChange={postDialogOnOpenChange}>
             <ResponsiveDialog.Header>
