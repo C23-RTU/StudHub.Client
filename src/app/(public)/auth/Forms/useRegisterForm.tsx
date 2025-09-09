@@ -14,7 +14,7 @@ import { type TRegisterDataSchema } from '@/lib/types/register.type';
 
 export const useRegisterForm = (
     reset: UseFormReset<TRegisterDataSchema>,
-    selectedInstitute: InstituteDetailDTO | null,
+    selectedInstitute: InstituteDetailDTO | null
 ) => {
     const router = useRouter();
 
@@ -54,7 +54,7 @@ export const useRegisterForm = (
             },
             {
                 id: 'error',
-            },
+            }
         );
     };
 

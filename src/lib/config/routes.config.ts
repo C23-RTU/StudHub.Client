@@ -3,11 +3,13 @@ class AuthPage {
     EVENTS = '/events';
     PROFILE = '/profile';
     PROFILE_SETTINGS = `${this.PROFILE}/settings`;
-    CLUBS = '/clubs';
     FINDER = '/finder';
     PROFILE_CLUBS = '/profile/clubs';
     POST_DRAFT = '/post/draft';
     PROFILE_CREATE_CLUB = `${this.PROFILE_SETTINGS}/create-club`;
+
+    CLUBS = '/clubs';
+    SETTING_CLUB =(clubId: number) => this.PROFILE_SETTINGS + `/club/${clubId}`;
 
     POST_COMMENTS = (id: number | string) => `/post/comments/${id}`;
     CLUB = (clubId: number | string) => `${this.CLUBS}/${clubId}`;
@@ -15,6 +17,7 @@ class AuthPage {
     EVENT = (id: number | string) => `${this.EVENTS}/${id}`;
     EVENTS_CALENDAR = () => `${this.EVENTS}/calendar`;
     USER_PROFILE = (user_id: number | string) => `${this.PROFILE}/${user_id}`;
+
 }
 
 class PublicPage {

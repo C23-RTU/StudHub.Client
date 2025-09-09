@@ -1,7 +1,7 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-import { EllipsisVertical } from 'lucide-react';
+import { EllipsisVertical, Settings } from 'lucide-react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -17,6 +17,10 @@ import {
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
+import { AUTH_PAGE } from '@/lib/config/routes.config';
+
+import { useClubsRole } from '@/hooks/useClubsRole';
+
 import { clubsApi } from '@/api/api';
 import type { ClubDetailDTO } from '@/api/axios-client';
 
@@ -25,6 +29,7 @@ import { BackButton } from '../ui/BackButton';
 import { Button } from '../ui/button';
 import { Skeleton } from '../ui/skeleton';
 
+import { CLUB_ROLES } from '@/lib/enums/club-roles.enum';
 import { getStaticImg } from '@/lib/helpers/getStaticImg.helper';
 
 const SubscribeButtonDynamic = dynamic(
@@ -37,6 +42,7 @@ const SubscribeButtonDynamic = dynamic(
 
 export function ClubHeader({ initClubData }: { initClubData: ClubDetailDTO }) {
     const pathname = usePathname();
+    const { checkRole } = useClubsRole();
     const reportOpen = useClubReportDialogStore((store) => store.openDialog);
 
     const { data: club } = useQuery({
@@ -75,29 +81,42 @@ export function ClubHeader({ initClubData }: { initClubData: ClubDetailDTO }) {
                         @IKB_MIREA
                     </p> */}
                     </div>
-                    <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                            <Button size="icon" variant={'outline'} className="text-text size-10">
-                                <EllipsisVertical />
-                            </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent>
-                            <DropdownMenuItem
-                                onClick={() => {
-                                    navigator.clipboard.writeText(`https://setka-rtu.ru${pathname}`);
-                                    toast.success('Ссылка скопирована');
-                                }}
-                                className="text-text"
+                    <div className="flex gap-3">
+                        {checkRole(initClubData.id) === CLUB_ROLES.OWNER && (
+                            <Link
+                                href={AUTH_PAGE.SETTING_CLUB(initClubData.id)}
+                                className={
+                                    'border-border bg-background text-text hover:bg-background-light dark:bg-background-light dark:hover:bg-background-dimmed flex size-10 items-center justify-center rounded-lg border'
+                                }
                             >
-                                <IoCopy className="text-neutral-400" />
-                                Скопировать ссылку
-                            </DropdownMenuItem>
-                            <DropdownMenuItem variant="destructive" onClick={() => reportOpen(club.id)}>
-                                <IoAlertCircle />
-                                Пожаловаться
-                            </DropdownMenuItem>
-                        </DropdownMenuContent>
-                    </DropdownMenu>
+                                <Settings />
+                            </Link>
+                        )}
+
+                        <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                                <Button size="icon" variant={'outline'} className="text-text size-10">
+                                    <EllipsisVertical />
+                                </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent>
+                                <DropdownMenuItem
+                                    onClick={() => {
+                                        navigator.clipboard.writeText(`https://setka-rtu.ru${pathname}`);
+                                        toast.success('Ссылка скопирована');
+                                    }}
+                                    className="text-text"
+                                >
+                                    <IoCopy className="text-neutral-400" />
+                                    Скопировать ссылку
+                                </DropdownMenuItem>
+                                <DropdownMenuItem variant="destructive" onClick={() => reportOpen(club.id)}>
+                                    <IoAlertCircle />
+                                    Пожаловаться
+                                </DropdownMenuItem>
+                            </DropdownMenuContent>
+                        </DropdownMenu>
+                    </div>
                 </div>
                 <div className="flex w-full items-center justify-center">
                     <LoaderImage

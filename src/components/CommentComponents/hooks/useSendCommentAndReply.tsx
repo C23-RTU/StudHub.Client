@@ -11,7 +11,7 @@ import type { TCommentPayloadSchema } from '@/lib/types/comment.type';
 export const useSendCommentAndReply = (
     post: PostDetailDTO,
     hasNextPage: boolean,
-    reset: UseFormReset<TCommentPayloadSchema>,
+    reset: UseFormReset<TCommentPayloadSchema>
 ) => {
     const commentForReply = useCommentStore((store) => store.commentForReply);
     const resetCommentForReply = useCommentStore((store) => store.resetCommentForReply);
@@ -54,7 +54,7 @@ export const useSendCommentAndReply = (
                             pageParams: oldData.pageParams,
                             pages: [...oldData.pages.slice(0, lastPageIndex), [...lastPage, comment]],
                         };
-                    },
+                    }
                 );
             }
 
@@ -75,7 +75,7 @@ export const useSendCommentAndReply = (
                             pageParams: oldData.pageParams,
                             pages: [...oldData.pages.slice(0, lastPageIndex), [...lastPage, comment]],
                         };
-                    },
+                    }
                 );
             }
 

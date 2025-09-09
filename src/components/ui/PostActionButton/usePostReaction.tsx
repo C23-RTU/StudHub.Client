@@ -20,7 +20,7 @@ export const usePostReaction = (post: PostDetailDTO) => {
                 pages,
             };
         },
-        [],
+        []
     );
 
     const { mutate } = useMutation({
@@ -45,7 +45,7 @@ export const usePostReaction = (post: PostDetailDTO) => {
                 ['fetch-club-posts', post.club.id],
                 (oldData: InfiniteData<PostDetailDTO[], unknown>) => {
                     return updatePostQueryHandler(oldData, newPost);
-                },
+                }
             );
         },
     });
