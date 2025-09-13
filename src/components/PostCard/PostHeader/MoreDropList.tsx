@@ -16,10 +16,13 @@ import type { PostDetailDTO } from '@/api/axios-client/models';
 
 import { usePostReportDialogStore } from '../store/useReportPostStore';
 
-export function MoreDropList({ post }: { post: PostDetailDTO }) {
-    const router = useRouter();
-    const postReportOpen = usePostReportDialogStore((store) => store.openDialog);
+type Props = {
+    post: PostDetailDTO;
+    onOpenChange: (state: boolean) => void;
+};
 
+export function MoreDropList({ post, onOpenChange }: Props) {
+    const router = useRouter();
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -52,7 +55,7 @@ export function MoreDropList({ post }: { post: PostDetailDTO }) {
                     Поделиться
                 </DropdownMenuItem>
                 {/* TODO свзяать с постом */}
-                <DropdownMenuItem variant="destructive" onClick={() => postReportOpen(0)}>
+                <DropdownMenuItem variant="destructive" onClick={() => onOpenChange(true)}>
                     Пожаловаться
                 </DropdownMenuItem>
             </DropdownMenuContent>

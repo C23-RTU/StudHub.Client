@@ -1,6 +1,13 @@
+import { notFound } from 'next/navigation';
+
+import { clubsApi } from '@/api/api';
+import type { ClubDetailDTO } from '@/api/axios-client';
+
 import { Club } from './Club';
-import ClubNotFound from './ClubNotFound';
 import { getClubGetByIdAction } from '@/server-actions/actions/clubs.action';
+
+export const dynamic = 'force-dynamic';
+export const revalidate = 60;
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
     try {
@@ -20,11 +27,11 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
 
 export default async function Page(props: { params: Promise<{ id: string }> }) {
     const id = (await props.params).id;
-
     try {
-        const club = await getClubGetByIdAction(id);
+        const club: ClubDetailDTO = (await clubsApi.clubsGetById(Number(id))).data;
+        console.log(club);
         return <Club club={club} />;
     } catch {
-        return <ClubNotFound />;
+        return notFound();
     }
 }

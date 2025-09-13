@@ -6,12 +6,14 @@ import { ResponsiveDialog } from '@/components/ui/responsive-dialog';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
 
-export default function PostReportDialog() {
-    const postDialogOpen = usePostReportDialogStore((store) => store.open);
-    const postDialogOnOpenChange = usePostReportDialogStore((store) => store.onOpenChange);
+type Props = {
+    open: boolean;
+    onOpenChange: (state: boolean) => void;
+};
 
+export default function PostReportDialog({ open, onOpenChange }: Props) {
     return (
-        <ResponsiveDialog open={postDialogOpen} onOpenChange={postDialogOnOpenChange}>
+        <ResponsiveDialog open={open} onOpenChange={onOpenChange}>
             <ResponsiveDialog.Header>
                 <ResponsiveDialog.Title>Пожаловаться на пост</ResponsiveDialog.Title>
                 <ResponsiveDialog.Description>

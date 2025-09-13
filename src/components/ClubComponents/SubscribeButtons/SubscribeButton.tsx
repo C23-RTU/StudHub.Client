@@ -1,3 +1,5 @@
+'use client';
+
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import type { VariantProps } from 'class-variance-authority';
 import { SquareCheck, SquarePlus } from 'lucide-react';
