@@ -1,7 +1,8 @@
 'use server';
 
-import { jwtVerify } from 'jose';
 import { cookies } from 'next/headers';
+
+import { jwtVerifyServer } from '@/server-actions/middleware/utils/jwt-verify';
 
 export async function getPersonIdFromToken(): Promise<string | null> {
     try {
@@ -12,8 +13,10 @@ export async function getPersonIdFromToken(): Promise<string | null> {
             return null;
         }
 
-        const secretKey = new TextEncoder().encode(process.env.JWT_SECRET);
-        const { payload } = await jwtVerify(token, secretKey);
+        const payload = await jwtVerifyServer(token);
+        if (!payload) {
+            return null;
+        }
         const personId = payload.personId as string;
         if (!personId) {
             console.warn('personId не найден в токене');

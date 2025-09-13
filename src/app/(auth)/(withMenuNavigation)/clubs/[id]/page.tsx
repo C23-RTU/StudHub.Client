@@ -1,6 +1,5 @@
 import { notFound } from 'next/navigation';
 
-import { clubsApi } from '@/api/api';
 import type { ClubDetailDTO } from '@/api/axios-client';
 
 import { Club } from './Club';
@@ -28,7 +27,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
 export default async function Page(props: { params: Promise<{ id: string }> }) {
     const id = (await props.params).id;
     try {
-        const club: ClubDetailDTO = (await clubsApi.clubsGetById(Number(id))).data;
+        const club: ClubDetailDTO = await getClubGetByIdAction(id);
         console.log(club);
         return <Club club={club} />;
     } catch {
