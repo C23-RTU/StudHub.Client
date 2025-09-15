@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useTransition } from 'react';
 import type { SubmitHandler, UseFormReset } from 'react-hook-form';
 import toast from 'react-hot-toast';
@@ -13,6 +13,8 @@ import { type TLoginDataSchema } from '@/lib/types/login.type';
 
 export const useLoginForm = (reset: UseFormReset<TLoginDataSchema>) => {
     const router = useRouter();
+    const params = useSearchParams();
+
     const [isPending, startTransition] = useTransition();
 
     const { mutateAsync, isPending: isLoginPending } = useMutation({
@@ -28,7 +30,9 @@ export const useLoginForm = (reset: UseFormReset<TLoginDataSchema>) => {
                 success: () => {
                     startTransition(() => {
                         reset();
-                        router.push(AUTH_PAGE.HOME);
+                        const returnUrl = params.get('returnUrl');
+                        if (returnUrl) router.push(returnUrl);
+                        else router.push(AUTH_PAGE.HOME);
                     });
 
                     return 'Успешный вход!';
@@ -41,7 +45,7 @@ export const useLoginForm = (reset: UseFormReset<TLoginDataSchema>) => {
             },
             {
                 id: 'error',
-            },
+            }
         );
     };
 
