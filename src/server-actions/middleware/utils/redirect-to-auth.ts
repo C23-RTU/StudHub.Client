@@ -9,7 +9,7 @@ export async function redirectToAuth(request: NextRequest) {
 
     console.log('x-forwarded-host =', forwardedHost);
 
-    const host = forwardedHost ?? request.headers.get('host');
+    const host = (forwardedHost ?? request.headers.get('host'))?.replace(':3000', '');
 
     const returnUrl = new URL(request.url);
     returnUrl.host = host ?? returnUrl.host;
