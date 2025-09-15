@@ -9,7 +9,7 @@ class AuthPage {
     PROFILE_CREATE_CLUB = `${this.PROFILE_SETTINGS}/create-club`;
 
     CLUBS = '/clubs';
-    SETTING_CLUB =(clubId: number) => this.PROFILE_SETTINGS + `/club/${clubId}`;
+    SETTING_CLUB = (clubId: number) => this.PROFILE_SETTINGS + `/club/${clubId}`;
 
     POST_COMMENTS = (id: number | string) => `/post/comments/${id}`;
     CLUB = (clubId: number | string) => `${this.CLUBS}/${clubId}`;
@@ -17,11 +17,11 @@ class AuthPage {
     EVENT = (id: number | string) => `${this.EVENTS}/${id}`;
     EVENTS_CALENDAR = () => `${this.EVENTS}/calendar`;
     USER_PROFILE = (user_id: number | string) => `${this.PROFILE}/${user_id}`;
-
 }
 
 class PublicPage {
-    AUTH = (type: 'login' | 'register' = 'login') => `/auth?type=${type}`;
+    AUTH = (type: 'login' | 'register' = 'login', returnUrl?: string) =>
+        returnUrl ? `/auth?returnUrl=${returnUrl}&type=${type}` : `/auth?type=${type}`;
 }
 
 export const AUTH_PAGE = new AuthPage();
