@@ -202,4 +202,4 @@ const config: Config = {
     // watchman: true,
 };
 
-module.exports = createJestConfig(config);
+export default createJestConfig(config);
