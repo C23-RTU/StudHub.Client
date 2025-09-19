@@ -53,6 +53,7 @@ export function ActionButton({ type, post }: Props) {
             className={cn('flex cursor-pointer items-center gap-2 rounded-md p-1 select-none', {
                 'text-blue': isCommentType ? !!match(AUTH_PAGE.POST_COMMENTS(post.id))(pathname) : false,
             })}
+            data-testid={type}
             onClick={clickHandler}
         >
             {computedIcon}
