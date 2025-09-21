@@ -15,23 +15,6 @@ jobs:
             }}
         runs-on: ubuntu-latest
         steps:
-            - name: git-checkout
-              uses: actions/checkout@v4
-
-            - name: pnpm-setup
-              uses: pnpm/action-setup@v2
-
-            - name: Setup Node.js
-              uses: actions/setup-node@v4
-              with:
-                  node-version: 22
-
-            - name: Install dependencies
-              run: pnpm install --no-frozen-lockfile
-
-            - name: Generate OpenAPI client [production-api]
-              run: pnpm run api:code-gen
-
             - name: Deploy SSH
               uses: appleboy/ssh-action@v0.1.6
               with:

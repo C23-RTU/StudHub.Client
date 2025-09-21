@@ -1,7 +1,9 @@
-import { isProduction } from './src/lib/helpers/isProduction.helper';
 import type { NextConfig } from 'next';
 
+import { isProduction } from './src/lib/helpers/isProduction.helper';
+
 const nextConfig: NextConfig = {
+    output: 'standalone',
     poweredByHeader: false,
     skipTrailingSlashRedirect: true,
     images: {

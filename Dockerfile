@@ -1,16 +1,37 @@
-FROM node:lts-alpine
+FROM oven/bun AS base
 
-RUN corepack enable pnpm && corepack install -g pnpm@latest
+
+RUN apt-get update && apt-get install -y openjdk-17-jre-headless \
+    && rm -rf /var/lib/apt/lists/*
+
+FROM base AS deps
+
+WORKDIR /app
+COPY package.json bun.lock ./
+RUN bun install
+
+FROM base AS builder
 
 WORKDIR /app
 
-# Игнорируем наши self-signed сертификаты при сборке
-# ENV NODE_TLS_REJECT_UNAUTHORIZED=0
-
-COPY pnpm-lock.yaml package.json ./
-
-RUN pnpm install
+COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-RUN pnpm build
 
-CMD ["pnpm", "start"]
+ENV NEXT_TELEMETRY_DISABLED=1
+
+RUN bun run api:code-gen
+RUN bun run build
+
+FROM base AS runner
+
+WORKDIR /app
+
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
+
+COPY --from=builder /app/public ./public
+
+COPY --from=builder --chown=nextjs:bun /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:bun /app/.next/static ./.next/static
+
+CMD ["bun", "server.js"]
