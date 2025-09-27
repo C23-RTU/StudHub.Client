@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import { userApi } from '@/api/api';
 
-import type { TypeClubRole } from '@/lib/enums/club-roles.enum';
+import { CLUB_ROLES, type TypeClubRole } from '@/lib/enums/club-roles.enum';
 
 /**
  * Хук для работы с ролями пользователя в клубах
@@ -31,8 +31,19 @@ export const useClubsRole = () => {
         return role;
     };
 
+    /**
+     * Проверка, что пользователь может создавать посты для клуба
+     * @param clubId
+     * @returns
+     */
+    const canCreatePostToClub = (clubId: number) => {
+        const currentRole = checkRole(clubId);
+        return currentRole === CLUB_ROLES.OWNER || currentRole === CLUB_ROLES.ADMIN;
+    };
+
     return {
         query,
         checkRole,
+        canCreatePostToClub,
     };
 };

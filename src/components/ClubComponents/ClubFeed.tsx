@@ -16,13 +16,12 @@ import { PostCard } from '../PostCard/PostCard';
 import { Button } from '../ui/button';
 
 import { MainContent } from '@/hoc/MainContent/MainContent';
-import { CLUB_ROLES } from '@/lib/enums/club-roles.enum';
 
 export function ClubFeed() {
     const { id } = useParams();
     const clubId = Number(id);
 
-    const { checkRole } = useClubsRole();
+    const { canCreatePostToClub } = useClubsRole();
 
     const {
         ref,
@@ -35,7 +34,7 @@ export function ClubFeed() {
 
     return (
         <MainContent className="flex flex-col gap-0">
-            {checkRole(clubId) === CLUB_ROLES.OWNER && (
+            {canCreatePostToClub(clubId) && (
                 <div className="border-border border-b p-4">
                     <Button variant={'default'} className="w-full" asChild>
                         <Link href={AUTH_PAGE.POST_DRAFT}>

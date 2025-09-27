@@ -1,5 +1,8 @@
 'use client';
 
+import { useMutation } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
+import { startTransition } from 'react';
 import { BiExit } from 'react-icons/bi';
 import { LuPlus } from 'react-icons/lu';
 
@@ -10,10 +13,11 @@ import { BackButton } from '@/components/ui/BackButton';
 import { Menu, MenuItem, MenuLink } from '@/components/ui/menu';
 import { SkeletonList } from '@/components/ui/skeleton';
 
-import { AUTH_PAGE } from '@/lib/config/routes.config';
+import { AUTH_PAGE, PUBLIC_PAGE } from '@/lib/config/routes.config';
 
 import { useProfile } from '@/hooks/useProfile';
 
+import { authApi } from '@/api/api';
 import { type PersonDetailDTO } from '@/api/axios-client';
 
 import { useOwnedClubs } from './useOwnedClubs';
@@ -22,8 +26,37 @@ import { MainContent } from '@/hoc/MainContent/MainContent';
 import { getStaticImg } from '@/lib/helpers/getStaticImg.helper';
 
 export default function Settings({ initUser }: { initUser: PersonDetailDTO }) {
+    const router = useRouter();
     const { data: user } = useProfile(initUser);
     const { data: ownedClubs, isLoading } = useOwnedClubs();
+
+    const { mutateAsync } = useMutation({
+        mutationKey: ['logout-profile'],
+        mutationFn: async () => await authApi.authLogout(),
+    });
+
+    const logoutHandler = async () => {
+        const { toast } = await import('react-hot-toast');
+        toast.promise(
+            mutateAsync(),
+            {
+                loading: 'Выход из системы',
+                success: () => {
+                    startTransition(() => {
+                        router.push(PUBLIC_PAGE.AUTH('login'));
+                    });
+
+                    return 'Успешно!';
+                },
+                error: () => {
+                    return 'Ошибка при попытке выхода из профиля';
+                },
+            },
+            {
+                id: 'error',
+            }
+        );
+    };
 
     return (
         <Page>
@@ -71,7 +104,7 @@ export default function Settings({ initUser }: { initUser: PersonDetailDTO }) {
                     </Menu>
                     <p className="font-semibold text-neutral-500">Прочее</p>
                     <Menu className="mb-8">
-                        <MenuItem title={'Выйти из аккаунта'} Icon={BiExit} hideChevron />
+                        <MenuItem title={'Выйти из аккаунта'} Icon={BiExit} onClick={logoutHandler} hideChevron />
                         {PROFILE_SETTING_SECTIONS.other.map((section, index) => (
                             <MenuLink
                                 key={index}
