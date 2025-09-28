@@ -1,5 +1,3 @@
-'use client';
-
 import { FaGithub, FaGraduationCap } from 'react-icons/fa';
 
 import LoaderImage from '@/components/ImageLoader/ImageLoader';
@@ -16,6 +14,8 @@ type Developer = {
     avatar: string;
 };
 
+export const dynamic = 'force-static';
+
 function DeveloperItem({ name, role, avatar }: Developer) {
     return (
         <div className="flex w-full flex-row items-center gap-3 select-none">
@@ -23,7 +23,7 @@ function DeveloperItem({ name, role, avatar }: Developer) {
                 loaderClassName="w-fit"
                 src={avatar}
                 alt="Avatar"
-                className="size-12 shrink-0 grow-0 rounded-full"
+                className="size-12 min-w-12 grow rounded-full"
                 width={128}
                 height={128}
             />
