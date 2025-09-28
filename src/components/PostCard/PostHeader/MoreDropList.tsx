@@ -14,8 +14,6 @@ import { AUTH_PAGE } from '@/lib/config/routes.config';
 
 import type { PostDetailDTO } from '@/api/axios-client/models';
 
-import { usePostReportDialogStore } from '../store/useReportPostStore';
-
 type Props = {
     post: PostDetailDTO;
     onOpenChange: (state: boolean) => void;
