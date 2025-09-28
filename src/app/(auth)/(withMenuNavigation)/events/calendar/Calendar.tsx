@@ -4,8 +4,8 @@ import { useQuery } from '@tanstack/react-query';
 import { format, parseISO } from 'date-fns';
 import { useMemo, useState } from 'react';
 
-import EventCalendar from '@/components/EventCalendar/EventCalendar';
-import { EventCard } from '@/components/EventCard/EventCard';
+import EventCalendar from '@/components/EventCalendar';
+import { EventCard } from '@/components/EventCard';
 import { Page } from '@/components/Page';
 import { BackButton } from '@/components/ui/BackButton';
 

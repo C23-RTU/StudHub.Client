@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
 import { useMemo } from 'react';
 
-import LoaderImage from '@/components/ImageLoader/ImageLoader';
+import LoaderImage from '@/components/ImageLoader';
 
 import { getStaticImg } from '@/lib/helpers/getStaticImg.helper';
 

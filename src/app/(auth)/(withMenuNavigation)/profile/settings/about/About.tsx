@@ -1,6 +1,6 @@
 import { FaGithub, FaGraduationCap } from 'react-icons/fa';
 
-import LoaderImage from '@/components/ImageLoader/ImageLoader';
+import LoaderImage from '@/components/ImageLoader';
 import { Page } from '@/components/Page';
 import SettingsSection from '@/components/ProfileComponents/SettingSection';
 import { BackButton } from '@/components/ui/BackButton';

@@ -21,7 +21,7 @@ import { useEffect, useState } from 'react';
 
 import type { EventDetailDTO } from '@/api/axios-client';
 
-import { Button } from '../ui/button';
+import { Button } from './ui/button';
 
 interface CalendarProps {
     events?: { [key: string]: EventDetailDTO[] };

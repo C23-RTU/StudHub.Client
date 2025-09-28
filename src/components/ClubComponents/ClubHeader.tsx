@@ -1,10 +1,8 @@
 'use client';
 
 import { EllipsisVertical, Settings } from 'lucide-react';
-import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useMemo } from 'react';
 import toast from 'react-hot-toast';
 import { IoAlertCircle, IoCopy } from 'react-icons/io5';
 
@@ -22,13 +20,10 @@ import { useClubsRole } from '@/hooks/useClubsRole';
 
 import type { ClubDetailDTO } from '@/api/axios-client';
 
-import LoaderImage from '../ImageLoader/ImageLoader';
 import { BackButton } from '../ui/BackButton';
 import { Button } from '../ui/button';
-import { Skeleton } from '../ui/skeleton';
 
 import { CLUB_ROLES } from '@/lib/enums/club-roles.enum';
-import { getStaticImg } from '@/lib/helpers/getStaticImg.helper';
 
 export function ClubHeader({ club }: { club: ClubDetailDTO }) {
     const pathname = usePathname();

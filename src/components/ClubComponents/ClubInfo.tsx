@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 
-import LoaderImage from '@/components/ImageLoader/ImageLoader';
+import LoaderImage from '@/components/ImageLoader';
 import { Skeleton } from '@/components/ui/skeleton';
 
 import type { ClubDetailDTO } from '@/api/axios-client';

@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 import Loader from '@/components/Loader';
 import { Page } from '@/components/Page';
-import { SubscriberCard } from '@/components/SubscriberCard/SubscriberCard';
+import { SubscriberCard } from '@/components/SubscriberCard';
 import { BackButton } from '@/components/ui/BackButton';
 
 import { AUTH_PAGE } from '@/lib/config/routes.config';

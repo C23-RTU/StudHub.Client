@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 import { CalendarBadge } from '@/components/Badges';
-import { EventCard } from '@/components/EventCard/EventCard';
+import { EventCard } from '@/components/EventCard';
 import { Page } from '@/components/Page';
 
 import { AUTH_PAGE } from '@/lib/config/routes.config';

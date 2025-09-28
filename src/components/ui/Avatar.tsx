@@ -1,6 +1,6 @@
 'use client';
 
-import LoaderImage from '@/components/ImageLoader/ImageLoader';
+import LoaderImage from '@/components/ImageLoader';
 
 import { getStaticImg } from '@/lib/helpers/getStaticImg.helper';
 import { cn } from '@/lib/utils/utils';
