@@ -46,7 +46,7 @@ export function CommentList({ post }: { post: PostDetailDTO }) {
 
     return (
         <>
-            <div className="flex flex-col gap-4 pb-[56px]">
+            <div className="flex flex-col pb-[56px]">
                 {comments && comments.length === 0 && <p className="m-auto">Комментариев нет</p>}
 
                 {!isLoading &&

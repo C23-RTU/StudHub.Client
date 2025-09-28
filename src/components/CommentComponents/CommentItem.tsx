@@ -91,11 +91,11 @@ export function CommentItem({
     }, [comment.deletedAt]);
 
     return (
-        <div className="flex flex-col gap-3 px-[16px] py-[5px]">
+        <div className="flex flex-col p-3">
             <div
                 id={`comment-${comment.id}`}
                 onClick={setHighlightCommentHandler}
-                className={cn('flex gap-2 rounded-md p-1 transition-colors', className, {
+                className={cn('flex gap-3 rounded-md transition-colors', className, {
                     'bg-secondary': commentForReply?.id === comment.id || highlightComment?.inReplyTo == comment.id,
                 })}
             >

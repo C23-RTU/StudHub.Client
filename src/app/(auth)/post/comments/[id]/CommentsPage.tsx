@@ -17,7 +17,7 @@ export function CommentsPage({ post }: { post: PostDetailDTO }) {
                 <HeaderTitle>Комментарии</HeaderTitle>
             </Header>
 
-            <MainContent>
+            <MainContent className={'gap-0'}>
                 <PostCard post={post} />
                 <CommentList post={post} />
             </MainContent>
