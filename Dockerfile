@@ -1,16 +1,19 @@
-FROM node:lts-alpine
-
-RUN corepack enable pnpm && corepack install -g pnpm@latest
+FROM node:lts-alpine AS builder
 
 WORKDIR /app
-
-# Игнорируем наши self-signed сертификаты при сборке
-# ENV NODE_TLS_REJECT_UNAUTHORIZED=0
-
 COPY pnpm-lock.yaml package.json ./
-
+RUN corepack enable pnpm && corepack install -g pnpm@latest
 RUN pnpm install
 COPY . .
 RUN pnpm build
 
-CMD ["pnpm", "start"]
+
+FROM node:lts-alpine AS runner
+
+WORKDIR /app
+
+COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/.next/static ./.next/static
+COPY --from=builder /app/public ./public
+
+CMD ["node", "server.js"]

@@ -27,9 +27,9 @@ export function Clubs() {
         queryKey: ['fetch-clubs', debouncedQuery],
         queryFn: async ({ pageParam = 0 }) => {
             if (debouncedQuery) {
-                return (await clubsApi.clubsSearch(debouncedQuery, pageParam, 10)).data;
+                return (await clubsApi.clubsSearch(debouncedQuery, pageParam, 50)).data;
             }
-            return (await clubsApi.clubsGetAll(pageParam, 10)).data;
+            return (await clubsApi.clubsGetAll(pageParam, 50)).data;
         },
         pageSize: 10,
     });

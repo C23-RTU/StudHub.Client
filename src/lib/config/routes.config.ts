@@ -17,11 +17,11 @@ class AuthPage {
     EVENT = (id: number | string) => `${this.EVENTS}/${id}`;
     EVENTS_CALENDAR = () => `${this.EVENTS}/calendar`;
     USER_PROFILE = (user_id: number | string) => `${this.PROFILE}/${user_id}`;
-    USER_PROFILE_CLUBS = (user_id: number | string) => `${this.PROFILE}/${user_id}/clubs`;
 }
 
 class PublicPage {
-    AUTH = (type: 'login' | 'register' = 'login') => `/auth?type=${type}`;
+    AUTH = (type: 'login' | 'register' = 'login', returnUrl?: string) =>
+        returnUrl ? `/auth?returnUrl=${returnUrl}&type=${type}` : `/auth?type=${type}`;
 }
 
 export const AUTH_PAGE = new AuthPage();
