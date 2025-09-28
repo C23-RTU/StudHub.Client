@@ -1,7 +1,6 @@
 'use client';
 
 import { useTheme } from 'next-themes';
-import { useEffect, useState } from 'react';
 import { IoMoon, IoSettingsSharp, IoSunny } from 'react-icons/io5';
 
 import { Page } from '@/components/Page';
@@ -13,15 +12,6 @@ import { MainContent } from '@/hoc/MainContent/MainContent';
 
 export default function Appearance() {
     const { theme, setTheme } = useTheme();
-    const [mounted, setMounted] = useState(false);
-
-    useEffect(() => {
-        setMounted(true);
-    }, []);
-
-    if (!mounted) {
-        return null;
-    }
 
     const handleThemeChange = (newTheme: string) => {
         setTheme(newTheme);
