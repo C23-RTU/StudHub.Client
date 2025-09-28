@@ -43,5 +43,6 @@ yarn-error.log*
 next-env.d.ts
 certificates
 certbot
+bun.lock
 
 /.idea
