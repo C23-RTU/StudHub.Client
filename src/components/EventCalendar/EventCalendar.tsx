@@ -139,7 +139,7 @@ const EventCalendar = ({ events = {}, onDateChange }: CalendarProps) => {
                                 key={day.toString()}
                                 onClick={() => handleDateClick(day)}
                                 disabled={!isCurrentMonth}
-                                className={`relative aspect-square rounded-xl text-sm font-medium transition-all duration-200 sm:text-base ${isCurrentMonth ? 'hover:scale-105 active:scale-95' : 'cursor-not-allowed opacity-30'} ${
+                                className={`relative aspect-square rounded-xl text-sm font-medium transition-all duration-200 sm:text-base ${isCurrentMonth ? '' : 'cursor-not-allowed opacity-30'} ${
                                     isSelected
                                         ? 'bg-primary scale-105 text-white'
                                         : isDayToday
@@ -183,8 +183,6 @@ const EventCalendar = ({ events = {}, onDateChange }: CalendarProps) => {
                         );
                     })}
                 </div>
-
-                {/* Toggle view button */}
             </div>
         </div>
     );
