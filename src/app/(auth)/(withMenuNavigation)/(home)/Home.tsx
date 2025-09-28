@@ -1,9 +1,13 @@
+import { Suspense } from 'react';
+
 import { Page } from '@/components/Page';
 
 import HomeFeed from '@/app/(auth)/(withMenuNavigation)/(home)/HomeFeed';
 import { Header, HeaderTitle } from '@/hoc/Header/Header';
 import { MainContent } from '@/hoc/MainContent/MainContent';
 import { parseLocalTime } from '@/lib/utils/time.util';
+
+export const dynamic = 'force-static';
 
 export default function Home({ timeBasedGreeting }: { timeBasedGreeting: string }) {
     return (
@@ -15,7 +19,9 @@ export default function Home({ timeBasedGreeting }: { timeBasedGreeting: string 
                 </p>
             </Header>
             <MainContent>
-                <HomeFeed />
+                <Suspense>
+                    <HomeFeed />
+                </Suspense>
             </MainContent>
         </Page>
     );

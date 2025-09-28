@@ -1,7 +1,5 @@
-'use client';
-
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 import { AUTH_PAGE } from '@/lib/config/routes.config';
 
@@ -16,44 +14,49 @@ interface Props {
 }
 
 export function ClubCard({ club, showSubscribe = false }: Props) {
-    const router = useRouter();
-
     return (
-        <figure className="flex w-full items-center hover:cursor-pointer" role="listitem">
-            <Image
-                src={club.imageUrl ? getStaticImg(club.imageUrl) : '/img/default-club-avatar.png'}
-                alt={`${club.name}'s avatar`}
-                width={256}
-                height={256}
-                className="h-12 w-12 rounded-lg"
-                onClick={() => router.push(AUTH_PAGE.CLUB(club.id))}
-            />
-
-            <div
-                className="mr-3 ml-3 flex grow flex-col justify-between overflow-hidden"
-                onClick={() => router.push(AUTH_PAGE.CLUB(club.id))}
+        <article
+            className="flex w-full flex-row items-center justify-between gap-3 rounded-lg"
+            aria-label={`Club: ${club.name}`}
+        >
+            <Link
+                href={AUTH_PAGE.CLUB(club.id)}
+                className="flex min-w-0 flex-1 items-center gap-3"
+                aria-label={`View details for ${club.name}`}
             >
-                <p
-                    className="text-m font-geologica overflow-hidden font-semibold text-ellipsis whitespace-nowrap"
-                    title={club.name}
-                >
-                    {club.name}
-                </p>
-                <p
-                    className="font-inter overflow-hidden text-xs font-normal text-ellipsis whitespace-nowrap opacity-50"
-                    title={club.about || ''}
-                >
-                    {club.about}
-                </p>
-            </div>
+                <div className="flex-shrink-0">
+                    <Image
+                        src={club.imageUrl ? getStaticImg(club.imageUrl) : '/img/default-club-avatar.png'}
+                        alt={`${club.name}'s avatar`}
+                        width={48}
+                        height={48}
+                        className="size-12 rounded-lg object-cover"
+                        onError={(e) => {
+                            e.currentTarget.src = '/img/default-club-avatar.png';
+                        }}
+                    />
+                </div>
+
+                <div className="flex min-w-0 flex-1 flex-col justify-center overflow-hidden">
+                    <p className="text-md font-geologica truncate font-semibold" title={club.name}>
+                        {club.name}
+                    </p>
+                    <p className="font-inter truncate text-xs font-normal text-neutral-400" title={club.about || ''}>
+                        {club.about || 'Описание отсутствует'}
+                    </p>
+                </div>
+            </Link>
+
             {showSubscribe && (
-                <SubscribeButton
-                    className="size-10"
-                    clubId={club.id}
-                    isBig={false}
-                    subscribed={club.isUserSubscribed}
-                />
+                <div className="flex-shrink-0">
+                    <SubscribeButton
+                        className="size-10"
+                        clubId={club.id}
+                        isBig={false}
+                        subscribed={club.isUserSubscribed}
+                    />
+                </div>
             )}
-        </figure>
+        </article>
     );
 }

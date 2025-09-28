@@ -48,7 +48,7 @@ export function Clubs() {
             </Header>
 
             <MainContent className="p-[20px]">
-                <div className="flex flex-col gap-4">
+                <div className="flex max-w-[600px] flex-col gap-4">
                     {isLoading && <Loader className="mx-auto mt-10" />}
                     {clubs?.pages
                         .flatMap((page) => page)
