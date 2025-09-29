@@ -7,8 +7,8 @@ import { usersApi } from '@/api/api';
 import type { PersonDetailDTO } from '@/api/axios-client';
 
 import ProfileClubs from './ProfileClubs';
-import { Header, HeaderTitle } from '@/hoc/Header/Header';
-import { MainContent } from '@/hoc/MainContent/MainContent';
+import { Header, HeaderTitle } from '@/hoc/Header';
+import { MainContent } from '@/hoc/MainContent';
 
 export const metadata: Metadata = {
     title: 'Подписки',

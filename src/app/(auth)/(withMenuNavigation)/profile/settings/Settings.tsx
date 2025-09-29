@@ -6,8 +6,8 @@ import { Menu, MenuLink } from '@/components/ui/menu';
 import MenuLogoutItem from '@/app/(auth)/(withMenuNavigation)/profile/settings/MenuLogoutItem';
 import UserCard from '@/app/(auth)/(withMenuNavigation)/profile/settings/UserCard';
 import UserClubs from '@/app/(auth)/(withMenuNavigation)/profile/settings/UserClubs';
-import { Header, HeaderTitle } from '@/hoc/Header/Header';
-import { MainContent } from '@/hoc/MainContent/MainContent';
+import { Header, HeaderTitle } from '@/hoc/Header';
+import { MainContent } from '@/hoc/MainContent';
 
 export default function Settings() {
     return (

@@ -1,8 +1,8 @@
 import { Page } from '@/components/Page';
 import { BackButton } from '@/components/ui/BackButton';
 
-import { Header, HeaderTitle } from '@/hoc/Header/Header';
-import { MainContent } from '@/hoc/MainContent/MainContent';
+import { Header, HeaderTitle } from '@/hoc/Header';
+import { MainContent } from '@/hoc/MainContent';
 
 export default function Notifications() {
     return (

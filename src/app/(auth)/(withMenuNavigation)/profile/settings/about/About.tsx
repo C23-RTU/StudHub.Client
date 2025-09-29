@@ -5,8 +5,8 @@ import { Page } from '@/components/Page';
 import SettingsSection from '@/components/ProfileComponents/SettingSection';
 import { BackButton } from '@/components/ui/BackButton';
 
-import { Header, HeaderTitle } from '@/hoc/Header/Header';
-import { MainContent } from '@/hoc/MainContent/MainContent';
+import { Header, HeaderTitle } from '@/hoc/Header';
+import { MainContent } from '@/hoc/MainContent';
 
 type Developer = {
     name: string;

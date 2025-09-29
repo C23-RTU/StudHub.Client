@@ -15,7 +15,7 @@ import Loader from '../Loader';
 import { PostCard } from '../PostCard/PostCard';
 import { Button } from '../ui/button';
 
-import { MainContent } from '@/hoc/MainContent/MainContent';
+import { MainContent } from '@/hoc/MainContent';
 
 export function ClubFeed() {
     const { id } = useParams();

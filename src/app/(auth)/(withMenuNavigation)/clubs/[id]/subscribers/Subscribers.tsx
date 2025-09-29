@@ -13,7 +13,7 @@ import { useInfinityScroll } from '@/hooks/useInfinityScroll';
 
 import { clubsApi } from '@/api/api';
 
-import { Header, HeaderTitle } from '@/hoc/Header/Header';
+import { Header, HeaderTitle } from '@/hoc/Header';
 
 export function Subscribers({ id }: { id: string }) {
     const {

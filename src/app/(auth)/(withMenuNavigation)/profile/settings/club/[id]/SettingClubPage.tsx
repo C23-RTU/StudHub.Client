@@ -17,8 +17,8 @@ import { AUTH_PAGE } from '@/lib/config/routes.config';
 import { clubsApi } from '@/api/api';
 import type { ClubDetailDTO, PersonDetailDTO } from '@/api/axios-client';
 
-import { Header, HeaderTitle } from '@/hoc/Header/Header';
-import { MainContent } from '@/hoc/MainContent/MainContent';
+import { Header, HeaderTitle } from '@/hoc/Header';
+import { MainContent } from '@/hoc/MainContent';
 
 const RemovePopupDynamic = dynamic(
     () => import('@/components/SettingClubComponents/RemovePopup').then((mod) => mod.RemovePopup),

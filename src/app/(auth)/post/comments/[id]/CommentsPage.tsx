@@ -5,8 +5,8 @@ import { BackButton } from '@/components/ui/BackButton';
 import type { PostDetailDTO } from '@/api/axios-client/models/post-detail-dto';
 
 import { CommentList } from './CommentList';
-import { Header, HeaderTitle } from '@/hoc/Header/Header';
-import { MainContent } from '@/hoc/MainContent/MainContent';
+import { Header, HeaderTitle } from '@/hoc/Header';
+import { MainContent } from '@/hoc/MainContent';
 
 export function CommentsPage({ post }: { post: PostDetailDTO }) {
     console.log('123');

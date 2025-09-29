@@ -9,8 +9,8 @@ import { AUTH_PAGE } from '@/lib/config/routes.config';
 
 import { eventsApi } from '@/api/api';
 
-import { Header, HeaderTitle } from '@/hoc/Header/Header';
-import { MainContent } from '@/hoc/MainContent/MainContent';
+import { Header, HeaderTitle } from '@/hoc/Header';
+import { MainContent } from '@/hoc/MainContent';
 
 export const metadata: Metadata = {
     title: 'События',

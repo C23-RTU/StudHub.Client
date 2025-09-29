@@ -14,8 +14,8 @@ import { useInfinityScroll } from '@/hooks/useInfinityScroll';
 import { eventsApi } from '@/api/api';
 import type { EventDetailDTO } from '@/api/axios-client';
 
-import { Header, HeaderTitle } from '@/hoc/Header/Header';
-import { MainContent } from '@/hoc/MainContent/MainContent';
+import { Header, HeaderTitle } from '@/hoc/Header';
+import { MainContent } from '@/hoc/MainContent';
 import { toUTCDate } from '@/lib/utils/time.util';
 
 export function Calendar() {

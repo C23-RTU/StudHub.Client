@@ -3,8 +3,8 @@ import { Suspense } from 'react';
 import { Page } from '@/components/Page';
 
 import HomeFeed from '@/app/(auth)/(withMenuNavigation)/(home)/HomeFeed';
-import { Header, HeaderTitle } from '@/hoc/Header/Header';
-import { MainContent } from '@/hoc/MainContent/MainContent';
+import { Header, HeaderTitle } from '@/hoc/Header';
+import { MainContent } from '@/hoc/MainContent';
 import { parseLocalTime } from '@/lib/utils/time.util';
 
 export const dynamic = 'force-static';

@@ -17,8 +17,8 @@ import { Textarea } from '@/components/ui/textarea';
 
 import { clubCreationRequestsApi } from '@/api/api.admin';
 
-import { Header, HeaderTitle } from '@/hoc/Header/Header';
-import { MainContent } from '@/hoc/MainContent/MainContent';
+import { Header, HeaderTitle } from '@/hoc/Header';
+import { MainContent } from '@/hoc/MainContent';
 import { type ClubFormValues, clubSchema } from '@/lib/schemas/create-club';
 
 type ImageType = 'banner' | 'avatar';

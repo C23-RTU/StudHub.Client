@@ -1,4 +1,4 @@
-import { Header, HeaderTitle } from '@/hoc/Header/Header';
+import { Header, HeaderTitle } from '@/hoc/Header';
 
 export function Finder() {
     return (

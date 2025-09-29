@@ -19,8 +19,8 @@ import { AUTH_PAGE } from '@/lib/config/routes.config';
 import type { PersonDetailDTO } from '@/api/axios-client/models';
 
 import UserProfileClubs from '@/app/(auth)/(withMenuNavigation)/profile/[id]/UserProfileClubs';
-import { Header } from '@/hoc/Header/Header';
-import { MainContent } from '@/hoc/MainContent/MainContent';
+import { Header } from '@/hoc/Header';
+import { MainContent } from '@/hoc/MainContent';
 
 type Props = {
     user: PersonDetailDTO;
