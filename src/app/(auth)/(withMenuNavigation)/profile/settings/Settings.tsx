@@ -21,15 +21,15 @@ export default function Settings() {
                     <UserCard />
                 </div>
                 <div className="px-pageX flex flex-col gap-4">
-                    <p className="font-semibold text-neutral-500">Основные</p>
+                    <p className="text-muted font-semibold">Основные</p>
                     <Menu>
                         {PROFILE_SETTING_SECTIONS.sections.map((section, index) => (
                             <MenuLink key={index} title={section.title} href={section.href} Icon={section.Icon} />
                         ))}
                     </Menu>
-                    <p className="font-semibold text-neutral-500">Ваши клубы</p>
+                    <p className="text-muted font-semibold">Ваши клубы</p>
                     <UserClubs />
-                    <p className="font-semibold text-neutral-500">Прочее</p>
+                    <p className="text-muted font-semibold">Прочее</p>
                     <Menu className="mb-8">
                         <MenuLogoutItem />
                         {PROFILE_SETTING_SECTIONS.other.map((section, index) => (

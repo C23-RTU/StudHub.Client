@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 
 import { usersApi } from '@/api/api';
 import type { PersonDetailDTO } from '@/api/axios-client';
@@ -16,15 +17,18 @@ export const metadata: Metadata = {
 
 export default async function Page({ params }: { params: Promise<{ id: number }> }) {
     const { id } = await params;
-    const user: PersonDetailDTO = (await usersApi.usersGetById(id)).data;
+    try {
+        const user: PersonDetailDTO = (await usersApi.usersGetById(id)).data;
+        let currentPerson = await getPersonIdFromToken();
+        if (!currentPerson) {
+            console.log('Не удалось получить текущего пользователя из токена');
+            currentPerson = '0';
+        }
 
-    let currentPerson = await getPersonIdFromToken();
-    if (!currentPerson) {
-        console.log('Не удалось получить текущего пользователя из токена');
-        currentPerson = '0';
+        const isCurrent = user.id === Number(currentPerson);
+
+        return <Profile user={user} isCurrent={isCurrent} />;
+    } catch (error) {
+        return notFound();
     }
-
-    const isCurrent = user.id === Number(currentPerson);
-
-    return <Profile user={user} isCurrent={isCurrent} />;
 }

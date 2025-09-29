@@ -1,6 +1,5 @@
 'use client';
 
-import { m } from 'framer-motion';
 import { useState } from 'react';
 import { useDebounce } from 'use-debounce';
 
@@ -48,19 +47,12 @@ export function Clubs() {
             </Header>
 
             <MainContent className="p-[20px]">
-                <div className="flex max-w-[600px] flex-col gap-4">
+                <div className="flex flex-col gap-4">
                     {isLoading && <Loader className="mx-auto mt-10" />}
                     {clubs?.pages
                         .flatMap((page) => page)
-                        .map((club, index) => (
-                            <m.div
-                                key={club.id}
-                                initial={{ scale: 0.8, opacity: 0 }}
-                                animate={{ scale: 1, opacity: 1 }}
-                                transition={{ delay: (index + 2.5) * 0.05, duration: 0.3, ease: 'easeOut' }}
-                            >
-                                <ClubCard club={club} showSubscribe />
-                            </m.div>
+                        .map((club) => (
+                            <ClubCard key={club.id} club={club} showSubscribe />
                         ))}
                     <div ref={ref}></div>
                 </div>

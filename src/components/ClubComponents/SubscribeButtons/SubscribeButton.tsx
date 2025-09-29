@@ -2,7 +2,7 @@
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import type { VariantProps } from 'class-variance-authority';
-import { SquareCheck, SquarePlus } from 'lucide-react';
+import { Loader2, SquareCheck, SquarePlus } from 'lucide-react';
 import dynamic from 'next/dynamic';
 import { Fragment, useCallback, useMemo, useState } from 'react';
 import toast from 'react-hot-toast';
@@ -27,7 +27,7 @@ export function SubscribeButton({
 }: {
     clubId: number;
     isBig: boolean;
-    subscribed: boolean | undefined;
+    subscribed?: boolean;
     className?: string;
     size?: VariantProps<typeof Button>['size'];
 }) {
@@ -37,17 +37,23 @@ export function SubscribeButton({
     const { mutateAsync: toggleSubscription, isPending: isSubscribePending } = useMutation({
         mutationKey: ['club-toggle-subscribe', clubId],
         mutationFn: async () => await clubsApi.clubsToggleSubscription(Number(clubId)),
-        onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ['fetch-clubs'] });
+        onSuccess: async () => {
             queryClient.setQueryData(['fetch-club', clubId], (oldData: ClubDetailDTO | undefined) => {
+                if (!oldData) return oldData;
                 return {
                     ...oldData,
                     subscriberCount: subscribed
-                        ? (oldData?.subscriberCount as number) - 1
-                        : (oldData?.subscriberCount as number) + 1,
+                        ? (oldData.subscriberCount ?? 0) - 1
+                        : (oldData.subscriberCount ?? 0) + 1,
                     isUserSubscribed: !subscribed,
                 };
             });
+
+            await queryClient.invalidateQueries({ queryKey: ['fetch-clubs'] });
+        },
+        onError: (error) => {
+            toast.error('Не удалось выполнить действие');
+            console.error('Subscription error:', error);
         },
     });
 
@@ -57,8 +63,8 @@ export function SubscribeButton({
     }, [toggleSubscription]);
 
     const buttonClass = useMemo(
-        () => cn('font-geologica text-text flex w-fit justify-center', isBig && 'p-3', className),
-        [isBig, className]
+        () => cn('font-geologica flex w-fit justify-center', subscribed ? 'text-text' : 'text-white', className),
+        [className, subscribed]
     );
 
     const unsubSheetHandler = useCallback(async () => {
@@ -78,12 +84,18 @@ export function SubscribeButton({
                 variant={subscribed ? 'outline' : 'default'}
                 className={cn(buttonClass, subscribed ? '' : 'hover:bg-primary')}
                 aria-busy={isSubscribePending}
-                aria-pressed={isSubscribePending}
+                aria-pressed={subscribed}
                 disabled={isSubscribePending}
                 title={label}
             >
-                {isBig && <span>{label}</span>}
-                <Icon />
+                {isSubscribePending ? (
+                    <Loader2 className="animate-spin" />
+                ) : (
+                    <>
+                        {isBig && <span>{label}</span>}
+                        <Icon />
+                    </>
+                )}
             </Button>
             <UnsubSheetDynamic
                 unsubVisible={unsubVisible}

@@ -1,19 +1,11 @@
-import dynamic from 'next/dynamic';
 import Link from 'next/link';
 
+import { SubscribeButton } from '@/components/ClubComponents/SubscribeButtons/SubscribeButton';
 import LoaderImage from '@/components/ImageLoader';
-import { Skeleton } from '@/components/ui/skeleton';
 
 import type { ClubDetailDTO } from '@/api/axios-client';
 
 import { getStaticImg } from '@/lib/helpers/getStaticImg.helper';
-
-const SubscribeButtonDynamic = dynamic(
-    () => import('./SubscribeButtons/SubscribeButton').then((mod) => mod.SubscribeButton),
-    {
-        loading: () => <Skeleton className="bg-background h-10 w-full rounded-md" />,
-    }
-);
 
 export default function ClubInfo({ club }: { club: ClubDetailDTO }) {
     const displaySubscribers = () => {
@@ -48,7 +40,7 @@ export default function ClubInfo({ club }: { club: ClubDetailDTO }) {
                     alt={'avatar'}
                     className="border-background-light size-[100px] rounded-full border-[5px] p-0"
                 />
-                <SubscribeButtonDynamic
+                <SubscribeButton
                     clubId={club?.id}
                     isBig={true}
                     className="z-40 mt-[56px]"

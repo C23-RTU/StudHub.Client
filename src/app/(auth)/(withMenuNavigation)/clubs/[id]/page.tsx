@@ -1,11 +1,9 @@
-import { notFound } from 'next/navigation';
-
 import type { ClubDetailDTO } from '@/api/axios-client';
 
 import { Club } from './Club';
+import ClubNotFound from '@/app/(auth)/(withMenuNavigation)/clubs/[id]/ClubNotFound';
 import { getClubGetByIdAction } from '@/server-actions/actions/clubs.action';
 
-export const dynamic = 'force-dynamic';
 export const revalidate = 60;
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
@@ -31,6 +29,6 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
         console.log(club);
         return <Club club={club} />;
     } catch {
-        return notFound();
+        return <ClubNotFound />;
     }
 }
