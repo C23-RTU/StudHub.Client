@@ -7,7 +7,6 @@ import type { PersonDetailDTO } from '@/api/axios-client';
 import Profile from './Profile';
 import { getPersonIdFromToken } from '@/server-actions/actions/getPersonIdFromToken.action';
 
-export const dynamic = 'force-dynamic';
 export const revalidate = 60;
 
 export const metadata: Metadata = {
