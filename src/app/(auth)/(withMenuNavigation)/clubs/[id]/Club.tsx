@@ -7,9 +7,7 @@ import { Page } from '@/components/Page';
 
 import type { ClubDetailDTO } from '@/api/axios-client/models/club-detail-dto';
 
-const ClubReportDialogDynamic = dynamic(() => import('@/components/ClubComponents/ClubReportDialog'), {
-    ssr: false
-});
+const ClubReportDialogDynamic = dynamic(() => import('@/components/ClubComponents/ClubReportDialog'));
 
 export function Club({ club }: { club: ClubDetailDTO }) {
     return (
