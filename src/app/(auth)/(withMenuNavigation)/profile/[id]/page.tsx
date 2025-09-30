@@ -1,24 +1,33 @@
 import type { Metadata } from 'next';
-import { redirect } from 'next/navigation';
+import { notFound } from 'next/navigation';
 
-import { AUTH_PAGE } from '@/lib/config/routes.config';
-
-import { userApi, usersApi } from '@/api/api';
+import { usersApi } from '@/api/api';
 import type { PersonDetailDTO } from '@/api/axios-client';
 
 import Profile from './Profile';
+import { getPersonIdFromToken } from '@/server-actions/actions/getPersonIdFromToken.action';
+
+export const revalidate = 60;
 
 export const metadata: Metadata = {
     title: 'Профиль',
-    description: '',
+    description: 'Профиль пользователя',
 };
 
 export default async function Page({ params }: { params: Promise<{ id: number }> }) {
     const { id } = await params;
-    const user: PersonDetailDTO = (await usersApi.usersGetById(id)).data;
-    const currentUser: PersonDetailDTO = (await userApi.userGetPersonalDetails()).data;
+    try {
+        const user: PersonDetailDTO = (await usersApi.usersGetById(id)).data;
+        let currentPerson = await getPersonIdFromToken();
+        if (!currentPerson) {
+            console.log('Не удалось получить текущего пользователя из токена');
+            currentPerson = '0';
+        }
 
-    if (currentUser.id === user.id) redirect(AUTH_PAGE.PROFILE);
+        const isCurrent = user.id === Number(currentPerson);
 
-    return <Profile user={user} />;
+        return <Profile user={user} isCurrent={isCurrent} />;
+    } catch (error) {
+        return notFound();
+    }
 }

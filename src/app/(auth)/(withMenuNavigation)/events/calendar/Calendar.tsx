@@ -2,11 +2,10 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { format, parseISO } from 'date-fns';
-import { m } from 'framer-motion';
 import { useMemo, useState } from 'react';
 
-import EventCalendar from '@/components/EventCalendar/EventCalendar';
-import { EventCard } from '@/components/EventCard/EventCard';
+import EventCalendar from '@/components/EventCalendar';
+import { EventCard } from '@/components/EventCard';
 import { Page } from '@/components/Page';
 import { BackButton } from '@/components/ui/BackButton';
 
@@ -15,8 +14,8 @@ import { useInfinityScroll } from '@/hooks/useInfinityScroll';
 import { eventsApi } from '@/api/api';
 import type { EventDetailDTO } from '@/api/axios-client';
 
-import { Header, HeaderTitle } from '@/hoc/Header/Header';
-import { MainContent } from '@/hoc/MainContent/MainContent';
+import { Header, HeaderTitle } from '@/hoc/Header';
+import { MainContent } from '@/hoc/MainContent';
 import { toUTCDate } from '@/lib/utils/time.util';
 
 export function Calendar() {
@@ -70,16 +69,10 @@ export function Calendar() {
                     {hasEvents
                         ? eventsPages?.pages
                               .flatMap((page) => page)
-                              .map((event, index) => (
-                                  <m.div
-                                      key={event.id}
-                                      initial={{ scale: 0.8, opacity: 0 }}
-                                      animate={{ scale: 1, opacity: 1 }}
-                                      transition={{ delay: index * 0.1 }}
-                                      className="border-border border-b"
-                                  >
+                              .map((event) => (
+                                  <div key={event.id} className="border-border border-b">
                                       <EventCard event={event} />
-                                  </m.div>
+                                  </div>
                               ))
                         : !isLoading && (
                               <div className="flex w-full items-center justify-center py-4 text-neutral-500">

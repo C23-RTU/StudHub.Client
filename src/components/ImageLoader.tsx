@@ -1,8 +1,9 @@
+'use client';
+
 import Image, { type ImageProps } from 'next/image';
 import { useState } from 'react';
 
-import Loader from '../Loader';
-
+import Loader from './Loader';
 import { cn } from '@/lib/utils/utils';
 
 interface LoaderImageProps extends ImageProps {

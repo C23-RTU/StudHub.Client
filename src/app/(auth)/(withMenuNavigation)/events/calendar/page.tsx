@@ -4,7 +4,7 @@ import { Calendar } from './Calendar';
 
 export const metadata: Metadata = {
     title: 'Календарь событий',
-    description: '',
+    description: 'Календарь со всеми событиями',
 };
 
 export default async function Page() {

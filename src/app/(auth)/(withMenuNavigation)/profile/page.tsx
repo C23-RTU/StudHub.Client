@@ -1,12 +1,15 @@
-import type { Metadata } from 'next';
+import { redirect } from 'next/navigation';
 
-import Profile from './UserProfile';
+import { AUTH_PAGE } from '@/lib/config/routes.config';
 
-export const metadata: Metadata = {
-    title: 'Ваш профиль',
-    description: '',
-};
+import { getPersonIdFromToken } from '@/server-actions/actions/getPersonIdFromToken.action';
+
+export const dynamic = 'force-dynamic';
 
 export default async function Page() {
-    return <Profile />;
+    const currentPerson = await getPersonIdFromToken();
+    if (!currentPerson) {
+        redirect('/');
+    }
+    redirect(AUTH_PAGE.USER_PROFILE(Number(currentPerson)));
 }

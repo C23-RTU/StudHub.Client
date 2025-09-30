@@ -13,9 +13,10 @@ import { parseLocalDate } from '@/lib/utils/time.util';
 
 type Props = {
     post: PostDetailDTO;
+    onOpenChange: (state: boolean) => void;
 };
 
-export function PostHeader({ post }: Props) {
+export function PostHeader({ post, onOpenChange }: Props) {
     return (
         <div className="flex items-center justify-between">
             <Link className="flex items-center" href={AUTH_PAGE.CLUB(post.club.id)}>
@@ -30,7 +31,7 @@ export function PostHeader({ post }: Props) {
                 </div>
             </Link>
 
-            <MoreDropList post={post} />
+            <MoreDropList post={post} onOpenChange={onOpenChange} />
         </div>
     );
 }

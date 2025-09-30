@@ -23,6 +23,7 @@ const PostReportDialog = dynamic(() => import('./PostHeader/PostReportDialog').t
 
 export function PostCard({ className, post }: PostCardProps) {
     const [showFull, setShowFull] = useState(false);
+    const [showReport, setShowReport] = useState(false);
 
     const isLong = post.content.length > 356;
     const displayText = !showFull && isLong ? truncateText(post.content, 200) : post.content;
@@ -30,7 +31,7 @@ export function PostCard({ className, post }: PostCardProps) {
     return (
         <>
             <article className={cn('border-border flex flex-col gap-3 border-b p-[20px]', className)}>
-                <PostHeader post={post} />
+                <PostHeader post={post} onOpenChange={setShowReport} />
                 <div>
                     <p className="text-text my-1 text-xl font-semibold">{post.title}</p>
                     <p className="text-sm whitespace-pre-line text-neutral-700 dark:text-neutral-300">
@@ -39,7 +40,7 @@ export function PostCard({ className, post }: PostCardProps) {
                     </p>
                     {((!showFull && isLong) || (showFull && isLong)) && (
                         <button
-                            onClick={() => setShowFull(!showFull && isLong ? true : false)}
+                            onClick={() => setShowFull(!showFull && isLong)}
                             className="text-primary mt-1 text-sm font-medium focus:outline-none"
                         >
                             {(!showFull && isLong) || (showFull && isLong)
@@ -67,7 +68,7 @@ export function PostCard({ className, post }: PostCardProps) {
                 </div>
             </article>
             {/* FIXME Мне кажется что это сильно будет бить по загрузке страницы */}
-            <PostReportDialog />
+            <PostReportDialog open={showReport} onOpenChange={setShowReport} />
         </>
     );
 }

@@ -1,20 +1,20 @@
-'use client';
-
 import { FaGithub, FaGraduationCap } from 'react-icons/fa';
 
-import LoaderImage from '@/components/ImageLoader/ImageLoader';
+import LoaderImage from '@/components/ImageLoader';
 import { Page } from '@/components/Page';
 import SettingsSection from '@/components/ProfileComponents/SettingSection';
 import { BackButton } from '@/components/ui/BackButton';
 
-import { Header, HeaderTitle } from '@/hoc/Header/Header';
-import { MainContent } from '@/hoc/MainContent/MainContent';
+import { Header, HeaderTitle } from '@/hoc/Header';
+import { MainContent } from '@/hoc/MainContent';
 
 type Developer = {
     name: string;
     role: string;
     avatar: string;
 };
+
+export const dynamic = 'force-static';
 
 function DeveloperItem({ name, role, avatar }: Developer) {
     return (
@@ -23,7 +23,7 @@ function DeveloperItem({ name, role, avatar }: Developer) {
                 loaderClassName="w-fit"
                 src={avatar}
                 alt="Avatar"
-                className="size-12 shrink-0 grow-0 rounded-full"
+                className="size-12 min-w-12 grow rounded-full"
                 width={128}
                 height={128}
             />

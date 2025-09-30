@@ -1,27 +1,17 @@
 'use client';
 
 import { useTheme } from 'next-themes';
-import { useEffect, useState } from 'react';
 import { IoMoon, IoSettingsSharp, IoSunny } from 'react-icons/io5';
 
 import { Page } from '@/components/Page';
 import { BackButton } from '@/components/ui/BackButton';
 import { Menu, MenuRadio } from '@/components/ui/menu';
 
-import { Header, HeaderTitle } from '@/hoc/Header/Header';
-import { MainContent } from '@/hoc/MainContent/MainContent';
+import { Header, HeaderTitle } from '@/hoc/Header';
+import { MainContent } from '@/hoc/MainContent';
 
 export default function Appearance() {
     const { theme, setTheme } = useTheme();
-    const [mounted, setMounted] = useState(false);
-
-    useEffect(() => {
-        setMounted(true);
-    }, []);
-
-    if (!mounted) {
-        return null;
-    }
 
     const handleThemeChange = (newTheme: string) => {
         setTheme(newTheme);

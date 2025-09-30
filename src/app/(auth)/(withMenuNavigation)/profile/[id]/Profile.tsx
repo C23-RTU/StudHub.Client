@@ -1,13 +1,8 @@
-'use client';
-
-import { useQuery } from '@tanstack/react-query';
 import { Copy, EllipsisVertical, OctagonAlert } from 'lucide-react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import toast from 'react-hot-toast';
 import { BiMessageSquare, BiSolidIdCard } from 'react-icons/bi';
+import { IoSettingsSharp } from 'react-icons/io5';
 
-import { ClubCard } from '@/components/ClubComponents/ClubCard';
 import { Page } from '@/components/Page';
 import { Avatar } from '@/components/ui/Avatar';
 import { BackButton } from '@/components/ui/BackButton';
@@ -18,36 +13,37 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { SkeletonList } from '@/components/ui/skeleton';
 
 import { AUTH_PAGE } from '@/lib/config/routes.config';
 
-import { clubsApi } from '@/api/api';
 import type { PersonDetailDTO } from '@/api/axios-client/models';
 
-import { Header } from '@/hoc/Header/Header';
-import { MainContent } from '@/hoc/MainContent/MainContent';
+import UserProfileClubs from '@/app/(auth)/(withMenuNavigation)/profile/[id]/UserProfileClubs';
+import { Header } from '@/hoc/Header';
+import { MainContent } from '@/hoc/MainContent';
 
 type Props = {
     user: PersonDetailDTO;
+    isCurrent: boolean;
 };
 
-export default function Profile({ user }: Props) {
-    const {
-        data: userClubs,
-        isLoading,
-        error,
-    } = useQuery({
-        queryKey: [user.id, 'fetch-profile-user-clubs'],
-        queryFn: async () => (await clubsApi.clubsGetByPersonId(user.id, 0, 3)).data,
-    });
+export const dynamic = 'force-dynamic';
+export const revalidate = 60;
 
-    const pathname = usePathname();
-
+export default function Profile({ user, isCurrent }: Props) {
     return (
         <Page>
-            <Header className="justify-between border-0 p-[20px] py-[16px]">
+            <Header className="items-center justify-between border-0 p-[20px] py-[16px]">
                 <BackButton variant={'outline'} />
+                <p className={'font-geologica mr-auto ml-2 text-xl font-semibold'}>Профиль</p>
+
+                {isCurrent && (
+                    <Link href={AUTH_PAGE.PROFILE_SETTINGS} className={'ml-auto'}>
+                        <Button size={'icon'} variant={'outline'}>
+                            <IoSettingsSharp />
+                        </Button>
+                    </Link>
+                )}
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                         <Button variant={'outline'} size="icon">
@@ -55,19 +51,16 @@ export default function Profile({ user }: Props) {
                         </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent>
-                        <DropdownMenuItem
-                            onClick={() => {
-                                navigator.clipboard.writeText(`https://setka-rtu.ru${pathname}`);
-                                toast.success('Ссылка скопирована');
-                            }}
-                        >
+                        <DropdownMenuItem>
                             <Copy />
                             Скопировать ссылку
                         </DropdownMenuItem>
-                        <DropdownMenuItem className="text-[#FF0000]">
-                            <OctagonAlert stroke="#FF0000" />
-                            Пожаловаться
-                        </DropdownMenuItem>
+                        {!isCurrent && (
+                            <DropdownMenuItem variant={'destructive'}>
+                                <OctagonAlert stroke="#FF0000" />
+                                Пожаловаться
+                            </DropdownMenuItem>
+                        )}
                     </DropdownMenuContent>
                 </DropdownMenu>
             </Header>
@@ -101,18 +94,11 @@ export default function Profile({ user }: Props) {
                 <div className="flex flex-col gap-4 p-[20px]">
                     <div className="flex flex-row justify-between">
                         <p className="font-geologica text-xl font-bold">Подписки</p>
-                        <Link href={AUTH_PAGE.PROFILE_CLUBS} className="text-primary">
+                        <Link href={AUTH_PAGE.USER_PROFILE_CLUBS(user.id)} className="text-primary">
                             Показать все
                         </Link>
                     </div>
-                    {isLoading && <SkeletonList />}
-                    {!isLoading &&
-                        userClubs &&
-                        userClubs.length > 0 &&
-                        userClubs.map((club) => <ClubCard key={club.id} club={club} />)}
-                    {error && (
-                        <p className="text-center text-neutral-500">Не удалось загрузить подписки пользователя</p>
-                    )}
+                    <UserProfileClubs id={user.id} />
                 </div>
             </MainContent>
         </Page>
