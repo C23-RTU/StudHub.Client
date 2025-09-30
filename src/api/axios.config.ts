@@ -1,8 +1,11 @@
 import type { AxiosInstance, CreateAxiosDefaults } from 'axios';
 import https from 'https';
 
+import { authApi } from './api';
 import { isClientSideRender } from '@/lib/helpers/isClientSideRender.helper';
 import { getServerSideCookies } from '@/server-actions/getServerSideCookies';
+
+let isRetryError = false;
 
 export const BASE_AXIOS_CONFIG: CreateAxiosDefaults = {
     headers: {
@@ -24,13 +27,23 @@ export const applyBaseInterceptors = (instance: AxiosInstance) => {
         return config;
     });
 
-    instance.interceptors.response.use((config) => {
-        const statusCode = config.status;
+    instance.interceptors.response.use(
+        (config) => config,
+        async (error) => {
+            const originalRequest = error.config;
 
-        if (statusCode === 401) {
-            location.reload();
+            if (error?.response?.status === 401 && !isRetryError) {
+                isRetryError = true;
+                try {
+                    await authApi.authRefreshTokens();
+                    return instance.request(originalRequest);
+                } catch (err) {
+                    console.warn('Не удалось обновить токен на клиенте = ', err);
+                    await authApi.authLogout();
+                }
+            }
+
+            throw error;
         }
-
-        return config;
-    });
+    );
 };
